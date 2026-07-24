@@ -38,14 +38,18 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue'])
 const editorRoot = ref(null)
 
-// 编辑器内�?const text = ref(props.modelValue || '')
+// 编辑器内容
+const text = ref(props.modelValue || '')
 // 是否预览模式
 const preview = ref(true)
-// 是否可编�?const editable = computed(() => props.editable !== false)
-// 占位�?const placeholder = computed(() => props.placeholder || '请输入内�?..')
+// 是否可编辑
+const editable = computed(() => props.editable !== false)
+// 占位符
+const placeholder = computed(() => props.placeholder || '请输入内容...')
 const editorHeight = computed(() => props.height || '400px')
 
-// 工具栏配�?const toolbars = [
+// 工具栏配置
+const toolbars = [
   'bold',
   'italic',
   'strikethrough',

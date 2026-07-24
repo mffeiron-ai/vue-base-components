@@ -17,12 +17,12 @@ const props = withDefaults(defineProps<{
   placeholder?: string
   options: ComboboxOption[]
   disabled?: boolean
-  /** 默认显示条数，不输入搜索词时只显示前 N �?*/
+  /** 默认显示条数，不输入搜索词时只显示前 N 条 */
   defaultLimit?: number
-  /** 搜索时是否去�?"#id " 前缀 */
+  /** 搜索时是否去掉 "#id " 前缀 */
   stripIdPrefix?: boolean
 }>(), {
-  placeholder: '搜索或选择�?,
+  placeholder: '搜索或选择…',
   defaultLimit: 10,
   stripIdPrefix: false,
 })

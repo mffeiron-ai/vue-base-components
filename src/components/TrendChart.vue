@@ -29,12 +29,12 @@ function buildOption() {
         const date = props.data[params[0]?.dataIndex]?.date || ''
         let html = `<strong>${date}</strong><br/>`
         params.forEach(p => {
-          html += `${p.marker} ${p.seriesName}: ${p.seriesName === '赔付金额' ? '¥' + p.value.toFixed(2) : p.value + '�?}<br/>`
+          html += `${p.marker} ${p.seriesName}: ${p.seriesName === '赔付金额' ? '¥' + p.value.toFixed(2) : p.value + '单'}<br/>`
         })
         return html
       },
     },
-    legend: { bottom: 0, data: ['赔付金额', '工单�?] },
+    legend: { bottom: 0, data: ['赔付金额', '工单数'] },
     grid: { left: 50, right: 50, top: 20, bottom: 40 },
     xAxis: {
       type: 'category',
@@ -49,7 +49,7 @@ function buildOption() {
       },
       {
         type: 'value',
-        name: '工单�?,
+        name: '工单数',
         axisLabel: { fontSize: 11 },
       },
     ],
@@ -69,7 +69,7 @@ function buildOption() {
         ])},
       },
       {
-        name: '工单�?,
+        name: '工单数',
         type: 'line',
         yAxisIndex: 1,
         data: counts,
@@ -90,12 +90,12 @@ function buildOption() {
 function initChart() {
   if (!chartRef.value) return
   const el = chartRef.value
-  // 确保容器有有效宽�?
+  // 确保容器有有效宽高
   if (el.clientWidth === 0 || el.clientHeight === 0) return
 
   if (!chart) {
     chart = echarts.init(el)
-    // �?ResizeObserver 监听容器大小变化
+    // 用 ResizeObserver 监听容器大小变化
     resizeObserver = new ResizeObserver(() => chart?.resize())
     resizeObserver.observe(el)
   }
@@ -132,7 +132,7 @@ onUnmounted(() => {
 <template>
   <div style="width: 100%; min-height: 280px; position: relative">
     <div v-if="loading" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.6); z-index: 10">
-      <span class="text-sm text-muted-foreground">加载�?..</span>
+      <span class="text-sm text-muted-foreground">加载中...</span>
     </div>
     <div ref="chartRef" style="width: 100%; height: 280px; min-width: 400px" />
   </div>

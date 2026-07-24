@@ -19,7 +19,7 @@ export interface FieldConfig {
   disabled?: boolean
   /** combobox 选项 */
   options?: { label: string; value: any }[]
-  /** 列跨�?1-12，默�?12 */
+  /** 列跨度 1-12，默认 12 */
   span?: number
   /** 分组标题（非空时前面显示分割线） */
   section?: string
@@ -43,7 +43,7 @@ const emit = defineEmits<{
 }>()
 
 const form = ref<Record<string, any>>({})
-/** 上一�?form 快照，用于检测字段变�?*/
+/** 上一次 form 快照，用于检测字段变更 */
 const prevForm = ref<Record<string, any>>({})
 
 /** 调试 + 字段变更事件（供父组件联动） */
@@ -57,7 +57,7 @@ watch(form, (val) => {
   prevForm.value = { ...val }
 }, { deep: true })
 
-/** 对话框打开时同�?initialData */
+/** 对话框打开时同步 initialData */
 watch(() => props.open, (val) => {
   if (val) {
     form.value = { ...(props.initialData || {}) }
@@ -70,7 +70,7 @@ function onSave() {
   emit('save', { ...form.value })
 }
 
-/** 检查是否为 @internationalized/date �?CalendarDate（含 year/month/day�?*/
+/** 检查是否为 @internationalized/date 的 CalendarDate（含 year/month/day） */
 function isDate(v: any): v is { year: number; month: number; day: number } {
   return v && typeof v.year === 'number' && typeof v.month === 'number' && typeof v.day === 'number'
 }
@@ -131,7 +131,7 @@ function isFieldVisible(f: FieldConfig): boolean {
             <template v-else-if="f.type === 'combobox'">
               <ComboboxField
                 v-model="form[f.field]"
-                :placeholder="f.placeholder || '搜索或选择�?"
+                :placeholder="f.placeholder || '搜索或选择…'"
                 :options="f.options || []"
                 :strip-id-prefix="true"
                 class="mt-1.5"
@@ -152,7 +152,7 @@ function isFieldVisible(f: FieldConfig): boolean {
 
       <DialogFooter>
         <Button variant="outline" @click="emit('update:open', false)">取消</Button>
-        <Button :disabled="saving" @click="onSave">{{ saving ? '保存中�? : '保存' }}</Button>
+        <Button :disabled="saving" @click="onSave">{{ saving ? '保存中…' : '保存' }}</Button>
       </DialogFooter>
     </DialogContent>
   </Dialog>

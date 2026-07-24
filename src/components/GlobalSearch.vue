@@ -95,7 +95,7 @@ function goTo(item: SearchResult) {
         <input
           ref="inputRef"
           v-model="query"
-          placeholder="搜索工单/商品/招商�?
+          placeholder="搜索工单/商品/招商…"
           class="flex-1 bg-transparent outline-none text-foreground text-sm placeholder:text-muted-foreground"
           @keydown="onKeydown"
           @focus="open = !!query.trim()"
@@ -103,7 +103,7 @@ function goTo(item: SearchResult) {
       </div>
     </PopoverTrigger>
     <PopoverContent class="w-[420px] p-1 max-h-[62vh] overflow-auto" align="start" side="bottom" :side-offset="8" @open-auto-focus.prevent>
-      <div v-if="loading" class="py-6 text-center text-sm text-muted-foreground">搜索中�?/div>
+      <div v-if="loading" class="py-6 text-center text-sm text-muted-foreground">搜索中…</div>
       <template v-else-if="!results.length && query.trim()">
         <div class="py-6 text-center text-sm text-muted-foreground">未找到与「{{ query }}」相关的结果</div>
       </template>

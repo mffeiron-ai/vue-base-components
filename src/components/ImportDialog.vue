@@ -34,7 +34,7 @@ const defaultReminders = [
   '请先下载模板文件，按模板格式填写数据',
   '不要修改模板的表头行，否则导入会失败',
   '必填字段不能为空',
-  '单次导入建议不超�?500 �?,
+  '单次导入建议不超过 500 条',
 ]
 
 const allReminders = props.reminders?.length ? props.reminders : defaultReminders
@@ -61,7 +61,7 @@ function clearFile() {
 
 async function downloadTemplate() {
   if (!props.templateApiUrl) {
-    toast.warning('模板下载地址未配�?)
+    toast.warning('模板下载地址未配置')
     return
   }
   downloading.value = true
@@ -110,7 +110,7 @@ async function handleImport() {
       toast.error(res.data.message || '导入失败')
     }
   } catch {
-    toast.error('导入失败，请检查文件格�?)
+    toast.error('导入失败，请检查文件格式')
   } finally {
     uploading.value = false
   }
@@ -122,7 +122,7 @@ async function handleImport() {
     <DialogContent class="sm:max-w-lg">
       <DialogHeader>
         <DialogTitle>{{ title || '批量导入' }}</DialogTitle>
-        <DialogDescription>下载模板 �?填写数据 �?上传导入</DialogDescription>
+        <DialogDescription>下载模板 → 填写数据 → 上传导入</DialogDescription>
       </DialogHeader>
 
       <div class="space-y-4 py-2">
@@ -134,7 +134,7 @@ async function handleImport() {
           </ul>
         </div>
 
-        <!-- 步骤 1：下载模�?-->
+        <!-- 步骤 1：下载模板 -->
         <div class="flex items-center gap-3">
           <div class="flex-shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">1</div>
           <Button
@@ -143,7 +143,7 @@ async function handleImport() {
             @click="downloadTemplate"
           >
             <Download class="mr-2 h-4 w-4" />
-            {{ downloading ? '下载中�? : '下载导入模板' }}
+            {{ downloading ? '下载中…' : '下载导入模板' }}
           </Button>
         </div>
 
@@ -173,17 +173,17 @@ async function handleImport() {
           </div>
         </div>
 
-        <!-- 步骤 3：上�?-->
+        <!-- 步骤 3：上传 -->
         <div class="flex items-center gap-3">
           <div class="flex-shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">3</div>
-          <p class="text-sm text-muted-foreground">确认文件无误后，点击下方「开始导入」按�?/p>
+          <p class="text-sm text-muted-foreground">确认文件无误后，点击下方「开始导入」按钮</p>
         </div>
       </div>
 
       <DialogFooter>
         <Button variant="outline" @click="onDialogOpen(false)">取消</Button>
         <Button :disabled="uploading || !selectedFile" @click="handleImport">
-          {{ uploading ? '导入中�? : '开始导�? }}
+          {{ uploading ? '导入中…' : '开始导入' }}
         </Button>
       </DialogFooter>
     </DialogContent>

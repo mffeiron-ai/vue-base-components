@@ -7,7 +7,7 @@
         <DropdownMenu>
           <DropdownMenuTrigger
           class="flex items-center px-3 py-2 bg-secondary text-sm rounded-md cursor-pointer">
-            显示/隐藏�?
+            显示/隐藏列
             <ChevronDown class="ml-1 h-4 w-4" />
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start" class="w-48 border-none bg-secondary">
@@ -17,7 +17,7 @@
                 :model-value="isAllColumnsSelected" 
                 @click="toggleAllColumns"
               />
-              <label for="select-all-columns" class="text-sm cursor-pointer">全�?取消全�?/label>
+              <label for="select-all-columns" class="text-sm cursor-pointer">全选/取消全选</label>
             </div>
             <DropdownMenuSeparator />
 
@@ -110,7 +110,7 @@
     />
   </div>
 
-  <!-- 行详情侧滑面�?-->
+  <!-- 行详情侧滑面板 -->
   <Sheet v-if="detailFields?.length" :open="detailOpen" @update:open="detailOpen = $event">
     <SheetContent class="w-[480px] sm:max-w-[480px] overflow-y-auto flex flex-col pl-4" side="right">
       <SheetHeader class="text-center pl-0"><SheetTitle class="text-base">{{ detailTitle || '详情' }}</SheetTitle></SheetHeader>
@@ -167,7 +167,7 @@ export type Column<T = any> = {
   slot?: string
   type?: string
   options?: { value: any; label: string }[] // 新增
-  sortable?: boolean // 是否可排�?
+  sortable?: boolean // 是否可排序
 }
 
 const props = defineProps<{
@@ -175,25 +175,25 @@ const props = defineProps<{
   data: any[]
   idField: string
   sortFn?: ((a: any, b: any) => number) | null
-  /** 服务端排序字�?*/
+  /** 服务端排序字段 */
   sortField?: string
-  /** 服务端排序方�?*/
+  /** 服务端排序方向 */
   sortOrder?: 'asc' | 'desc'
   page?: number
   pageSize?: number
   numPages?: number
   total?: number
   loading?: boolean
-  /** 骨架屏最短展示时�?ms)，避免数据太快导致闪烁，默认 120 */
+  /** 骨架屏最短展示时间(ms)，避免数据太快导致闪烁，默认 120 */
   minLoadingMs?: number
   emptyText?: string
-  /** 行是否可点击，开启后鼠标悬停有反馈，并触�?row-click 事件 */
+  /** 行是否可点击，开启后鼠标悬停有反馈，并触发 row-click 事件 */
   clickable?: boolean
-  /** 详情字段定义，提供后点击行自动弹出右侧详情面�?*/
+  /** 详情字段定义，提供后点击行自动弹出右侧详情面板 */
   detailFields?: { label: string; field: string; type?: 'text' | 'image' }[]
   /** 详情面板标题 */
   detailTitle?: string
-  /** 图片 URL 转换函数，例�?getAvatarUrl */
+  /** 图片 URL 转换函数，例如 getAvatarUrl */
   resolveImageUrl?: (url: string) => string
 }>()
 
@@ -202,13 +202,13 @@ const emit = defineEmits<{
   'update:pageSize': [pageSize: number]
   'page-change': [page: number]
   'pageSizeChange': [pageSize: number]
-  /** 点击数据行时触发，参数为行数�?*/
+  /** 点击数据行时触发，参数为行数据 */
   'row-click': [row: any]
   /** 点击可排序列的表头时触发 */
   'sort-change': [payload: { field: string; order: 'asc' | 'desc' }]
 }>()
 
-// ========== 行点�?�?详情面板 ==========
+// ========== 行点击 → 详情面板 ==========
 const detailOpen = ref(false)
 const detailRow = ref<any>(null)
 const detailPreviewImage = ref('')
@@ -235,7 +235,7 @@ const isAllColumnsSelected = computed(() => {
   return visibleColumns.value.length === props.columns.length;
 })
 
-// 切换列显�?隐藏状�?
+// 切换列显示/隐藏状态
 function toggleColumn(field: string, checked: boolean) 
 {
   if (checked) {
@@ -244,14 +244,14 @@ function toggleColumn(field: string, checked: boolean)
       visibleColumns.value.push(field)
     }
   } else {
-    // 从可见列表中移除列，但至少保留一�?
+    // 从可见列表中移除列，但至少保留一列
     if (visibleColumns.value.length > 1) {
       visibleColumns.value = visibleColumns.value.filter(col => col !== field)
     }
   }
 }
 
-// 切换全�?取消全选状�?
+// 切换全选/取消全选状态
 function toggleAllColumns() {
   if (isAllColumnsSelected.value) {
     // 当前是全选状态，切换到最小选择状态（保留第一列）
@@ -261,7 +261,7 @@ function toggleAllColumns() {
       visibleColumns.value = [];
     }
   } else {
-    // 当前不是全选状态，切换到全选状�?
+    // 当前不是全选状态，切换到全选状态
     visibleColumns.value = props.columns.map(col => String(col.field));
   }
 }
@@ -281,8 +281,8 @@ function handleSort(col: Column) {
 
 function sortIndicator(col: Column): string {
   if (!col.sortable) return ''
-  if (props.sortField !== String(col.field)) return ' �?
-  return props.sortOrder === 'asc' ? ' �? : ' �?
+  if (props.sortField !== String(col.field)) return ' ↕'
+  return props.sortOrder === 'asc' ? ' ↑' : ' ↓'
 }
 
 const filteredColumns = computed(() => {
@@ -322,7 +322,7 @@ watch(() => props.loading, (val) => {
   }
 }, { immediate: true })
 
-// 数据渲染完成后，测量第一条数据行�?td 高度缓存起来
+// 数据渲染完成后，测量第一条数据行的 td 高度缓存起来
 watch(internalLoading, (val) => {
   if (!val && props.data?.length) {
     nextTick(() => {

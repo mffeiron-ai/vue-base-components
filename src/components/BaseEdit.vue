@@ -87,7 +87,7 @@
                           <div v-for="(image, index) in getCarouselImages(item.field)" :key="index" class="relative">
                             <img
                               :src="image"
-                              alt="轮播�?
+                              alt="轮播图"
                               class="w-32 h-32 object-cover rounded"
                             />
                             <Button
@@ -104,7 +104,7 @@
                           class="bg-secondary flex items-center justify-center rounded w-32 h-32 cursor-pointer"
                           @click="openImageUpload(item.field)"
                         >
-                          <span>添加轮播�?/span>
+                          <span>添加轮播图</span>
                         </div>
                         <div class="hidden">
                           <Input
@@ -230,8 +230,10 @@ const router = useRouter()
 
 // 字段类型配置 - 维护所有支持的字段类型
 const FIELD_TYPES = {
-  MARKDOWN: 'markdown',      // Markdown编辑�?  SELECT: 'select',          // 下拉选择
-  IMAGE: 'image',            // 单图片上�?  CAROUSEL: 'carousel',      // 轮播图（多图片）
+  MARKDOWN: 'markdown',      // Markdown编辑器
+  SELECT: 'select',          // 下拉选择
+  IMAGE: 'image',            // 单图片上传
+  CAROUSEL: 'carousel',      // 轮播图（多图片）
   NUMBER: 'number',          // 数字输入
   EMAIL: 'email',            // 邮箱输入
   PASSWORD: 'password',      // 密码输入
@@ -239,21 +241,24 @@ const FIELD_TYPES = {
 } as const
 
 const props = defineProps<{
-  type?: string // 类型（用于提示文案和动态选项加载�?  id?: number // 编辑时的ID
+  type?: string // 类型（用于提示文案和动态选项加载）
+  id?: number // 编辑时的ID
   fields?: any[] // 字段配置列表
   getInfo?: (params: any) => Promise<any> // 获取信息的API函数
   updateApi?: (data: any) => Promise<any> // 更新的API函数
   createApi?: (data: any) => Promise<any> // 创建的API函数
-  redirectPath?: string // 保存成功后的重定向路�?}>()
+  redirectPath?: string // 保存成功后的重定向路径
+}>()
 
 const form = ref<Record<string, any>>({}) // 表单数据对象
 const errors = ref<Record<string, string>>({}) // 错误对象
-const fileInputRefs = ref<Record<string, HTMLInputElement>>({}) // 文件输入框引用对�?
+const fileInputRefs = ref<Record<string, HTMLInputElement>>({}) // 文件输入框引用对象
+
 const authStore = useAuthStore()
 const editStore = useEditStore()
 const titleComputed = computed(() => props.id ? `编辑${props.type}` : `新建${props.type}`)
 
-// �?props �?editStore 回退读取配置
+// 从 props 或 editStore 回退读取配置
 const fields = computed(() => {
   if (props.fields?.length) return props.fields
   return editStore.editConfig?.fields || []
@@ -263,7 +268,8 @@ const getInfo = computed(() => props.getInfo || editStore.editConfig?.getInfo)
 const createApi = computed(() => props.createApi || editStore.editConfig?.createApi)
 const updateApi = computed(() => props.updateApi || editStore.editConfig?.updateApi)
 
-// �?colSpan 计算占几列（12列网格），默认占�?function getFieldColSpan(item: any): string {
+// 按 colSpan 计算占几列（12列网格），默认占满
+function getFieldColSpan(item: any): string {
   const span = Math.min(item.colSpan || 12, 12)
   const map: Record<number, string> = {
     1: 'col-span-1', 2: 'col-span-2', 3: 'col-span-3', 4: 'col-span-4',
@@ -273,13 +279,15 @@ const updateApi = computed(() => props.updateApi || editStore.editConfig?.update
   return map[span] || 'col-span-12'
 }
 
-// 设置文件输入框引�?function setFileInputRef(fieldName: string, el: any) {
+// 设置文件输入框引用
+function setFileInputRef(fieldName: string, el: any) {
   if (el) {
     fileInputRefs.value[fieldName] = el.$el || el
   }
 }
 
-// 获取轮播图图片列�?function getCarouselImages(fieldName: string): string[] {
+// 获取轮播图图片列表
+function getCarouselImages(fieldName: string): string[] {
   if (!form.value[fieldName]) {
     return [];
   }
@@ -312,7 +320,8 @@ async function handleFileChange(event: Event, fieldName: string, isCarousel: boo
     const imagePath = response.data.data.file_path
 
     if (isCarousel) {
-      // 轮播图：添加到数�?      const images = getCarouselImages(fieldName)
+      // 轮播图：添加到数组
+      const images = getCarouselImages(fieldName)
       images.push(imagePath)
       form.value[fieldName] = JSON.stringify(images)
     } else {
@@ -329,7 +338,8 @@ async function handleFileChange(event: Event, fieldName: string, isCarousel: boo
   }
 }
 
-// 移除轮播�?function removeCarouselImage(fieldName: string, index: number) {
+// 移除轮播图
+function removeCarouselImage(fieldName: string, index: number) {
   const images = getCarouselImages(fieldName)
   images.splice(index, 1)
   form.value[fieldName] = JSON.stringify(images)
@@ -342,7 +352,8 @@ function validateForm(): boolean {
   for (const item of fields.value) {
     const value = form.value[item.field]
     
-    // 验证必填�?    if (item.required && !value) {
+    // 验证必填项
+    if (item.required && !value) {
       errors.value[item.field] = `${item.label}不能为空`
       continue
     }
@@ -410,9 +421,11 @@ onMounted(() => {
   loadDynamicOptions()
 })
 
-// 监听路由参数变化，重新加载数�?watch(() => props.id, (newId) => {
+// 监听路由参数变化，重新加载数据
+watch(() => props.id, (newId) => {
   if (newId && props.type) {
-    // 重置表单和错�?    form.value = {}
+    // 重置表单和错误
+    form.value = {}
     errors.value = {}
     // 重新获取数据
     fetchInfo()
@@ -420,7 +433,8 @@ onMounted(() => {
 })
 
 async function onSave() {
-  // 先验证表�?  if (!validateForm()) {
+  // 先验证表单
+  if (!validateForm()) {
     toast.error(`请修正表单中的错误`)
     return
   }
@@ -433,7 +447,7 @@ async function onSave() {
       result = await createApi.value(form.value)
     }
     if (
-      props.type === '管理�? &&
+      props.type === '管理员' &&
       props.id &&
       String(props.id) === String(authStore.admin?.id)
     ) {
