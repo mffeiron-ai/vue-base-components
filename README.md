@@ -16,10 +16,10 @@ Vue 3 + Tailwind CSS + shadcn-vue 共享组件库，为多个项目提供统一�
 
 ```bash
 # 通过 Git URL 安装（推荐）
-npm install github:your-username/vue-base-components#v1.0.0
+npm install github:mffeiron-ai/vue-base-components#v1.0.0
 
 # 或指定分支
-npm install github:your-username/vue-base-components#main
+npm install github:mffeiron-ai/vue-base-components#main
 ```
 
 ## 使用
