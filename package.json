@@ -1,0 +1,50 @@
+{
+  "name": "vue-base-components",
+  "version": "1.0.0",
+  "description": "共享 Vue 3 组件库：业务组件 + shadcn-vue UI 组件",
+  "type": "module",
+  "main": "./src/index.ts",
+  "module": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "types": "./src/index.ts"
+    },
+    "./*": "./src/*"
+  },
+  "files": [
+    "src/**/*.vue",
+    "src/**/*.ts",
+    "src/**/*.css"
+  ],
+  "peerDependencies": {
+    "vue": "^3.5.0",
+    "vue-router": "^4.0.0",
+    "pinia": "^2.0.0 || ^3.0.0",
+    "reka-ui": "^2.10.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "tailwind-merge": "^3.3.0",
+    "@vueuse/core": "^13.0.0",
+    "lucide-vue-next": "^0.525.0",
+    "vue-sonner": "^1.0.0",
+    "echarts": "^5.0.0 || ^6.0.0",
+    "md-editor-v3": "^6.0.0",
+    "embla-carousel-vue": "^8.0.0",
+    "embla-carousel-autoplay": "^8.0.0",
+    "vaul-vue": "^0.4.0",
+    "vue-input-otp": "^0.3.0"
+  },
+  "peerDependenciesMeta": {
+    "vue-router": { "optional": true },
+    "pinia": { "optional": true },
+    "vue-sonner": { "optional": true },
+    "echarts": { "optional": true },
+    "md-editor-v3": { "optional": true },
+    "embla-carousel-vue": { "optional": true },
+    "embla-carousel-autoplay": { "optional": true },
+    "vaul-vue": { "optional": true },
+    "vue-input-otp": { "optional": true }
+  }
+}
