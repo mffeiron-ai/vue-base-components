@@ -75,9 +75,14 @@ import { cn } from 'vue-base-components'
 
 ### 2. Tailwind CSS 配置
 
-项目 `style.css` 需要包含 shadcn-vue 的 CSS 变量：
+项目 `style.css` 需要包含 shadcn-vue 的 CSS 变量，**并配置 Tailwind 扫描共享组件库**（否则 shadcn 组件样式会缺失）：
 
 ```css
+@import "tailwindcss";
+
+/* 必须！告诉 Tailwind 扫描 vue-base-components 中的类名 */
+@source "../node_modules/vue-base-components/src";
+```
 @import "tailwindcss";
 
 /* 这些变量是 shadcn 组件正常运行的前提 */
