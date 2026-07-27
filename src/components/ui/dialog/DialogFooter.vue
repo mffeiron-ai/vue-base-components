@@ -2,7 +2,7 @@
 import type { HTMLAttributes } from "vue"
 import { DialogClose } from "reka-ui"
 import { cn } from "../../../lib/utils"
-import { Button } from "./ui/button"
+import { Button } from "../button"
 
 const props = withDefaults(defineProps<{
   class?: HTMLAttributes["class"]
