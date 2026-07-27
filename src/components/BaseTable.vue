@@ -55,12 +55,17 @@
       </TableHeader>
       <TableBody>
         <template v-if="internalLoading">
-          <TableRow v-for="r in (pageSize || 5)" :key="'skel-'+r">
-            <TableCell v-if="selectable" :style="{ height: cachedRowHeight + 'px' }"><div class="h-4 w-4 bg-muted rounded animate-pulse" /></TableCell>
-            <TableCell v-for="(_, ci) in filteredColumns" :key="ci" :style="{ height: cachedRowHeight + 'px' }">
-              <div class="h-4 bg-muted rounded animate-pulse" :style="{ width: (['w-3/4','w-1/2','w-2/3','w-5/6','w-full','w-3/5','w-4/5','w-1/3'][(r*3+ci)%8]) }" />
+          <TableRow>
+            <TableCell :colspan="filteredColumns.length + ($slots.actions?1:0) + (selectable?1:0)" class="text-center h-32">
+              <div class="flex items-center justify-center py-8">
+                <BlurText
+                  text="加载中..."
+                  :delay="100"
+                  animateBy="words"
+                  direction="top"
+                />
+              </div>
             </TableCell>
-            <TableCell v-if="$slots.actions" :style="{ height: cachedRowHeight + 'px' }"><div class="h-4 w-12 bg-muted rounded animate-pulse" /></TableCell>
           </TableRow>
         </template>
         <template v-else-if="!sortedData.length">
@@ -154,13 +159,13 @@
 <script setup lang="ts">
 import { computed, ref, watch, nextTick } from 'vue'
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell, TableEmpty } from './ui/table'
-import { Skeleton } from './ui/skeleton'
 import { Button } from './ui/button'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter, SheetClose } from './ui/sheet'
 import { Dialog, DialogContent } from './ui/dialog'
 import { MdPreview } from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import BasePagination from './BasePagination.vue'
+import BlurText from './BlurText.vue'
 
 import { 
   DropdownMenu,
