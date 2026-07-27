@@ -14,6 +14,7 @@ export { default as GlobalSearch } from './components/GlobalSearch.vue'
 export { default as ComboboxField } from './components/ComboboxField.vue'
 export { default as MarkDown } from './components/MarkDown.vue'
 export { default as TrendChart } from './components/TrendChart.vue'
+export { default as BlurText } from './components/BlurText.vue'
 
 // ── shadcn-vue UI 组件 ────────────────────────────────────
 export * from './components/ui/accordion'

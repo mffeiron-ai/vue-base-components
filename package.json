@@ -34,12 +34,14 @@
     "embla-carousel-vue": "^8.0.0",
     "embla-carousel-autoplay": "^8.0.0",
     "vaul-vue": "^0.4.0",
-    "vue-input-otp": "^0.3.0"
+    "vue-input-otp": "^0.3.0",
+    "motion-v": "^2.0.0"
   },
   "peerDependenciesMeta": {
     "vue-router": { "optional": true },
     "pinia": { "optional": true },
     "vue-sonner": { "optional": true },
+    "motion-v": { "optional": true },
     "echarts": { "optional": true },
     "md-editor-v3": { "optional": true },
     "embla-carousel-vue": { "optional": true },
