@@ -39,20 +39,24 @@
       </div>
     </div>
     <div ref="tableRef">
-    <Table>
+    <Table class="min-w-full">
       <TableHeader>
         <TableRow>
+          <TableHead v-if="selectable" class="w-10">
+            <Checkbox :model-value="allSelected" @update:model-value="toggleSelectAll()" />
+          </TableHead>
           <TableHead v-for="(col, idx) in filteredColumns" :key="idx"
             :class="col.sortable ? 'cursor-pointer select-none hover:bg-muted/50' : ''"
             @click="handleSort(col)">
             {{ col.label }}<span v-if="col.sortable" class="text-muted-foreground">{{ sortIndicator(col) }}</span>
           </TableHead>
-          <TableHead v-if="$slots.actions" class="text-right"></TableHead>
+          <TableHead v-if="$slots.actions" class="text-right w-0"></TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         <template v-if="internalLoading">
           <TableRow v-for="r in (pageSize || 5)" :key="'skel-'+r">
+            <TableCell v-if="selectable" :style="{ height: cachedRowHeight + 'px' }"><div class="h-4 w-4 bg-muted rounded animate-pulse" /></TableCell>
             <TableCell v-for="(_, ci) in filteredColumns" :key="ci" :style="{ height: cachedRowHeight + 'px' }">
               <div class="h-4 bg-muted rounded animate-pulse" :style="{ width: (['w-3/4','w-1/2','w-2/3','w-5/6','w-full','w-3/5','w-4/5','w-1/3'][(r*3+ci)%8]) }" />
             </TableCell>
@@ -60,10 +64,17 @@
           </TableRow>
         </template>
         <template v-else-if="!sortedData.length">
-          <TableRow><TableCell :colspan="filteredColumns.length + ($slots.actions?1:0)" class="text-center text-muted-foreground h-24">{{ emptyText || '暂无数据' }}</TableCell></TableRow>
+          <TableRow><TableCell :colspan="filteredColumns.length + ($slots.actions?1:0) + (selectable?1:0)" class="text-center text-muted-foreground h-24">{{ emptyText || '暂无数据' }}</TableCell></TableRow>
         </template>
         <template v-else>
           <TableRow v-for="row in sortedData" :key="row[idField]">
+          <TableCell v-if="selectable" class="w-10">
+            <Checkbox
+              :model-value="(selected || []).includes(row[idField])"
+              @update:model-value="toggleRow(row[idField])"
+              @click.stop
+            />
+          </TableCell>
           <TableCell v-for="(col, idx) in filteredColumns" :key="idx" class="max-w-[250px]" :class="clickable && idx === 0 ? 'cursor-pointer text-primary hover:underline' : ''" @click="clickable && idx === 0 && onRowClick(row)">
             <template v-if="col.type === 'markdown'">
               <div class="max-w-[250px] max-h-[150px] overflow-hidden break-words">
@@ -86,7 +97,7 @@
               </slot>
             </template>
           </TableCell>
-          <TableCell v-if="$slots.actions" class="text-right">
+          <TableCell v-if="$slots.actions" class="text-right whitespace-nowrap">
             <slot name="actions" v-bind="row"></slot>
           </TableCell>
         </TableRow>
@@ -195,6 +206,10 @@ const props = defineProps<{
   detailTitle?: string
   /** 图片 URL 转换函数，例如 getAvatarUrl */
   resolveImageUrl?: (url: string) => string
+  /** 是否开启行选择 */
+  selectable?: boolean
+  /** 已选中的 ID 列表 */
+  selected?: (string | number)[]
 }>()
 
 const emit = defineEmits<{
@@ -206,7 +221,35 @@ const emit = defineEmits<{
   'row-click': [row: any]
   /** 点击可排序列的表头时触发 */
   'sort-change': [payload: { field: string; order: 'asc' | 'desc' }]
+  /** 选中行变化时触发 */
+  'update:selected': [ids: (string | number)[]]
 }>()
+
+// ========== 行选择 ==========
+const allSelected = computed(() => {
+  if (!sortedData.value.length) return false
+  return sortedData.value.every(row => (props.selected || []).includes(row[props.idField]))
+})
+
+function toggleSelectAll() {
+  if (allSelected.value) {
+    emit('update:selected', [])
+  } else {
+    const allIds = sortedData.value.map(row => row[props.idField])
+    emit('update:selected', allIds)
+  }
+}
+
+function toggleRow(id: string | number) {
+  const current = [...(props.selected || [])]
+  const idx = current.indexOf(id)
+  if (idx >= 0) {
+    current.splice(idx, 1)
+  } else {
+    current.push(id)
+  }
+  emit('update:selected', current)
+}
 
 // ========== 行点击 → 详情面板 ==========
 const detailOpen = ref(false)

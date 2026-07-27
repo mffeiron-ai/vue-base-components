@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { PaginationLastProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
-import type { ButtonVariants } from "../button"
+import type { ButtonVariants } from "./ui/button"
 import { reactiveOmit } from "@vueuse/core"
 import { ChevronRightIcon } from "lucide-vue-next"
 import { PaginationLast, useForwardProps } from "reka-ui"
