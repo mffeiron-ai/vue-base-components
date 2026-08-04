@@ -72,7 +72,7 @@
           <TableRow><TableCell :colspan="filteredColumns.length + ($slots.actions?1:0) + (selectable?1:0)" class="text-center text-muted-foreground h-24">{{ emptyText || '暂无数据' }}</TableCell></TableRow>
         </template>
         <template v-else>
-          <TableRow v-for="row in sortedData" :key="row[idField]">
+          <TableRow v-for="(row, index) in sortedData" :key="row[idField]" :style="{ animationDelay: `${index * 50}ms` }" class="animate-table-row-in">
           <TableCell v-if="selectable" class="w-10">
             <Checkbox
               :model-value="(selected || []).includes(row[idField])"
@@ -391,3 +391,21 @@ defineExpose({
   },
 })
 </script>
+
+<style>
+@keyframes tableRowIn {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+.animate-table-row-in {
+  animation: tableRowIn 0.4s ease-out both;
+}
+</style>

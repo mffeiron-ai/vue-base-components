@@ -6,7 +6,7 @@ import { Primitive } from "reka-ui"
 import { cn } from "../../../lib/utils"
 import { markerVariants } from "."
 
-interface Props extends PrimitiveProps {
+interface Props extends /* @vue-ignore */ PrimitiveProps {
   variant?: MarkerVariants["variant"]
   class?: HTMLAttributes["class"]
 }

@@ -1,0 +1,99 @@
+import { defineConfig } from 'vitepress'
+import path from 'path'
+import tailwindcss from '@tailwindcss/vite'
+
+// 自动生成 UI 组件侧边栏
+const uiComponents = [
+  'accordion', 'alert', 'alert-dialog', 'aspect-ratio',
+  'avatar', 'badge', 'breadcrumb', 'bubble',
+  'button', 'button-group', 'calendar', 'card',
+  'carousel', 'chart', 'checkbox', 'collapsible',
+  'combobox', 'command', 'context-menu', 'dialog',
+  'drawer', 'dropdown-menu', 'empty', 'field',
+  'form', 'hover-card', 'input', 'input-group',
+  'input-otp', 'item', 'kbd', 'label',
+  'marker', 'menubar', 'message', 'message-scroller',
+  'native-select', 'navigation-menu', 'number-field',
+  'pagination', 'pin-input', 'popover', 'progress',
+  'radio-group', 'range-calendar', 'resizable', 'scroll-area',
+  'select', 'separator', 'sheet', 'sidebar',
+  'skeleton', 'slider', 'sonner', 'spinner',
+  'stepper', 'switch', 'table', 'tabs',
+  'tags-input', 'textarea', 'toggle', 'toggle-group',
+  'tooltip',
+]
+
+function capitalize(s: string) {
+  return s.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+}
+
+// https://vitepress.dev/reference/site-config
+export default defineConfig({
+  title: 'Vue Base Components',
+  description: '基于 reka-ui + Tailwind CSS 的 Vue 3 组件库',
+  lang: 'zh-CN',
+
+  themeConfig: {
+    // https://vitepress.dev/reference/default-theme-config
+    logo: { light: '', dark: '' },
+
+    nav: [
+      { text: '首页', link: '/' },
+      { text: 'UI 组件', link: '/components/button' },
+      { text: '业务组件', link: '/business/basetable' },
+    ],
+
+    sidebar: {
+      '/components/': [
+        {
+          text: 'UI 组件',
+          items: uiComponents.map(name => ({
+            text: capitalize(name),
+            link: `/components/${name}`,
+          })),
+        },
+      ],
+      '/business/': [
+        {
+          text: '业务组件',
+          items: [
+            { text: 'BaseTable', link: '/business/basetable' },
+            { text: 'BaseEdit', link: '/business/baseedit' },
+            { text: 'BasePagination', link: '/business/basepagination' },
+            { text: 'EditDialog', link: '/business/editdialog' },
+            { text: 'ImportDialog', link: '/business/importdialog' },
+            { text: 'GlobalSearch', link: '/business/globalsearch' },
+            { text: 'ComboboxField', link: '/business/comboboxfield' },
+            { text: 'MarkDown', link: '/business/markdown' },
+            { text: 'TrendChart', link: '/business/trendchart' },
+            { text: 'BlurText', link: '/business/blurtext' },
+          ],
+        },
+      ],
+    },
+
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/mffeiron-ai/vue-base-components' },
+    ],
+
+    search: {
+      provider: 'local',
+    },
+
+    footer: {
+      message: '基于 reka-ui + Tailwind CSS 构建',
+      copyright: 'MIT License',
+    },
+  },
+
+  vite: {
+    plugins: [
+      tailwindcss() as any,
+    ],
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, '../../src'),
+      },
+    },
+  },
+})

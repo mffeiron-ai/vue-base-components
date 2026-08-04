@@ -2,21 +2,20 @@
 import { ref, computed } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
 import { Motion } from 'motion-v'
-import type { Easing } from 'motion-v'
 
 // ── Props ─────────────────────────────────────────────
 interface BlurTextProps {
   text?: string
-  delay?: number          // 每个元素的延迟（ms），默认 200
+  delay?: number
   animateBy?: 'words' | 'letters'
   direction?: 'top' | 'bottom'
   threshold?: number
   rootMargin?: string
   animationFrom?: Record<string, string | number>
   animationTo?: Array<Record<string, string | number>>
-  easing?: Easing | Easing[]
+  easing?: string | number[] | ((t: number) => number)
   onAnimationComplete?: () => void
-  stepDuration?: number   // 每步持续时间（秒），默认 0.35
+  stepDuration?: number
 }
 
 const props = withDefaults(defineProps<BlurTextProps>(), {
@@ -26,7 +25,7 @@ const props = withDefaults(defineProps<BlurTextProps>(), {
   direction: 'top',
   threshold: 0.1,
   rootMargin: '0px',
-  easing: (t: number) => t,
+  easing: 'easeOut',
   stepDuration: 0.35,
 })
 
@@ -96,7 +95,7 @@ function buildKeyframes(
 }
 
 // ── 每个元素的动画参数 ─────────────────────────────────
-function getAnimateKeyframes(index: number) {
+function getAnimateKeyframes() {
   return buildKeyframes(fromSnapshot.value, toSnapshots.value)
 }
 
@@ -108,13 +107,6 @@ function getTransition(index: number) {
     ease: props.easing,
   }
 }
-
-// ── 动画完成回调 ───────────────────────────────────────
-function handleComplete(index: number) {
-  if (index === elements.value.length - 1) {
-    props.onAnimationComplete?.()
-  }
-}
 </script>
 
 <template>
@@ -123,9 +115,8 @@ function handleComplete(index: number) {
       <Motion
         tag="span"
         :initial="fromSnapshot"
-        :animate="inView ? getAnimateKeyframes(index) : fromSnapshot"
+        :animate="inView ? getAnimateKeyframes() : fromSnapshot"
         :transition="getTransition(index)"
-        @animation-complete="handleComplete(index)"
         style="display: inline-block; will-change: transform, filter, opacity"
       >
         {{ segment === ' ' ? '\u00A0' : segment }}
