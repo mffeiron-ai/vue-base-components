@@ -1,10 +1,16 @@
 /**
  * Tailwind CSS v4 — 通过 @tailwindcss/vite 插件注入
- * 这是文档站的自定义样式入口
+ * 文档站的自定义样式入口
+ *
+ * important: VitePress 有无层 (unlayered) 样式会覆盖 @layer utilities，
+ *           加 important 确保 Tailwind 工具类优先级最高
  * ─────────────────────────────────────────────
  */
 
-@import "tailwindcss";
+@import "tailwindcss" important;
+
+/* 告诉 Tailwind 扫描组件库源码中的类名 */
+@source "../../../src/";
 
 /**
  * 你的 Design Token（和组件库的 Tailwind 主题保持一致）

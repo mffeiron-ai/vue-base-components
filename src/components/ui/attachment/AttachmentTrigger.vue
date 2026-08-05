@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import type { PrimitiveProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { cn } from "../../../lib/utils"
 
-interface Props extends /* @vue-ignore */ PrimitiveProps {
+interface Props {
   class?: HTMLAttributes["class"]
+  asChild?: boolean
+  as?: string
 }
 const props = withDefaults(defineProps<Props>(), {
   as: "button",

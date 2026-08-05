@@ -1,0 +1,18 @@
+# Kbd
+
+> TODO: 组件描述
+
+## 导入
+
+```vue
+<script setup lang="ts">
+import { Kbd, KbdGroup } from 'vue-base-components'
+</script>
+```
+
+## API
+
+| 属性 | 类型 | 说明 |
+|------|------|------|
+| `class` | `string` | TODO |
+

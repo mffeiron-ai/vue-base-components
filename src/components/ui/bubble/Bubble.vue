@@ -1,15 +1,16 @@
 <script lang='ts' setup>
-import type { PrimitiveProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import type { BubbleVariants } from "."
 import { Primitive } from "reka-ui"
 import { cn } from "../../../lib/utils"
 import { bubbleVariants } from "."
 
-interface Props extends /* @vue-ignore */ PrimitiveProps {
+interface Props {
   variant?: BubbleVariants["variant"]
   align?: "start" | "end"
   class?: HTMLAttributes["class"]
+  asChild?: boolean
+  as?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
