@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { Button } from "@/random-ui/ui-dispatch/button"
-import { Card, CardContent, CardFooter } from "@/random-ui/ui-dispatch/card"
-import { Field, FieldGroup, FieldLabel } from "@/random-ui/ui-dispatch/field"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardFooter } from "@/components/ui/card"
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import {
   NativeSelect,
   NativeSelectOption,
-} from "@/random-ui/ui-dispatch/native-select"
-import { Textarea } from "@/random-ui/ui-dispatch/textarea"
+} from "@/components/ui/native-select"
+import { Textarea } from "@/components/ui/textarea"
 </script>
 
 <template>

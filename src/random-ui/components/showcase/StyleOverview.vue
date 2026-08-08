@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue"
 import { useDesignSystemSearchParams } from "@/components/useDesignSystemSearchParams"
-import { Card, CardContent } from "@/random-ui/ui-dispatch/card"
+import { Card, CardContent } from "@/components/ui/card"
 
 const { style } = useDesignSystemSearchParams()
 

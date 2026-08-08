@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import IconPlaceholder from "@/components/IconPlaceholder.vue"
-import { Button } from "@/random-ui/ui-dispatch/button"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardAction,
@@ -9,7 +9,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
+} from "@/components/ui/card"
 import {
   Field,
   FieldContent,
@@ -17,7 +17,7 @@ import {
   FieldGroup,
   FieldLabel,
   FieldSeparator,
-} from "@/random-ui/ui-dispatch/field"
+} from "@/components/ui/field"
 import {
   Select,
   SelectContent,
@@ -25,8 +25,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/random-ui/ui-dispatch/select"
-import { Switch } from "@/random-ui/ui-dispatch/switch"
+} from "@/components/ui/select"
+import { Switch } from "@/components/ui/switch"
 
 const CURRENCIES = [
   { label: "USD - United States Dollar", value: "usd" },

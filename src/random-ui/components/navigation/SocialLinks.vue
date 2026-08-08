@@ -1,19 +1,19 @@
 <script setup lang="ts">
 import IconPlaceholder from "@/components/IconPlaceholder.vue"
-import { Button } from "@/random-ui/ui-dispatch/button"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
-import { Field, FieldGroup, FieldLabel } from "@/random-ui/ui-dispatch/field"
+} from "@/components/ui/card"
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-} from "@/random-ui/ui-dispatch/input-group"
+} from "@/components/ui/input-group"
 </script>
 
 <template>

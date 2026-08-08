@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import IconPlaceholder from "@/components/IconPlaceholder.vue"
-import { Button } from "@/random-ui/ui-dispatch/button"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardAction,
@@ -8,20 +8,20 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
+} from "@/components/ui/card"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/random-ui/ui-dispatch/dropdown-menu"
+} from "@/components/ui/dropdown-menu"
 import {
   Table,
   TableBody,
   TableCell,
   TableRow,
-} from "@/random-ui/ui-dispatch/table"
+} from "@/components/ui/table"
 
 const transactions = [
   {

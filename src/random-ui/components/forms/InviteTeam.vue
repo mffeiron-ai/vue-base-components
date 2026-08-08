@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import IconPlaceholder from "@/components/IconPlaceholder.vue"
-import { Button } from "@/random-ui/ui-dispatch/button"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -8,15 +8,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
-import { Field, FieldLabel } from "@/random-ui/ui-dispatch/field"
-import { Input } from "@/random-ui/ui-dispatch/input"
+} from "@/components/ui/card"
+import { Field, FieldLabel } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from "@/random-ui/ui-dispatch/input-group"
+} from "@/components/ui/input-group"
 import {
   Select,
   SelectContent,
@@ -24,8 +24,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/random-ui/ui-dispatch/select"
-import { Separator } from "@/random-ui/ui-dispatch/separator"
+} from "@/components/ui/select"
+import { Separator } from "@/components/ui/separator"
 
 const invites = [
   { email: "alex@example.com", role: "editor" },

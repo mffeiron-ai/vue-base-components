@@ -7,12 +7,12 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
-import { Slider } from "@/random-ui/ui-dispatch/slider"
+} from "@/components/ui/card"
+import { Slider } from "@/components/ui/slider"
 import {
   ToggleGroup,
   ToggleGroupItem,
-} from "@/random-ui/ui-dispatch/toggle-group"
+} from "@/components/ui/toggle-group"
 
 const position = ref([50])
 

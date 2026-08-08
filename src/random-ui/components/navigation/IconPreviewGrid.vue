@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import IconPlaceholder from "@/components/IconPlaceholder.vue"
-import { Card, CardContent } from "@/random-ui/ui-dispatch/card"
+import { Card, CardContent } from "@/components/ui/card"
 
 const PREVIEW_ICONS = [
   {

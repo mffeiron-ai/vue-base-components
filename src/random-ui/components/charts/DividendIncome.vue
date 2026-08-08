@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { ChartConfig } from "@/random-ui/ui-dispatch/chart"
+import type { ChartConfig } from "@/components/ui/chart"
 import { VisGroupedBar, VisXYContainer } from "@unovis/vue"
 import IconPlaceholder from "@/components/IconPlaceholder.vue"
-import { Button } from "@/random-ui/ui-dispatch/button"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardAction,
@@ -10,21 +10,21 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
+} from "@/components/ui/card"
 import {
   ChartContainer,
   ChartCrosshair,
   ChartTooltip,
   ChartTooltipContent,
   componentToString,
-} from "@/random-ui/ui-dispatch/chart"
+} from "@/components/ui/chart"
 import {
   Item,
   ItemContent,
   ItemDescription,
   ItemGroup,
   ItemTitle,
-} from "@/random-ui/ui-dispatch/item"
+} from "@/components/ui/item"
 
 const HOLDINGS = [
   {

@@ -1,22 +1,22 @@
 <script setup lang="ts">
 import { CalendarDate } from "@internationalized/date"
 import { ref } from "vue"
-import { Badge } from "@/random-ui/ui-dispatch/badge"
-import { Calendar } from "@/random-ui/ui-dispatch/calendar"
+import { Badge } from "@/components/ui/badge"
+import { Calendar } from "@/components/ui/calendar"
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
+} from "@/components/ui/card"
 import {
   Item,
   ItemContent,
   ItemDescription,
   ItemGroup,
   ItemTitle,
-} from "@/random-ui/ui-dispatch/item"
+} from "@/components/ui/item"
 
 const today = new Date()
 const date = ref(new CalendarDate(today.getFullYear(), today.getMonth() + 1, today.getDate()))

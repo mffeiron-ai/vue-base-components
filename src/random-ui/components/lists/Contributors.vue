@@ -3,15 +3,15 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@/random-ui/ui-dispatch/avatar"
-import { Badge } from "@/random-ui/ui-dispatch/badge"
+} from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge"
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
+} from "@/components/ui/card"
 
 const usernames = [
   "shadcn",

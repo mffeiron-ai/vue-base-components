@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button } from "@/random-ui/ui-dispatch/button"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardAction,
@@ -8,31 +8,31 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
+} from "@/components/ui/card"
 import {
   Field,
   FieldDescription,
   FieldGroup,
   FieldLabel,
-} from "@/random-ui/ui-dispatch/field"
+} from "@/components/ui/field"
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
   InputGroupText,
-} from "@/random-ui/ui-dispatch/input-group"
+} from "@/components/ui/input-group"
 import {
   Item,
   ItemContent,
   ItemDescription,
   ItemFooter,
   ItemGroup,
-} from "@/random-ui/ui-dispatch/item"
+} from "@/components/ui/item"
 import {
   NativeSelect,
   NativeSelectOption,
-} from "@/random-ui/ui-dispatch/native-select"
-import { Progress } from "@/random-ui/ui-dispatch/progress"
+} from "@/components/ui/native-select"
+import { Progress } from "@/components/ui/progress"
 </script>
 
 <template>

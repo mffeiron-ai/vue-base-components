@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import IconPlaceholder from "@/components/IconPlaceholder.vue"
-import { Badge } from "@/random-ui/ui-dispatch/badge"
-import { Card, CardContent, CardHeader } from "@/random-ui/ui-dispatch/card"
+import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-} from "@/random-ui/ui-dispatch/input-group"
+} from "@/components/ui/input-group"
 import {
   Item,
   ItemContent,
@@ -14,11 +14,11 @@ import {
   ItemGroup,
   ItemMedia,
   ItemTitle,
-} from "@/random-ui/ui-dispatch/item"
+} from "@/components/ui/item"
 import {
   ToggleGroup,
   ToggleGroupItem,
-} from "@/random-ui/ui-dispatch/toggle-group"
+} from "@/components/ui/toggle-group"
 
 const HOLDINGS = [
   {

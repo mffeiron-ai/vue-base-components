@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Card, CardContent } from "@/random-ui/ui-dispatch/card"
+import { Card, CardContent } from "@/components/ui/card"
 import {
   Item,
   ItemActions,
@@ -7,8 +7,8 @@ import {
   ItemHeader,
   ItemSeparator,
   ItemTitle,
-} from "@/random-ui/ui-dispatch/item"
-import { Kbd } from "@/random-ui/ui-dispatch/kbd"
+} from "@/components/ui/item"
+import { Kbd } from "@/components/ui/kbd"
 
 const shortcuts = [
   { label: "Search", keys: ["⌘", "K"] },

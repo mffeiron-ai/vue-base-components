@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, reactive } from "vue"
-import { Button } from "@/random-ui/ui-dispatch/button"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -8,15 +8,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
-import { Checkbox } from "@/random-ui/ui-dispatch/checkbox"
+} from "@/components/ui/card"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   Field,
   FieldContent,
   FieldDescription,
   FieldGroup,
   FieldLabel,
-} from "@/random-ui/ui-dispatch/field"
+} from "@/components/ui/field"
 
 const NOTIFICATIONS = [
   {

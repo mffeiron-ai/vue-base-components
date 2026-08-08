@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import IconPlaceholder from "@/components/IconPlaceholder.vue"
-import { Card } from "@/random-ui/ui-dispatch/card"
+import { Card } from "@/components/ui/card"
 import {
   Sidebar,
   SidebarContent,
@@ -12,7 +12,7 @@ import {
   SidebarMenuItem,
   SidebarProvider,
   SidebarSeparator,
-} from "@/random-ui/ui-dispatch/sidebar"
+} from "@/components/ui/sidebar"
 </script>
 
 <template>

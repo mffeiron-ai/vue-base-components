@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { ChartConfig } from "@/random-ui/ui-dispatch/chart"
+import type { ChartConfig } from "@/components/ui/chart"
 import { VisAxis, VisGroupedBar, VisXYContainer } from "@unovis/vue"
-import { Button } from "@/random-ui/ui-dispatch/button"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -9,7 +9,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
+} from "@/components/ui/card"
 import {
   ChartContainer,
   ChartCrosshair,
@@ -17,7 +17,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
   componentToString,
-} from "@/random-ui/ui-dispatch/chart"
+} from "@/components/ui/chart"
 
 const barChartData = [
   { month: "January", desktop: 186, mobile: 80 },

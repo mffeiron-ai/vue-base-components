@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button } from "@/random-ui/ui-dispatch/button"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -7,10 +7,10 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
-import { Checkbox } from "@/random-ui/ui-dispatch/checkbox"
-import { Field, FieldGroup, FieldLabel } from "@/random-ui/ui-dispatch/field"
-import { Input } from "@/random-ui/ui-dispatch/input"
+} from "@/components/ui/card"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
 import {
   Select,
   SelectContent,
@@ -18,7 +18,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/random-ui/ui-dispatch/select"
+} from "@/components/ui/select"
 </script>
 
 <template>

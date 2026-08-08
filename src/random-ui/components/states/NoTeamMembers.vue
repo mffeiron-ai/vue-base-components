@@ -4,9 +4,9 @@ import {
   AvatarFallback,
   AvatarGroup,
   AvatarImage,
-} from "@/random-ui/ui-dispatch/avatar"
-import { Button } from "@/random-ui/ui-dispatch/button"
-import { Card, CardContent } from "@/random-ui/ui-dispatch/card"
+} from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
 import {
   Empty,
   EmptyContent,
@@ -14,7 +14,7 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from "@/random-ui/ui-dispatch/empty"
+} from "@/components/ui/empty"
 </script>
 
 <template>

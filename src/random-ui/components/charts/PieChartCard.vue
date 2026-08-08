@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { ChartConfig } from "@/random-ui/ui-dispatch/chart"
+import type { ChartConfig } from "@/components/ui/chart"
 import { Donut } from "@unovis/ts"
 import { VisDonut, VisSingleContainer } from "@unovis/vue"
-import { Badge } from "@/random-ui/ui-dispatch/badge"
+import { Badge } from "@/components/ui/badge"
 import {
   Card,
   CardAction,
@@ -11,14 +11,14 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
+} from "@/components/ui/card"
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
   componentToString,
-} from "@/random-ui/ui-dispatch/chart"
-import { Progress } from "@/random-ui/ui-dispatch/progress"
+} from "@/components/ui/chart"
+import { Progress } from "@/components/ui/progress"
 
 const pieChartData = [
   { browser: "chrome", visitors: 275 },

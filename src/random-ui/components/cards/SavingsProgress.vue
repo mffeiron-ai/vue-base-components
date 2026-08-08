@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import type { ChartConfig } from "@/random-ui/ui-dispatch/chart"
+import type { ChartConfig } from "@/components/ui/chart"
 import { Donut } from "@unovis/ts"
 import { VisDonut, VisSingleContainer } from "@unovis/vue"
-import { Card, CardContent, CardFooter } from "@/random-ui/ui-dispatch/card"
+import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
   componentToString,
-} from "@/random-ui/ui-dispatch/chart"
-import { Separator } from "@/random-ui/ui-dispatch/separator"
+} from "@/components/ui/chart"
+import { Separator } from "@/components/ui/separator"
 
 const chartData = [
   { name: "saved", value: 24000 },

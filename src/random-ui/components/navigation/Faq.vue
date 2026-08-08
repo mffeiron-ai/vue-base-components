@@ -4,19 +4,19 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/random-ui/ui-dispatch/accordion"
-import { Button } from "@/random-ui/ui-dispatch/button"
+} from "@/components/ui/accordion"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
   CardFooter,
-} from "@/random-ui/ui-dispatch/card"
+} from "@/components/ui/card"
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@/random-ui/ui-dispatch/tabs"
+} from "@/components/ui/tabs"
 
 const GENERAL_QUESTIONS = [
   {

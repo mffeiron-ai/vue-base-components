@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import IconPlaceholder from "@/components/IconPlaceholder.vue"
-import { Button } from "@/random-ui/ui-dispatch/button"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
   CardDescription,
   CardFooter,
-} from "@/random-ui/ui-dispatch/card"
-import { Item } from "@/random-ui/ui-dispatch/item"
-import { Label } from "@/random-ui/ui-dispatch/label"
+} from "@/components/ui/card"
+import { Item } from "@/components/ui/item"
+import { Label } from "@/components/ui/label"
 </script>
 
 <template>

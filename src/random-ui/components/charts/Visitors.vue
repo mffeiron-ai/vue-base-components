@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { ChartConfig } from "@/random-ui/ui-dispatch/chart"
+import type { ChartConfig } from "@/components/ui/chart"
 import { VisArea, VisAxis, VisLine, VisXYContainer } from "@unovis/vue"
-import { Badge } from "@/random-ui/ui-dispatch/badge"
+import { Badge } from "@/components/ui/badge"
 import {
   Card,
   CardAction,
@@ -9,14 +9,14 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
+} from "@/components/ui/card"
 import {
   ChartContainer,
   ChartCrosshair,
   ChartTooltip,
   ChartTooltipContent,
   componentToString,
-} from "@/random-ui/ui-dispatch/chart"
+} from "@/components/ui/chart"
 
 const areaChartData = [
   { month: 1, monthLabel: "January", desktop: 186 },

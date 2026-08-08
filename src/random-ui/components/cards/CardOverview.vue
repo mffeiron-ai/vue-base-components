@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import type { ChartConfig } from "@/random-ui/ui-dispatch/chart"
+import type { ChartConfig } from "@/components/ui/chart"
 import { VisGroupedBar, VisXYContainer } from "@unovis/vue"
-import { Badge } from "@/random-ui/ui-dispatch/badge"
-import { Button } from "@/random-ui/ui-dispatch/button"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
   CardDescription,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
+} from "@/components/ui/card"
 import {
   ChartContainer,
   ChartCrosshair,
   ChartTooltip,
   ChartTooltipContent,
   componentToString,
-} from "@/random-ui/ui-dispatch/chart"
+} from "@/components/ui/chart"
 
 const activityData = [
   { month: "Jan", index: 0, amount: 40 },

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import IconPlaceholder from "@/components/IconPlaceholder.vue"
-import { Button } from "@/random-ui/ui-dispatch/button"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardAction,
@@ -9,7 +9,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
+} from "@/components/ui/card"
 import {
   Field,
   FieldContent,
@@ -18,12 +18,12 @@ import {
   FieldLabel,
   FieldLegend,
   FieldSet,
-} from "@/random-ui/ui-dispatch/field"
-import { Input } from "@/random-ui/ui-dispatch/input"
+} from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
 import {
   RadioGroup,
   RadioGroupItem,
-} from "@/random-ui/ui-dispatch/radio-group"
+} from "@/components/ui/radio-group"
 </script>
 
 <template>

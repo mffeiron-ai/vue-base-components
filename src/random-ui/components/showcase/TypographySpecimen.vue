@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Button } from "@/random-ui/ui-dispatch/button"
-import { Card, CardContent, CardFooter } from "@/random-ui/ui-dispatch/card"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import {
   Dialog,
   DialogClose,
@@ -10,9 +10,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/random-ui/ui-dispatch/dialog"
-import { Field, FieldGroup, FieldLabel } from "@/random-ui/ui-dispatch/field"
-import { Input } from "@/random-ui/ui-dispatch/input"
+} from "@/components/ui/dialog"
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
 import {
   Select,
   SelectContent,
@@ -20,8 +20,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/random-ui/ui-dispatch/select"
-import { Textarea } from "@/random-ui/ui-dispatch/textarea"
+} from "@/components/ui/select"
+import { Textarea } from "@/components/ui/textarea"
 
 // Static values (no Next.js search params)
 const headingLabel = "Inherit"

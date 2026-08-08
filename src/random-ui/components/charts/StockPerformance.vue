@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ChartConfig } from "@/random-ui/ui-dispatch/chart"
+import type { ChartConfig } from "@/components/ui/chart"
 import { VisArea, VisLine, VisXYContainer } from "@unovis/vue"
 import { computed, ref } from "vue"
 import {
@@ -8,14 +8,14 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
+} from "@/components/ui/card"
 import {
   ChartContainer,
   ChartCrosshair,
   ChartTooltip,
   ChartTooltipContent,
   componentToString,
-} from "@/random-ui/ui-dispatch/chart"
+} from "@/components/ui/chart"
 import {
   Combobox,
   ComboboxEmpty,
@@ -23,9 +23,9 @@ import {
   ComboboxItem,
   ComboboxList,
   ComboboxViewport,
-} from "@/random-ui/ui-dispatch/combobox"
-import { Field, FieldGroup, FieldLabel } from "@/random-ui/ui-dispatch/field"
-import { Separator } from "@/random-ui/ui-dispatch/separator"
+} from "@/components/ui/combobox"
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
+import { Separator } from "@/components/ui/separator"
 
 const TICKERS = ["VOO", "VIG", "AAPL", "MSFT", "GOOGL", "AMZN", "TSLA"]
 

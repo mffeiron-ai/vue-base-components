@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Badge } from "@/random-ui/ui-dispatch/badge"
+import { Badge } from "@/components/ui/badge"
 import {
   Card,
   CardContent,
@@ -7,9 +7,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
-import { Item, ItemContent } from "@/random-ui/ui-dispatch/item"
-import { Separator } from "@/random-ui/ui-dispatch/separator"
+} from "@/components/ui/card"
+import { Item, ItemContent } from "@/components/ui/item"
+import { Separator } from "@/components/ui/separator"
 </script>
 
 <template>

@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import IconPlaceholder from "@/components/IconPlaceholder.vue"
-import { Button } from "@/random-ui/ui-dispatch/button"
+import { Button } from "@/components/ui/button"
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-} from "@/random-ui/ui-dispatch/input-group"
+} from "@/components/ui/input-group"
 import {
   ToggleGroup,
   ToggleGroupItem,
-} from "@/random-ui/ui-dispatch/toggle-group"
+} from "@/components/ui/toggle-group"
 </script>
 
 <template>

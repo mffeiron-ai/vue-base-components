@@ -7,16 +7,16 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/random-ui/ui-dispatch/breadcrumb"
-import { Button } from "@/random-ui/ui-dispatch/button"
-import { Card, CardContent, CardHeader } from "@/random-ui/ui-dispatch/card"
+} from "@/components/ui/breadcrumb"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/random-ui/ui-dispatch/dropdown-menu"
+} from "@/components/ui/dropdown-menu"
 import {
   Item,
   ItemContent,
@@ -24,7 +24,7 @@ import {
   ItemGroup,
   ItemMedia,
   ItemTitle,
-} from "@/random-ui/ui-dispatch/item"
+} from "@/components/ui/item"
 </script>
 
 <template>

@@ -342,9 +342,9 @@ const initialFonts = getThemeFonts(themeOptions.value, currentThemeIndex.value, 
 
 // 定义自定义设置的响应式对象，初始值来自 URL 搜索参数和当前主题的字体配置
 const customizer = reactive({
-  style: urlStyle.value as StyleKey,
+  style: (urlStyle.value ?? styleOptions[0].value) as StyleKey,
   themeIndex: String(currentThemeIndex.value),
-  iconLibrary: urlIconLibrary.value,
+  iconLibrary: urlIconLibrary.value ?? iconLibraryOptions[0].value,
   fontSans: initialFonts.fontSans,
   fontSerif: initialFonts.fontSerif,
   fontMono: initialFonts.fontMono,

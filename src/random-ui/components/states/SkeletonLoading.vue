@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Card, CardContent } from "@/random-ui/ui-dispatch/card"
-import { Skeleton } from "@/random-ui/ui-dispatch/skeleton"
+import { Card, CardContent } from "@/components/ui/card"
+import { Skeleton } from "@/components/ui/skeleton"
 </script>
 
 <template>

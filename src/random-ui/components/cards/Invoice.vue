@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Badge } from "@/random-ui/ui-dispatch/badge"
-import { Button } from "@/random-ui/ui-dispatch/button"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardAction,
@@ -9,7 +9,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
+} from "@/components/ui/card"
 import {
   Table,
   TableBody,
@@ -17,7 +17,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/random-ui/ui-dispatch/table"
+} from "@/components/ui/table"
 
 const INVOICE_ITEMS = [
   { item: "Design System License", qty: 1, unitPrice: 499 },

@@ -8,7 +8,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
+} from "@/components/ui/card"
 import {
   Item,
   ItemActions,
@@ -16,13 +16,13 @@ import {
   ItemGroup,
   ItemMedia,
   ItemTitle,
-} from "@/random-ui/ui-dispatch/item"
-import { Slider } from "@/random-ui/ui-dispatch/slider"
-import { Switch } from "@/random-ui/ui-dispatch/switch"
+} from "@/components/ui/item"
+import { Slider } from "@/components/ui/slider"
+import { Switch } from "@/components/ui/switch"
 import {
   ToggleGroup,
   ToggleGroupItem,
-} from "@/random-ui/ui-dispatch/toggle-group"
+} from "@/components/ui/toggle-group"
 
 const SCENES = {
   cooking: { brightness: [90], colorTemp: [70], volume: [30], fade: [0] },

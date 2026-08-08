@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Alert, AlertDescription, AlertTitle } from "@/random-ui/ui-dispatch/alert"
-import { Button } from "@/random-ui/ui-dispatch/button"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -8,12 +8,12 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
-import { Field, FieldGroup, FieldLabel } from "@/random-ui/ui-dispatch/field"
+} from "@/components/ui/card"
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import {
   ToggleGroup,
   ToggleGroupItem,
-} from "@/random-ui/ui-dispatch/toggle-group"
+} from "@/components/ui/toggle-group"
 
 const timeSlots = ["上午 9:00", "上午 10:30", "上午 11:00", "下午 1:30"]
 </script>

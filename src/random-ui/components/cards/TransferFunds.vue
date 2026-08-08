@@ -1,6 +1,6 @@
 .0<script setup lang="ts">
 import IconPlaceholder from "@/components/IconPlaceholder.vue"
-import { Button } from "@/random-ui/ui-dispatch/button"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardAction,
@@ -9,15 +9,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
-import { Field, FieldGroup, FieldLabel } from "@/random-ui/ui-dispatch/field"
+} from "@/components/ui/card"
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
   InputGroupText,
-} from "@/random-ui/ui-dispatch/input-group"
-import { Item, ItemContent } from "@/random-ui/ui-dispatch/item"
+} from "@/components/ui/input-group"
+import { Item, ItemContent } from "@/components/ui/item"
 import {
   Select,
   SelectContent,
@@ -25,8 +25,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/random-ui/ui-dispatch/select"
-import { Separator } from "@/random-ui/ui-dispatch/separator"
+} from "@/components/ui/select"
+import { Separator } from "@/components/ui/separator"
 
 const FROM_ACCOUNTS = [
   { label: "主账户 (..8402) - $12,450.00", value: "checking" },

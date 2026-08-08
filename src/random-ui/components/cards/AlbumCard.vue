@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { Badge } from "@/random-ui/ui-dispatch/badge"
+import { Badge } from "@/components/ui/badge"
 import {
   Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
-import { Separator } from "@/random-ui/ui-dispatch/separator"
+} from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator"
 </script>
 
 <template>

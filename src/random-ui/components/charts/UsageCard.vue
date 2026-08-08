@@ -4,7 +4,7 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
+} from "@/components/ui/card"
 import {
   Item,
   ItemActions,
@@ -12,7 +12,7 @@ import {
   ItemGroup,
   ItemMedia,
   ItemTitle,
-} from "@/random-ui/ui-dispatch/item"
+} from "@/components/ui/item"
 
 const items = [
   {

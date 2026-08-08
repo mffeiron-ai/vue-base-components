@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import IconPlaceholder from "@/components/IconPlaceholder.vue"
-import { Button } from "@/random-ui/ui-dispatch/button"
-import { Card, CardContent } from "@/random-ui/ui-dispatch/card"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,7 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/random-ui/ui-dispatch/dropdown-menu"
+} from "@/components/ui/dropdown-menu"
 import {
   Empty,
   EmptyContent,
@@ -18,39 +18,39 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from "@/random-ui/ui-dispatch/empty"
+} from "@/components/ui/empty"
 import {
   Field,
   FieldDescription,
   FieldLabel,
-} from "@/random-ui/ui-dispatch/field"
+} from "@/components/ui/field"
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from "@/random-ui/ui-dispatch/input-group"
+} from "@/components/ui/input-group"
 import {
   Item,
   ItemActions,
   ItemContent,
   ItemDescription,
   ItemTitle,
-} from "@/random-ui/ui-dispatch/item"
-import { Separator } from "@/random-ui/ui-dispatch/separator"
-import { Spinner } from "@/random-ui/ui-dispatch/spinner"
+} from "@/components/ui/item"
+import { Separator } from "@/components/ui/separator"
+import { Spinner } from "@/components/ui/spinner"
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@/random-ui/ui-dispatch/tabs"
+} from "@/components/ui/tabs"
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/random-ui/ui-dispatch/tooltip"
+} from "@/components/ui/tooltip"
 
 const isCreatingCodespace = ref(false)
 

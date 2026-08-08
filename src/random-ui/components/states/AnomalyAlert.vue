@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { Button } from "@/random-ui/ui-dispatch/button"
-import { Card, CardContent } from "@/random-ui/ui-dispatch/card"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
 import {
   Empty,
   EmptyContent,
   EmptyDescription,
   EmptyHeader,
   EmptyTitle,
-} from "@/random-ui/ui-dispatch/empty"
+} from "@/components/ui/empty"
 </script>
 
 <template>

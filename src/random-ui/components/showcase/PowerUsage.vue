@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ChartConfig } from "@/random-ui/ui-dispatch/chart"
+import type { ChartConfig } from "@/components/ui/chart"
 import { VisGroupedBar, VisXYContainer } from "@unovis/vue"
 import {
   Card,
@@ -8,16 +8,16 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
+} from "@/components/ui/card"
 import {
   ChartContainer,
   ChartCrosshair,
   ChartTooltip,
   ChartTooltipContent,
   componentToString,
-} from "@/random-ui/ui-dispatch/chart"
-import { Progress } from "@/random-ui/ui-dispatch/progress"
-import { Separator } from "@/random-ui/ui-dispatch/separator"
+} from "@/components/ui/chart"
+import { Progress } from "@/components/ui/progress"
+import { Separator } from "@/components/ui/separator"
 
 const chartData = [
   { hour: "6a", index: 0, usage: 1.2 },

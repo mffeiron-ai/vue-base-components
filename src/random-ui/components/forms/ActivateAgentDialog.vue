@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import IconPlaceholder from "@/components/IconPlaceholder.vue"
-import { Alert, AlertDescription } from "@/random-ui/ui-dispatch/alert"
-import { Badge } from "@/random-ui/ui-dispatch/badge"
-import { Button } from "@/random-ui/ui-dispatch/button"
+import { Alert, AlertDescription } from "@/components/ui/alert"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -10,14 +10,14 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/random-ui/ui-dispatch/card"
+} from "@/components/ui/card"
 import {
   Item,
   ItemContent,
   ItemGroup,
   ItemMedia,
   ItemTitle,
-} from "@/random-ui/ui-dispatch/item"
+} from "@/components/ui/item"
 
 const agentFeatures = [
   {

@@ -11,12 +11,12 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/random-ui/ui-dispatch/alert-dialog"
-import { Badge } from "@/random-ui/ui-dispatch/badge"
-import { Button } from "@/random-ui/ui-dispatch/button"
-import { ButtonGroup } from "@/random-ui/ui-dispatch/button-group"
-import { Card, CardContent } from "@/random-ui/ui-dispatch/card"
-import { Checkbox } from "@/random-ui/ui-dispatch/checkbox"
+} from "@/components/ui/alert-dialog"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { ButtonGroup } from "@/components/ui/button-group"
+import { Card, CardContent } from "@/components/ui/card"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,28 +25,28 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/random-ui/ui-dispatch/dropdown-menu"
-import { Field, FieldGroup } from "@/random-ui/ui-dispatch/field"
+} from "@/components/ui/dropdown-menu"
+import { Field, FieldGroup } from "@/components/ui/field"
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
   InputGroupText,
-} from "@/random-ui/ui-dispatch/input-group"
+} from "@/components/ui/input-group"
 import {
   Item,
   ItemActions,
   ItemContent,
   ItemDescription,
   ItemTitle,
-} from "@/random-ui/ui-dispatch/item"
+} from "@/components/ui/item"
 import {
   RadioGroup,
   RadioGroupItem,
-} from "@/random-ui/ui-dispatch/radio-group"
-import { Slider } from "@/random-ui/ui-dispatch/slider"
-import { Switch } from "@/random-ui/ui-dispatch/switch"
-import { Textarea } from "@/random-ui/ui-dispatch/textarea"
+} from "@/components/ui/radio-group"
+import { Slider } from "@/components/ui/slider"
+import { Switch } from "@/components/ui/switch"
+import { Textarea } from "@/components/ui/textarea"
 
 const sliderValue = ref<number[]>([500])
 </script>
