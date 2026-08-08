@@ -1,0 +1,106 @@
+<script setup lang="ts">
+import IconPlaceholder from "@/components/IconPlaceholder.vue"
+import { Button } from "@/random-ui/ui-dispatch/button"
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/random-ui/ui-dispatch/card"
+import {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel,
+  FieldLegend,
+  FieldSet,
+} from "@/random-ui/ui-dispatch/field"
+import { Input } from "@/random-ui/ui-dispatch/input"
+import {
+  RadioGroup,
+  RadioGroupItem,
+} from "@/random-ui/ui-dispatch/radio-group"
+</script>
+
+<template>
+  <Card>
+    <CardHeader>
+      <CardDescription>提款偏好</CardDescription>
+      <CardTitle>收款方式</CardTitle>
+      <CardAction>
+        <Button variant="ghost" size="icon-sm" class="bg-muted">
+          <IconPlaceholder
+            lucide="XIcon"
+            tabler="IconX"
+            hugeicons="Cancel01Icon"
+            phosphor="XIcon"
+            remixicon="RiCloseLine"
+          />
+        </Button>
+      </CardAction>
+    </CardHeader>
+    <CardContent>
+      <FieldGroup>
+        <Field>
+          <FieldLabel for="account-holder">
+            账户持有人姓名
+          </FieldLabel>
+          <Input
+            id="account-holder"
+            default-value="Synthetic Horizons Music LLC"
+          />
+        </Field>
+        <FieldSet>
+          <FieldLegend variant="label">
+            收款方式
+          </FieldLegend>
+          <RadioGroup
+            default-value="bank"
+            class="grid grid-cols-1 items-start gap-3 md:grid-cols-2"
+          >
+            <FieldLabel for="method-bank">
+              <Field orientation="horizontal" class="pb-2.5">
+                <RadioGroupItem id="method-bank" value="bank" />
+                <FieldContent>
+                  <FieldDescription class="font-medium text-foreground">
+                    银行转账
+                  </FieldDescription>
+                  <FieldDescription>SWIFT / IBAN</FieldDescription>
+                </FieldContent>
+              </Field>
+            </FieldLabel>
+            <FieldLabel for="method-paypal">
+              <Field orientation="horizontal" class="pb-2.5">
+                <RadioGroupItem id="method-paypal" value="paypal" />
+                <FieldContent>
+                  <FieldDescription class="font-medium text-foreground">
+                    PayPal
+                  </FieldDescription>
+                  <FieldDescription class="line-clamp-1">
+                    即时到账
+                  </FieldDescription>
+                </FieldContent>
+              </Field>
+            </FieldLabel>
+          </RadioGroup>
+        </FieldSet>
+        <Field>
+          <FieldLabel for="iban">
+            IBAN / 账户号码
+          </FieldLabel>
+          <Input id="iban" placeholder="DE89 3704 0044 ...." />
+        </Field>
+      </FieldGroup>
+    </CardContent>
+    <CardFooter>
+      <Button class="w-full" disabled>
+        保存收款设置
+      </Button>
+    </CardFooter>
+  </Card>
+</template>
+

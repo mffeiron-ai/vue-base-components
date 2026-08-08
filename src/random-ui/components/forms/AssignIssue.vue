@@ -1,0 +1,113 @@
+<script setup lang="ts">
+import { ref } from "vue"
+import IconPlaceholder from "@/components/IconPlaceholder.vue"
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/random-ui/ui-dispatch/avatar"
+import { Button } from "@/random-ui/ui-dispatch/button"
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/random-ui/ui-dispatch/card"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/random-ui/ui-dispatch/tooltip"
+
+const users = [
+  "shadcn",
+  "maxleiter",
+  "evilrabbit",
+  "pranathip",
+  "jorgezreik",
+  "shuding",
+  "rauchg",
+]
+
+const selectedUsers = ref<string[]>([users[0]!])
+</script>
+
+<template>
+  <TooltipProvider>
+    <Card class="w-full max-w-sm" size="sm">
+    <CardHeader class="border-b">
+      <CardTitle class="text-sm">
+        分配问题
+      </CardTitle>
+      <CardDescription class="text-sm">
+        选择要分配此问题的用户。
+      </CardDescription>
+      <CardAction>
+        <Tooltip>
+          <TooltipTrigger :as-child="true">
+            <Button variant="outline" size="icon-xs">
+              <IconPlaceholder
+                lucide="PlusIcon"
+                tabler="IconPlus"
+                hugeicons="PlusSignIcon"
+                phosphor="PlusIcon"
+                remixicon="RiAddLine"
+              />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>添加用户</TooltipContent>
+        </Tooltip>
+      </CardAction>
+    </CardHeader>
+    <CardContent>
+      <div class="flex flex-wrap gap-2 rounded-md border px-2 py-1.5 min-h-9">
+        <div
+          v-for="username in selectedUsers"
+          :key="username"
+          class="flex items-center gap-1 rounded-md bg-secondary px-2 py-0.5 text-sm"
+        >
+          <Avatar class="size-4">
+            <AvatarImage
+              :src="`https://github.com/${username}.png`"
+              :alt="username"
+            />
+            <AvatarFallback>{{ username.charAt(0) }}</AvatarFallback>
+          </Avatar>
+          {{ username }}
+        </div>
+      </div>
+      <div class="mt-2 flex flex-col gap-1">
+        <div
+          v-for="username in users"
+          :key="username"
+          class="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-sm hover:bg-accent"
+          @click="selectedUsers.includes(username)
+            ? selectedUsers = selectedUsers.filter(u => u !== username)
+            : selectedUsers = [...selectedUsers, username]"
+        >
+          <Avatar class="size-5">
+            <AvatarImage
+              :src="`https://github.com/${username}.png`"
+              :alt="username"
+            />
+            <AvatarFallback>{{ username.charAt(0) }}</AvatarFallback>
+          </Avatar>
+          {{ username }}
+          <IconPlaceholder
+            v-if="selectedUsers.includes(username)"
+            lucide="CheckIcon"
+            tabler="IconCheck"
+            hugeicons="Tick02Icon"
+            phosphor="CheckIcon"
+            remixicon="RiCheckLine"
+            class="ml-auto size-4"
+          />
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+  </TooltipProvider>
+</template>

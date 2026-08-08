@@ -14,11 +14,11 @@ const dataSource = ref([
 ])
 
 const columns = ref([
-  { title: 'ID', key: 'id', width: 80 },
-  { title: '姓名', key: 'name', sortable: true },
-  { title: '邮箱', key: 'email' },
-  { title: '角色', key: 'role' },
-  { title: '状态', key: 'status' },
+  { label: 'ID', field: 'id', width: 80 },
+  { label: '姓名', field: 'name', sortable: true },
+  { label: '邮箱', field: 'email' },
+  { label: '角色', field: 'role' },
+  { label: '状态', field: 'status' },
 ])
 </script>
 
@@ -26,15 +26,17 @@ const columns = ref([
 
 <BaseTable
   :columns="columns"
-  :data-source="dataSource"
+  :data="dataSource"
   :pagination="false"
+  id-field="id"
 />
 
 ```vue
 <BaseTable
   :columns="columns"
-  :data-source="dataSource"
+  :data="dataSource"
   :pagination="false"
+  id-field="id"
 />
 ```
 
