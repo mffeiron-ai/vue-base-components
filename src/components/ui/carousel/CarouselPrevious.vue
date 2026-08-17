@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { WithClassAsProps } from "./interface"
-import type { ButtonVariants } from "../button"
-import { ArrowLeft } from "lucide-vue-next"
-import { cn } from "../../../lib/utils"
-import { Button } from "../button"
+import type { ButtonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+import { IconPlaceholder } from "@/components/icon-placeholder"
+import { Button } from "@/components/ui/button"
 import { useCarousel } from "./useCarousel"
 
 const props = withDefaults(defineProps<{
@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<{
 }
 & WithClassAsProps>(), {
   variant: "outline",
-  size: "icon",
+  size: "icon-sm",
 })
 
 const { orientation, canScrollPrev, scrollPrev } = useCarousel()
@@ -23,7 +23,7 @@ const { orientation, canScrollPrev, scrollPrev } = useCarousel()
     data-slot="carousel-previous"
     :disabled="!canScrollPrev"
     :class="cn(
-      'absolute size-8 rounded-full',
+      'cn-carousel-previous absolute touch-manipulation',
       orientation === 'horizontal'
         ? 'top-1/2 -left-12 -translate-y-1/2'
         : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
@@ -34,8 +34,15 @@ const { orientation, canScrollPrev, scrollPrev } = useCarousel()
     @click="scrollPrev"
   >
     <slot>
-      <ArrowLeft />
-      <span class="sr-only">Previous Slide</span>
+      <IconPlaceholder
+        lucide="ChevronLeftIcon"
+        tabler="IconChevronLeft"
+        hugeicons="ArrowLeft01Icon"
+        phosphor="CaretLeftIcon"
+        remixicon="RiArrowLeftSLine"
+        class="cn-rtl-flip"
+      />
+      <span class="sr-only">Previous slide</span>
     </slot>
   </Button>
 </template>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from "vue"
-import { cn } from "../../../lib/utils"
+import { cn } from "@/lib/utils"
 
 const props = defineProps<{
   class?: HTMLAttributes["class"]
@@ -11,7 +11,7 @@ const props = defineProps<{
   <div
     data-slot="empty-header"
     :class="cn(
-      'flex max-w-sm flex-col items-center gap-2 text-center',
+      'cn-empty-header flex max-w-sm flex-col items-center',
       props.class,
     )"
   >

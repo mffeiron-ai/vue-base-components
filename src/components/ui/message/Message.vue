@@ -1,13 +1,12 @@
 <script lang='ts' setup>
+import type { PrimitiveProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { Primitive } from "reka-ui"
-import { cn } from "../../../lib/utils"
+import { cn } from "@/lib/utils"
 
-interface Props {
+interface Props extends PrimitiveProps {
   class?: HTMLAttributes["class"]
   align?: "start" | "end"
-  asChild?: boolean
-  as?: string
 }
 const props = withDefaults(defineProps<Props>(), {
   align: "start",
@@ -22,7 +21,7 @@ const props = withDefaults(defineProps<Props>(), {
     :as="as"
     :as-child="asChild"
     :class="cn(
-      'text-sm gap-2 group/message relative flex w-full min-w-0 data-[align=end]:flex-row-reverse',
+      'cn-message group/message relative flex w-full min-w-0 data-[align=end]:flex-row-reverse',
       props.class,
     )"
   >

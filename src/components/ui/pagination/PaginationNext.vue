@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type { PaginationNextProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
-import type { ButtonVariants } from "../button"
+import type { ButtonVariants } from "@/components/ui/button"
 import { reactiveOmit } from "@vueuse/core"
-import { ChevronRightIcon } from "lucide-vue-next"
 import { PaginationNext, useForwardProps } from "reka-ui"
-import { cn } from "../../../lib/utils"
-import { buttonVariants } from "../button"
+import { cn } from "@/lib/utils"
+import IconPlaceholder from "@/components/IconPlaceholder.vue"
+import { buttonVariants } from "@/components/ui/button"
 
 const props = withDefaults(defineProps<PaginationNextProps & {
   size?: ButtonVariants["size"]
@@ -22,12 +22,20 @@ const forwarded = useForwardProps(delegatedProps)
 <template>
   <PaginationNext
     data-slot="pagination-next"
-    :class="cn(buttonVariants({ variant: 'ghost', size }), 'gap-1 px-2.5 sm:pr-2.5', props.class)"
+    :class="cn(buttonVariants({ variant: 'ghost', size }), 'cn-pagination-next', props.class)"
     v-bind="forwarded"
   >
     <slot>
-      <span class="hidden sm:block">Next</span>
-      <ChevronRightIcon />
+      <span class="cn-pagination-next-text hidden sm:block">Next</span>
+      <IconPlaceholder
+        lucide="ChevronRightIcon"
+        tabler="IconChevronRight"
+        hugeicons="ArrowRight01Icon"
+        phosphor="CaretRightIcon"
+        remixicon="RiArrowRightSLine"
+        data-icon="inline-end"
+        class="cn-rtl-flip"
+      />
     </slot>
   </PaginationNext>
 </template>

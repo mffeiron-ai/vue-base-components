@@ -1,17 +1,14 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from "vue"
 import type { ButtonVariants } from "../button"
-import Button from "../button/Button.vue"
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 
-interface Props {
+const props = withDefaults(defineProps<{
   class?: HTMLAttributes["class"]
   variant?: ButtonVariants["variant"]
   size?: ButtonVariants["size"]
-  asChild?: boolean
-  as?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
+}>(), {
   variant: "ghost",
   size: "icon-xs",
 })
@@ -22,6 +19,7 @@ const props = withDefaults(defineProps<Props>(), {
     data-slot="attachment-action"
     :variant="variant"
     :size="size"
+    :class="cn('cn-attachment-action', props.class)"
   >
     <slot />
   </Button>

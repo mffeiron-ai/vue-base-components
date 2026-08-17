@@ -3,7 +3,7 @@ import type { RangeCalendarRootEmits, RangeCalendarRootProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"
 import { RangeCalendarRoot, useForwardPropsEmits } from "reka-ui"
-import { cn } from "../../../lib/utils"
+import { cn } from "@/lib/utils"
 import { RangeCalendarCell, RangeCalendarCellTrigger, RangeCalendarGrid, RangeCalendarGridBody, RangeCalendarGridHead, RangeCalendarGridRow, RangeCalendarHeadCell, RangeCalendarHeader, RangeCalendarHeading, RangeCalendarNextButton, RangeCalendarPrevButton } from "."
 
 const props = defineProps<RangeCalendarRootProps & { class?: HTMLAttributes["class"] }>()
@@ -21,7 +21,6 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
     data-slot="range-calendar"
     :class="cn('p-3', props.class)"
     v-bind="forwarded"
-    locale="zh-CN"
   >
     <RangeCalendarHeader>
       <RangeCalendarHeading />

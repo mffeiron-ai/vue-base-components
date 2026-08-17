@@ -2,9 +2,10 @@
 import type { ComboboxInputEmits, ComboboxInputProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"
-import { SearchIcon } from "lucide-vue-next"
 import { ComboboxInput, useForwardPropsEmits } from "reka-ui"
-import { cn } from "../../../lib/utils"
+import { cn } from "@/lib/utils"
+import { IconPlaceholder } from "@/components/icon-placeholder"
+import { InputGroup, InputGroupAddon } from "@/components/ui/input-group"
 
 defineOptions({
   inheritAttrs: false,
@@ -22,21 +23,14 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>
-  <div
-    data-slot="command-input-wrapper"
-    class="flex h-9 items-center gap-2 border-b px-3"
-  >
-    <SearchIcon class="size-4 shrink-0 opacity-50" />
+  <InputGroup>
+    <InputGroupAddon>
+      <IconPlaceholder lucide="SearchIcon" tabler="IconSearch" hugeicons="Search01Icon" phosphor="MagnifyingGlassIcon" remixicon="RiSearchLine" class="cn-command-input-icon" />
+    </InputGroupAddon>
     <ComboboxInput
-      data-slot="command-input"
-      :class="cn(
-        'placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50',
-        props.class,
-      )"
-
+      data-slot="combobox-input"
+      :class="cn('cn-combobox-input flex-1 outline-hidden disabled:cursor-not-allowed disabled:opacity-50', props.class)"
       v-bind="{ ...$attrs, ...forwarded }"
-    >
-      <slot />
-    </ComboboxInput>
-  </div>
+    />
+  </InputGroup>
 </template>
