@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { HoverCard, HoverCardContent, HoverCardTrigger } from 'vue-base-components'
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'
 </script>
 ```
 

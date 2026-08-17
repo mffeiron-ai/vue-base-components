@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { NumberField, NumberFieldContent, NumberFieldDecrement, NumberFieldIncrement, NumberFieldInput } from 'vue-base-components'
+import { NumberField, NumberFieldContent, NumberFieldDecrement, NumberFieldIncrement, NumberFieldInput } from '@/components/ui/number-field'
 </script>
 ```
 

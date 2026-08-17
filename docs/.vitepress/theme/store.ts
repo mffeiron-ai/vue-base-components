@@ -38,7 +38,7 @@ export interface AppStore {
 }
 
 export const appStore = reactive<AppStore>({
-  siteName: 'Vue Base Components',
+  siteName: 'RionStudio',
   themeMode: 'light',
   isReady: false,
   extra: {},

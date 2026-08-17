@@ -1,7 +1,7 @@
 {
-  "name": "vue-base-components",
+  "name": "@rionstudio/ui",
   "version": "1.0.0",
-  "description": "共享 Vue 3 组件库：业务组件 + shadcn-vue UI 组件",
+  "description": "RionStudio 共享 Vue 3 组件库：业务组件 npm 包 + UI 组件 Registry 源码分发",
   "type": "module",
   "main": "./src/index.ts",
   "module": "./src/index.ts",
@@ -73,7 +73,9 @@
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
-    "docs:gen": "node scripts/gen-docs.mjs"
+    "docs:gen": "node scripts/gen-docs.mjs",
+    "registry:build": "node registry/build.mjs",
+    "cli": "node packages/cli/index.mjs"
   },
   "dependencies": {
     "@lucide/vue": "^1.27.0",

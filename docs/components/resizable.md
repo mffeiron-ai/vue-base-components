@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from 'vue-base-components'
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable'
 </script>
 ```
 

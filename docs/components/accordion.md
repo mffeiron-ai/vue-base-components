@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from 'vue-base-components'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 </script>
 ```
 

@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Toaster } from 'vue-base-components'
+import { Toaster } from '@/components/ui/sonner'
 </script>
 ```
 

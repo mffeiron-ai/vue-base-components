@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { ScrollArea, ScrollBar } from 'vue-base-components'
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 </script>
 ```
 

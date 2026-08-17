@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Alert, AlertDescription, AlertTitle } from 'vue-base-components'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 </script>
 ```
 

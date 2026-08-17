@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from 'vue-base-components'
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty'
 </script>
 ```
 

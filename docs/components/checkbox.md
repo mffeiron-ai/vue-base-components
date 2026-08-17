@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Checkbox } from 'vue-base-components'
+import { Checkbox } from '@/components/ui/checkbox'
 </script>
 ```
 

@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Kbd, KbdGroup } from 'vue-base-components'
+import { Kbd, KbdGroup } from '@/components/ui/kbd'
 </script>
 ```
 

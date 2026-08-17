@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from 'vue-base-components'
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 </script>
 ```
 

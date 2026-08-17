@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Table, TableBody, TableCaption, TableCell, TableEmpty, TableFooter, TableHead, TableHeader, TableRow } from 'vue-base-components'
+import { Table, TableBody, TableCaption, TableCell, TableEmpty, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 </script>
 ```
 

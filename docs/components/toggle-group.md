@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { ToggleGroup, ToggleGroupItem } from 'vue-base-components'
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 </script>
 ```
 

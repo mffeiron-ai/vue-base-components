@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Progress } from 'vue-base-components'
+import { Progress } from '@/components/ui/progress'
 </script>
 ```
 

@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Toggle } from 'vue-base-components'
+import { Toggle } from '@/components/ui/toggle'
 </script>
 ```
 

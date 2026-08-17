@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Avatar, AvatarFallback, AvatarImage } from 'vue-base-components'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 </script>
 ```
 

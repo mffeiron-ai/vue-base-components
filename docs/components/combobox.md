@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Combobox, ComboboxAnchor, ComboboxEmpty, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxList, ComboboxSeparator, ComboboxViewport } from 'vue-base-components'
+import { Combobox, ComboboxAnchor, ComboboxEmpty, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxList, ComboboxSeparator, ComboboxViewport } from '@/components/ui/combobox'
 </script>
 ```
 

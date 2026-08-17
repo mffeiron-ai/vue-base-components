@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { NativeSelect, NativeSelectOptGroup, NativeSelectOption } from 'vue-base-components'
+import { NativeSelect, NativeSelectOptGroup, NativeSelectOption } from '@/components/ui/native-select'
 </script>
 ```
 

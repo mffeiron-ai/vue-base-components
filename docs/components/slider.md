@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Slider } from 'vue-base-components'
+import { Slider } from '@/components/ui/slider'
 </script>
 ```
 

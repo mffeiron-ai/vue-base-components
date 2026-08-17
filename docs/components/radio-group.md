@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { RadioGroup, RadioGroupItem } from 'vue-base-components'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 </script>
 ```
 

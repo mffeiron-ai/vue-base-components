@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from 'vue-base-components'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 </script>
 ```
 

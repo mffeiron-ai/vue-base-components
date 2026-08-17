@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Spinner } from 'vue-base-components'
+import { Spinner } from '@/components/ui/spinner'
 </script>
 ```
 

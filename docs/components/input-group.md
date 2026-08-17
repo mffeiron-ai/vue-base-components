@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput, InputGroupText, InputGroupTextarea } from 'vue-base-components'
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput, InputGroupText, InputGroupTextarea } from '@/components/ui/input-group'
 </script>
 ```
 

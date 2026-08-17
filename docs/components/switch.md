@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Switch } from 'vue-base-components'
+import { Switch } from '@/components/ui/switch'
 </script>
 ```
 

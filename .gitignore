@@ -3,3 +3,7 @@ dist/
 .DS_Store
 *.log
 docs/.vitepress/cache
+
+# CLI 测试目录
+e2e-test/
+.tmp/

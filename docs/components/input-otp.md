@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from 'vue-base-components'
+import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '@/components/ui/input-otp'
 </script>
 ```
 

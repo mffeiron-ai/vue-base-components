@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Skeleton } from 'vue-base-components'
+import { Skeleton } from '@/components/ui/skeleton'
 </script>
 ```
 

@@ -1,0 +1,30 @@
+{
+  "name": "@rionstudio/cli",
+  "version": "0.1.0",
+  "description": "RionStudio CLI - 将 UI 组件复制到你的项目（Registry 源码分发）",
+  "type": "module",
+  "bin": {
+    "rionstudio": "./index.mjs"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": "./index.mjs"
+  },
+  "files": [
+    "index.mjs",
+    "src/"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "vue",
+    "components",
+    "ui",
+    "cli",
+    "registry"
+  ],
+  "license": "MIT"
+}

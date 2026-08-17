@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { TagsInput, TagsInputInput, TagsInputItem, TagsInputItemDelete, TagsInputItemText } from 'vue-base-components'
+import { TagsInput, TagsInputInput, TagsInputItem, TagsInputItemDelete, TagsInputItemText } from '@/components/ui/tags-input'
 </script>
 ```
 

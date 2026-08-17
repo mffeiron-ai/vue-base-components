@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { ChartContainer, ChartLegendContent, ChartTooltipContent } from 'vue-base-components'
+import { ChartContainer, ChartLegendContent, ChartTooltipContent } from '@/components/ui/chart'
 </script>
 ```
 

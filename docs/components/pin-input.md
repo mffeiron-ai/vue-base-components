@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { PinInput, PinInputGroup, PinInputSeparator, PinInputSlot } from 'vue-base-components'
+import { PinInput, PinInputGroup, PinInputSeparator, PinInputSlot } from '@/components/ui/pin-input'
 </script>
 ```
 

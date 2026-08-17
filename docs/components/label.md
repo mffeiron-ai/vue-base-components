@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Label } from 'vue-base-components'
+import { Label } from '@/components/ui/label'
 </script>
 ```
 

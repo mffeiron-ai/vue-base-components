@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Textarea } from 'vue-base-components'
+import { Textarea } from '@/components/ui/textarea'
 </script>
 ```
 

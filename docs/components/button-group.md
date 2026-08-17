@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { ButtonGroup, ButtonGroupSeparator, ButtonGroupText } from 'vue-base-components'
+import { ButtonGroup, ButtonGroupSeparator, ButtonGroupText } from '@/components/ui/button-group'
 </script>
 ```
 

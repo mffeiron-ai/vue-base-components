@@ -85,9 +85,9 @@ const features = [
           <div class="flex w-full justify-between lg:w-auto">
             <a href="/" aria-label="home" class="flex items-center gap-2 transition-opacity hover:opacity-75">
               <span class="flex size-8 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground">
-                V
+                R
               </span>
-              <span class="text-base font-semibold tracking-tight">Vue Base Components</span>
+              <span class="text-base font-semibold tracking-tight">RionStudio</span>
             </a>
 
             <!-- 移动端汉堡 -->
@@ -255,7 +255,7 @@ const features = [
     <!-- ═══════════ Footer ═══════════ -->
     <footer class="border-t border-border px-6 py-8">
       <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-sm text-muted-foreground sm:flex-row">
-        <p>© 2026 Vue Base Components · MIT License</p>
+        <p>© 2026 RionStudio · MIT License</p>
         <div class="flex items-center gap-6">
           <a href="/components/button" class="hover:text-foreground">组件</a>
           <a href="/playground" class="hover:text-foreground">主题预览</a>

@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Popover, PopoverAnchor, PopoverContent, PopoverTrigger } from 'vue-base-components'
+import { Popover, PopoverAnchor, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 </script>
 ```
 

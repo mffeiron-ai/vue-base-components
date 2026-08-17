@@ -29,8 +29,8 @@ function capitalize(s: string) {
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: 'Vue Base Components',
-  description: '基于 reka-ui + Tailwind CSS 的 Vue 3 组件库',
+  title: 'RionStudio',
+  description: 'RionStudio UI - Vue 3 组件库：业务组件 npm 包 + UI 组件 Registry 源码分发',
   lang: 'zh-CN',
 
   themeConfig: {
@@ -82,8 +82,8 @@ export default defineConfig({
     },
 
     footer: {
-      message: '基于 reka-ui + Tailwind CSS 构建',
-      copyright: 'MIT License',
+      message: 'RionStudio · 基于 reka-ui + Tailwind CSS 构建',
+      copyright: '© 2026 RionStudio · MIT License',
     },
   },
 

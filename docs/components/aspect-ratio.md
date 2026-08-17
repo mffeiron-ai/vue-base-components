@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { AspectRatio } from 'vue-base-components'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
 </script>
 ```
 

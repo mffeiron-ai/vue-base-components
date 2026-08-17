@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from 'vue-base-components'
+import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 </script>
 ```
 

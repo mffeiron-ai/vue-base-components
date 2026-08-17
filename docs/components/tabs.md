@@ -6,7 +6,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Tabs, TabsContent, TabsList, TabsTrigger } from 'vue-base-components'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 </script>
 ```
 
