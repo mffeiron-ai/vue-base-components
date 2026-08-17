@@ -176,8 +176,8 @@ export class ThemeManager {
       'font-mono': styles['font-mono']
     })
 
-    // 只获取 SideBar07 作用域的元素
-    const scopeElements = document.querySelectorAll('.backend-sidebar-theme-scope')
+    // 只应用到随机 UI 预览容器，避免污染左侧配置面板和 VitePress 全局界面。
+    const scopeElements = Array.from(document.querySelectorAll('.backend-sidebar-theme-scope'))
     
     // 应用到 SideBar07 作用域元素
     scopeElements.forEach(element => {

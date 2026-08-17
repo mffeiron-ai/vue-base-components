@@ -44,6 +44,14 @@
 /* 告诉 Tailwind 扫描组件库源码中的类名 */
 @source "../../../src/";
 
+/* Teleported control-panel popovers carry the style scope on their root. */
+.style-vega.cn-select-content {
+  background-color: var(--color-popover);
+  color: var(--color-popover-foreground);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+}
+
 /**
  * 你的 Design Token（和组件库的 Tailwind 主题保持一致）
  * 这里以 shadcn-vue 默认主题为基础，后续可按需覆盖

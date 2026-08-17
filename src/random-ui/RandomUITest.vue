@@ -1,6 +1,6 @@
 <template>
     <div class="mx-auto flex h-[90vh] w-full gap-4 overflow-hidden rounded-2xl bg-background p-5">
-      <div class="w-[20%] min-h-0 overflow-hidden">
+      <div class="style-vega w-[20%] min-h-0 overflow-hidden">
         <div class="flex h-full min-h-0 flex-col rounded-2xl border border-border bg-card">
           <div class="border-b border-border px-4 py-4">
             <div class="space-y-3 rounded-xl border border-primary/15 bg-gradient-to-br from-primary/8 via-background to-background p-4 shadow-sm">
@@ -12,7 +12,7 @@
 
               <Popover v-model:open="previewCategoryOpen">
                 <PopoverTrigger as-child>
-                  <Button variant="outline" class="h-auto w-full justify-between border-border/70 bg-background/90 px-4 py-3 text-left hover:bg-accent/40" :style="previewInteractiveStyle">
+                  <Button variant="outline" class="h-auto w-full justify-between border-border/70 bg-background/90 px-4 py-3 text-left hover:bg-accent/40">
                     <div class="flex min-w-0 flex-1 flex-col items-start gap-1">
                       <div class="flex w-full items-center justify-between gap-3">
                         <span class="truncate text-sm font-semibold text-foreground">
@@ -78,7 +78,6 @@
                     class="cursor-pointer px-2.5 py-1 text-xs"
                     @click="applyFullTheme(index)"
                     :variant="String(index) === customizer.themeIndex ? 'default' : 'outline'"
-                    :style="previewBadgeStyle"
                   >
                     {{ theme.label_zh || theme.label }}
                   </Badge>
@@ -87,7 +86,6 @@
                   @click="toggleDark"
                   variant="default"
                   class="w-full cursor-pointer text-sm font-medium transition-opacity"
-                  :style="previewInteractiveStyle"
                 >
                   {{ isDark ? '切换到浅色模式' : '切换到深色模式' }}
                 </Button>
@@ -103,7 +101,7 @@
                   <SelectTrigger class="w-full">
                     <SelectValue placeholder="选择风格" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent position="popper" class="style-vega">
                     <SelectItem v-for="style in styleOptions" :key="style.value" :value="style.value">
                       {{ style.label }}
                     </SelectItem>
@@ -117,7 +115,7 @@
                   <SelectTrigger class="w-full">
                     <SelectValue placeholder="选择主题" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent position="popper" class="style-vega">
                     <SelectItem v-for="(theme, index) in themeOptions" :key="theme.label + index" :value="String(index)">
                       {{ theme.label_zh || theme.label }}
                     </SelectItem>
@@ -131,7 +129,7 @@
                   <SelectTrigger class="w-full">
                     <SelectValue placeholder="选择图标库" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent position="popper" class="style-vega">
                     <SelectItem v-for="icon in iconLibraryOptions" :key="icon.value" :value="icon.value">
                       {{ icon.label }}
                     </SelectItem>
@@ -151,7 +149,7 @@
                     <SelectTrigger class="w-full">
                       <SelectValue placeholder="正文字体" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent position="popper" class="style-vega">
                       <SelectItem v-for="font in sansFontOptions" :key="font" :value="font">{{ font }}</SelectItem>
                     </SelectContent>
                   </Select>
@@ -162,7 +160,7 @@
                     <SelectTrigger class="w-full">
                       <SelectValue placeholder="标题字体" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent position="popper" class="style-vega">
                       <SelectItem v-for="font in serifFontOptions" :key="font" :value="font">{{ font }}</SelectItem>
                     </SelectContent>
                   </Select>
@@ -173,7 +171,7 @@
                     <SelectTrigger class="w-full">
                       <SelectValue placeholder="等宽字体" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent position="popper" class="style-vega">
                       <SelectItem v-for="font in monoFontOptions" :key="font" :value="font">{{ font }}</SelectItem>
                     </SelectContent>
                   </Select>
@@ -191,7 +189,7 @@
                     <SelectTrigger class="w-full">
                       <SelectValue placeholder="选择排版档位" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent position="popper" class="style-vega">
                       <SelectItem v-for="preset in layoutPresets" :key="preset.key" :value="preset.key">
                         {{ preset.label }}
                       </SelectItem>
@@ -204,7 +202,7 @@
                     <SelectTrigger class="w-full">
                       <SelectValue placeholder="选择阴影档位" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent position="popper" class="style-vega">
                       <SelectItem v-for="preset in shadowPresets" :key="preset.key" :value="preset.key">
                         {{ preset.label }}
                       </SelectItem>
@@ -215,8 +213,8 @@
               </div>
 
               <div class="grid grid-cols-2 gap-3">
-                <Button variant="outline" @click="resetCustomizer" :style="previewInteractiveStyle">重置</Button>
-                <Button variant="secondary" @click="randomizeCustomizer" :style="previewInteractiveStyle">随机</Button>
+                <Button variant="outline" @click="resetCustomizer">重置</Button>
+                <Button variant="secondary" @click="randomizeCustomizer">随机</Button>
               </div>
             </div>
           </div>
