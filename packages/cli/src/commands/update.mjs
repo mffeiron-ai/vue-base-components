@@ -5,7 +5,7 @@ import fs from 'fs'
 import path from 'path'
 import { log } from '../utils.mjs'
 import { readConfig, resolveUiDir, writeConfig } from '../config.mjs'
-import { loadRegistry, findItem, collectDependencies } from '../registry.mjs'
+import { loadRegistry, resolveStyleRegistryUrl, findItem, collectDependencies } from '../registry.mjs'
 import { installComponentFiles, installDependencies } from '../installer.mjs'
 
 export async function update(names, { cwd = process.cwd() } = {}) {
@@ -20,7 +20,7 @@ export async function update(names, { cwd = process.cwd() } = {}) {
 
   let registry
   try {
-    registry = await loadRegistry(config.registry)
+    registry = await loadRegistry(resolveStyleRegistryUrl(config.registry, config.style))
   } catch (e) {
     log.error(`加载 registry 失败: ${e.message}`)
     return

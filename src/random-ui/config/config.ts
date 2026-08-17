@@ -14,7 +14,7 @@ export type {
 export type ThemeMode = 'light' | 'dark'
 
 // 暴露变量：设计系统配置项类型
-export type StyleKey = 'reka-nova' | 'reka-luma' | 'reka-lyra' | 'reka-maia' | 'reka-mira' | 'reka-vega'
+export type StyleKey = 'reka-nova' | 'reka-luma' | 'reka-lyra' | 'reka-maia' | 'reka-mira' | 'reka-rhea' | 'reka-sera' | 'reka-vega'
 
 // 暴露变量：布局和阴影预设类型
 export type LayoutPresetKey = 'theme' | 'compact' | 'balanced' | 'airy' | 'rounded' | 'editorial'
@@ -79,6 +79,8 @@ export const styleOptions: Array<{ value: StyleKey, label: string }> = [
   { value: 'reka-lyra', label: 'Lyra' },
   { value: 'reka-maia', label: 'Maia' },
   { value: 'reka-mira', label: 'Mira' },
+  { value: 'reka-rhea', label: 'Rhea' },
+  { value: 'reka-sera', label: 'Sera' },
   { value: 'reka-vega', label: 'Vega' },
 ] 
 

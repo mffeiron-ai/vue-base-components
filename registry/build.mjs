@@ -12,8 +12,10 @@ import { fileURLToPath } from 'url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const root = path.resolve(__dirname, '..')
 const uiDir = path.join(root, 'src', 'components', 'ui')
+const stylesDir = path.join(root, 'src', 'styles')
 const registryDir = path.join(root, 'registry')
 const outputFile = path.join(registryDir, 'registry.json')
+const styleNames = ['reka-luma', 'reka-lyra', 'reka-maia', 'reka-mira', 'reka-nova', 'reka-rhea', 'reka-sera', 'reka-vega']
 
 // 外部依赖白名单（UI 层实际用到的 npm 包）
 const EXTERNAL_DEPS = new Set([
@@ -68,15 +70,15 @@ function readContent(filePath) {
   return fs.readFileSync(filePath, 'utf-8').replace(/\r\n/g, '\n')
 }
 
-function main() {
+function buildRegistry(sourceDir, name) {
   const items = []
-  const dirs = fs.readdirSync(uiDir, { withFileTypes: true })
+  const dirs = fs.readdirSync(sourceDir, { withFileTypes: true })
     .filter(d => d.isDirectory())
     .map(d => d.name)
     .sort()
 
   for (const name of dirs) {
-    const compDir = path.join(uiDir, name)
+    const compDir = path.join(sourceDir, name)
     const files = walk(compDir).map(rel => ({
       path: path.join('ui', name, rel).replace(/\\/g, '/'),
       type: 'registry:ui',
@@ -96,23 +98,40 @@ function main() {
     })
   }
 
-  const registry = {
+  return {
     $schema: 'https://your-domain.example/schema.json',
     name: '@rionstudio/ui',
     homepage: 'https://your-domain.example',
     items,
   }
+}
 
-  if (!fs.existsSync(registryDir)) fs.mkdirSync(registryDir, { recursive: true })
-  fs.writeFileSync(outputFile, JSON.stringify(registry, null, 2) + '\n', 'utf-8')
+function writeRegistry(filePath, registry) {
+  fs.mkdirSync(path.dirname(filePath), { recursive: true })
+  fs.writeFileSync(filePath, JSON.stringify(registry, null, 2) + '\n', 'utf-8')
+}
 
-  // 统计
+function printStats(label, filePath, registry) {
+  const { items } = registry
   const withDeps = items.filter(i => i.dependencies.length).length
   const withInternal = items.filter(i => i.registryDependencies.length).length
   const totalFiles = items.reduce((s, i) => s + i.files.length, 0)
-  console.log(`✅ 生成 ${outputFile}`)
-  console.log(`   组件: ${items.length} | 文件: ${totalFiles} | 有外部依赖: ${withDeps} | 有内部依赖: ${withInternal}`)
-  console.log(`   外部依赖汇总: ${[...new Set(items.flatMap(i => i.dependencies))].sort().join(', ')}`)
+  console.log(`✅ ${label}: ${filePath}`)
+  console.log(`   组件: ${items.length} | 文件: ${totalFiles} | 外部依赖组件: ${withDeps} | 内部依赖组件: ${withInternal}`)
+}
+
+function main() {
+  const baseRegistry = buildRegistry(uiDir)
+  writeRegistry(outputFile, baseRegistry)
+  printStats('base registry', outputFile, baseRegistry)
+
+  for (const styleName of styleNames) {
+    const styleSource = path.join(stylesDir, styleName, 'ui')
+    const styleOutput = path.join(registryDir, 'styles', styleName, 'registry.json')
+    const registry = buildRegistry(styleSource)
+    writeRegistry(styleOutput, registry)
+    printStats(styleName, styleOutput, registry)
+  }
 }
 
 main()

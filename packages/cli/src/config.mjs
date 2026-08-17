@@ -11,7 +11,7 @@ export const CONFIG_FILE = 'components.json'
 export function defaultConfig() {
   return {
     $schema: 'https://your-domain.example/schema.json',
-    style: 'default',
+    style: 'reka-nova',
     typescript: true,
     tailwind: {
       css: 'src/assets/index.css',

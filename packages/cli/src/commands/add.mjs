@@ -5,7 +5,7 @@ import fs from 'fs'
 import path from 'path'
 import { log } from '../utils.mjs'
 import { readConfig, resolveUiDir, resolveUtilsDir, resolveTailwindCss, writeConfig } from '../config.mjs'
-import { loadRegistry, resolveDependencyTree, collectDependencies } from '../registry.mjs'
+import { loadRegistry, resolveStyleRegistryUrl, resolveDependencyTree, collectDependencies } from '../registry.mjs'
 import { installComponentFiles, ensureUtils, ensureTailwindTheme, installDependencies } from '../installer.mjs'
 
 export async function add(names, { cwd = process.cwd(), registry: registryFlag } = {}) {
@@ -23,7 +23,10 @@ export async function add(names, { cwd = process.cwd(), registry: registryFlag }
   const { config } = cfg
 
   // 2. 加载 registry（支持 -r 覆盖）
-  const registryUrl = registryFlag || config.registry
+  const registryUrl = resolveStyleRegistryUrl(
+    registryFlag || config.registry,
+    config.style,
+  )
   let registry
   try {
     registry = await loadRegistry(registryUrl)

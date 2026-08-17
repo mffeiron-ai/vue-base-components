@@ -8,6 +8,38 @@
  */
 
 @import "tailwindcss" important;
+@import "tw-animate-css";
+
+/* Reka UI state variants used by the imported RionStudio style presets. */
+@custom-variant data-open (&[data-state="open"]);
+@custom-variant data-closed (&[data-state="closed"]);
+@custom-variant data-checked (&[data-state="checked"]);
+@custom-variant data-unchecked (&[data-state="unchecked"]);
+@custom-variant data-highlighted (&[data-highlighted]);
+@custom-variant data-placeholder (&[data-placeholder]);
+@custom-variant data-empty (&[data-empty]);
+@custom-variant data-inset (&[data-inset]);
+@custom-variant data-horizontal (&[data-orientation="horizontal"]);
+@custom-variant data-vertical (&[data-orientation="vertical"]);
+
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* RionStudio design-system style presets */
+@import "../../../src/styles/style-luma.css";
+@import "../../../src/styles/style-lyra.css";
+@import "../../../src/styles/style-maia.css";
+@import "../../../src/styles/style-mira.css";
+@import "../../../src/styles/style-nova.css";
+@import "../../../src/styles/style-rhea.css";
+@import "../../../src/styles/style-sera.css";
+@import "../../../src/styles/style-vega.css";
 
 /* 告诉 Tailwind 扫描组件库源码中的类名 */
 @source "../../../src/";
