@@ -12,7 +12,7 @@
 
               <Popover v-model:open="previewCategoryOpen">
                 <PopoverTrigger as-child>
-                  <Button variant="outline" class="h-auto w-full justify-between border-border/70 bg-background/90 px-4 py-3 text-left hover:bg-accent/40">
+                  <Button variant="outline" class="preview-category-trigger h-auto w-full justify-between border-border/70 bg-background/90 px-4 py-3 text-left hover:bg-accent/40">
                     <div class="flex min-w-0 flex-1 flex-col items-start gap-1">
                       <div class="flex w-full items-center justify-between gap-3">
                         <span class="truncate text-sm font-semibold text-foreground">
@@ -26,7 +26,7 @@
                     </div>
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent class="w-[var(--radix-popover-trigger-width)] p-0" align="start">
+                <PopoverContent class="style-vega w-[var(--radix-popover-trigger-width)] p-0" align="start">
                   <Command>
                     <CommandInput placeholder="搜索分类..." />
                     <CommandList>

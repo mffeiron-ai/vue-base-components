@@ -52,6 +52,23 @@
   box-shadow: var(--shadow-lg);
 }
 
+.style-vega.cn-popover-content {
+  background-color: var(--color-popover);
+  color: var(--color-popover-foreground);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+}
+
+/* The category trigger contains a title row and description; keep its box
+   taller than the compact default button preset. */
+.style-vega .preview-category-trigger {
+  height: auto !important;
+  min-height: 68px !important;
+  align-items: stretch !important;
+  padding-block: 12px !important;
+}
+
 /**
  * 你的 Design Token（和组件库的 Tailwind 主题保持一致）
  * 这里以 shadcn-vue 默认主题为基础，后续可按需覆盖
