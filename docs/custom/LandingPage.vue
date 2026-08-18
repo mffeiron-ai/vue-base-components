@@ -65,7 +65,7 @@ const features = [
 </script>
 
 <template>
-  <div class="landing-page min-h-screen bg-background text-foreground">
+  <div class="landing-page style-vega min-h-screen bg-background text-foreground">
     <!-- ═══════════ 毛玻璃导航栏 ═══════════ -->
     <nav
       :data-state="menuState ? 'active' : ''"
@@ -213,7 +213,7 @@ const features = [
 
     <!-- ═══════════ Features ═══════════ -->
     <section class="mx-auto max-w-6xl px-6 py-20">
-      <div class="mb-12 text-center">
+      <div class="hero-enter mb-12 text-center" style="animation-delay: 0.5s">
         <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">为什么选择它</h2>
         <p class="mx-auto mt-4 max-w-xl text-muted-foreground">
           从基础组件到业务场景，一套完整的设计系统。
@@ -221,7 +221,7 @@ const features = [
       </div>
 
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <Card v-for="f in features" :key="f.title" class="group transition-all hover:-translate-y-1 hover:shadow-lg">
+        <Card v-for="(f, idx) in features" :key="f.title" class="hero-enter group transition-all hover:-translate-y-1 hover:shadow-lg" :style="{ animationDelay: `${0.6 + idx * 0.1}s` }">
           <CardHeader>
             <span class="mb-3 flex size-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
               <component :is="f.icon" class="size-5" />
@@ -235,7 +235,7 @@ const features = [
     </section>
 
     <!-- ═══════════ CTA ═══════════ -->
-    <section class="px-6 pb-20">
+    <section class="hero-enter px-6 pb-20" style="animation-delay: 1.2s">
       <div class="mx-auto max-w-4xl rounded-3xl border border-border bg-gradient-to-br from-primary/10 via-background to-background p-12 text-center">
         <h2 class="text-3xl font-bold tracking-tight">准备好开始了吗？</h2>
         <p class="mx-auto mt-4 max-w-md text-muted-foreground">
@@ -253,7 +253,7 @@ const features = [
     </section>
 
     <!-- ═══════════ Footer ═══════════ -->
-    <footer class="border-t border-border px-6 py-8">
+    <footer class="hero-enter border-t border-border px-6 py-8" style="animation-delay: 1.4s">
       <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-sm text-muted-foreground sm:flex-row">
         <p>© 2026 RionStudio · MIT License</p>
         <div class="flex items-center gap-6">

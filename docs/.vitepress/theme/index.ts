@@ -5,6 +5,7 @@ import Demo from './components/Demo.vue'
 import CustomLayout from './Layout.vue'
 import { appStore, pageRegistry } from './store'
 import './style.css'
+import './vitepress-reset.css'
 
 // 应用统一入口：注册全局组件、全局状态、自定义布局
 export default {

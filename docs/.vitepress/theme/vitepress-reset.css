@@ -1,0 +1,88 @@
+/**
+ * VitePress 反重置（无层级 / unlayered）
+ *
+ * Tailwind CSS v4 的 @tailwindcss/vite 插件会把 style.css 中的所有规则
+ * 放入 @layer utilities，而 VitePress 的 button/input 基础重置是无层级的。
+ * 无层级样式始终覆盖层级样式，导致组件样式失效。
+ *
+ * 本文件在 index.ts 中直接 import，不经过 Tailwind 处理，
+ * 因此生成的规则是无层级的，可以正确覆盖 VitePress 的重置。
+ */
+
+/* ── Button 反重置 ────────────────────────────────── */
+[class*="style-"] :is(.cn-button, [data-slot="button"]) {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: var(--color-primary);
+  color: var(--color-primary-foreground);
+  padding-inline: calc(var(--spacing) * 2.5);
+  border-color: transparent;
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+[class*="style-"] :is(.cn-button-variant-outline, [data-slot="button"][data-variant="outline"]) {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  border-color: var(--color-border);
+}
+
+[class*="style-"] :is(.cn-button-variant-secondary, [data-slot="button"][data-variant="secondary"]) {
+  background-color: var(--color-secondary);
+  color: var(--color-secondary-foreground);
+}
+
+[class*="style-"] :is(.cn-button-variant-destructive, [data-slot="button"][data-variant="destructive"]) {
+  background-color: var(--color-destructive);
+  color: var(--color-destructive-foreground);
+}
+
+[class*="style-"] :is(.cn-button-variant-ghost, [data-slot="button"][data-variant="ghost"]) {
+  background-color: transparent;
+  color: var(--color-foreground);
+}
+
+[class*="style-"] :is(.cn-button-variant-link, [data-slot="button"][data-variant="link"]) {
+  background-color: transparent;
+  color: var(--color-primary);
+  border-color: transparent;
+}
+
+/* ── 标题反重置 ────────────────────────────────────── */
+/* VitePress 的无层级 h1-h3 重置会覆盖 Tailwind text-4xl / font-bold 等工具类 */
+.landing-page h1 {
+  font-size: var(--text-4xl);
+  line-height: 1.2;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-tight);
+}
+@media (min-width: 640px) {
+  .landing-page h1 { font-size: var(--text-6xl); line-height: 1.1; }
+}
+@media (min-width: 1024px) {
+  .landing-page h1 { font-size: var(--text-7xl); line-height: 1; }
+}
+.landing-page h2 {
+  font-size: var(--text-3xl);
+  line-height: 1.2;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-tight);
+}
+@media (min-width: 640px) {
+  .landing-page h2 { font-size: var(--text-4xl); line-height: 1.1; }
+}
+.landing-page .text-center {
+  text-align: center;
+}
+.landing-page .mx-auto {
+  margin-inline: auto;
+}
+
+/* ── 通用组件反重置 ───────────────────────────────── */
+[class*="style-"] :is(.cn-input, [data-slot="input"]),
+[class*="style-"] :is(.cn-textarea, [data-slot="textarea"]),
+[class*="style-"] :is(.cn-select-trigger, [data-slot="select-trigger"]) {
+  appearance: none;
+  -webkit-appearance: none;
+}
