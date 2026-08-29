@@ -1,16 +1,15 @@
-# Skeleton
+# Skeleton 骨架屏
 
-> TODO: 组件描述
+<script setup>
+import { Skeleton } from '../../src/components/ui/skeleton'
 
-## 导入
+const demo0 = `import { Skeleton } from '@/components/ui/skeleton'
 
-```vue
-<script setup lang="ts">
-import { Skeleton } from '@/components/ui/skeleton'
+  <Skeleton class="w-[100px] h-[20px] rounded-full" />`
 </script>
-```
 
-## API
+<Demo :code="demo0">
+    <Skeleton class="w-[100px] h-[20px] rounded-full" />
+</Demo>
 
-> TODO: 补充 Props / Emits / Slots 文档
-
+## Usage

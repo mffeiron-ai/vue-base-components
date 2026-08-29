@@ -1,32 +1,61 @@
-# Stepper
+# Stepper 步骤条
 
-> TODO: 组件描述
+<script setup>
+</script>
 
-## 导入
+<Demo :code="demo0">
+  <!-- TODO: 动态示例需补充 script 逻辑后放入 -->
+</Demo>
+
+## Usage
 
 ```vue
-<script setup lang="ts">
-import { Stepper, StepperDescription, StepperIndicator, StepperItem, StepperSeparator, StepperTitle, StepperTrigger } from '@/components/ui/stepper'
-</script>
+import {
+  Stepper,
+  StepperDescription,
+  StepperIndicator,
+  StepperItem,
+  StepperSeparator,
+  StepperTitle,
+  StepperTrigger,
+} from '@/components/ui/stepper'
+<template>
+  <Stepper>
+    <StepperItem :step="1">
+      <StepperTrigger>
+        <StepperIndicator>1</StepperIndicator>
+        <StepperTitle>Step 1</StepperTitle>
+        <StepperDescription>This is the first step</StepperDescription>
+      </StepperTrigger>
+      <StepperSeparator />
+    </StepperItem>
+    <StepperItem :step="2">
+      <StepperTrigger>
+        <StepperIndicator>2</StepperIndicator>
+        <StepperTitle>Step 2</StepperTitle>
+        <StepperDescription>This is the second step</StepperDescription>
+      </StepperTrigger>
+    </StepperItem>
+  </Stepper>
+</template>
 ```
 
-## 子组件
+## Examples
 
-该组件由以下子组件组合而成：
+### Horizontal
 
-| 组件 | 说明 |
-|------|------|
-| `Stepper` | TODO |
-| `StepperDescription` | TODO |
-| `StepperIndicator` | TODO |
-| `StepperItem` | TODO |
-| `StepperSeparator` | TODO |
-| `StepperTitle` | TODO |
-| `StepperTrigger` | TODO |
+<Demo :code="demo0">
+  <!-- TODO: 动态示例需补充 script 逻辑后放入 -->
+</Demo>
 
-## API
+### Vertical
 
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `class` | `string` | TODO |
+<Demo :code="demo0">
+  <!-- TODO: 动态示例需补充 script 逻辑后放入 -->
+</Demo>
 
+### Form
+
+<Demo :code="demo0">
+  <!-- TODO: 动态示例需补充 script 逻辑后放入 -->
+</Demo>

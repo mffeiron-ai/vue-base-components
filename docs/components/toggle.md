@@ -1,18 +1,53 @@
-# Toggle
+# Toggle 开关按钮
 
-> TODO: 组件描述
+<script setup>
+import { Toggle } from '../../src/components/ui/toggle'
 
-## 导入
+const demo0 = `import { Toggle } from '@/components/ui/toggle'
 
-```vue
-<script setup lang="ts">
-import { Toggle } from '@/components/ui/toggle'
+  <Toggle>Toggle</Toggle>`
 </script>
-```
 
-## API
+<Demo :code="demo0">
+    <Toggle>Toggle</Toggle>
+</Demo>
 
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `class` | `string variant?: ToggleVariants["variant"] size?: ToggleVariants["size"]` | TODO |
+## Usage
 
+## Examples
+
+### Default
+
+<Demo :code="demo0">
+    <Toggle>Toggle</Toggle>
+</Demo>
+
+### Outline
+
+<Demo :code="demo0">
+    <Toggle>Toggle</Toggle>
+</Demo>
+
+### With Text
+
+<Demo :code="demo0">
+    <Toggle>Toggle</Toggle>
+</Demo>
+
+### Small
+
+<Demo :code="demo0">
+    <Toggle>Toggle</Toggle>
+</Demo>
+
+### Large
+
+<Demo :code="demo0">
+    <Toggle>Toggle</Toggle>
+</Demo>
+
+### Disabled
+
+<Demo :code="demo0">
+    <Toggle>Toggle</Toggle>
+</Demo>

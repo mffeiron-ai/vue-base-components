@@ -1,18 +1,15 @@
-# Checkbox
+# Checkbox 复选框
 
-> TODO: 组件描述
+<script setup>
+import { Checkbox } from '../../src/components/ui/checkbox'
 
-## 导入
+const demo0 = `import { Checkbox } from '@/components/ui/checkbox'
 
-```vue
-<script setup lang="ts">
-import { Checkbox } from '@/components/ui/checkbox'
+  <Checkbox />`
 </script>
-```
 
-## API
+<Demo :code="demo0">
+    <Checkbox />
+</Demo>
 
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `class` | `string` | TODO |
-
+## Usage

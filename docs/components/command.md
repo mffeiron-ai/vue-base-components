@@ -1,34 +1,57 @@
-# Command
+# Command 命令面板
 
-> TODO: 组件描述
+<script setup>
+import { Command, CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut, } from '../../src/components/ui/command'
 
-## 导入
+const demo0 = `import {
+  Command,
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from '@/components/ui/command'
 
-```vue
-<script setup lang="ts">
-import { Command, CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut } from '@/components/ui/command'
+  <Command>
+    <CommandInput placeholder="Type a command or search..." />
+    <CommandList>
+      <CommandEmpty>No results found.</CommandEmpty>
+      <CommandGroup heading="Suggestions">
+        <CommandItem>Calendar</CommandItem>
+        <CommandItem>Search Emoji</CommandItem>
+        <CommandItem>Calculator</CommandItem>
+      </CommandGroup>
+      <CommandSeparator />
+      <CommandGroup heading="Settings">
+        <CommandItem>Profile</CommandItem>
+        <CommandItem>Billing</CommandItem>
+        <CommandItem>Settings</CommandItem>
+      </CommandGroup>
+    </CommandList>
+  </Command>`
 </script>
-```
 
-## 子组件
+<Demo :code="demo0">
+    <Command>
+      <CommandInput placeholder="Type a command or search..." />
+      <CommandList>
+        <CommandEmpty>No results found.</CommandEmpty>
+        <CommandGroup heading="Suggestions">
+          <CommandItem>Calendar</CommandItem>
+          <CommandItem>Search Emoji</CommandItem>
+          <CommandItem>Calculator</CommandItem>
+        </CommandGroup>
+        <CommandSeparator />
+        <CommandGroup heading="Settings">
+          <CommandItem>Profile</CommandItem>
+          <CommandItem>Billing</CommandItem>
+          <CommandItem>Settings</CommandItem>
+        </CommandGroup>
+      </CommandList>
+    </Command>
+</Demo>
 
-该组件由以下子组件组合而成：
-
-| 组件 | 说明 |
-|------|------|
-| `Command` | TODO |
-| `CommandDialog` | TODO |
-| `CommandEmpty` | TODO |
-| `CommandGroup` | TODO |
-| `CommandInput` | TODO |
-| `CommandItem` | TODO |
-| `CommandList` | TODO |
-| `CommandSeparator` | TODO |
-| `CommandShortcut` | TODO |
-
-## API
-
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `class` | `string` | TODO |
-
+## Usage

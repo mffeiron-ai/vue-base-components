@@ -1,16 +1,31 @@
-# Collapsible
+# Collapsible 折叠面板
 
-> TODO: 组件描述
+<script setup>
+import { Collapsible, CollapsibleContent, CollapsibleTrigger, } from '../../src/components/ui/collapsible'
 
-## 导入
+const demo0 = `import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/collapsible'
 
-```vue
-<script setup lang="ts">
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
+  <Collapsible>
+    <CollapsibleTrigger>Can I use this in my project?</CollapsibleTrigger>
+    <CollapsibleContent>
+      Yes. Free to use for personal and commercial projects. No attribution
+      required.
+    </CollapsibleContent>
+  </Collapsible>`
 </script>
-```
 
-## API
+<Demo :code="demo0">
+    <Collapsible>
+      <CollapsibleTrigger>Can I use this in my project?</CollapsibleTrigger>
+      <CollapsibleContent>
+        Yes. Free to use for personal and commercial projects. No attribution
+        required.
+      </CollapsibleContent>
+    </Collapsible>
+</Demo>
 
-> TODO: 补充 Props / Emits / Slots 文档
-
+## Usage

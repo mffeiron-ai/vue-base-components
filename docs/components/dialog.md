@@ -1,10 +1,9 @@
 # Dialog 对话框
 
-模态弹窗组件，用于需要用户确认或输入的场景。
-
 <script setup>
-import { ref } from 'vue'
-import {
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, } from '../../src/components/ui/dialog'
+
+const demo0 = `import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -12,101 +11,130 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogClose,
-} from '../../src/components/ui/dialog'
-import { Button } from '../../src/components/ui/button'
-import { Input } from '../../src/components/ui/input'
-import { Label } from '../../src/components/ui/label'
+} from '@/components/ui/dialog'
 
-const open = ref(false)
+  <Dialog>
+    <DialogTrigger>Open</DialogTrigger>
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>Are you absolutely sure?</DialogTitle>
+        <DialogDescription>
+          This action cannot be undone. This will permanently delete your account
+          and remove your data from our servers.
+        </DialogDescription>
+      </DialogHeader>
+    </DialogContent>
+  </Dialog>`
 </script>
 
-## 基础用法
+<Demo :code="demo0">
+    <Dialog>
+      <DialogTrigger>Open</DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Are you absolutely sure?</DialogTitle>
+          <DialogDescription>
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+          </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+</Demo>
 
-<Dialog>
-  <DialogTrigger>
-    <Button variant="outline">打开对话框</Button>
-  </DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>确认操作</DialogTitle>
-      <DialogDescription>
-        此操作不可撤销。确定要继续吗？
-      </DialogDescription>
-    </DialogHeader>
-    <DialogFooter>
-      <DialogClose>
-        <Button variant="outline">取消</Button>
-      </DialogClose>
-      <Button>确认</Button>
-    </DialogFooter>
-  </DialogContent>
-</Dialog>
+## Usage
+
+## Example
+
+### Custom close button
+
+<Demo :code="demo0">
+    <Dialog>
+      <DialogTrigger>Open</DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Are you absolutely sure?</DialogTitle>
+          <DialogDescription>
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+          </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+</Demo>
+
+### Dialog with form
+
+To keep field value after `Dialog` unmounts
+
+<Demo :code="demo0">
+    <Dialog>
+      <DialogTrigger>Open</DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Are you absolutely sure?</DialogTitle>
+          <DialogDescription>
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+          </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+</Demo>
+
+### Responsive Modal (Dialog & Drawer)
+
+Use a `Drawer` component for smaller viewport sizes and a `Dialog` component otherwise. This can be further made reusable by using slots for various parts of the modal.
+
+<Demo :code="demo0">
+    <Dialog>
+      <DialogTrigger>Open</DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Are you absolutely sure?</DialogTitle>
+          <DialogDescription>
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+          </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+</Demo>
+
+## Notes
+
+To use the `Dialog` component from within a `Context Menu` or `Dropdown Menu`, you must encase the `Context Menu` or
+`Dropdown Menu` component in the `Dialog` component.
 
 ```vue
-<Dialog>
-  <DialogTrigger>
-    <Button variant="outline">打开对话框</Button>
-  </DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>确认操作</DialogTitle>
-      <DialogDescription>
-        此操作不可撤销。确定要继续吗？
-      </DialogDescription>
-    </DialogHeader>
-    <DialogFooter>
-      <DialogClose><Button variant="outline">取消</Button></DialogClose>
-      <Button>确认</Button>
-    </DialogFooter>
-  </DialogContent>
-</Dialog>
+<template>
+  <Dialog>
+    <ContextMenu>
+      <ContextMenuTrigger>Right click</ContextMenuTrigger>
+      <ContextMenuContent>
+        <ContextMenuItem>Open</ContextMenuItem>
+        <ContextMenuItem>Download</ContextMenuItem>
+        <DialogTrigger as-child>
+          <ContextMenuItem>
+            <span>Delete</span>
+          </ContextMenuItem>
+        </DialogTrigger>
+      </ContextMenuContent>
+    </ContextMenu>
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>Are you absolutely sure?</DialogTitle>
+        <DialogDescription>
+          This action cannot be undone. Are you sure you want to permanently
+          delete this file from our servers?
+        </DialogDescription>
+      </DialogHeader>
+      <DialogFooter>
+        <Button type="submit">
+          Confirm
+        </Button>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
+</template>
 ```
-
-## 带表单
-
-<Dialog>
-  <DialogTrigger>
-    <Button variant="outline">编辑资料</Button>
-  </DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>编辑资料</DialogTitle>
-      <DialogDescription>
-        修改您的个人信息。完成后点击保存。
-      </DialogDescription>
-    </DialogHeader>
-    <div class="flex flex-col gap-4 py-2">
-      <div class="flex flex-col gap-2">
-        <Label>用户名</Label>
-        <Input placeholder="请输入用户名" />
-      </div>
-      <div class="flex flex-col gap-2">
-        <Label>邮箱</Label>
-        <Input type="email" placeholder="请输入邮箱" />
-      </div>
-    </div>
-    <DialogFooter>
-      <DialogClose>
-        <Button variant="outline">取消</Button>
-      </DialogClose>
-      <Button>保存</Button>
-    </DialogFooter>
-  </DialogContent>
-</Dialog>
-
-## API
-
-### Dialog (Root)
-
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| `open` | `boolean` | — | 受控打开状态 |
-| `defaultOpen` | `boolean` | `false` | 默认打开状态 |
-| `modal` | `boolean` | `true` | 是否模态 |
-
-### DialogContent
-
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| `class` | `string` | — | 自定义样式类 |

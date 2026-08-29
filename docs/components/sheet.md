@@ -1,31 +1,44 @@
-# Sheet
+# Sheet 侧边面板
 
-> TODO: 组件描述
+<script setup>
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger, } from '../../src/components/ui/sheet'
 
-## 导入
+const demo0 = `import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet'
 
-```vue
-<script setup lang="ts">
-import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+  <Sheet>
+    <SheetTrigger>Open</SheetTrigger>
+    <SheetContent>
+      <SheetHeader>
+        <SheetTitle>Are you absolutely sure?</SheetTitle>
+        <SheetDescription>
+          This action cannot be undone. This will permanently delete your account
+          and remove your data from our servers.
+        </SheetDescription>
+      </SheetHeader>
+    </SheetContent>
+  </Sheet>`
 </script>
-```
 
-## 子组件
+<Demo :code="demo0">
+    <Sheet>
+      <SheetTrigger>Open</SheetTrigger>
+      <SheetContent>
+        <SheetHeader>
+          <SheetTitle>Are you absolutely sure?</SheetTitle>
+          <SheetDescription>
+            This action cannot be undone. This will permanently delete your account
+            and remove your data from our servers.
+          </SheetDescription>
+        </SheetHeader>
+      </SheetContent>
+    </Sheet>
+</Demo>
 
-该组件由以下子组件组合而成：
-
-| 组件 | 说明 |
-|------|------|
-| `Sheet` | TODO |
-| `SheetClose` | TODO |
-| `SheetContent` | TODO |
-| `SheetDescription` | TODO |
-| `SheetFooter` | TODO |
-| `SheetHeader` | TODO |
-| `SheetTitle` | TODO |
-| `SheetTrigger` | TODO |
-
-## API
-
-> TODO: 补充 Props / Emits / Slots 文档
-
+## Usage

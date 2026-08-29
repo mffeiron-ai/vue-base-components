@@ -1,16 +1,29 @@
-# Hover Card
+# Hover Card 悬停卡片
 
-> TODO: 组件描述
+<script setup>
+import { HoverCard, HoverCardContent, HoverCardTrigger, } from '../../src/components/ui/hover-card'
 
-## 导入
+const demo0 = `import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from '@/components/ui/hover-card'
 
-```vue
-<script setup lang="ts">
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'
+  <HoverCard>
+    <HoverCardTrigger>Hover</HoverCardTrigger>
+    <HoverCardContent>
+      The Vue Framework – created and maintained by Evan You.
+    </HoverCardContent>
+  </HoverCard>`
 </script>
-```
 
-## API
+<Demo :code="demo0">
+    <HoverCard>
+      <HoverCardTrigger>Hover</HoverCardTrigger>
+      <HoverCardContent>
+        The Vue Framework – created and maintained by Evan You.
+      </HoverCardContent>
+    </HoverCard>
+</Demo>
 
-> TODO: 补充 Props / Emits / Slots 文档
-
+## Usage

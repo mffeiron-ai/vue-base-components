@@ -1,34 +1,119 @@
-# Select
+# Select 选择器
 
-> TODO: 组件描述
+<script setup>
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from '../../src/components/ui/select'
 
-## 导入
+const demo0 = `import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
-```vue
-<script setup lang="ts">
-import { Select, SelectContent, SelectGroup, SelectItem, SelectItemText, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue } from '@/components/ui/select'
+  <Select>
+    <SelectTrigger>
+      <SelectValue placeholder="Select a fruit" />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectItem value="apple">
+        Apple
+      </SelectItem>
+      <SelectItem value="banana">
+        Banana
+      </SelectItem>
+      <SelectItem value="blueberry">
+        Blueberry
+      </SelectItem>
+      <SelectItem value="grapes">
+        Grapes
+      </SelectItem>
+      <SelectItem value="pineapple">
+        Pineapple
+      </SelectItem>
+    </SelectContent>
+  </Select>`
 </script>
-```
 
-## 子组件
+<Demo :code="demo0">
+    <Select>
+      <SelectTrigger>
+        <SelectValue placeholder="Select a fruit" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="apple">
+          Apple
+        </SelectItem>
+        <SelectItem value="banana">
+          Banana
+        </SelectItem>
+        <SelectItem value="blueberry">
+          Blueberry
+        </SelectItem>
+        <SelectItem value="grapes">
+          Grapes
+        </SelectItem>
+        <SelectItem value="pineapple">
+          Pineapple
+        </SelectItem>
+      </SelectContent>
+    </Select>
+</Demo>
 
-该组件由以下子组件组合而成：
+## Usage
 
-| 组件 | 说明 |
-|------|------|
-| `Select` | TODO |
-| `SelectContent` | TODO |
-| `SelectGroup` | TODO |
-| `SelectItem` | TODO |
-| `SelectItemText` | TODO |
-| `SelectLabel` | TODO |
-| `SelectScrollDownButton` | TODO |
-| `SelectScrollUpButton` | TODO |
-| `SelectSeparator` | TODO |
-| `SelectTrigger` | TODO |
-| `SelectValue` | TODO |
+## Examples
 
-## API
+### Scrollable
 
-> TODO: 补充 Props / Emits / Slots 文档
+<Demo :code="demo0">
+    <Select>
+      <SelectTrigger>
+        <SelectValue placeholder="Select a fruit" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="apple">
+          Apple
+        </SelectItem>
+        <SelectItem value="banana">
+          Banana
+        </SelectItem>
+        <SelectItem value="blueberry">
+          Blueberry
+        </SelectItem>
+        <SelectItem value="grapes">
+          Grapes
+        </SelectItem>
+        <SelectItem value="pineapple">
+          Pineapple
+        </SelectItem>
+      </SelectContent>
+    </Select>
+</Demo>
 
+### Multiple
+
+<Demo :code="demo0">
+    <Select>
+      <SelectTrigger>
+        <SelectValue placeholder="Select a fruit" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="apple">
+          Apple
+        </SelectItem>
+        <SelectItem value="banana">
+          Banana
+        </SelectItem>
+        <SelectItem value="blueberry">
+          Blueberry
+        </SelectItem>
+        <SelectItem value="grapes">
+          Grapes
+        </SelectItem>
+        <SelectItem value="pineapple">
+          Pineapple
+        </SelectItem>
+      </SelectContent>
+    </Select>
+</Demo>

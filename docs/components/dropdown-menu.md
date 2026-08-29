@@ -1,37 +1,42 @@
-# Dropdown Menu
+# Dropdown Menu 下拉菜单
 
-> TODO: 组件描述
+<script setup>
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, } from '../../src/components/ui/dropdown-menu'
 
-## 导入
+const demo0 = `import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 
-```vue
-<script setup lang="ts">
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+  <DropdownMenu>
+    <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem>Profile</DropdownMenuItem>
+      <DropdownMenuItem>Billing</DropdownMenuItem>
+      <DropdownMenuItem>Team</DropdownMenuItem>
+      <DropdownMenuItem>Subscription</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>`
 </script>
-```
 
-## 子组件
+<Demo :code="demo0">
+    <DropdownMenu>
+      <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>Profile</DropdownMenuItem>
+        <DropdownMenuItem>Billing</DropdownMenuItem>
+        <DropdownMenuItem>Team</DropdownMenuItem>
+        <DropdownMenuItem>Subscription</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+</Demo>
 
-该组件由以下子组件组合而成：
-
-| 组件 | 说明 |
-|------|------|
-| `DropdownMenu` | TODO |
-| `DropdownMenuCheckboxItem` | TODO |
-| `DropdownMenuContent` | TODO |
-| `DropdownMenuGroup` | TODO |
-| `DropdownMenuItem` | TODO |
-| `DropdownMenuLabel` | TODO |
-| `DropdownMenuRadioGroup` | TODO |
-| `DropdownMenuRadioItem` | TODO |
-| `DropdownMenuSeparator` | TODO |
-| `DropdownMenuShortcut` | TODO |
-| `DropdownMenuSub` | TODO |
-| `DropdownMenuSubContent` | TODO |
-| `DropdownMenuSubTrigger` | TODO |
-| `DropdownMenuTrigger` | TODO |
-
-## API
-
-> TODO: 补充 Props / Emits / Slots 文档
-
+## Usage

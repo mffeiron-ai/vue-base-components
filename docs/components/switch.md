@@ -1,18 +1,15 @@
-# Switch
+# Switch 开关
 
-> TODO: 组件描述
+<script setup>
+import { Switch } from '../../src/components/ui/switch'
 
-## 导入
+const demo0 = `import { Switch } from '@/components/ui/switch'
 
-```vue
-<script setup lang="ts">
-import { Switch } from '@/components/ui/switch'
+  <Switch />`
 </script>
-```
 
-## API
+<Demo :code="demo0">
+    <Switch />
+</Demo>
 
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `class` | `string` | TODO |
-
+## Usage

@@ -1,40 +1,51 @@
-# Menubar
+# Menubar 菜单栏
 
-> TODO: 组件描述
+<script setup>
+import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarShortcut, MenubarTrigger, } from '../../src/components/ui/menubar'
 
-## 导入
+const demo0 = `import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarTrigger,
+} from '@/components/ui/menubar'
 
-```vue
-<script setup lang="ts">
-import { Menubar, MenubarCheckboxItem, MenubarContent, MenubarGroup, MenubarItem, MenubarLabel, MenubarMenu, MenubarRadioGroup, MenubarRadioItem, MenubarSeparator, MenubarShortcut, MenubarSub, MenubarSubContent, MenubarSubTrigger, MenubarTrigger } from '@/components/ui/menubar'
+  <Menubar>
+    <MenubarMenu>
+      <MenubarTrigger>File</MenubarTrigger>
+      <MenubarContent>
+        <MenubarItem>
+          New Tab <MenubarShortcut>⌘T</MenubarShortcut>
+        </MenubarItem>
+        <MenubarItem>New Window</MenubarItem>
+        <MenubarSeparator />
+        <MenubarItem>Share</MenubarItem>
+        <MenubarSeparator />
+        <MenubarItem>Print</MenubarItem>
+      </MenubarContent>
+    </MenubarMenu>
+  </Menubar>`
 </script>
-```
 
-## 子组件
+<Demo :code="demo0">
+    <Menubar>
+      <MenubarMenu>
+        <MenubarTrigger>File</MenubarTrigger>
+        <MenubarContent>
+          <MenubarItem>
+            New Tab <MenubarShortcut>⌘T</MenubarShortcut>
+          </MenubarItem>
+          <MenubarItem>New Window</MenubarItem>
+          <MenubarSeparator />
+          <MenubarItem>Share</MenubarItem>
+          <MenubarSeparator />
+          <MenubarItem>Print</MenubarItem>
+        </MenubarContent>
+      </MenubarMenu>
+    </Menubar>
+</Demo>
 
-该组件由以下子组件组合而成：
-
-| 组件 | 说明 |
-|------|------|
-| `Menubar` | TODO |
-| `MenubarCheckboxItem` | TODO |
-| `MenubarContent` | TODO |
-| `MenubarGroup` | TODO |
-| `MenubarItem` | TODO |
-| `MenubarLabel` | TODO |
-| `MenubarMenu` | TODO |
-| `MenubarRadioGroup` | TODO |
-| `MenubarRadioItem` | TODO |
-| `MenubarSeparator` | TODO |
-| `MenubarShortcut` | TODO |
-| `MenubarSub` | TODO |
-| `MenubarSubContent` | TODO |
-| `MenubarSubTrigger` | TODO |
-| `MenubarTrigger` | TODO |
-
-## API
-
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `class` | `string` | TODO |
-
+## Usage

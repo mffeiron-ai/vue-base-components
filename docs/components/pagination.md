@@ -1,33 +1,77 @@
-# Pagination
+# Pagination 分页
 
-> TODO: 组件描述
+<script setup>
+import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, } from '../../src/components/ui/pagination'
 
-## 导入
+const demo0 = `import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination'
 
-```vue
-<script setup lang="ts">
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationFirst, PaginationItem, PaginationLast, PaginationNext, PaginationPrevious } from '@/components/ui/pagination'
+  <Pagination>
+    <PaginationContent>
+      <PaginationItem>
+        <PaginationPrevious href="#" />
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink href="#">
+          1
+        </PaginationLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink href="#" is-active>
+          2
+        </PaginationLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink href="#">
+          3
+        </PaginationLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationEllipsis />
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationNext href="#" />
+      </PaginationItem>
+    </PaginationContent>
+  </Pagination>`
 </script>
-```
 
-## 子组件
+<Demo :code="demo0">
+    <Pagination>
+      <PaginationContent>
+        <PaginationItem>
+          <PaginationPrevious href="#" />
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink href="#">
+            1
+          </PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink href="#" is-active>
+            2
+          </PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink href="#">
+            3
+          </PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationEllipsis />
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationNext href="#" />
+        </PaginationItem>
+      </PaginationContent>
+    </Pagination>
+</Demo>
 
-该组件由以下子组件组合而成：
-
-| 组件 | 说明 |
-|------|------|
-| `Pagination` | TODO |
-| `PaginationContent` | TODO |
-| `PaginationEllipsis` | TODO |
-| `PaginationFirst` | TODO |
-| `PaginationItem` | TODO |
-| `PaginationLast` | TODO |
-| `PaginationNext` | TODO |
-| `PaginationPrevious` | TODO |
-
-## API
-
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `class` | `string` | TODO |
-
+## Usage

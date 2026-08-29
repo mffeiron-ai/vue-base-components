@@ -1,27 +1,25 @@
-# Popover
+# Popover 弹出层
 
-> TODO: 组件描述
+<script setup>
+import { Popover, PopoverContent, PopoverTrigger, } from '../../src/components/ui/popover'
 
-## 导入
+const demo0 = `import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
 
-```vue
-<script setup lang="ts">
-import { Popover, PopoverAnchor, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+  <Popover>
+    <PopoverTrigger>Open</PopoverTrigger>
+    <PopoverContent>Place content for the popover here.</PopoverContent>
+  </Popover>`
 </script>
-```
 
-## 子组件
+<Demo :code="demo0">
+    <Popover>
+      <PopoverTrigger>Open</PopoverTrigger>
+      <PopoverContent>Place content for the popover here.</PopoverContent>
+    </Popover>
+</Demo>
 
-该组件由以下子组件组合而成：
-
-| 组件 | 说明 |
-|------|------|
-| `Popover` | TODO |
-| `PopoverAnchor` | TODO |
-| `PopoverContent` | TODO |
-| `PopoverTrigger` | TODO |
-
-## API
-
-> TODO: 补充 Props / Emits / Slots 文档
-
+## Usage

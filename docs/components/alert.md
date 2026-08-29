@@ -1,18 +1,25 @@
-# Alert
+# Alert 警告提示
 
-> TODO: 组件描述
+<script setup>
+import { Alert, AlertDescription, AlertTitle } from '../../src/components/ui/alert'
 
-## 导入
+const demo0 = `import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 
-```vue
-<script setup lang="ts">
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+  <Alert>
+    <AlertTitle>Heads up!</AlertTitle>
+    <AlertDescription>
+      You can add components and dependencies to your app using the cli.
+    </AlertDescription>
+  </Alert>`
 </script>
-```
 
-## API
+<Demo :code="demo0">
+    <Alert>
+      <AlertTitle>Heads up!</AlertTitle>
+      <AlertDescription>
+        You can add components and dependencies to your app using the cli.
+      </AlertDescription>
+    </Alert>
+</Demo>
 
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `class` | `string variant?: AlertVariants["variant"]` | TODO |
-
+## Usage

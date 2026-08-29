@@ -1,34 +1,76 @@
-# Table
+# Table 表格
 
-> TODO: 组件描述
+<script setup>
+import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow, } from '../../src/components/ui/table'
 
-## 导入
+const demo0 = `import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
 
-```vue
-<script setup lang="ts">
-import { Table, TableBody, TableCaption, TableCell, TableEmpty, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+  <Table>
+    <TableCaption>A list of your recent invoices.</TableCaption>
+    <TableHeader>
+      <TableRow>
+        <TableHead class="w-[100px]">
+          Invoice
+        </TableHead>
+        <TableHead>Status</TableHead>
+        <TableHead>Method</TableHead>
+        <TableHead class="text-right">
+          Amount
+        </TableHead>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      <TableRow>
+        <TableCell class="font-medium">
+          INV001
+        </TableCell>
+        <TableCell>Paid</TableCell>
+        <TableCell>Credit Card</TableCell>
+        <TableCell class="text-right">
+          $250.00
+        </TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>`
 </script>
-```
 
-## 子组件
+<Demo :code="demo0">
+    <Table>
+      <TableCaption>A list of your recent invoices.</TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead class="w-[100px]">
+            Invoice
+          </TableHead>
+          <TableHead>Status</TableHead>
+          <TableHead>Method</TableHead>
+          <TableHead class="text-right">
+            Amount
+          </TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        <TableRow>
+          <TableCell class="font-medium">
+            INV001
+          </TableCell>
+          <TableCell>Paid</TableCell>
+          <TableCell>Credit Card</TableCell>
+          <TableCell class="text-right">
+            $250.00
+          </TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+</Demo>
 
-该组件由以下子组件组合而成：
-
-| 组件 | 说明 |
-|------|------|
-| `Table` | TODO |
-| `TableBody` | TODO |
-| `TableCaption` | TODO |
-| `TableCell` | TODO |
-| `TableEmpty` | TODO |
-| `TableFooter` | TODO |
-| `TableHead` | TODO |
-| `TableHeader` | TODO |
-| `TableRow` | TODO |
-
-## API
-
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `class` | `string` | TODO |
-
+## Usage

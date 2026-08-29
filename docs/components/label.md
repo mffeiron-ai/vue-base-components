@@ -1,18 +1,15 @@
-# Label
+# Label 标签
 
-> TODO: 组件描述
+<script setup>
+import { Label } from '../../src/components/ui/label'
 
-## 导入
+const demo0 = `import { Label } from '@/components/ui/label'
 
-```vue
-<script setup lang="ts">
-import { Label } from '@/components/ui/label'
+  <Label for="email">Your email address</Label>`
 </script>
-```
 
-## API
+<Demo :code="demo0">
+    <Label for="email">Your email address</Label>
+</Demo>
 
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `class` | `string` | TODO |
-
+## Usage

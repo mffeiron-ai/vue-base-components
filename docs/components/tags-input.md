@@ -1,30 +1,16 @@
-# Tags Input
+# Tags Input 标签输入
 
-> TODO: 组件描述
-
-## 导入
-
-```vue
-<script setup lang="ts">
-import { TagsInput, TagsInputInput, TagsInputItem, TagsInputItemDelete, TagsInputItemText } from '@/components/ui/tags-input'
+<script setup>
 </script>
-```
 
-## 子组件
+<Demo :code="demo0">
+  <!-- TODO: 动态示例需补充 script 逻辑后放入 -->
+</Demo>
 
-该组件由以下子组件组合而成：
+## Examples
 
-| 组件 | 说明 |
-|------|------|
-| `TagsInput` | TODO |
-| `TagsInputInput` | TODO |
-| `TagsInputItem` | TODO |
-| `TagsInputItemDelete` | TODO |
-| `TagsInputItemText` | TODO |
+### Tags with Listbox
 
-## API
-
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `class` | `string` | TODO |
-
+<Demo :code="demo0">
+  <!-- TODO: 动态示例需补充 script 逻辑后放入 -->
+</Demo>

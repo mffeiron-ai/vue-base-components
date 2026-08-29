@@ -1,27 +1,34 @@
-# Accordion
+# Accordion 手风琴
 
-> TODO: 组件描述
+<script setup>
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, } from '../../src/components/ui/accordion'
 
-## 导入
+const demo0 = `import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
 
-```vue
-<script setup lang="ts">
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+  <Accordion type="single" collapsible>
+    <AccordionItem value="item-1">
+      <AccordionTrigger>Is it accessible?</AccordionTrigger>
+      <AccordionContent>
+        Yes. It adheres to the WAI-ARIA design pattern.
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>`
 </script>
-```
 
-## 子组件
+<Demo :code="demo0">
+    <Accordion type="single" collapsible>
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Is it accessible?</AccordionTrigger>
+        <AccordionContent>
+          Yes. It adheres to the WAI-ARIA design pattern.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+</Demo>
 
-该组件由以下子组件组合而成：
-
-| 组件 | 说明 |
-|------|------|
-| `Accordion` | TODO |
-| `AccordionContent` | TODO |
-| `AccordionItem` | TODO |
-| `AccordionTrigger` | TODO |
-
-## API
-
-> TODO: 补充 Props / Emits / Slots 文档
-
+## Usage

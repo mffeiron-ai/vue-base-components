@@ -1,18 +1,15 @@
-# Progress
+# Progress 进度条
 
-> TODO: 组件描述
+<script setup>
+import { Progress } from '../../src/components/ui/progress'
 
-## 导入
+const demo0 = `import { Progress } from '@/components/ui/progress'
 
-```vue
-<script setup lang="ts">
-import { Progress } from '@/components/ui/progress'
+  <Progress :model-value="33" />`
 </script>
-```
 
-## API
+<Demo :code="demo0">
+    <Progress :model-value="33" />
+</Demo>
 
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `class` | `string` | TODO |
-
+## Usage

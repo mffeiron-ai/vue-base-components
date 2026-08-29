@@ -1,18 +1,15 @@
-# Slider
+# Slider 滑块
 
-> TODO: 组件描述
+<script setup>
+import { Slider } from '../../src/components/ui/slider'
 
-## 导入
+const demo0 = `import { Slider } from '@/components/ui/slider'
 
-```vue
-<script setup lang="ts">
-import { Slider } from '@/components/ui/slider'
+  <Slider :default-value="[33]" :max="100" :step="1" />`
 </script>
-```
 
-## API
+<Demo :code="demo0">
+    <Slider :default-value="[33]" :max="100" :step="1" />
+</Demo>
 
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `class` | `string` | TODO |
-
+## Usage

@@ -1,16 +1,39 @@
-# Sonner
+# Sonner Toast 通知
 
-> TODO: 组件描述
+<script setup>
+import { toast } from 'vue-sonner'
+import { Button } from '../../src/components/ui/button'
 
-## 导入
+const demo0 = `import { toast } from 'vue-sonner'
+import { Button } from '@/components/ui/button'
 
-```vue
-<script setup lang="ts">
-import { Toaster } from '@/components/ui/sonner'
+  <Button @click="() => toast('My first toast')">
+    Give me a toast
+  </Button>`
 </script>
-```
 
-## API
+<Demo :code="demo0">
+    <Button @click="() => toast('My first toast')">
+      Give me a toast
+    </Button>
+</Demo>
 
-> TODO: 补充 Props / Emits / Slots 文档
+## Usage
 
+## Examples
+
+### Types
+
+<Demo :code="demo0">
+    <Button @click="() => toast('My first toast')">
+      Give me a toast
+    </Button>
+</Demo>
+
+### With Dialog
+
+<Demo :code="demo0">
+    <Button @click="() => toast('My first toast')">
+      Give me a toast
+    </Button>
+</Demo>

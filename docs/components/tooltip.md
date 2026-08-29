@@ -1,27 +1,34 @@
-# Tooltip
+# Tooltip 文字提示
 
-> TODO: 组件描述
+<script setup>
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, } from '../../src/components/ui/tooltip'
 
-## 导入
+const demo0 = `import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 
-```vue
-<script setup lang="ts">
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+  <TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger>Hover</TooltipTrigger>
+      <TooltipContent>
+        <p>Add to library</p>
+      </TooltipContent>
+    </Tooltip>
+  </TooltipProvider>`
 </script>
-```
 
-## 子组件
+<Demo :code="demo0">
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger>Hover</TooltipTrigger>
+        <TooltipContent>
+          <p>Add to library</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+</Demo>
 
-该组件由以下子组件组合而成：
-
-| 组件 | 说明 |
-|------|------|
-| `Tooltip` | TODO |
-| `TooltipContent` | TODO |
-| `TooltipProvider` | TODO |
-| `TooltipTrigger` | TODO |
-
-## API
-
-> TODO: 补充 Props / Emits / Slots 文档
-
+## Usage

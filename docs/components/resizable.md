@@ -1,18 +1,27 @@
-# Resizable
+# Resizable 可调整大小
 
-> TODO: 组件描述
+<script setup>
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup, } from '../../src/components/ui/resizable'
 
-## 导入
+const demo0 = `import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from '@/components/ui/resizable'
 
-```vue
-<script setup lang="ts">
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable'
+  <ResizablePanelGroup direction="horizontal">
+    <ResizablePanel>One</ResizablePanel>
+    <ResizableHandle />
+    <ResizablePanel>Two</ResizablePanel>
+  </ResizablePanelGroup>`
 </script>
-```
 
-## API
+<Demo :code="demo0">
+    <ResizablePanelGroup direction="horizontal">
+      <ResizablePanel>One</ResizablePanel>
+      <ResizableHandle />
+      <ResizablePanel>Two</ResizablePanel>
+    </ResizablePanelGroup>
+</Demo>
 
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `class` | `string, withHandle?: boolean` | TODO |
-
+## Usage

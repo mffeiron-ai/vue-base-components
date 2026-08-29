@@ -1,18 +1,21 @@
-# Avatar
+# Avatar 头像
 
-> TODO: 组件描述
+<script setup>
+import { Avatar, AvatarFallback, AvatarImage } from '../../src/components/ui/avatar'
 
-## 导入
+const demo0 = `import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
-```vue
-<script setup lang="ts">
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+  <Avatar>
+    <AvatarImage src="https://github.com/shadcn.png" />
+    <AvatarFallback>CN</AvatarFallback>
+  </Avatar>`
 </script>
-```
 
-## API
+<Demo :code="demo0">
+    <Avatar>
+      <AvatarImage src="https://github.com/shadcn.png" />
+      <AvatarFallback>CN</AvatarFallback>
+    </Avatar>
+</Demo>
 
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `class` | `string` | TODO |
-
+## Usage

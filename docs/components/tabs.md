@@ -1,29 +1,45 @@
-# Tabs
+# Tabs 选项卡
 
-> TODO: 组件描述
+<script setup>
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../src/components/ui/tabs'
 
-## 导入
+const demo0 = `import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
-```vue
-<script setup lang="ts">
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+  <Tabs default-value="account">
+    <TabsList>
+      <TabsTrigger value="account">
+        Account
+      </TabsTrigger>
+      <TabsTrigger value="password">
+        Password
+      </TabsTrigger>
+    </TabsList>
+    <TabsContent value="account">
+      Make changes to your account here.
+    </TabsContent>
+    <TabsContent value="password">
+      Change your password here.
+    </TabsContent>
+  </Tabs>`
 </script>
-```
 
-## 子组件
+<Demo :code="demo0">
+    <Tabs default-value="account">
+      <TabsList>
+        <TabsTrigger value="account">
+          Account
+        </TabsTrigger>
+        <TabsTrigger value="password">
+          Password
+        </TabsTrigger>
+      </TabsList>
+      <TabsContent value="account">
+        Make changes to your account here.
+      </TabsContent>
+      <TabsContent value="password">
+        Change your password here.
+      </TabsContent>
+    </Tabs>
+</Demo>
 
-该组件由以下子组件组合而成：
-
-| 组件 | 说明 |
-|------|------|
-| `Tabs` | TODO |
-| `TabsContent` | TODO |
-| `TabsList` | TODO |
-| `TabsTrigger` | TODO |
-
-## API
-
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `class` | `string` | TODO |
-
+## Usage

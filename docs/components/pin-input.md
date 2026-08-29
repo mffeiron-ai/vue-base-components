@@ -1,27 +1,12 @@
-# Pin Input
+# Pin Input PIN 输入
 
-> TODO: 组件描述
-
-## 导入
-
-```vue
-<script setup lang="ts">
-import { PinInput, PinInputGroup, PinInputSeparator, PinInputSlot } from '@/components/ui/pin-input'
+<script setup>
 </script>
-```
 
-## 子组件
+<Callout title="The pin input component has been deprecated." class="mt-0">
 
-该组件由以下子组件组合而成：
+  See the [input otp](/components/input-otp.html) documentation for more information.
 
-| 组件 | 说明 |
-|------|------|
-| `PinInput` | TODO |
-| `PinInputGroup` | TODO |
-| `PinInputSeparator` | TODO |
-| `PinInputSlot` | TODO |
+</Callout>
 
-## API
-
-> TODO: 补充 Props / Emits / Slots 文档
-
+If you're looking for the old pin input component, see the [old docs](https://v3.shadcn-vue.com/docs/components/pin-input) for more information.

@@ -1,30 +1,33 @@
-# Number Field
+# Number Field 数字输入
 
-> TODO: 组件描述
+<script setup>
+import { NumberField, NumberFieldContent, NumberFieldDecrement, NumberFieldIncrement, NumberFieldInput, } from '../../src/components/ui/number-field'
 
-## 导入
+const demo0 = `import {
+  NumberField,
+  NumberFieldContent,
+  NumberFieldDecrement,
+  NumberFieldIncrement,
+  NumberFieldInput,
+} from '@/components/ui/number-field'
 
-```vue
-<script setup lang="ts">
-import { NumberField, NumberFieldContent, NumberFieldDecrement, NumberFieldIncrement, NumberFieldInput } from '@/components/ui/number-field'
+  <NumberField :default-value="18" :min="0">
+    <NumberFieldContent>
+      <NumberFieldDecrement />
+      <NumberFieldInput />
+      <NumberFieldIncrement />
+    </NumberFieldContent>
+  </NumberField>`
 </script>
-```
 
-## 子组件
+<Demo :code="demo0">
+    <NumberField :default-value="18" :min="0">
+      <NumberFieldContent>
+        <NumberFieldDecrement />
+        <NumberFieldInput />
+        <NumberFieldIncrement />
+      </NumberFieldContent>
+    </NumberField>
+</Demo>
 
-该组件由以下子组件组合而成：
-
-| 组件 | 说明 |
-|------|------|
-| `NumberField` | TODO |
-| `NumberFieldContent` | TODO |
-| `NumberFieldDecrement` | TODO |
-| `NumberFieldIncrement` | TODO |
-| `NumberFieldInput` | TODO |
-
-## API
-
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `class` | `string` | TODO |
-
+## Usage

@@ -1,18 +1,43 @@
-# Radio Group
+# Radio Group 单选组
 
-> TODO: 组件描述
+<script setup>
+import { Label } from '../../src/components/ui/label'
+import { RadioGroup, RadioGroupItem } from '../../src/components/ui/radio-group'
 
-## 导入
-
-```vue
-<script setup lang="ts">
+const demo0 = `import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+
+  <RadioGroup default-value="comfortable">
+    <div class="flex items-center space-x-2">
+      <RadioGroupItem id="r1" value="default" />
+      <Label for="r1">Default</Label>
+    </div>
+    <div class="flex items-center space-x-2">
+      <RadioGroupItem id="r2" value="comfortable" />
+      <Label for="r2">Comfortable</Label>
+    </div>
+    <div class="flex items-center space-x-2">
+      <RadioGroupItem id="r3" value="compact" />
+      <Label for="r3">Compact</Label>
+    </div>
+  </RadioGroup>`
 </script>
-```
 
-## API
+<Demo :code="demo0">
+    <RadioGroup default-value="comfortable">
+      <div class="flex items-center space-x-2">
+        <RadioGroupItem id="r1" value="default" />
+        <Label for="r1">Default</Label>
+      </div>
+      <div class="flex items-center space-x-2">
+        <RadioGroupItem id="r2" value="comfortable" />
+        <Label for="r2">Comfortable</Label>
+      </div>
+      <div class="flex items-center space-x-2">
+        <RadioGroupItem id="r3" value="compact" />
+        <Label for="r3">Compact</Label>
+      </div>
+    </RadioGroup>
+</Demo>
 
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `class` | `string` | TODO |
-
+## Usage

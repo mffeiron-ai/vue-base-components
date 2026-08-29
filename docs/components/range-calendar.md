@@ -1,37 +1,22 @@
-# Range Calendar
+# Range Calendar 范围日历
 
-> TODO: 组件描述
-
-## 导入
-
-```vue
-<script setup lang="ts">
-import { RangeCalendar, RangeCalendarCell, RangeCalendarCellTrigger, RangeCalendarGrid, RangeCalendarGridBody, RangeCalendarGridHead, RangeCalendarGridRow, RangeCalendarHeadCell, RangeCalendarHeader, RangeCalendarHeading, RangeCalendarNextButton, RangeCalendarPrevButton } from '@/components/ui/range-calendar'
+<script setup>
 </script>
+
+<Demo :code="demo0">
+  <!-- TODO: 动态示例需补充 script 逻辑后放入 -->
+</Demo>
+
+## About
+
+The `<RangeCalendar />` component is built on top of the [Reka UI Range Calendar](https://www.reka-ui.com/docs/components/date-range-picker.html) component, which uses the [@internationalized/date](https://react-spectrum.adobe.com/internationalized/date/index.html) package to handle dates.
+
+If you're looking for a normal calendar, check out the [Calendar](./calendar.md) component.
+
+## Usage
+```vue
+import { RangeCalendar } from "@/components/ui/range-calendar";
+<template>
+  <RangeCalendar />
+</template>
 ```
-
-## 子组件
-
-该组件由以下子组件组合而成：
-
-| 组件 | 说明 |
-|------|------|
-| `RangeCalendar` | TODO |
-| `RangeCalendarCell` | TODO |
-| `RangeCalendarCellTrigger` | TODO |
-| `RangeCalendarGrid` | TODO |
-| `RangeCalendarGridBody` | TODO |
-| `RangeCalendarGridHead` | TODO |
-| `RangeCalendarGridRow` | TODO |
-| `RangeCalendarHeadCell` | TODO |
-| `RangeCalendarHeader` | TODO |
-| `RangeCalendarHeading` | TODO |
-| `RangeCalendarNextButton` | TODO |
-| `RangeCalendarPrevButton` | TODO |
-
-## API
-
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `class` | `string` | TODO |
-

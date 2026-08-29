@@ -1,18 +1,15 @@
-# Textarea
+# Textarea 多行输入
 
-> TODO: 组件描述
+<script setup>
+import { Textarea } from '../../src/components/ui/textarea'
 
-## 导入
+const demo0 = `import { Textarea } from '@/components/ui/textarea'
 
-```vue
-<script setup lang="ts">
-import { Textarea } from '@/components/ui/textarea'
+  <Textarea placeholder="Type your message here." />`
 </script>
-```
 
-## API
+<Demo :code="demo0">
+    <Textarea placeholder="Type your message here." />
+</Demo>
 
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `class` | `string defaultValue?: string | number modelValue?: string | number` | TODO |
-
+## Usage

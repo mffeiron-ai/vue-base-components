@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 // 自动生成 UI 组件侧边栏
 const uiComponents = [
   'accordion', 'alert', 'alert-dialog', 'aspect-ratio',
-  'avatar', 'badge', 'breadcrumb', 'bubble',
+  'attachment', 'avatar', 'badge', 'breadcrumb', 'bubble',
   'button', 'button-group', 'calendar', 'card',
   'carousel', 'chart', 'checkbox', 'collapsible',
   'combobox', 'command', 'context-menu', 'dialog',
@@ -15,7 +15,7 @@ const uiComponents = [
   'marker', 'menubar', 'message', 'message-scroller',
   'native-select', 'navigation-menu', 'number-field',
   'pagination', 'pin-input', 'popover', 'progress',
-  'radio-group', 'range-calendar', 'resizable', 'scroll-area',
+  'questionnaire', 'radio-group', 'range-calendar', 'resizable', 'scroll-area',
   'select', 'separator', 'sheet', 'sidebar',
   'skeleton', 'slider', 'sonner', 'spinner',
   'stepper', 'switch', 'table', 'tabs',

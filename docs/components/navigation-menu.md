@@ -1,33 +1,42 @@
-# Navigation Menu
+# Navigation Menu 导航菜单
 
-> TODO: 组件描述
+<script setup>
+import { NavigationMenu, NavigationMenuContent, NavigationMenuIndicator, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, NavigationMenuViewport, } from '../../src/components/ui/navigation-menu'
 
-## 导入
+const demo0 = `import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from '@/components/ui/navigation-menu'
 
-```vue
-<script setup lang="ts">
-import { NavigationMenu, NavigationMenuContent, NavigationMenuIndicator, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, NavigationMenuViewport } from '@/components/ui/navigation-menu'
+  <NavigationMenu>
+    <NavigationMenuList>
+      <NavigationMenuItem>
+        <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
+        <NavigationMenuContent>
+          <NavigationMenuLink>Link</NavigationMenuLink>
+        </NavigationMenuContent>
+      </NavigationMenuItem>
+    </NavigationMenuList>
+  </NavigationMenu>`
 </script>
-```
 
-## 子组件
+<Demo :code="demo0">
+    <NavigationMenu>
+      <NavigationMenuList>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <NavigationMenuLink>Link</NavigationMenuLink>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
+</Demo>
 
-该组件由以下子组件组合而成：
-
-| 组件 | 说明 |
-|------|------|
-| `NavigationMenu` | TODO |
-| `NavigationMenuContent` | TODO |
-| `NavigationMenuIndicator` | TODO |
-| `NavigationMenuItem` | TODO |
-| `NavigationMenuLink` | TODO |
-| `NavigationMenuList` | TODO |
-| `NavigationMenuTrigger` | TODO |
-| `NavigationMenuViewport` | TODO |
-
-## API
-
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `class` | `string viewport?: boolean` | TODO |
-
+## Usage

@@ -1,18 +1,133 @@
-# Toggle Group
+# Toggle Group 开关按钮组
 
-> TODO: 组件描述
+<script setup>
+import { ToggleGroup, ToggleGroupItem } from '../../src/components/ui/toggle-group'
 
-## 导入
+const demo0 = `import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 
-```vue
-<script setup lang="ts">
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+  <ToggleGroup type="multiple">
+    <ToggleGroupItem value="a">
+      A
+    </ToggleGroupItem>
+    <ToggleGroupItem value="b">
+      B
+    </ToggleGroupItem>
+    <ToggleGroupItem value="c">
+      C
+    </ToggleGroupItem>
+  </ToggleGroup>`
 </script>
-```
 
-## API
+<Demo :code="demo0">
+    <ToggleGroup type="multiple">
+      <ToggleGroupItem value="a">
+        A
+      </ToggleGroupItem>
+      <ToggleGroupItem value="b">
+        B
+      </ToggleGroupItem>
+      <ToggleGroupItem value="c">
+        C
+      </ToggleGroupItem>
+    </ToggleGroup>
+</Demo>
 
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `class` | `string variant?: ToggleGroupVariants["variant"] size?: ToggleGroupVariants["size"] spacing?: number` | TODO |
+## Usage
 
+## Examples
+
+### Default
+
+<Demo :code="demo0">
+    <ToggleGroup type="multiple">
+      <ToggleGroupItem value="a">
+        A
+      </ToggleGroupItem>
+      <ToggleGroupItem value="b">
+        B
+      </ToggleGroupItem>
+      <ToggleGroupItem value="c">
+        C
+      </ToggleGroupItem>
+    </ToggleGroup>
+</Demo>
+
+### Outline
+
+<Demo :code="demo0">
+    <ToggleGroup type="multiple">
+      <ToggleGroupItem value="a">
+        A
+      </ToggleGroupItem>
+      <ToggleGroupItem value="b">
+        B
+      </ToggleGroupItem>
+      <ToggleGroupItem value="c">
+        C
+      </ToggleGroupItem>
+    </ToggleGroup>
+</Demo>
+
+### Single
+
+<Demo :code="demo0">
+    <ToggleGroup type="multiple">
+      <ToggleGroupItem value="a">
+        A
+      </ToggleGroupItem>
+      <ToggleGroupItem value="b">
+        B
+      </ToggleGroupItem>
+      <ToggleGroupItem value="c">
+        C
+      </ToggleGroupItem>
+    </ToggleGroup>
+</Demo>
+
+### Small
+
+<Demo :code="demo0">
+    <ToggleGroup type="multiple">
+      <ToggleGroupItem value="a">
+        A
+      </ToggleGroupItem>
+      <ToggleGroupItem value="b">
+        B
+      </ToggleGroupItem>
+      <ToggleGroupItem value="c">
+        C
+      </ToggleGroupItem>
+    </ToggleGroup>
+</Demo>
+
+### Large
+
+<Demo :code="demo0">
+    <ToggleGroup type="multiple">
+      <ToggleGroupItem value="a">
+        A
+      </ToggleGroupItem>
+      <ToggleGroupItem value="b">
+        B
+      </ToggleGroupItem>
+      <ToggleGroupItem value="c">
+        C
+      </ToggleGroupItem>
+    </ToggleGroup>
+</Demo>
+
+### Disabled
+
+<Demo :code="demo0">
+    <ToggleGroup type="multiple">
+      <ToggleGroupItem value="a">
+        A
+      </ToggleGroupItem>
+      <ToggleGroupItem value="b">
+        B
+      </ToggleGroupItem>
+      <ToggleGroupItem value="c">
+        C
+      </ToggleGroupItem>
+    </ToggleGroup>
+</Demo>

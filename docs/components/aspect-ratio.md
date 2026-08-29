@@ -1,16 +1,19 @@
-# Aspect Ratio
+# Aspect Ratio 宽高比
 
-> TODO: 组件描述
+<script setup>
+import { AspectRatio } from '../../src/components/ui/aspect-ratio'
 
-## 导入
+const demo0 = `import { AspectRatio } from '@/components/ui/aspect-ratio'
 
-```vue
-<script setup lang="ts">
-import { AspectRatio } from '@/components/ui/aspect-ratio'
+  <AspectRatio :ratio="16 / 9">
+    <img src="..." alt="Image" class="rounded-md object-cover">
+  </AspectRatio>`
 </script>
-```
 
-## API
+<Demo :code="demo0">
+    <AspectRatio :ratio="16 / 9">
+      <img src="..." alt="Image" class="rounded-md object-cover">
+    </AspectRatio>
+</Demo>
 
-> TODO: 补充 Props / Emits / Slots 文档
-
+## Usage
