@@ -2,12 +2,12 @@
 import type { NavigationMenuTriggerProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"
+import { ChevronDown } from "lucide-vue-next"
 import {
   NavigationMenuTrigger,
   useForwardProps,
 } from "reka-ui"
-import { cn } from "@/lib/utils"
-import { IconPlaceholder } from "@/components/icon-placeholder"
+import { cn } from "../../../lib/utils"
 import { navigationMenuTriggerStyle } from "."
 
 const props = defineProps<NavigationMenuTriggerProps & { class?: HTMLAttributes["class"] }>()
@@ -24,13 +24,8 @@ const forwardedProps = useForwardProps(delegatedProps)
     :class="cn(navigationMenuTriggerStyle(), 'group', props.class)"
   >
     <slot />
-    <IconPlaceholder
-      lucide="ChevronDownIcon"
-      tabler="IconChevronDown"
-      hugeicons="ArrowDown01Icon"
-      phosphor="CaretDownIcon"
-      remixicon="RiArrowDownSLine"
-      class="cn-navigation-menu-trigger-icon"
+    <ChevronDown
+      class="relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180"
       aria-hidden="true"
     />
   </NavigationMenuTrigger>

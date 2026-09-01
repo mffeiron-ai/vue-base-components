@@ -1,8 +1,16 @@
 <script setup lang="ts">
-import type { InputGroupButtonProps } from "."
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import type { HTMLAttributes } from "vue"
+import type { InputGroupButtonVariants } from "."
+import type { ButtonVariants } from "../button"
+import { cn } from "../../../lib/utils"
+import { Button } from "../button"
 import { inputGroupButtonVariants } from "."
+
+interface InputGroupButtonProps {
+  variant?: ButtonVariants["variant"]
+  size?: InputGroupButtonVariants["size"]
+  class?: HTMLAttributes["class"]
+}
 
 const props = withDefaults(defineProps<InputGroupButtonProps>(), {
   size: "xs",
@@ -12,7 +20,6 @@ const props = withDefaults(defineProps<InputGroupButtonProps>(), {
 
 <template>
   <Button
-    type="button"
     :data-size="props.size"
     :variant="props.variant"
     :class="cn(inputGroupButtonVariants({ size: props.size }), props.class)"

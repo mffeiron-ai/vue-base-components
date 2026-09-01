@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from "vue"
-import { cn } from "@/lib/utils"
-import { IconPlaceholder } from "@/components/icon-placeholder"
-import { Button } from "@/components/ui/button"
+import { PanelLeft } from "lucide-vue-next"
+import { cn } from "../../../lib/utils"
+import { Button } from "../button"
 import { useSidebar } from "./utils"
 
 const props = defineProps<{
@@ -17,18 +17,11 @@ const { toggleSidebar } = useSidebar()
     data-sidebar="trigger"
     data-slot="sidebar-trigger"
     variant="ghost"
-    size="icon-sm"
-    :class="cn('cn-sidebar-trigger', props.class)"
+    size="icon"
+    :class="cn('h-7 w-7', props.class)"
     @click="toggleSidebar"
   >
-    <IconPlaceholder
-      lucide="PanelLeftIcon"
-      tabler="IconLayoutSidebar"
-      hugeicons="SidebarLeftIcon"
-      phosphor="SidebarIcon"
-      remixicon="RiSideBarLine"
-      class="cn-rtl-flip"
-    />
+    <PanelLeft />
     <span class="sr-only">Toggle Sidebar</span>
   </Button>
 </template>

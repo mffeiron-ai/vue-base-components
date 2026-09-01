@@ -1,15 +1,13 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from "vue"
 import type { EmptyMediaVariants } from "."
-import { cn } from "@/lib/utils"
+import { cn } from "../../../lib/utils"
 import { emptyMediaVariants } from "."
 
-const props = withDefaults(defineProps<{
+const props = defineProps<{
   class?: HTMLAttributes["class"]
   variant?: EmptyMediaVariants["variant"]
-}>(), {
-  variant: "default",
-})
+}>()
 </script>
 
 <template>

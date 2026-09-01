@@ -4,12 +4,11 @@ import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"
 import { ListboxRoot, useFilter, useForwardPropsEmits } from "reka-ui"
 import { reactive, ref, watch } from "vue"
-import { cn } from "@/lib/utils"
+import { cn } from "../../../lib/utils"
 import { provideCommandContext } from "."
 
 const props = withDefaults(defineProps<ListboxRootProps & { class?: HTMLAttributes["class"] }>(), {
   modelValue: "",
-  highlightOnHover: true,
 })
 
 const emits = defineEmits<ListboxRootEmits>()
@@ -81,7 +80,7 @@ provideCommandContext({
   <ListboxRoot
     data-slot="command"
     v-bind="forwarded"
-    :class="cn('cn-command flex size-full flex-col overflow-hidden', props.class)"
+    :class="cn('bg-popover text-popover-foreground flex h-full w-full flex-col overflow-hidden rounded-md', props.class)"
   >
     <slot />
   </ListboxRoot>

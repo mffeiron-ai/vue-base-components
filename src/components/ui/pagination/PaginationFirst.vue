@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type { PaginationFirstProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
-import type { ButtonVariants } from "@/components/ui/button"
+import type { ButtonVariants } from "../button"
 import { reactiveOmit } from "@vueuse/core"
+import { ChevronLeftIcon } from "lucide-vue-next"
 import { PaginationFirst, useForwardProps } from "reka-ui"
-import { cn } from "@/lib/utils"
-import { IconPlaceholder } from "@/components/icon-placeholder"
-import { buttonVariants } from "@/components/ui/button"
+import { cn } from "../../../lib/utils"
+import { buttonVariants } from "../button"
 
 const props = withDefaults(defineProps<PaginationFirstProps & {
   size?: ButtonVariants["size"]
@@ -22,19 +22,12 @@ const forwarded = useForwardProps(delegatedProps)
 <template>
   <PaginationFirst
     data-slot="pagination-first"
-    :class="cn(buttonVariants({ variant: 'ghost', size }), 'cn-pagination-first', props.class)"
+    :class="cn(buttonVariants({ variant: 'ghost', size }), 'gap-1 px-2.5 sm:pr-2.5', props.class)"
     v-bind="forwarded"
   >
     <slot>
-      <IconPlaceholder
-        lucide="ChevronsLeftIcon"
-        tabler="IconChevronsLeft"
-        hugeicons="ArrowLeftDoubleIcon"
-        phosphor="CaretDoubleLeftIcon"
-        remixicon="RiArrowLeftDoubleLine"
-        data-icon="inline-start"
-      />
-      <span class="cn-pagination-first-text hidden sm:block">First</span>
+      <ChevronLeftIcon />
+      <span class="hidden sm:block">First</span>
     </slot>
   </PaginationFirst>
 </template>

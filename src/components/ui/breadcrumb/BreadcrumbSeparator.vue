@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { HTMLAttributes } from "vue"
-import { cn } from "@/lib/utils"
-import IconPlaceholder from "@/components/IconPlaceholder.vue"
+import { ChevronRight } from "lucide-vue-next"
+import { cn } from "../../../lib/utils"
 
 const props = defineProps<{
   class?: HTMLAttributes["class"]
@@ -13,17 +13,10 @@ const props = defineProps<{
     data-slot="breadcrumb-separator"
     role="presentation"
     aria-hidden="true"
-    :class="cn('cn-breadcrumb-separator', props.class)"
+    :class="cn('[&>svg]:size-3.5', props.class)"
   >
     <slot>
-      <IconPlaceholder
-        lucide="ChevronRightIcon"
-        tabler="IconChevronRight"
-        hugeicons="ArrowRight01Icon"
-        phosphor="CaretRightIcon"
-        remixicon="RiArrowRightSLine"
-        class="cn-rtl-flip"
-      />
+      <ChevronRight />
     </slot>
   </li>
 </template>

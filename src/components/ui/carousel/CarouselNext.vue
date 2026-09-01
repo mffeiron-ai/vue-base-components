@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { WithClassAsProps } from "./interface"
-import type { ButtonVariants } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
-import { IconPlaceholder } from "@/components/icon-placeholder"
-import { Button } from "@/components/ui/button"
+import type { ButtonVariants } from "../button"
+import { ArrowRight } from "lucide-vue-next"
+import { cn } from "../../../lib/utils"
+import { Button } from "../button"
 import { useCarousel } from "./useCarousel"
 
 const props = withDefaults(defineProps<{
@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<{
 }
 & WithClassAsProps>(), {
   variant: "outline",
-  size: "icon-sm",
+  size: "icon",
 })
 
 const { orientation, canScrollNext, scrollNext } = useCarousel()
@@ -23,7 +23,7 @@ const { orientation, canScrollNext, scrollNext } = useCarousel()
     data-slot="carousel-next"
     :disabled="!canScrollNext"
     :class="cn(
-      'cn-carousel-next absolute touch-manipulation',
+      'absolute size-8 rounded-full',
       orientation === 'horizontal'
         ? 'top-1/2 -right-12 -translate-y-1/2'
         : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
@@ -34,15 +34,8 @@ const { orientation, canScrollNext, scrollNext } = useCarousel()
     @click="scrollNext"
   >
     <slot>
-      <IconPlaceholder
-        lucide="ChevronRightIcon"
-        tabler="IconChevronRight"
-        hugeicons="ArrowRight01Icon"
-        phosphor="CaretRightIcon"
-        remixicon="RiArrowRightSLine"
-        class="cn-rtl-flip"
-      />
-      <span class="sr-only">Next slide</span>
+      <ArrowRight />
+      <span class="sr-only">Next Slide</span>
     </slot>
   </Button>
 </template>

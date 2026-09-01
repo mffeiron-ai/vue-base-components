@@ -47,7 +47,7 @@ export default defineConfig({
     sidebar: {
       '/components/': [
         {
-          text: 'UI 组件',
+          text: `UI 组件 (${uiComponents.length})`,
           items: uiComponents.map(name => ({
             text: capitalize(name),
             link: `/components/${name}`,

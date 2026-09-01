@@ -1,4 +1,21 @@
-import type { Registry } from "shadcn-vue/schema"
+// 本地定义 Registry 类型（替代 shadcn-vue/schema）
+export interface RegistryItem {
+  name: string
+  type: string
+  dependencies?: string[]
+  devDependencies?: string[]
+  registryDependencies?: string[]
+  files: Array<{
+    path: string
+    type: string
+    content?: string
+  }>
+  component?: boolean
+}
+
+export interface Registry {
+  items: RegistryItem[]
+}
 
 export const ui: Registry["items"] = [
   {
@@ -37,10 +54,6 @@ export const ui: Registry["items"] = [
     files: [
       {
         path: "ui/alert/Alert.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/alert/AlertAction.vue",
         type: "registry:ui",
       },
       {
@@ -97,10 +110,6 @@ export const ui: Registry["items"] = [
         type: "registry:ui",
       },
       {
-        path: "ui/alert-dialog/AlertDialogMedia.vue",
-        type: "registry:ui",
-      },
-      {
         path: "ui/alert-dialog/AlertDialogTitle.vue",
         type: "registry:ui",
       },
@@ -132,58 +141,6 @@ export const ui: Registry["items"] = [
     ],
   },
   {
-    name: "attachment",
-    type: "registry:ui",
-    dependencies: [
-      "reka-ui",
-    ],
-    registryDependencies: [
-      "button",
-    ],
-    files: [
-      {
-        path: "ui/attachment/Attachment.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/attachment/AttachmentAction.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/attachment/AttachmentActions.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/attachment/AttachmentContent.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/attachment/AttachmentDescription.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/attachment/AttachmentGroup.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/attachment/AttachmentMedia.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/attachment/AttachmentTitle.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/attachment/AttachmentTrigger.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/attachment/index.ts",
-        type: "registry:ui",
-      },
-    ],
-  },
-  {
     name: "avatar",
     type: "registry:ui",
     dependencies: [
@@ -196,19 +153,7 @@ export const ui: Registry["items"] = [
         type: "registry:ui",
       },
       {
-        path: "ui/avatar/AvatarBadge.vue",
-        type: "registry:ui",
-      },
-      {
         path: "ui/avatar/AvatarFallback.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/avatar/AvatarGroup.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/avatar/AvatarGroupCount.vue",
         type: "registry:ui",
       },
       {
@@ -276,35 +221,6 @@ export const ui: Registry["items"] = [
       },
       {
         path: "ui/breadcrumb/index.ts",
-        type: "registry:ui",
-      },
-    ],
-  },
-  {
-    name: "bubble",
-    type: "registry:ui",
-    dependencies: [
-      "reka-ui",
-    ],
-    files: [
-      {
-        path: "ui/bubble/Bubble.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/bubble/BubbleContent.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/bubble/BubbleGroup.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/bubble/BubbleReactions.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/bubble/index.ts",
         type: "registry:ui",
       },
     ],
@@ -588,9 +504,6 @@ export const ui: Registry["items"] = [
       "reka-ui",
       "@vueuse/core",
     ],
-    registryDependencies: [
-      "input-group",
-    ],
     files: [
       {
         path: "ui/combobox/Combobox.vue",
@@ -651,7 +564,6 @@ export const ui: Registry["items"] = [
     ],
     registryDependencies: [
       "dialog",
-      "input-group",
     ],
     files: [
       {
@@ -831,6 +743,7 @@ export const ui: Registry["items"] = [
     name: "drawer",
     type: "registry:ui",
     dependencies: [
+      "vaul-vue",
       "reka-ui",
       "@vueuse/core",
     ],
@@ -1288,31 +1201,6 @@ export const ui: Registry["items"] = [
     ],
   },
   {
-    name: "marker",
-    type: "registry:ui",
-    dependencies: [
-      "reka-ui",
-    ],
-    files: [
-      {
-        path: "ui/marker/Marker.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/marker/MarkerContent.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/marker/MarkerIcon.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/marker/index.ts",
-        type: "registry:ui",
-      },
-    ],
-  },
-  {
     name: "menubar",
     type: "registry:ui",
     dependencies: [
@@ -1382,84 +1270,6 @@ export const ui: Registry["items"] = [
       },
       {
         path: "ui/menubar/index.ts",
-        type: "registry:ui",
-      },
-    ],
-  },
-  {
-    name: "message",
-    type: "registry:ui",
-    dependencies: [
-      "reka-ui",
-    ],
-    files: [
-      {
-        path: "ui/message/Message.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/message/MessageAvatar.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/message/MessageContent.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/message/MessageFooter.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/message/MessageGroup.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/message/MessageHeader.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/message/index.ts",
-        type: "registry:ui",
-      },
-    ],
-  },
-  {
-    name: "message-scroller",
-    type: "registry:ui",
-    registryDependencies: [
-      "button",
-    ],
-    files: [
-      {
-        path: "ui/message-scroller/MessageScroller.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/message-scroller/MessageScrollerButton.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/message-scroller/MessageScrollerContent.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/message-scroller/MessageScrollerItem.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/message-scroller/MessageScrollerProvider.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/message-scroller/MessageScrollerViewport.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/message-scroller/index.ts",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/message-scroller/useMessageScroller.ts",
         type: "registry:ui",
       },
     ],
@@ -1606,10 +1416,6 @@ export const ui: Registry["items"] = [
         type: "registry:ui",
       },
       {
-        path: "ui/pagination/PaginationLink.vue",
-        type: "registry:ui",
-      },
-      {
         path: "ui/pagination/PaginationNext.vue",
         type: "registry:ui",
       },
@@ -1674,18 +1480,6 @@ export const ui: Registry["items"] = [
         type: "registry:ui",
       },
       {
-        path: "ui/popover/PopoverDescription.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/popover/PopoverHeader.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/popover/PopoverTitle.vue",
-        type: "registry:ui",
-      },
-      {
         path: "ui/popover/PopoverTrigger.vue",
         type: "registry:ui",
       },
@@ -1709,86 +1503,6 @@ export const ui: Registry["items"] = [
       },
       {
         path: "ui/progress/index.ts",
-        type: "registry:ui",
-      },
-    ],
-  },
-  {
-    name: "questionnaire",
-    type: "registry:ui",
-    dependencies: [
-      "reka-ui",
-    ],
-    registryDependencies: [
-      "button",
-    ],
-    files: [
-      {
-        path: "ui/questionnaire/Questionnaire.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/questionnaire/QuestionnaireActions.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/questionnaire/QuestionnaireChoice.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/questionnaire/QuestionnaireChoiceDescription.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/questionnaire/QuestionnaireChoices.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/questionnaire/QuestionnaireDescription.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/questionnaire/QuestionnaireError.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/questionnaire/QuestionnaireInput.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/questionnaire/QuestionnaireItem.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/questionnaire/QuestionnaireNext.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/questionnaire/QuestionnairePrevious.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/questionnaire/QuestionnaireProgress.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/questionnaire/QuestionnaireSkip.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/questionnaire/QuestionnaireSubmit.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/questionnaire/QuestionnaireTitle.vue",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/questionnaire/index.ts",
-        type: "registry:ui",
-      },
-      {
-        path: "ui/questionnaire/useQuestionnaire.ts",
         type: "registry:ui",
       },
     ],
@@ -2011,9 +1725,6 @@ export const ui: Registry["items"] = [
       "reka-ui",
       "@vueuse/core",
     ],
-    registryDependencies: [
-      "button",
-    ],
     files: [
       {
         path: "ui/sheet/Sheet.vue",
@@ -2216,7 +1927,6 @@ export const ui: Registry["items"] = [
     type: "registry:ui",
     dependencies: [
       "vue-sonner",
-      "@vueuse/core",
     ],
     files: [
       {
@@ -2308,6 +2018,7 @@ export const ui: Registry["items"] = [
     type: "registry:ui",
     dependencies: [
       "@vueuse/core",
+      "@tanstack/vue-table",
     ],
     files: [
       {
@@ -2348,6 +2059,10 @@ export const ui: Registry["items"] = [
       },
       {
         path: "ui/table/index.ts",
+        type: "registry:ui",
+      },
+      {
+        path: "ui/table/utils.ts",
         type: "registry:ui",
       },
     ],

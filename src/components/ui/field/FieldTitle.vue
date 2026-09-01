@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from "vue"
-import { cn } from "@/lib/utils"
+import { cn } from "../../../lib/utils"
 
 const props = defineProps<{
   class?: HTMLAttributes["class"]
@@ -11,7 +11,7 @@ const props = defineProps<{
   <div
     data-slot="field-label"
     :class="cn(
-      'cn-field-title flex w-fit items-center leading-snug',
+      'flex w-fit items-center gap-2 text-sm leading-snug font-medium group-data-[disabled=true]/field:opacity-50',
       props.class,
     )"
   >

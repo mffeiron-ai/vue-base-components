@@ -2,7 +2,7 @@
 import type { HTMLAttributes } from "vue"
 import type { ChartConfig } from "."
 import { computed } from "vue"
-import { cn } from "@/lib/utils"
+import { cn } from "../../../lib/utils"
 
 const props = withDefaults(defineProps<{
   hideLabel?: boolean
@@ -49,7 +49,7 @@ const tooltipLabel = computed(() => {
 <template>
   <div
     :class="cn(
-      'cn-chart-tooltip grid min-w-32 items-start',
+      'border-border/50 bg-background grid min-w-[8rem] items-start gap-1.5 rounded-lg border px-2.5 py-1.5 text-sm shadow-xl',
       props.class,
     )"
   >
@@ -69,7 +69,7 @@ const tooltipLabel = computed(() => {
           <template v-else-if="!hideIndicator">
             <div
               :class="cn(
-                'shrink-0 rounded-xs border-(--color-border) bg-(--color-bg)',
+                'shrink-0 rounded-[2px] border-(--color-border) bg-(--color-bg)',
                 {
                   'h-2.5 w-2.5': indicator === 'dot',
                   'w-1': indicator === 'line',

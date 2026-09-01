@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from "vue"
-import { cn } from "@/lib/utils"
+import { cn } from "../../../lib/utils"
 
 const props = defineProps<{
   class?: HTMLAttributes["class"]
@@ -10,7 +10,11 @@ const props = defineProps<{
 <template>
   <fieldset
     data-slot="field-set"
-    :class="cn('cn-field-set flex flex-col', props.class)"
+    :class="cn(
+      'flex flex-col gap-6',
+      'has-[>[data-slot=checkbox-group]]:gap-3 has-[>[data-slot=radio-group]]:gap-3',
+      props.class,
+    )"
   >
     <slot />
   </fieldset>

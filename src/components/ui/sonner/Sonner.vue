@@ -1,12 +1,10 @@
 <script lang="ts" setup>
 import type { ToasterProps } from "vue-sonner"
-import { reactiveOmit } from "@vueuse/core"
+import { CircleCheckIcon, InfoIcon, Loader2Icon, OctagonXIcon, TriangleAlertIcon, XIcon } from "lucide-vue-next"
 import { Toaster as Sonner } from "vue-sonner"
-import { cn } from "@/lib/utils"
-import { IconPlaceholder } from "@/components/icon-placeholder"
+import { cn } from "../../../lib/utils"
 
 const props = defineProps<ToasterProps>()
-const delegatedProps = reactiveOmit(props, "class", "toastOptions")
 </script>
 
 <template>
@@ -17,38 +15,28 @@ const delegatedProps = reactiveOmit(props, "class", "toastOptions")
       '--normal-text': 'var(--popover-foreground)',
       '--normal-border': 'var(--border)',
       '--border-radius': 'var(--radius)',
-      '--gray2': 'hsl(var(--popover) / 0.9)',
-      '--gray3': 'var(--border)',
-      '--gray4': 'var(--border)',
-      '--gray5': 'var(--border)',
-      '--gray12': 'var(--popover-foreground)',
     }"
-    :toast-options="props.toastOptions ?? {
-      classes: {
-        toast: 'cn-toast',
-      },
-    }"
-    v-bind="delegatedProps"
+    v-bind="props"
   >
     <template #success-icon>
-      <IconPlaceholder lucide="CircleCheckIcon" tabler="IconCircleCheck" hugeicons="CheckmarkCircle01Icon" phosphor="CheckCircleIcon" remixicon="RiCheckboxCircleLine" class="size-4" />
+      <CircleCheckIcon class="size-4" />
     </template>
     <template #info-icon>
-      <IconPlaceholder lucide="InfoIcon" tabler="IconInfoCircle" hugeicons="InformationCircleIcon" phosphor="InfoIcon" remixicon="RiInformationLine" class="size-4" />
+      <InfoIcon class="size-4" />
     </template>
     <template #warning-icon>
-      <IconPlaceholder lucide="TriangleAlertIcon" tabler="IconAlertTriangle" hugeicons="Alert02Icon" phosphor="WarningIcon" remixicon="RiAlertLine" class="size-4" />
+      <TriangleAlertIcon class="size-4" />
     </template>
     <template #error-icon>
-      <IconPlaceholder lucide="OctagonXIcon" tabler="IconOctagonOff" hugeicons="CancelCircleIcon" phosphor="XCircleIcon" remixicon="RiCloseCircleLine" class="size-4" />
+      <OctagonXIcon class="size-4" />
     </template>
     <template #loading-icon>
       <div>
-        <IconPlaceholder lucide="Loader2Icon" tabler="IconLoader2" hugeicons="Loading03Icon" phosphor="SpinnerGapIcon" remixicon="RiLoader4Line" class="size-4 animate-spin" />
+        <Loader2Icon class="size-4 animate-spin" />
       </div>
     </template>
     <template #close-icon>
-      <IconPlaceholder lucide="XIcon" tabler="IconX" hugeicons="Cancel01Icon" phosphor="XIcon" remixicon="RiCloseLine" class="size-4" />
+      <XIcon class="size-4" />
     </template>
   </Sonner>
 </template>

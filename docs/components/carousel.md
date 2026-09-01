@@ -97,10 +97,7 @@ To set the size of the items, you can use the `basis` utility class on the `<Car
 To set the spacing between the items, we use a `pl-[VALUE]` utility on the `<CarouselItem />` and a negative `-ml-[VALUE]` on the `<CarouselContent />`.
 
 > **提示**
-  **Why:** I tried to use the `gap` property or a `grid` layout on the `
-  <CarouselContent />` but it required a lot of math and mental effort to get the
-  spacing right. I found `pl-[VALUE]` and `-ml-[VALUE]` utilities much easier to
-  use.
+  **Why:** I tried to use the `gap` property or a `grid` layout on the `<CarouselContent />` but it required a lot of math and mental effort to get the spacing right. I found `pl-[VALUE]` and `-ml-[VALUE]` utilities much easier to use.
 
 You can always adjust this in your own project if you need to.
 
