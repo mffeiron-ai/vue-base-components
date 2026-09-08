@@ -1,6 +1,6 @@
 # Data Table 数据表格
 
-<script setup>
+<script setup lang="ts">
 import type { Column } from '@tanstack/vue-table'
 import { type Task } from '../data/schema'
 import type { DataTableFeatures } from '../features'

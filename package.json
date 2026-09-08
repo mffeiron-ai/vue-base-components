@@ -70,6 +70,9 @@
     }
   },
   "scripts": {
+    "dev": "vite --config app/vite.config.ts",
+    "build": "vite build --config app/vite.config.ts",
+    "preview": "vite preview --config app/vite.config.ts",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
@@ -84,6 +87,7 @@
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.0",
+    "@vitejs/plugin-vue": "^5.2.4",
     "@types/node": "^26.2.0",
     "@types/qrcode": "^1.5.5",
     "@vueuse/core": "^13.9.0",

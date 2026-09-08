@@ -2,7 +2,6 @@
 
 <script setup>
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput, InputGroupText, InputGroupTextarea, } from '../../src/components/ui/input-group'
-import { InputGroup, InputGroupAddon, InputGroupButton } from '../../src/components/ui/input-group'
 
 const demo0 = `import {
   InputGroup,

@@ -1,11 +1,9 @@
 # Chart 图表
 
-<script setup>
-import { VisGroupedBar, VisXYContainer } from '@unovis/vue'
-import { ChartContainer, ChartTooltipContent } from '../../src/components/ui/chart'
-import type { ChartConfig } from '../../src/components/ui/chart'
-import { ChartContainer, ChartCrosshair, ChartTooltip, ChartTooltipContent, componentToString, } from '../../src/components/ui/chart'
+<script setup lang="ts">
 import { VisAxis, VisGroupedBar, VisXYContainer } from '@unovis/vue'
+import { ChartContainer, ChartCrosshair, ChartTooltip, ChartTooltipContent, componentToString } from '../../src/components/ui/chart'
+import type { ChartConfig } from '../../src/components/ui/chart'
 
 const demo0 = `import { VisGroupedBar, VisXYContainer } from '@unovis/vue'
 import { ChartContainer, ChartTooltipContent } from '@/components/ui/chart'

@@ -3,10 +3,7 @@
 <script setup>
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInset, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarRail, SidebarTrigger, } from '../../src/components/ui/sidebar'
 import AppSidebar from '@/components/AppSidebar.vue'
-import { SidebarProvider, SidebarTrigger } from '../../src/components/ui/sidebar'
-import { Sidebar, SidebarContent } from '../../src/components/ui/sidebar'
 import { Calendar, Home, Inbox, Search, Settings } from 'lucide-vue-next'
-import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem, } from '../../src/components/ui/sidebar'
 import { ref } from 'vue'
 import { useSidebar } from '../../src/components/ui/sidebar'
 

@@ -2,7 +2,6 @@
 
 <script setup>
 import { Bubble, BubbleContent, BubbleReactions } from '../../src/components/ui/bubble'
-import { Bubble, BubbleContent } from '../../src/components/ui/bubble'
 
 const demo0 = `import { Bubble, BubbleContent, BubbleReactions } from '@/components/ui/bubble'
 

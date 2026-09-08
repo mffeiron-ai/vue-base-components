@@ -1,9 +1,9 @@
 /**
  * Tailwind CSS v4 — 通过 @tailwindcss/vite 插件注入
- * 文档站的自定义样式入口
+ * 纯 Vue 文档应用的全局样式入口
  *
- * important: VitePress 有无层 (unlayered) 样式会覆盖 @layer utilities，
- *           加 important 确保 Tailwind 工具类优先级最高
+ * 由组件库的 docs/.vitepress/theme/style.css 迁移而来，
+ * 仅调整了相对路径（app/src/style.css → 组件库 ../../src/）
  * ─────────────────────────────────────────────
  */
 @import "tailwindcss";
@@ -32,46 +32,23 @@
 }
 
 /* RionStudio design-system style presets */
-@import "../../../src/styles/style-luma.css";
-@import "../../../src/styles/style-lyra.css";
-@import "../../../src/styles/style-maia.css";
-@import "../../../src/styles/style-mira.css";
-@import "../../../src/styles/style-nova.css";
-@import "../../../src/styles/style-rhea.css";
-@import "../../../src/styles/style-sera.css";
-@import "../../../src/styles/style-vega.css";
+@import "../../src/styles/style-luma.css";
+@import "../../src/styles/style-lyra.css";
+@import "../../src/styles/style-maia.css";
+@import "../../src/styles/style-mira.css";
+@import "../../src/styles/style-nova.css";
+@import "../../src/styles/style-rhea.css";
+@import "../../src/styles/style-sera.css";
+@import "../../src/styles/style-vega.css";
 
 /* 告诉 Tailwind 扫描组件库源码中的类名 */
-@source "../../../src/";
-
-/* Teleported control-panel popovers carry the style scope on their root. */
-.style-vega.cn-select-content {
-  background-color: var(--color-popover);
-  color: var(--color-popover-foreground);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-}
-
-.style-vega.cn-popover-content {
-  background-color: var(--color-popover);
-  color: var(--color-popover-foreground);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-}
-
-/* The category trigger contains a title row and description; keep its box
-   taller than the compact default button preset. */
-.style-vega .preview-category-trigger {
-  height: auto !important;
-  min-height: 68px !important;
-  align-items: stretch !important;
-  padding-block: 12px !important;
-}
+@source "../../src/";
+/* 以及文档应用自身源码中的类名 */
+@source ".";
 
 /**
- * 你的 Design Token（和组件库的 Tailwind 主题保持一致）
- * 这里以 shadcn-vue 默认主题为基础，后续可按需覆盖
+ * Design Token（和组件库的 Tailwind 主题保持一致）
+ * 以 shadcn-vue 默认主题为基础
  * ─────────────────────────────────────────────
  */
 @theme {
@@ -127,7 +104,6 @@
   --radius-xl: 0.75rem;
   --radius-2xl: 1rem;
   --radius-3xl: 1.5rem;
-
 }
 
 /* 暗色模式 */

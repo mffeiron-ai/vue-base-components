@@ -18,6 +18,8 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.vue",
+    "app/**/*.ts",
+    "app/**/*.vue",
     "docs/**/*.ts",
     "docs/**/*.vue",
     "docs/**/*.d.ts"
