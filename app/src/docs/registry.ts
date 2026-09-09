@@ -29,6 +29,12 @@ export const componentDocs: ComponentDoc[] = [
     description: '页面内固定位置的提示条，用于展示重要信息或错误状态。',
     importCode: `import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'`,
   },
+  {
+    name: 'alert-dialog',
+    title: 'Alert Dialog 警告对话框',
+    description: '模态对话框，用于需要用户确认的重要操作，打断当前流程。',
+    importCode: `import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */
