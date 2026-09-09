@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import type { AccordionTriggerProps } from "reka-ui"
+/**
+ * AccordionTriggerProps：
+ * 继承 PrimitiveProps：as / asChild。
+ * 它的全部作用 = 定义 Accordion 触发器（标题按钮）接收的 props。
+ */
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"
 import { ChevronDown } from "lucide-vue-next"
@@ -7,15 +12,28 @@ import {
   AccordionHeader,
   AccordionTrigger,
 } from "reka-ui"
+/**
+ * AccordionHeader：reka-ui 的标题容器（一般渲染为 h3）。
+ * AccordionTrigger：reka-ui 的触发器（点击切换展开/收起，自动处理
+ *   aria-expanded / aria-disabled / data-state 等）。
+ */
 import { cn } from "../../../lib/utils"
 
 const props = defineProps<AccordionTriggerProps & { class?: HTMLAttributes["class"] }>()
+// 定义组件的 props = reka-ui 的 AccordionTriggerProps，外加一个可选的 class
 
 const delegatedProps = reactiveOmit(props, "class")
+// 从 props 里剔除 class，剩下的（as / asChild...）用于透传给 AccordionTrigger
 </script>
 
 <template>
+  <!-- AccordionHeader: 标题容器，包住触发器 -->
   <AccordionHeader class="flex">
+    <!-- AccordionTrigger: 标题按钮
+     data-slot="accordion-trigger" 标识插槽，便于样式按 data-slot 定位
+     v-bind="delegatedProps" 透传 as / asChild 给 reka-ui
+     :class="..." 默认样式 + 合并用户传入的 props.class
+     默认插槽放标题文本，name="icon" 插槽放箭头图标（默认 ChevronDown） -->
     <AccordionTrigger
       data-slot="accordion-trigger"
       v-bind="delegatedProps"

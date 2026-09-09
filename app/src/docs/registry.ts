@@ -61,6 +61,12 @@ export const componentDocs: ComponentDoc[] = [
       { name: 'class', type: 'string', description: '追加 / 覆盖类名' },
     ],
   },
+  {
+    name: 'accordion',
+    title: 'Accordion 手风琴',
+    description: '垂直堆叠的可折叠区块，点击标题展开 / 收起对应内容。',
+    importCode: `import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */

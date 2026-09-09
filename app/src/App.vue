@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { Moon, Sun } from 'lucide-vue-next'
 import { useDark, useToggle } from '@vueuse/core'
@@ -9,6 +10,8 @@ const route = useRoute()
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
 
+const isFullPage = computed(() => route.meta.fullPage === true)
+
 const navLinks = [
   { name: '首页', to: '/' },
   { name: '组件', to: `/components/${componentDocs[0]?.name ?? 'button'}` },
@@ -16,7 +19,11 @@ const navLinks = [
 </script>
 
 <template>
-  <div class="flex min-h-screen bg-background text-foreground">
+  <!-- 全屏页（如落地页）跳过 app 外壳 -->
+  <RouterView v-if="isFullPage" />
+
+  <!-- 常规文档页：侧边栏 + 顶栏外壳 -->
+  <div v-else class="flex min-h-screen bg-background text-foreground">
     <!-- 侧边栏 -->
     <aside class="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-border lg:flex">
       <a href="/" class="flex items-center gap-2 border-b border-border px-5 h-14">
