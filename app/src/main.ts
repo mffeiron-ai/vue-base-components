@@ -2,8 +2,6 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import './style.css'
-
-// 默认启用组件库 vega 主题切面（与 docs 一致）
-document.documentElement.classList.add('style-vega')
+// 全局风格切面（style-* class 与圆角档位）由 lib/style.ts 统一管理
 
 createApp(App).use(router).mount('#app')

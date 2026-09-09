@@ -85,19 +85,19 @@ const features = [
         </div>
 
         <!-- 组件展示卡片 -->
-        <div class="hero-enter mt-16 overflow-hidden rounded-2xl border border-border bg-card/80 shadow-2xl shadow-black/10 backdrop-blur" style="animation-delay: 0.4s">
-          <div class="border-b border-border px-6 py-3 text-left text-xs font-medium text-muted-foreground">
-            Live Preview
-          </div>
-          <div class="flex flex-wrap items-center justify-center gap-3 p-8">
+        <Card class="hero-enter mt-16 overflow-hidden border-border bg-card/80 shadow-2xl shadow-black/10 backdrop-blur" style="animation-delay: 0.4s">
+          <CardHeader class="border-b border-border px-6 py-3">
+            <CardTitle class="text-left text-xs font-medium text-muted-foreground">Live Preview</CardTitle>
+          </CardHeader>
+          <CardContent class="flex flex-wrap items-center justify-center gap-3 p-8">
             <Button>主要按钮</Button>
             <Button variant="secondary">次要按钮</Button>
             <Button variant="destructive">危险按钮</Button>
             <Button variant="outline">描边按钮</Button>
             <Button variant="ghost">幽灵按钮</Button>
             <Button variant="link">链接按钮</Button>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     </section>
 

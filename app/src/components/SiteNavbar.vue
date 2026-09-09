@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { Github, Menu, Moon, Palette, Sun, X } from 'lucide-vue-next'
+import { Github, Menu, Moon, Palette, Sun, SlidersHorizontal, X } from 'lucide-vue-next'
 import { useDark, useToggle } from '@vueuse/core'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -12,8 +12,23 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/drawer'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+} from '@/components/ui/sheet'
 import { componentDocs } from '../docs/registry'
 import { useGlobalTheme } from '../lib/theme'
+import { useGlobalStyle, STYLE_OPTIONS, LAYOUT_PRESETS, SHADOW_PRESETS, ICON_LIBRARY_OPTIONS } from '../lib/style'
 
 const route = useRoute()
 const menuState = ref(false)
@@ -33,6 +48,31 @@ const themeDrawerOpen = ref(false)
 function selectTheme(i: number) {
   setIndex(i)
   themeDrawerOpen.value = false
+}
+
+// 全局样式定制（复用 random-ui 现成面板：风格/主题/图标库/字体/圆角/阴影 + 重置/随机）
+const {
+  styleKey, layoutKey, shadowKey, iconLibrary,
+  fontSans, fontSerif, fontMono,
+  sansFontOptions, serifFontOptions, monoFontOptions,
+  effectiveLayout, effectiveShadow,
+  setStyle, setLayout, setShadow, setIconLibrary, setFonts,
+  reset, randomize,
+} = useGlobalStyle()
+const styleSheetOpen = ref(false)
+const currentStyleLabel = computed(
+  () => STYLE_OPTIONS.find(o => o.value === styleKey.value)?.label ?? '风格',
+)
+const currentLayoutLabel = computed(
+  () => LAYOUT_PRESETS.find(p => p.key === layoutKey.value)?.label ?? '跟随主题',
+)
+
+// 字体更新辅助：整份字体对象（模板用于 ...fonts 展开）
+const fonts = computed(() => ({ fontSans: fontSans.value, fontSerif: fontSerif.value, fontMono: fontMono.value }))
+
+// Select 的 update:model-value 是 AcceptableValue（可能为 null），统一归一化为 string
+function toStr(v: unknown) {
+  return v == null ? '' : String(v)
 }
 
 // 第一个组件文档（用于「UI 组件 / 开始使用」这类入口链接）
@@ -138,6 +178,12 @@ onUnmounted(() => {
 
           <!-- CTA -->
           <div class="mt-6 flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 lg:mt-0 md:w-fit">
+            <!-- 风格选择（打开右侧 Sheet） -->
+            <Button variant="ghost" size="sm" @click="styleSheetOpen = true">
+              <SlidersHorizontal class="size-4" />
+              <span class="hidden lg:inline">{{ currentStyleLabel }} · {{ currentLayoutLabel }}</span>
+            </Button>
+
             <!-- 主题选择（打开抽屉） -->
             <Button variant="ghost" size="sm" @click="themeDrawerOpen = true">
               <Palette class="size-4" />
@@ -171,7 +217,7 @@ onUnmounted(() => {
   </nav>
 
   <!-- 主题选择抽屉 -->
-  <Drawer v-model:open="themeDrawerOpen" :should-scale-background="false">
+  <Drawer v-model:open="themeDrawerOpen">
     <DrawerContent>
       <DrawerHeader>
         <DrawerTitle>选择主题</DrawerTitle>
@@ -202,4 +248,143 @@ onUnmounted(() => {
       </div>
     </DrawerContent>
   </Drawer>
+
+  <!-- 风格选择（右侧 Sheet） -->
+  <Sheet v-model:open="styleSheetOpen">
+    <SheetContent side="right" class="w-full sm:max-w-md">
+      <SheetHeader>
+        <SheetTitle>选择风格</SheetTitle>
+        <SheetDescription>风格、字体、圆角与阴影实时作用于整站。</SheetDescription>
+      </SheetHeader>
+
+      <div class="flex-1 space-y-5 overflow-y-auto px-1 pb-6">
+        <!-- 风格基础 -->
+        <div class="space-y-3">
+          <p class="text-sm font-semibold">风格基础</p>
+          <div class="grid grid-cols-1 gap-3">
+            <div class="space-y-2">
+              <label class="text-sm font-medium text-foreground/90 block">Style</label>
+              <Select :model-value="styleKey" @update:model-value="v => setStyle(toStr(v))">
+                <SelectTrigger class="w-full">
+                  <SelectValue placeholder="选择风格" />
+                </SelectTrigger>
+                <SelectContent position="popper" class="style-vega">
+                  <SelectItem v-for="style in STYLE_OPTIONS" :key="style.value" :value="style.value">
+                    {{ style.label }}
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div class="space-y-2">
+              <label class="text-sm font-medium text-foreground/90 block">主题色</label>
+              <Select :model-value="String(themeIndex)" @update:model-value="v => setIndex(Number(v))">
+                <SelectTrigger class="w-full">
+                  <SelectValue placeholder="选择主题" />
+                </SelectTrigger>
+                <SelectContent position="popper" class="style-vega">
+                  <SelectItem v-for="(theme, index) in themes" :key="theme.label + index" :value="String(index)">
+                    {{ theme.label_zh || theme.label }}
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div class="space-y-2">
+              <label class="text-sm font-medium text-foreground/90 block">图标库</label>
+              <Select :model-value="iconLibrary" @update:model-value="v => setIconLibrary(toStr(v))">
+                <SelectTrigger class="w-full">
+                  <SelectValue placeholder="选择图标库" />
+                </SelectTrigger>
+                <SelectContent position="popper" class="style-vega">
+                  <SelectItem v-for="icon in ICON_LIBRARY_OPTIONS" :key="icon.value" :value="icon.value">
+                    {{ icon.label }}
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
+
+        <!-- 字体系统 -->
+        <div class="space-y-3">
+          <p class="text-sm font-semibold">字体系统</p>
+          <div class="grid grid-cols-1 gap-3">
+            <div class="space-y-2">
+              <label class="text-sm font-medium text-foreground/90 block">正文字体</label>
+              <Select :model-value="fontSans" @update:model-value="v => setFonts({ ...fonts, fontSans: toStr(v) })">
+                <SelectTrigger class="w-full">
+                  <SelectValue placeholder="正文字体" />
+                </SelectTrigger>
+                <SelectContent position="popper" class="style-vega">
+                  <SelectItem v-for="font in sansFontOptions" :key="font" :value="font">{{ font }}</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div class="space-y-2">
+              <label class="text-sm font-medium text-foreground/90 block">标题字体</label>
+              <Select :model-value="fontSerif" @update:model-value="v => setFonts({ ...fonts, fontSerif: toStr(v) })">
+                <SelectTrigger class="w-full">
+                  <SelectValue placeholder="标题字体" />
+                </SelectTrigger>
+                <SelectContent position="popper" class="style-vega">
+                  <SelectItem v-for="font in serifFontOptions" :key="font" :value="font">{{ font }}</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div class="space-y-2">
+              <label class="text-sm font-medium text-foreground/90 block">等宽字体</label>
+              <Select :model-value="fontMono" @update:model-value="v => setFonts({ ...fonts, fontMono: toStr(v) })">
+                <SelectTrigger class="w-full">
+                  <SelectValue placeholder="等宽字体" />
+                </SelectTrigger>
+                <SelectContent position="popper" class="style-vega">
+                  <SelectItem v-for="font in monoFontOptions" :key="font" :value="font">{{ font }}</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
+
+        <!-- 细节调节 -->
+        <div class="space-y-3">
+          <p class="text-sm font-semibold">细节调节</p>
+          <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div class="space-y-2">
+              <label class="text-sm font-medium text-foreground/90 block">圆角与排版</label>
+              <Select :model-value="layoutKey" @update:model-value="v => setLayout(toStr(v))">
+                <SelectTrigger class="w-full">
+                  <SelectValue placeholder="选择排版档位" />
+                </SelectTrigger>
+                <SelectContent position="popper" class="style-vega">
+                  <SelectItem v-for="preset in LAYOUT_PRESETS" :key="preset.key" :value="preset.key">
+                    {{ preset.label }}
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div class="space-y-2">
+              <label class="text-sm font-medium text-foreground/90 block">阴影</label>
+              <Select :model-value="shadowKey" @update:model-value="v => setShadow(toStr(v))">
+                <SelectTrigger class="w-full">
+                  <SelectValue placeholder="选择阴影档位" />
+                </SelectTrigger>
+                <SelectContent position="popper" class="style-vega">
+                  <SelectItem v-for="preset in SHADOW_PRESETS" :key="preset.key" :value="preset.key">
+                    {{ preset.label }}
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
+
+        <!-- 重置 / 随机 -->
+        <div class="grid grid-cols-2 gap-3">
+          <Button variant="outline" @click="reset">重置</Button>
+          <Button variant="secondary" @click="randomize">随机</Button>
+        </div>
+      </div>
+    </SheetContent>
+  </Sheet>
 </template>
