@@ -1,16 +1,39 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { Github, Menu, Moon, Sun, X } from 'lucide-vue-next'
+import { Github, Menu, Moon, Palette, Sun, X } from 'lucide-vue-next'
 import { useDark, useToggle } from '@vueuse/core'
 import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+} from '@/components/ui/drawer'
 import { componentDocs } from '../docs/registry'
+import { useGlobalTheme } from '../lib/theme'
 
 const route = useRoute()
 const menuState = ref(false)
 const isScrolled = ref(false)
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
+
+// 全局主题（41 套色板，作用到整站）
+const { themes, index: themeIndex, setIndex } = useGlobalTheme()
+const currentThemeLabel = computed(() => {
+  const t = themes[themeIndex.value]
+  return t?.label_zh || t?.label || '主题'
+})
+
+// 主题抽屉
+const themeDrawerOpen = ref(false)
+function selectTheme(i: number) {
+  setIndex(i)
+  themeDrawerOpen.value = false
+}
 
 // 第一个组件文档（用于「UI 组件 / 开始使用」这类入口链接）
 const firstComponentLink = `/components/${componentDocs[0]?.name ?? 'accordion'}`
@@ -81,8 +104,8 @@ onUnmounted(() => {
         </div>
 
         <!-- 桌面菜单 -->
-        <div class="absolute inset-0 m-auto hidden size-fit lg:block">
-          <ul class="flex gap-8 text-sm">
+        <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center">
+          <ul class="flex min-w-0 gap-8 text-sm">
             <li v-for="item in menuItems" :key="item.name">
               <RouterLink
                 :to="item.href"
@@ -115,6 +138,12 @@ onUnmounted(() => {
 
           <!-- CTA -->
           <div class="mt-6 flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 lg:mt-0 md:w-fit">
+            <!-- 主题选择（打开抽屉） -->
+            <Button variant="ghost" size="sm" @click="themeDrawerOpen = true">
+              <Palette class="size-4" />
+              <span class="hidden lg:inline">{{ currentThemeLabel }}</span>
+            </Button>
+
             <Button variant="ghost" size="icon" aria-label="切换主题" @click="toggleDark()">
               <Sun v-if="isDark" class="size-4" />
               <Moon v-else class="size-4" />
@@ -140,4 +169,37 @@ onUnmounted(() => {
       </div>
     </div>
   </nav>
+
+  <!-- 主题选择抽屉 -->
+  <Drawer v-model:open="themeDrawerOpen" :should-scale-background="false">
+    <DrawerContent>
+      <DrawerHeader>
+        <DrawerTitle>选择主题</DrawerTitle>
+        <DrawerDescription>选择你喜欢的主题风格</DrawerDescription>
+      </DrawerHeader>
+      <div class="px-4 pb-6">
+        <div class="mb-6 flex max-h-[55vh] flex-wrap gap-2 overflow-y-auto pr-1">
+          <Badge
+            v-for="(theme, i) in themes"
+            :key="theme.label || i"
+            @click="selectTheme(i)"
+            class="cursor-pointer px-3 py-2 transition-all flex items-center gap-2"
+            :variant="i === themeIndex ? 'default' : 'secondary'"
+          >
+            <span>{{ theme.label_zh || theme.label }}</span>
+            <span class="flex gap-1">
+              <span
+                class="h-2 w-2 rounded-full"
+                :style="{ backgroundColor: theme.styles?.light?.primary || 'currentColor' }"
+              />
+              <span
+                class="h-2 w-2 rounded-full"
+                :style="{ backgroundColor: theme.styles?.dark?.primary || 'currentColor' }"
+              />
+            </span>
+          </Badge>
+        </div>
+      </div>
+    </DrawerContent>
+  </Drawer>
 </template>
