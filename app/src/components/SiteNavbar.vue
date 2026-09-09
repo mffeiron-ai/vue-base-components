@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router'
 import { Github, Menu, Moon, Sun, X } from 'lucide-vue-next'
 import { useDark, useToggle } from '@vueuse/core'
 import { Button } from '@/components/ui/button'
+import { componentDocs } from '../docs/registry'
 
 const route = useRoute()
 const menuState = ref(false)
@@ -11,10 +12,13 @@ const isScrolled = ref(false)
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
 
+// 第一个组件文档（用于「UI 组件 / 开始使用」这类入口链接）
+const firstComponentLink = `/components/${componentDocs[0]?.name ?? 'accordion'}`
+
 // 全站统一导航项
 const menuItems = [
   { name: '首页', href: '/' },
-  { name: 'UI 组件', href: '/components/button' },
+  { name: 'UI 组件', href: firstComponentLink },
   { name: '业务组件', href: '/business/basetable' },
   { name: '主题预览', href: '/playground' },
 ]
@@ -126,7 +130,7 @@ onUnmounted(() => {
                 <span>主题预览</span>
               </Button>
             </RouterLink>
-            <RouterLink :to="'/components/button'" :class="isScrolled && 'lg:inline-flex' || 'hidden'">
+            <RouterLink :to="firstComponentLink" :class="isScrolled && 'lg:inline-flex' || 'hidden'">
               <Button size="sm">
                 <span>开始使用</span>
               </Button>

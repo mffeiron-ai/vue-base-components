@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import type { Component } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 import LandingPage from './pages/LandingPage.vue'
-import ComponentPage from './pages/ComponentPage.vue'
 import PlaceholderPage from './pages/PlaceholderPage.vue'
 import { componentDocs } from './docs/registry'
 
@@ -20,13 +19,11 @@ for (const [path, mod] of Object.entries(docModules)) {
   docComponents[kebab] = mod.default
 }
 
-// 由组件文档数据自动生成路由：/components/:name
-// 存在独立文档组件时优先使用，否则回退到数据驱动页
+// 由组件文档数据自动生成路由：/components/:name（每个组件都是独立 SFC 文档）
 const componentRoutes: RouteRecordRaw[] = componentDocs.map((doc) => ({
   path: `/components/${doc.name}`,
   name: `component-${doc.name}`,
-  component: docComponents[doc.name] ?? ComponentPage,
-  meta: { doc },
+  component: docComponents[doc.name],
 }))
 
 const routes: RouteRecordRaw[] = [

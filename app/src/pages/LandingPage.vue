@@ -4,6 +4,10 @@ import { ArrowRight, Sparkles, Boxes, Palette, Accessibility, Type, Rocket, Bloc
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { componentDocs } from '../docs/registry'
+
+// 第一个组件文档（用于「浏览组件」这类入口链接）
+const firstComponentLink = `/components/${componentDocs[0]?.name ?? 'accordion'}`
 
 // ── 特性数据 ────────────────────────────────────────
 const features = [
@@ -73,7 +77,7 @@ const features = [
               <ArrowRight class="size-4" />
             </Button>
           </RouterLink>
-          <RouterLink to="/components/button">
+          <RouterLink :to="firstComponentLink">
             <Button size="lg" variant="outline" class="w-full sm:w-auto">
               浏览组件
             </Button>
@@ -131,7 +135,7 @@ const features = [
           <RouterLink to="/playground">
             <Button size="lg">🎨 打开主题预览</Button>
           </RouterLink>
-          <RouterLink to="/components/button">
+          <RouterLink :to="firstComponentLink">
             <Button size="lg" variant="outline">📚 查看组件文档</Button>
           </RouterLink>
         </div>
@@ -143,7 +147,7 @@ const features = [
       <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-sm text-muted-foreground sm:flex-row">
         <p>© 2026 RionStudio · MIT License</p>
         <div class="flex items-center gap-6">
-          <RouterLink to="/components/button" class="hover:text-foreground">组件</RouterLink>
+          <RouterLink :to="firstComponentLink" class="hover:text-foreground">组件</RouterLink>
           <RouterLink to="/playground" class="hover:text-foreground">主题预览</RouterLink>
           <a href="https://github.com/mffeiron-ai/vue-base-components" target="_blank" class="hover:text-foreground">GitHub</a>
         </div>
