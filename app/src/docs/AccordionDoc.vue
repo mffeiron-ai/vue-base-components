@@ -45,7 +45,7 @@ const propsRows = [
       <h2 class="text-xl font-semibold">多选</h2>
       <p class="mt-2 text-sm text-muted-foreground">`type="multiple"` 可同时展开多个面板，`default-value` 传数组。</p>
       <div class="mt-4 rounded-xl border border-border p-4">
-        <Accordion type="multiple" default-value="['a','b']" class="w-full border-t">
+        <Accordion type="multiple" :default-value="['a','b']" class="w-full border-t">
           <AccordionItem value="a">
             <AccordionTrigger>支持多选</AccordionTrigger>
             <AccordionContent>设置 type="multiple" 可同时展开多个面板。</AccordionContent>

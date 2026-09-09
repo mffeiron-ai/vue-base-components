@@ -145,3 +145,17 @@
   --color-sidebar-border: hsl(217.2 32.6% 17.5%);
   --color-sidebar-ring: hsl(212.7 26.8% 83.9%);
 }
+
+/* ── 路由页面切换动画（类似 landing hero-enter 的淡入上移） ── */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(24px);
+}
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-16px);
+}
