@@ -145,7 +145,19 @@ const features = [
     <!-- ═══════════ Footer ═══════════ -->
     <footer class="hero-enter border-t border-border px-6 py-8" style="animation-delay: 1.4s">
       <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-sm text-muted-foreground sm:flex-row">
-        <p>© 2026 RionStudio · MIT License</p>
+        <div class="flex flex-col items-center gap-1 sm:items-start">
+          <p>© 2026 RionStudio · MIT License</p>
+          <p>
+            UI 组件基于
+            <a
+              href="https://github.com/unovue/shadcn-vue"
+              target="_blank"
+              rel="noreferrer"
+              class="underline underline-offset-4 hover:text-foreground"
+            >shadcn-vue</a>
+            构建，特此声明并致谢
+          </p>
+        </div>
         <div class="flex items-center gap-6">
           <RouterLink :to="firstComponentLink" class="hover:text-foreground">组件</RouterLink>
           <RouterLink to="/playground" class="hover:text-foreground">主题预览</RouterLink>

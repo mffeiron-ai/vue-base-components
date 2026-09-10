@@ -8,6 +8,11 @@ import path from 'path'
 export default defineConfig({
   root: __dirname,
 
+  // 部署到 GitHub Pages 项目页时，站点在 https://<owner>.github.io/<repo>/ 这个子路径下，
+  // 资源前缀必须跟着变，否则 JS/CSS 会 404；
+  // 本地开发/预览默认根路径，CI 里由 workflow 传 VITE_BASE_PATH 覆盖。
+  base: process.env.VITE_BASE_PATH || '/',
+
   plugins: [vue(), tailwindcss()],
 
   resolve: {

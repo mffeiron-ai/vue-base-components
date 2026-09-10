@@ -2,6 +2,23 @@
 
 Vue 3 + Tailwind CSS + shadcn-vue 共享组件库，为多个项目提供统一的业务组件和 UI 组件。
 
+## 来源声明（Credits）
+
+> 本项目的 UI 组件部分是**照着 [shadcn-vue](https://github.com/unovue/shadcn-vue) 做的** —— 源码、API 设计、样式预设与文档结构均移植自该项目，特此声明并致谢。
+
+| 来源项目 | 在本仓库中的对应内容 | 许可证 |
+|---------|------------------|---------|
+| [unovue/shadcn-vue](https://github.com/unovue/shadcn-vue) | `src/components/ui/**`、`src/styles/reka-*/**`（8 套设计版组件）、`src/styles/style-*.css`（8 套风格预设）、`src/styles/utilities.css`、`registry/**`、`shadcn-docs/**` | MIT |
+| [shadcn-ui/ui](https://github.com/shadcn-ui/ui) | shadcn-vue 的上游设计体系与文档来源 | MIT |
+| [unovue/reka-ui](https://github.com/unovue/reka-ui) | 所有无头（headless）无障碍组件基元 | MIT |
+| [tailwindlabs/tailwindcss](https://github.com/tailwindlabs/tailwindcss) | 样式引擎（Tailwind CSS 4） | MIT |
+
+本项目在此基础上做的部分：接入自有设计令牌与主题系统、业务组件（`BaseTable` 等）、随机 UI 生成器、纯 Vue 文档站应用（`app/`），以及若干 bug 修复（见 `git log`）。
+
+**本项目与 shadcn / shadcn-vue 官方无任何隶属、赞助或背书关系**，相关名称与商标归各自所有者。
+
+许可证：[MIT](./LICENSE)（包含上述项目的衍生代码，其原始版权声明同样适用，详见 LICENSE 里的第三方来源声明）。
+
 ## 技术栈
 
 | 类别 | 技术 |
@@ -149,6 +166,51 @@ git push --tags
 # 各项目更新
 npm update vue-base-components
 ```
+
+## 文档站（app/）与部署
+
+文档站是 `app/` 下的纯 Vue 应用（Vite + vue-router），本地命令：
+
+```bash
+npm run dev      # http://localhost:5174
+npm run build    # 产物在 app/dist/
+npm run preview  # 预览构建产物
+```
+
+> `docs/` 里的 VitePress 站点是历史产物，已被 `app/` 取代。VitePress 相关命令（`docs:dev` 等）仍可用，但不再参与部署。
+
+### 部署到 GitHub Pages
+
+工作流已就绪：`.github/workflows/deploy-pages.yml`（推送到 `master` 且改动 `app/**`、`src/**`、`package*.json` 时自动构建并发布）。
+
+启用步骤（只需做一次）：
+
+0. 仓库可见性设为 **Public**（Pages 免费计划不支持私有仓库）
+1. **Settings → Pages → Build and deployment → Source** 选择 **GitHub Actions**
+2. 推送到 `master`，或在 **Actions → Deploy Docs App to GitHub Pages → Run workflow** 手动触发
+
+发布地址：`https://mffeiron-ai.github.io/vue-base-components/`
+
+> ℹ️ GitHub Pages 在**免费计划下只支持公开仓库**，因此本仓库需保持 **public**。
+> 若以后要改回私有，得升级到 Pro/Team/Enterprise，或改用下面的其他托管。
+
+### 换用其他托管（支持私有仓库、免费）
+
+三者都不需要改代码 —— `VITE_BASE_PATH` 不设置时 `base` 默认是 `/`（根路径部署）：
+
+| 平台 | 构建命令 | 输出目录 |
+|------|----------|----------|
+| Cloudflare Pages | `npm run build` | `app/dist` |
+| Vercel | `npm run build` | `app/dist` |
+| Netlify | `npm run build` | `app/dist` |
+
+根路径部署不需要 `404.html` 回退（这些平台都有 SPA rewrite 配置项）。
+
+### 部署相关的两个关键点（改代码时注意）
+
+- **`base` 由环境变量驱动**：`app/vite.config.ts` 里 `base: process.env.VITE_BASE_PATH || '/'`。部署在子路径（GitHub Pages 项目页）必须传 `/<repo>/`，否则 JS/CSS 全 404。
+- **路由基路径跟着 base 走**：`app/src/router.ts` 用 `createWebHistory(import.meta.env.BASE_URL)`，不要改回硬编码 `'/'`。
+- **前端路由刷新**：工作流会把 `index.html` 复制成 `404.html` 兜住深链接（如 `/components/button` 直接刷新/分享时状态码是 404，但页面能正常渲染）。想彻底避免 404 状态码，可改用 `createWebHashHistory()`（URL 会变成 `/#/components/button`）。
 
 ## 注意事项 / 风险
 

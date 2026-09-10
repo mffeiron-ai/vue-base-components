@@ -42,6 +42,9 @@ const routes: RouteRecordRaw[] = [
 ]
 
 export default createRouter({
-  history: createWebHistory(),
+  // 用 import.meta.env.BASE_URL 而不是硬编码 '/'：
+  // 部署到子路径（如 GitHub Pages 的 /vue-base-components/）时，
+  // 路由的基准路径必须和 Vite 的 base 保持一致，否则首屏 path 匹配不上。
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 })

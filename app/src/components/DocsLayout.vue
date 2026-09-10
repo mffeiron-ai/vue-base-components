@@ -39,7 +39,16 @@ const isFullPage = computed(() => route.meta.fullPage === true)
         </nav>
 
         <div class="border-t border-border p-4 text-xs text-muted-foreground">
-          {{ componentDocs.length }} 个组件 · 纯 Vue 渲染
+          <p>{{ componentDocs.length }} 个组件 · 纯 Vue 渲染</p>
+          <p class="mt-1">
+            UI 组件基于
+            <a
+              href="https://github.com/unovue/shadcn-vue"
+              target="_blank"
+              rel="noreferrer"
+              class="underline underline-offset-4 hover:text-foreground"
+            >shadcn-vue</a>
+          </p>
         </div>
       </aside>
 

@@ -1,0 +1,71 @@
+name: Deploy Docs App to GitHub Pages
+
+# 部署对象：app/ 这个纯 Vue 文档应用（`npm run build` → app/dist）
+# 旧的 VitePress 站点已由该应用取代，不再单独部署（一个仓库只能有一个 Pages 站点）
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'app/**'
+      - 'src/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/deploy-pages.yml'
+  # 支持在 Actions 页面手动触发
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同一时间只跑一个部署，不取消进行中的（避免部署到一半被打断）
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Build docs app
+        # 项目页地址形如 https://<owner>.github.io/<repo>/，
+        # 因此 Vite 的 base 必须是 /<repo>/（默认值 '/' 是给根路径/自定义域名用的）。
+        # 若以后绑定自定义域名并部署在根路径，把这个值改成 / 即可。
+        env:
+          VITE_BASE_PATH: /vue-base-components/
+        run: npm run build
+
+      - name: SPA fallback
+        # GitHub Pages 对不存在的路径会直接返回 404，
+        # 复制一份 index.html 作为 404 页，前端路由（/components/button 等）刷新才不会白屏
+        run: cp app/dist/index.html app/dist/404.html
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: app/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
