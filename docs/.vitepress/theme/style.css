@@ -22,14 +22,8 @@
 @custom-variant data-horizontal (&[data-orientation="horizontal"]);
 @custom-variant data-vertical (&[data-orientation="vertical"]);
 
-@utility no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
+/* 组件库共享工具类（no-scrollbar / scrollbar-none / scroll-fade-x / shimmer） */
+@import "../../../src/styles/utilities.css";
 
 /* RionStudio design-system style presets */
 @import "../../../src/styles/style-luma.css";

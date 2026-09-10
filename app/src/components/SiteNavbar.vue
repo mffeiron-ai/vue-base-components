@@ -78,12 +78,12 @@ function toStr(v: unknown) {
 // 第一个组件文档（用于「UI 组件 / 开始使用」这类入口链接）
 const firstComponentLink = `/components/${componentDocs[0]?.name ?? 'accordion'}`
 
-// 全站统一导航项
+// 全站统一导航项（short：导航收窄时显示的短标签）
 const menuItems = [
-  { name: '首页', href: '/' },
-  { name: 'UI 组件', href: firstComponentLink },
-  { name: '业务组件', href: '/business/basetable' },
-  { name: '主题预览', href: '/playground' },
+  { name: '首页', short: '首页', href: '/' },
+  { name: 'UI 组件', short: '组件', href: firstComponentLink },
+  { name: '业务组件', short: '业务', href: '/business/basetable' },
+  { name: '主题预览', short: '主题', href: '/playground' },
 ]
 
 function isActive(href: string) {
@@ -118,8 +118,8 @@ onUnmounted(() => {
         'mx-auto px-6 duration-300 lg:px-12',
         'transition-[max-width,background-color,backdrop-filter,box-shadow]',
         isScrolled
-          ? 'bg-background/50 max-w-4xl rounded-2xl border border-border shadow-lg shadow-black/5 backdrop-blur-lg lg:px-5'
-          : 'max-w-6xl',
+          ? 'bg-background/50 max-w-5xl rounded-2xl border border-border shadow-lg shadow-black/5 backdrop-blur-lg lg:px-5'
+          : 'max-w-7xl',
       ]"
     >
       <div class="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-3">
@@ -143,16 +143,16 @@ onUnmounted(() => {
           </button>
         </div>
 
-        <!-- 桌面菜单 -->
+        <!-- 桌面菜单（导航收窄时用短标签，避免文字被挤成竖排） -->
         <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center">
-          <ul class="flex min-w-0 gap-8 text-sm">
+          <ul class="flex gap-8 text-sm">
             <li v-for="item in menuItems" :key="item.name">
               <RouterLink
                 :to="item.href"
-                class="block transition-all duration-150 hover:font-semibold hover:text-accent-foreground"
+                class="block whitespace-nowrap transition-all duration-150 hover:font-semibold hover:text-accent-foreground"
                 :class="isActive(item.href) ? 'font-semibold text-accent-foreground' : 'text-muted-foreground'"
               >
-                {{ item.name }}
+                {{ isScrolled ? item.short : item.name }}
               </RouterLink>
             </li>
           </ul>

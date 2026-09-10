@@ -35,6 +35,18 @@ export const componentDocs: ComponentDoc[] = [
     description: '模态对话框，用于需要用户确认的重要操作，打断当前流程。',
     importCode: `import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog'`,
   },
+  {
+    name: 'aspect-ratio',
+    title: 'Aspect Ratio 宽高比',
+    description: '按指定比例维持内容尺寸，常用于图片、视频、地图等媒体容器。',
+    importCode: `import { AspectRatio } from '@/components/ui/aspect-ratio'`,
+  },
+  {
+    name: 'attachment',
+    title: 'Attachment 附件',
+    description: '展示文件或图片附件，含媒体、名称、元信息、上传状态与操作按钮。',
+    importCode: `import { Attachment, AttachmentAction, AttachmentActions, AttachmentContent, AttachmentDescription, AttachmentGroup, AttachmentMedia, AttachmentTitle, AttachmentTrigger } from '@/components/ui/attachment'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */

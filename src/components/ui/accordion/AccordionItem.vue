@@ -40,7 +40,7 @@ const forwardedProps = useForwardProps(delegatedProps)
     v-slot="slotProps"
     data-slot="accordion-item"
     v-bind="forwardedProps"
-    :class="cn('border-b last:border-b-0', props.class)"
+    :class="cn('border-input last:border-b-0', props.class)"
   >
     <!-- 把 AccordionItem 的 slot scope（open）透传给使用方 -->
     <slot v-bind="slotProps" />
