@@ -140,6 +140,51 @@
   --color-sidebar-ring: hsl(212.7 26.8% 83.9%);
 }
 
+/**
+ * shadcn-vue 标准 token 别名
+ * ─────────────────────────────────────────────
+ * 组件库中有一部分源码是从上游 shadcn 直接迁移的，会直接引用 `--primary`、
+ * `--muted`、`--foreground` 这类标准 token 名（例如 bubble 的 tinted 变体、
+ * sonner 的 --normal-bg、StyleOverview 的色卡），而本项目主题只定义了
+ * `--color-*` 命名。这里做一层别名转发，让两种命名都能解析；
+ * 值是 var() 引用，因此仍然跟随主题切换与暗色模式动态变化。
+ */
+:root {
+  --background: var(--color-background);
+  --foreground: var(--color-foreground);
+
+  --card: var(--color-card);
+  --card-foreground: var(--color-card-foreground);
+
+  --popover: var(--color-popover);
+  --popover-foreground: var(--color-popover-foreground);
+
+  --primary: var(--color-primary);
+  --primary-foreground: var(--color-primary-foreground);
+
+  --secondary: var(--color-secondary);
+  --secondary-foreground: var(--color-secondary-foreground);
+
+  --muted: var(--color-muted);
+  --muted-foreground: var(--color-muted-foreground);
+
+  --accent: var(--color-accent);
+  --accent-foreground: var(--color-accent-foreground);
+
+  --destructive: var(--color-destructive);
+  --destructive-foreground: var(--color-destructive-foreground);
+
+  --border: var(--color-border);
+  --input: var(--color-input);
+  --ring: var(--color-ring);
+
+  --chart-1: var(--color-chart-1);
+  --chart-2: var(--color-chart-2);
+  --chart-3: var(--color-chart-3);
+  --chart-4: var(--color-chart-4);
+  --chart-5: var(--color-chart-5);
+}
+
 /* ── 路由页面切换动画（类似 landing hero-enter 的淡入上移） ── */
 .page-enter-active,
 .page-leave-active {

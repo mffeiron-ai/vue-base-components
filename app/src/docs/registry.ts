@@ -47,6 +47,42 @@ export const componentDocs: ComponentDoc[] = [
     description: '展示文件或图片附件，含媒体、名称、元信息、上传状态与操作按钮。',
     importCode: `import { Attachment, AttachmentAction, AttachmentActions, AttachmentContent, AttachmentDescription, AttachmentGroup, AttachmentMedia, AttachmentTitle, AttachmentTrigger } from '@/components/ui/attachment'`,
   },
+  {
+    name: 'avatar',
+    title: 'Avatar 头像',
+    description: '用图片表示用户，图片缺失或加载失败时自动回退到兜底内容。',
+    importCode: `import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'`,
+  },
+  {
+    name: 'badge',
+    title: 'Badge 徽标',
+    description: '用于展示状态、分类或计数的短标签。',
+    importCode: `import { Badge } from '@/components/ui/badge'`,
+  },
+  {
+    name: 'breadcrumb',
+    title: 'Breadcrumb 面包屑',
+    description: '用层级链接展示当前页面在站点结构中的位置。',
+    importCode: `import { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb'`,
+  },
+  {
+    name: 'bubble',
+    title: 'Bubble 气泡',
+    description: '对话场景中的消息气泡，支持变体、左右对齐、分组与反应。',
+    importCode: `import { Bubble, BubbleContent, BubbleGroup, BubbleReactions } from '@/components/ui/bubble'`,
+  },
+  {
+    name: 'button',
+    title: 'Button 按钮',
+    description: '触发操作的基础控件，支持 6 种变体、6 种尺寸、图标、加载态与 as-child 链接。',
+    importCode: `import { Button } from '@/components/ui/button'`,
+  },
+  {
+    name: 'button-group',
+    title: 'Button Group 按钮组',
+    description: '把相关按钮（也可混入 Input / Select / Dropdown）拼成整体，自动合并接缝圆角与边框。',
+    importCode: `import { ButtonGroup, ButtonGroupSeparator, ButtonGroupText } from '@/components/ui/button-group'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */
