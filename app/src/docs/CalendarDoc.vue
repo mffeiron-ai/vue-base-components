@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { CalendarDate, getLocalTimeZone, today } from '@internationalized/date'
+import { ChevronsLeft, ChevronsRight } from 'lucide-vue-next'
+import type { PageAnimationTypes } from '@/components/ui/calendar'
 import { Calendar } from '@/components/ui/calendar'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
 const tz = getLocalTimeZone()
 const todayDate = today(tz)
@@ -20,11 +23,22 @@ const isUnavailable = (d: any) => d.day % 2 === 0
 
 const fmt = (d: any) => (d ? `${d.year}-${String(d.month).padStart(2, '0')}-${String(d.day).padStart(2, '0')}` : '(未选择)')
 
+// 换页动画示例：用下拉切换 page-animation
+const anim = ref<PageAnimationTypes>('slide')
+const animOptions: Array<{ value: NonNullable<PageAnimationTypes>, label: string }> = [
+  { value: 'slide', label: '滑入 slide' },
+  { value: 'fade', label: '淡入 fade' },
+  { value: 'zoom', label: '缩放 zoom' },
+  { value: 'flip', label: '翻转 flip' },
+  { value: 'none', label: '无动画 none' },
+]
+
 const rows = [
   { name: 'v-model', type: 'DateValue | null', def: '—', desc: '选中的日期（受控）；类型来自 @internationalized/date，如 new CalendarDate(2026, 9, 11)' },
   { name: 'default-value', type: 'DateValue', def: '—', desc: '非受控时的初始选中日期' },
   { name: 'placeholder', type: 'DateValue', def: '今天', desc: '「当前显示哪个月」（v-model:placeholder 可受控）' },
   { name: 'layout', type: "'month-and-year' | 'month-only' | 'year-only'", def: '—', desc: '标题区改成下拉；不传则显示纯文本标题' },
+  { name: 'page-animation', type: "'slide' | 'fade' | 'zoom' | 'flip' | 'none'", def: "'slide'", desc: '换月/翻页时月份网格的动画，默认滑入；slide 会根据翻页方向自动决定从哪边滑入，传 none 关掉动画' },
   { name: 'year-range', type: 'DateValue[]', def: '自动推算', desc: '自定义年份下拉的可选年份；不传则按 min/max（或当前月份）前后推 100 / 10 年' },
   { name: 'min-value / max-value', type: 'DateValue', def: '—', desc: '可选日期范围；超出范围的格子会置灰不可点' },
   { name: 'is-date-unavailable', type: '(date) => boolean', def: '—', desc: '自定义「哪些日期不可选」，返回 true 的格子带删除线' },
@@ -83,7 +97,7 @@ const slots = [
         <CardTitle class="text-xl font-semibold">标题下拉（layout）</CardTitle>
         <CardDescription>
           用 `layout` 把标题变成下拉：`month-and-year` 月份+年份都可选、`month-only` 只选月份、`year-only` 只选年份。
-          外观是文本，底层是原生 select —— 所以键盘和移动端都能正常用。
+          标题本身就是项目自己的 Select（触发器去掉了边框与底色，所以看上去就是标题文字），点开才是下拉列表，键盘和移动端都能正常用。
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -119,6 +133,36 @@ const slots = [
           <p class="mb-2 text-sm font-medium">number-of-months="2" + paged-navigation</p>
           <Calendar :number-of-months="2" paged-navigation class="rounded-md border border-input" />
         </div>
+      </CardContent>
+    </Card>
+
+    <!-- 换页动画 -->
+    <Card class="mt-8">
+      <CardHeader>
+        <CardTitle class="text-xl font-semibold">换页动画（page-animation）</CardTitle>
+        <CardDescription>
+          用 `page-animation` 选换月/翻页时月份网格的动画：**不传就是默认的 `slide` 滑入**（会按翻页方向自动换向）、
+          `fade` 淡入淡出、`zoom` 缩放、`flip` 3D 翻转；传 `none` 关掉动画、直接切换。
+          切下面的动画后，点日历右上的上一月 / 下一月按钮就能看到效果。
+        </CardDescription>
+      </CardHeader>
+      <CardContent class="space-y-4">
+        <div class="flex flex-wrap items-center gap-3 text-sm">
+          <span class="text-muted-foreground">动画</span>
+          <Select v-model="anim">
+            <SelectTrigger size="sm" class="w-40">
+              <SelectValue placeholder="选择动画">
+                {{ animOptions.find(a => a.value === anim)?.label }}
+              </SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem v-for="a in animOptions" :key="a.value" :value="a.value">
+                {{ a.label }}
+              </SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        <Calendar :page-animation="anim" class="rounded-md border border-input" />
       </CardContent>
     </Card>
 
@@ -186,10 +230,10 @@ const slots = [
             </div>
           </template>
           <template #calendar-prev-icon>
-            <span class="text-xs">◀◀</span>
+            <ChevronsLeft class="size-4" />
           </template>
           <template #calendar-next-icon>
-            <span class="text-xs">▶▶</span>
+            <ChevronsRight class="size-4" />
           </template>
         </Calendar>
       </CardContent>

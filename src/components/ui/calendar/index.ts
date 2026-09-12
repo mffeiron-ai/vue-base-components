@@ -14,3 +14,13 @@ export { default as CalendarPrevButton } from "./CalendarPrevButton.vue"
 
 /** 标题区形式：月+年下拉 / 仅月下拉 / 仅年下拉；不传则为纯文本标题 */
 export type LayoutTypes = "month-and-year" | "month-only" | "year-only" | undefined
+
+/**
+ * 换页（换月/翻页）动画，**不传默认滑入（slide）**：
+ *  - slide：横向滑入滑出（按翻页方向自动换向）
+ *  - fade：淡入淡出
+ *  - zoom：缩放
+ *  - flip：3D 翻转
+ * 传 none 关掉动画，直接切换（此时网格不会卸载重建）
+ */
+export type PageAnimationTypes = "none" | "slide" | "fade" | "zoom" | "flip" | undefined
