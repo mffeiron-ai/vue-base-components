@@ -8,7 +8,7 @@ Vue 3 + Tailwind CSS + shadcn-vue 共享组件库，为多个项目提供统一�
 
 | 来源项目 | 在本仓库中的对应内容 | 许可证 |
 |---------|------------------|---------|
-| [unovue/shadcn-vue](https://github.com/unovue/shadcn-vue) | `src/components/ui/**`、`src/styles/reka-*/**`（8 套设计版组件）、`src/styles/style-*.css`（8 套风格预设）、`src/styles/utilities.css`、`registry/**`、`shadcn-docs/**` | MIT |
+| [unovue/shadcn-vue](https://github.com/unovue/shadcn-vue) | `src/components/ui/**`（唯一组件源）、`src/styles/style-*.css`（8 套风格预设）、`src/styles/utilities.css`、`registry/**`、`shadcn-docs/**` | MIT |
 | [shadcn-ui/ui](https://github.com/shadcn-ui/ui) | shadcn-vue 的上游设计体系与文档来源 | MIT |
 | [unovue/reka-ui](https://github.com/unovue/reka-ui) | 所有无头（headless）无障碍组件基元 | MIT |
 | [tailwindlabs/tailwindcss](https://github.com/tailwindlabs/tailwindcss) | 样式引擎（Tailwind CSS 4） | MIT |

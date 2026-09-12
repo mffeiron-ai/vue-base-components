@@ -56,7 +56,7 @@ const slots = [
         <CardDescription>不传任何 props 就是「今天所在月」，点击日期即可选择。</CardDescription>
       </CardHeader>
       <CardContent>
-        <Calendar class="rounded-md border" />
+        <Calendar class="rounded-md border border-input" />
       </CardContent>
     </Card>
 
@@ -73,7 +73,7 @@ const slots = [
           <Button variant="outline" size="sm" @click="picked = today(getLocalTimeZone())">回到今天</Button>
           <Button variant="ghost" size="sm" @click="picked = null">清空</Button>
         </div>
-        <Calendar v-model="picked" class="rounded-md border" />
+        <Calendar v-model="picked" class="rounded-md border border-input" />
       </CardContent>
     </Card>
 
@@ -90,15 +90,15 @@ const slots = [
         <div class="flex flex-wrap gap-6">
           <div class="space-y-2">
             <p class="text-sm font-medium">month-and-year</p>
-            <Calendar layout="month-and-year" class="rounded-md border" />
+            <Calendar layout="month-and-year" class="rounded-md border border-input" />
           </div>
           <div class="space-y-2">
             <p class="text-sm font-medium">month-only</p>
-            <Calendar layout="month-only" class="rounded-md border" />
+            <Calendar layout="month-only" class="rounded-md border border-input" />
           </div>
           <div class="space-y-2">
             <p class="text-sm font-medium">year-only</p>
-            <Calendar layout="year-only" class="rounded-md border" />
+            <Calendar layout="year-only" class="rounded-md border border-input" />
           </div>
         </div>
       </CardContent>
@@ -113,11 +113,11 @@ const slots = [
       <CardContent class="space-y-6">
         <div>
           <p class="mb-2 text-sm font-medium">number-of-months="2"</p>
-          <Calendar :number-of-months="2" class="rounded-md border" />
+          <Calendar :number-of-months="2" class="rounded-md border border-input" />
         </div>
         <div>
           <p class="mb-2 text-sm font-medium">number-of-months="2" + paged-navigation</p>
-          <Calendar :number-of-months="2" paged-navigation class="rounded-md border" />
+          <Calendar :number-of-months="2" paged-navigation class="rounded-md border border-input" />
         </div>
       </CardContent>
     </Card>
@@ -135,11 +135,11 @@ const slots = [
         <div class="flex flex-wrap gap-6">
           <div class="space-y-2">
             <p class="text-sm font-medium">本月 5 号 ~ 25 号可选</p>
-            <Calendar :min-value="minDate" :max-value="maxDate" class="rounded-md border" />
+            <Calendar :min-value="minDate" :max-value="maxDate" class="rounded-md border border-input" />
           </div>
           <div class="space-y-2">
             <p class="text-sm font-medium">偶数日不可选</p>
-            <Calendar :is-date-unavailable="isUnavailable" class="rounded-md border" />
+            <Calendar :is-date-unavailable="isUnavailable" class="rounded-md border border-input" />
           </div>
         </div>
       </CardContent>
@@ -157,11 +157,11 @@ const slots = [
         <div class="flex flex-wrap gap-6">
           <div class="space-y-2">
             <p class="text-sm font-medium">locale="zh-CN"</p>
-            <Calendar locale="zh-CN" class="rounded-md border" />
+            <Calendar locale="zh-CN" class="rounded-md border border-input" />
           </div>
           <div class="space-y-2">
             <p class="text-sm font-medium">zh-CN + weekday-format="short"</p>
-            <Calendar locale="zh-CN" weekday-format="short" class="rounded-md border" />
+            <Calendar locale="zh-CN" weekday-format="short" class="rounded-md border border-input" />
           </div>
         </div>
       </CardContent>
@@ -177,7 +177,7 @@ const slots = [
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Calendar class="rounded-md border **:data-[slot=calendar-cell-trigger]:size-11!">
+        <Calendar class="rounded-md border border-input **:data-[slot=calendar-cell-trigger]:size-11!">
           <template #calendar-heading="{ date, month, year }">
             <div class="flex items-center gap-1 text-sm font-medium">
               <span>选择日期：</span>

@@ -1,7 +1,11 @@
 /**
  * Registry 构建脚本
- * 扫描 src/components/ui/，生成 registry/registry.json
- * （含源码内联 + 依赖推断 + 组件间依赖）
+ *
+ * 1) 扫描 src/components/ui/（**唯一组件源**），生成 registry/registry.json
+ *    （含源码内联 + 依赖推断 + 组件间依赖）
+ * 2) 为 8 套风格生成 registry/styles/<风格>/registry.json
+ *    每份只带该风格的 CSS（style-<风格>.css + utilities.css），组件全部复用上面这一份，
+ *    即「一套组件 + 8 套 CSS」，不再为每套风格复制一份组件源码。
  *
  * 用法: node registry/build.mjs
  */
@@ -15,6 +19,8 @@ const uiDir = path.join(root, 'src', 'components', 'ui')
 const stylesDir = path.join(root, 'src', 'styles')
 const registryDir = path.join(root, 'registry')
 const outputFile = path.join(registryDir, 'registry.json')
+const SCHEMA = 'https://your-domain.example/schema.json'
+// 风格名 = src/styles/style-<短名>.css 的短名；组件本身只有一套，风格差异全在 CSS 里
 const styleNames = ['reka-luma', 'reka-lyra', 'reka-maia', 'reka-mira', 'reka-nova', 'reka-rhea', 'reka-sera', 'reka-vega']
 
 // 外部依赖白名单（UI 层实际用到的 npm 包）
@@ -52,9 +58,18 @@ function extractDeps(content) {
   while ((m = re.exec(content)) !== null) {
     const spec = m[1]
     if (spec.startsWith('.')) {
-      // 相对导入：跨 ui 组件目录 → 内部依赖；同目录 → 忽略
-      const uiMatch = spec.match(/\/ui\/([^/]+)/)
-      if (uiMatch) internal.add(uiMatch[1])
+      // 相对导入分三种：
+      //   ../button           → 跨组件目录，算组件间依赖（组件源用的就是这种写法）
+      //   ../button/index     → 同上
+      //   ../../../lib/utils  → 指向 lib（名字以 . 开头，不会命中）
+      //   ./useQuestionnaire  → 同目录，忽略
+      const sibling = spec.match(/^\.\.\/([A-Za-z][^/]*)(?:\/|$)/)
+      if (sibling) {
+        internal.add(sibling[1])
+      } else {
+        const uiMatch = spec.match(/\/ui\/([^/]+)/)
+        if (uiMatch) internal.add(uiMatch[1])
+      }
     } else if (!spec.startsWith('virtual:') && !spec.startsWith('@/lib')) {
       const pkg = spec.startsWith('@') ? spec.split('/').slice(0, 2).join('/') : spec.split('/')[0]
       external.add(pkg)
@@ -99,10 +114,43 @@ function buildRegistry(sourceDir, name) {
   }
 
   return {
-    $schema: 'https://your-domain.example/schema.json',
+    $schema: SCHEMA,
     name: '@rionstudio/ui',
     homepage: 'https://your-domain.example',
     items,
+  }
+}
+
+/**
+ * 风格包：不再复制组件源码，只带该风格的 CSS
+ *  （style-<短名>.css 负责该风格的全部视觉差异，utilities.css 是组件用到的自定义工具类）
+ */
+function buildStyleRegistry(styleName) {
+  const short = styleName.replace(/^reka-/, '')
+  const cssFiles = [`style-${short}.css`, 'utilities.css']
+    .map(f => path.join(stylesDir, f))
+    .filter(f => fs.existsSync(f))
+    .map(f => ({
+      path: `styles/${path.basename(f)}`,
+      type: 'registry:style',
+      content: readContent(f),
+    }))
+
+  return {
+    $schema: SCHEMA,
+    name: `@rionstudio/ui/${styleName}`,
+    style: styleName,
+    // 组件统一来自这份单组件源；风格文件只负责额外叠上视觉差异
+    extends: '../../registry.json',
+    items: [
+      {
+        name: styleName,
+        type: 'registry:style',
+        dependencies: [],
+        registryDependencies: [],
+        files: cssFiles,
+      },
+    ],
   }
 }
 
@@ -123,14 +171,17 @@ function printStats(label, filePath, registry) {
 function main() {
   const baseRegistry = buildRegistry(uiDir)
   writeRegistry(outputFile, baseRegistry)
-  printStats('base registry', outputFile, baseRegistry)
+  printStats('唯一组件源 registry', outputFile, baseRegistry)
+
+  // 先清掉上一轮生成结果，避免风格被移除后留下陈旧目录
+  fs.rmSync(path.join(registryDir, 'styles'), { recursive: true, force: true })
 
   for (const styleName of styleNames) {
-    const styleSource = path.join(stylesDir, styleName, 'ui')
     const styleOutput = path.join(registryDir, 'styles', styleName, 'registry.json')
-    const registry = buildRegistry(styleSource)
+    const registry = buildStyleRegistry(styleName)
     writeRegistry(styleOutput, registry)
-    printStats(styleName, styleOutput, registry)
+    const cssNames = registry.items[0].files.map(f => path.basename(f.path)).join(' + ')
+    console.log(`✅ ${styleName}: ${path.relative(root, styleOutput).replace(/\\/g, '/')} —— ${cssNames}（组件复用 registry.json）`)
   }
 }
 

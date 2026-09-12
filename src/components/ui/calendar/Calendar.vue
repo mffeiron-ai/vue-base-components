@@ -13,8 +13,8 @@ import { CalendarRoot, useDateFormatter, useForwardPropsEmits } from "reka-ui"
 import { createYear, createYearRange, toDate } from "reka-ui/date"
 import { computed, toRaw } from "vue"
 import { cn } from "../../../lib/utils"
-// 用原生 select 实现「点标题就能改月份/年份」的下拉
-import { NativeSelect, NativeSelectOption } from "../native-select"
+// 「点标题就能改月份/年份」的下拉用项目自己的 Select（reka-ui），而不是原生 select
+import { Select, SelectContent, SelectItem, SelectTrigger } from "../select"
 import { CalendarCell, CalendarCellTrigger, CalendarGrid, CalendarGridBody, CalendarGridHead, CalendarGridRow, CalendarHeadCell, CalendarHeader, CalendarHeading, CalendarNextButton, CalendarPrevButton } from "."
 
 // modelValue / defaultValue / placeholder 在 reka-ui 里是 DateValue，
@@ -68,54 +68,49 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 
 <template>
   <!--
-    月份下拉：外观看起来是普通文本（静态文字绝对定位盖在上面），底层其实是原生 select。
-    select 自身文字设为 transparent（只留右侧箭头），这样既有原生下拉的键盘/移动端可用性，
-    又能保持标题的排版效果。年份下拉同理。
+    月份下拉：用项目自己的 Select（reka-ui）替代原生 select。
+    触发器把边框/底色/阴影都去掉、只留文字和小箭头，所以看上去就是标题文字，点开才是下拉列表。
+    年份下拉同理。
   -->
   <DefineMonthTemplate v-slot="{ date }">
-    <div class="**:data-[slot=native-select-icon]:right-1">
-      <div class="relative">
-        <div class="absolute inset-0 flex h-full items-center text-sm pl-2 pointer-events-none">
-          {{ formatter.custom(toDate(date), { month: 'short' }) }}
-        </div>
-        <NativeSelect
-          class="text-sm h-8 pr-6 pl-2 text-transparent relative"
-          :model-value="date.month"
-          @change="(e: Event) => {
-            placeholder = placeholder.set({
-              month: Number((e?.target as any)?.value),
-            })
-          }"
+    <!-- SelectItem 的 value 只接受字符串，所以这里统一 String() 一下，回调里再转回数字 -->
+    <Select
+      :model-value="String(date.month)"
+      @update:model-value="(v: any) => { placeholder = placeholder.set({ month: Number(v) }) }"
+    >
+      <SelectTrigger class="h-8! gap-1! rounded-md! border-0! bg-transparent! px-2! py-0! text-sm shadow-none!">
+        {{ formatter.custom(toDate(date), { month: 'short' }) }}
+      </SelectTrigger>
+      <SelectContent class="max-h-72">
+        <SelectItem
+          v-for="month in createYear({ dateObj: date })"
+          :key="month.toString()"
+          :value="String(month.month)"
         >
-          <NativeSelectOption v-for="(month) in createYear({ dateObj: date })" :key="month.toString()" :value="month.month" :selected="date.month === month.month">
-            {{ formatter.custom(toDate(month), { month: 'short' }) }}
-          </NativeSelectOption>
-        </NativeSelect>
-      </div>
-    </div>
+          {{ formatter.custom(toDate(month), { month: 'short' }) }}
+        </SelectItem>
+      </SelectContent>
+    </Select>
   </DefineMonthTemplate>
 
   <DefineYearTemplate v-slot="{ date }">
-    <div class="**:data-[slot=native-select-icon]:right-1">
-      <div class="relative">
-        <div class="absolute inset-0 flex h-full items-center text-sm pl-2 pointer-events-none">
-          {{ formatter.custom(toDate(date), { year: 'numeric' }) }}
-        </div>
-        <NativeSelect
-          class="text-sm h-8 pr-6 pl-2 text-transparent relative"
-          :model-value="date.year"
-          @change="(e: Event) => {
-            placeholder = placeholder.set({
-              year: Number((e?.target as any)?.value),
-            })
-          }"
+    <Select
+      :model-value="String(date.year)"
+      @update:model-value="(v: any) => { placeholder = placeholder.set({ year: Number(v) }) }"
+    >
+      <SelectTrigger class="h-8! gap-1! rounded-md! border-0! bg-transparent! px-2! py-0! text-sm shadow-none!">
+        {{ formatter.custom(toDate(date), { year: 'numeric' }) }}
+      </SelectTrigger>
+      <SelectContent class="max-h-72">
+        <SelectItem
+          v-for="year in yearRange"
+          :key="year.toString()"
+          :value="String(year.year)"
         >
-          <NativeSelectOption v-for="(year) in yearRange" :key="year.toString()" :value="year.year" :selected="date.year === year.year">
-            {{ formatter.custom(toDate(year), { year: 'numeric' }) }}
-          </NativeSelectOption>
-        </NativeSelect>
-      </div>
-    </div>
+          {{ formatter.custom(toDate(year), { year: 'numeric' }) }}
+        </SelectItem>
+      </SelectContent>
+    </Select>
   </DefineYearTemplate>
 
   <!--
@@ -132,11 +127,16 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
     :class="cn('p-3', props.class)"
   >
     <CalendarHeader class="pt-0">
-      <nav class="flex items-center gap-1 absolute top-0 inset-x-0 justify-between">
-        <CalendarPrevButton>
+      <!--
+        这排「上/下月」按钮用 absolute 铺满整个标题行（inset-x-0），于是标题行中间那块的
+        月份/年份下拉会整片落在 nav 的命中区域里，导致下拉点不开。
+        所以 nav 自身设为 pointer-events-none（不吃事件），只把两个按钮单独设回 pointer-events-auto。
+      -->
+      <nav class="pointer-events-none flex items-center gap-1 absolute top-0 inset-x-0 justify-between">
+        <CalendarPrevButton class="pointer-events-auto">
           <slot name="calendar-prev-icon" />
         </CalendarPrevButton>
-        <CalendarNextButton>
+        <CalendarNextButton class="pointer-events-auto">
           <slot name="calendar-next-icon" />
         </CalendarNextButton>
       </nav>
