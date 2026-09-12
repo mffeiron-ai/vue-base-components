@@ -1,6 +1,8 @@
 <script lang="ts" setup>
+// reka-ui 的标题（无头基元）：无障碍上会把「当前显示的是哪个月」读出来
 import type { CalendarHeadingProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
+// reactiveOmit + useForwardProps：class 单独合并，其余 props 原样透传
 import { reactiveOmit } from "@vueuse/core"
 import { CalendarHeading, useForwardProps } from "reka-ui"
 import { cn } from "../../../lib/utils"

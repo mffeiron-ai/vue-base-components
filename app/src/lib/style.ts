@@ -29,6 +29,28 @@ export const STYLE_OPTIONS: Array<{ value: StyleKey, label: string }> = [
   { value: 'reka-vega', label: 'Vega' },
 ]
 
+/** 默认正文字体（设计系统未定义字体时用） */
+export const DEFAULT_STYLE_FONT = 'Inter, sans-serif'
+
+/**
+ * 风格（设计系统）自带的字体
+ *
+ * 与 `@/random-ui/config/config.ts` 的 PRESETS 保持一致：
+ * Vega / Nova / Mira / Luma → Inter，Maia → Figtree，Lyra → JetBrains Mono。
+ * PRESETS 里没有字体的风格（rhea / sera）沿用默认 Inter。
+ * 注：app 侧不运行时 import config.ts（会连带整棵 random-ui 组件树），故在此同步一份。
+ */
+export const STYLE_FONTS: Record<string, string> = {
+  'reka-vega': 'Inter, sans-serif',
+  'reka-nova': 'Inter, sans-serif',
+  'reka-maia': 'Figtree, sans-serif',
+  'reka-lyra': 'JetBrains Mono, monospace',
+  'reka-mira': 'Inter, sans-serif',
+  'reka-luma': 'Inter, sans-serif',
+  'reka-rhea': 'Inter, sans-serif',
+  'reka-sera': 'Inter, sans-serif',
+}
+
 export const LAYOUT_PRESETS: LayoutPreset[] = [
   { key: 'theme', label: '跟随主题', radius: '', spacing: '', letterSpacing: '' },
   { key: 'compact', label: '紧凑', radius: '0.35rem', spacing: '0.18rem', letterSpacing: '-0.01em' },
@@ -193,12 +215,47 @@ function persistFonts() {
   localStorage.setItem(FONT_STORAGE_KEY, JSON.stringify({ fontSans: fontSans.value, fontSerif: fontSerif.value, fontMono: fontMono.value }))
 }
 
+/** 当前主题在当前亮/暗模式下的字体 */
+function themeFontsNow() {
+  return getThemeFonts(themes, themeIndex.value, isDarkMode() ? 'dark' : 'light', DEFAULT_FALLBACK)
+}
+
+/** 某套风格（设计系统）的正文字体 */
+function styleFontOf(key: string) {
+  return STYLE_FONTS[key] ?? DEFAULT_STYLE_FONT
+}
+
+/**
+ * 字体维度的三个来源（优先级由「谁最后被操作」决定，都是并列的一等选项）：
+ * - 切换主题 → 三档字体全部跟随主题（applyThemeFonts）
+ * - 切换风格 → 正文字体跟随该设计系统，标题/等宽仍取当前主题（applyStyleFonts）
+ * - 手动选字体 → 只改该档（setFonts）
+ */
+function applyThemeFonts() {
+  const t = themeFontsNow()
+  fontSans.value = t.fontSans
+  fontSerif.value = t.fontSerif
+  fontMono.value = t.fontMono
+  persistFonts()
+  apply()
+}
+
+function applyStyleFonts(key: string) {
+  const t = themeFontsNow()
+  fontSans.value = styleFontOf(key)
+  fontSerif.value = t.fontSerif
+  fontMono.value = t.fontMono
+  persistFonts()
+  apply()
+}
+
 /** 全局样式定制状态（复用 random-ui 现成面板能力，作用于整站） */
 export function useGlobalStyle() {
   const setStyle = (s: string) => {
     styleKey.value = s as StyleKey
     localStorage.setItem(STYLE_STORAGE_KEY, s)
-    apply()
+    // 风格自带字体：设计系统只定义正文那一档，故只覆盖 --font-sans
+    applyStyleFonts(s)
   }
   const setLayout = (key: string) => {
     layoutKey.value = key as LayoutPresetKey
@@ -225,16 +282,15 @@ export function useGlobalStyle() {
     setLayout('theme')
     setShadow('theme')
     setIconLibrary('lucide')
-    const fonts = getThemeFonts(themes, themeIndex.value, isDarkMode() ? 'dark' : 'light', DEFAULT_FALLBACK)
-    setFonts(fonts)
+    // 字体回到「当前风格 + 当前主题」的默认组合（清掉手动选择的痕迹）
+    applyStyleFonts(styleKey.value)
   }
   const randomize = () => {
+    // setStyle 内部已把正文字体换成该风格的字体，故后面不再单独设字体
     setStyle(STYLE_OPTIONS[Math.floor(Math.random() * STYLE_OPTIONS.length)].value)
     setLayout(LAYOUT_PRESETS[Math.floor(Math.random() * LAYOUT_PRESETS.length)].key)
     setShadow(SHADOW_PRESETS[Math.floor(Math.random() * SHADOW_PRESETS.length)].key)
     setIconLibrary(ICON_LIBRARY_OPTIONS[Math.floor(Math.random() * ICON_LIBRARY_OPTIONS.length)].value)
-    const fonts = getThemeFonts(themes, themeIndex.value, isDarkMode() ? 'dark' : 'light', DEFAULT_FALLBACK)
-    setFonts(fonts)
   }
   return {
     styleKey, layoutKey, shadowKey, iconLibrary,
@@ -249,8 +305,10 @@ export function useGlobalStyle() {
 // 模块加载时应用一次
 apply()
 
-// 联动：主题索引变化时，重算「跟随主题」的圆角 / 阴影
-watch(themeIndex, () => apply())
+// 联动 1：主题索引变化时，重算「跟随主题」的圆角 / 阴影，并让三档字体跟随主题
+watch(themeIndex, () => {
+  applyThemeFonts()
+})
 
 const darkObserver = new MutationObserver(() => apply())
 darkObserver.observe(document.documentElement, {

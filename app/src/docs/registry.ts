@@ -83,6 +83,12 @@ export const componentDocs: ComponentDoc[] = [
     description: '把相关按钮（也可混入 Input / Select / Dropdown）拼成整体，自动合并接缝圆角与边框。',
     importCode: `import { ButtonGroup, ButtonGroupSeparator, ButtonGroupText } from '@/components/ui/button-group'`,
   },
+  {
+    name: 'calendar',
+    title: 'Calendar 日历',
+    description: '选择单个日期，支持月份/年份下拉、多月份、范围限制、禁用规则与多语言历法。',
+    importCode: `import { Calendar } from '@/components/ui/calendar'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */
