@@ -1,4 +1,8 @@
 <script setup lang="ts">
+/**
+ * DialogHeader —— 头部容器：标题 + 描述（+ 可选的其他信息）。
+ * 移动端居中、sm 以上左对齐，与 shadcn 视觉一致。
+ */
 import type { HTMLAttributes } from "vue"
 import { cn } from "../../../lib/utils"
 

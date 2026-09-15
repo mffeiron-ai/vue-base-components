@@ -1,4 +1,8 @@
 <script setup lang="ts">
+/**
+ * DialogTitle —— 对话框标题（必填）。
+ * reka 用它生成 `aria-labelledby`，缺了会提示无障碍标记不完整。
+ */
 import type { DialogTitleProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"

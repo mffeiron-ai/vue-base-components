@@ -149,6 +149,12 @@ export const componentDocs: ComponentDoc[] = [
     description: '单日 / 输入框 + 日历 / 日期区间三种形态，底层 reka-ui 日历，值类型为 @internationalized/date 的 CalendarDate；支持可选范围、禁用日期、快捷预设与自定义格式。',
     importCode: `import { DatePicker, DatePickerInput, DatePickerRange, formatDateISO, toCalendarDate } from '@/components/ui/date-picker'`,
   },
+  {
+    name: 'dialog',
+    title: 'Dialog 对话框',
+    description: '模态对话框：锁背景滚动与焦点，Esc / 点遮罩 / 右上角 × / 内部按钮都能关；支持受控开关、自定义宽度、隐藏关闭按钮，长内容用 DialogScrollContent 整页滚动。',
+    importCode: `import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogScrollContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */
