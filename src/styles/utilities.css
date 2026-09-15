@@ -343,3 +343,38 @@
     -webkit-text-fill-color: currentColor;
   }
 }
+
+/* ─────────────── 折叠动画（Collapsible / Accordion） ─────────────── */
+/*
+ * reka-ui 的 CollapsibleContent 会把内容实际高度写到 --reka-collapsible-content-height，
+ * 所以高度动画只需要从 0 过渡到这个变量（反过来同理）。
+ * 组件已默认挂上：data-[state=open]:animate-collapsible-down / data-[state=closed]:animate-collapsible-up，
+ * 想换时长或关掉，传 class="duration-300" / "animate-none!" 覆盖即可。
+ *
+ * 注意：这个 @theme 必须在使用方的样式入口里生效（本文件被 import 即可），
+ * 否则 animate-collapsible-* 不会被生成。
+ */
+@theme {
+  --animate-collapsible-down: collapsible-down 0.2s ease-out;
+  --animate-collapsible-up: collapsible-up 0.2s ease-out;
+
+  @keyframes collapsible-down {
+    from {
+      height: 0;
+    }
+
+    to {
+      height: var(--reka-collapsible-content-height);
+    }
+  }
+
+  @keyframes collapsible-up {
+    from {
+      height: var(--reka-collapsible-content-height);
+    }
+
+    to {
+      height: 0;
+    }
+  }
+}

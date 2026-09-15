@@ -113,6 +113,18 @@ export const componentDocs: ComponentDoc[] = [
     description: '三态复选框（选中 / 未选 / 半选），支持键盘切换、表单提交与校验失败态；CheckboxGroup 可成组管理数组。',
     importCode: `import { Checkbox } from '@/components/ui/checkbox'\nimport { CheckboxGroup } from '@/components/ui/checkbox-group'`,
   },
+  {
+    name: 'collapsible',
+    title: 'Collapsible 折叠面板',
+    description: '可展开 / 收起的单个内容区，自带 aria 语义与默认高度动画。',
+    importCode: `import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'`,
+  },
+  {
+    name: 'combobox',
+    title: 'Combobox 组合框',
+    description: '可搜索的下拉选择框，支持单选 / 多选、分组与分隔线、空状态、禁用项、长列表滚动与受控展开。',
+    importCode: `import { Combobox, ComboboxAnchor, ComboboxCancel, ComboboxEmpty, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxList, ComboboxSeparator, ComboboxTrigger, ComboboxViewport } from '@/components/ui/combobox'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */

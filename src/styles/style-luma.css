@@ -231,7 +231,7 @@
   }
 
   :is(.cn-combobox-list, [data-slot="combobox-list"]) {
-    @apply no-scrollbar max-h-[min(calc(--spacing(72)---spacing(9)),calc(var(--available-height)---spacing(9)))] scroll-py-1.5 overflow-y-auto p-1.5 data-empty:p-0;
+    @apply no-scrollbar max-h-[min(calc(--spacing(72)---spacing(9)),calc(var(--reka-combobox-content-available-height)---spacing(9)))] scroll-py-1.5 overflow-y-auto p-1.5 data-empty:p-0;
   }
 
   .cn-combobox-item-text {

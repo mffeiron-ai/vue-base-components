@@ -23,13 +23,5 @@ const delegatedProps = reactiveOmit(props, "class")
     data-[orientation=vertical]:h-auto：竖向时分隔线高度由拉伸决定，不用 h-full
     （!m-0 里的 ! 是为了盖过预设/基础样式里的 margin）
   -->
-  <Separator
-    data-slot="button-group-separator"
-    v-bind="delegatedProps"
-    :orientation="props.orientation"
-    :class="cn(
-      'bg-input relative !m-0 self-stretch data-[orientation=vertical]:h-auto',
-      props.class,
-    )"
-  />
+  <Separator data-slot="button-group-separator" v-bind="delegatedProps" :orientation="props.orientation" :class="cn( 'bg-input relative !m-0 self-stretch data-[orientation=vertical]:h-auto', props.class, )" />
 </template>

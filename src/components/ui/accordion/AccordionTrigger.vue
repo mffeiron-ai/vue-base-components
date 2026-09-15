@@ -34,12 +34,7 @@ const delegatedProps = reactiveOmit(props, "class")
      v-bind="delegatedProps" 透传 as / asChild 给 reka-ui
      :class="..." 默认样式 + 合并用户传入的 props.class
      默认插槽放标题文本，name="icon" 插槽放箭头图标（默认 ChevronDown） -->
-    <AccordionTrigger
-      data-slot="accordion-trigger"
-      v-bind="delegatedProps"
-      :class="
-        cn(
-          'focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 items-start justify-between gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none hover:underline focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180',
+    <AccordionTrigger data-slot="accordion-trigger" v-bind="delegatedProps" :class=" cn( 'focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 items-start justify-between gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none hover:underline focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180',
           props.class,
         )
       "
