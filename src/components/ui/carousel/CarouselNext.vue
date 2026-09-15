@@ -2,8 +2,10 @@
 import type { WithClassAsProps } from "./interface"
 import type { ButtonVariants } from "../button"
 import { ArrowRight } from "lucide-vue-next"
+// 默认图标；想换就用默认插槽
 import { cn } from "../../../lib/utils"
 import { Button } from "../button"
+// 直接复用 Button：variant / size 可透传
 import { useCarousel } from "./useCarousel"
 
 const props = withDefaults(defineProps<{
@@ -14,11 +16,13 @@ const props = withDefaults(defineProps<{
   variant: "outline",
   size: "icon",
 })
+// 默认描边 + 图标尺寸
 
 const { orientation, canScrollNext, scrollNext } = useCarousel()
 </script>
 
 <template>
+  <!-- 与 CarouselPrevious 对称：水平贴右侧外侧、纵向贴下方，到头自动禁用，sr-only 保留无障碍文案 -->
   <Button
     data-slot="carousel-next"
     :disabled="!canScrollNext"

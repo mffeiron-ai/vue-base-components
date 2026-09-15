@@ -39,7 +39,7 @@ const parts = [
     <h1 class="text-3xl font-bold tracking-tight">Card 卡片</h1>
     <p class="mt-3 text-muted-foreground">
       卡片容器，把标题、描述、正文、操作和页脚组合成一块带边框与阴影的区域。
-      全部子组件都是纯布局 div（只有 <code class="font-mono text-sm">class</code> 一个 prop），
+      全部子组件都是纯布局 div（只有 <code>class</code> 一个 prop），
       间距由外层统一控制，所以内部不需要写 margin。
     </p>
 
@@ -75,8 +75,8 @@ const parts = [
       <CardHeader>
         <CardTitle class="text-xl font-semibold">右上角操作（CardAction）</CardTitle>
         <CardDescription>
-          把 <code class="font-mono text-sm">CardAction</code> 放进 <code class="font-mono text-sm">CardHeader</code>：
-          header 检测到它就会从单列切成 <code class="font-mono text-sm">[1fr_auto]</code> 两列，
+          把 <code>CardAction</code> 放进 <code>CardHeader</code>：
+          header 检测到它就会从单列切成 <code>[1fr_auto]</code> 两列，
           标题占左、操作顶靠右。
         </CardDescription>
       </CardHeader>
@@ -118,8 +118,8 @@ const parts = [
           </Card>
         </div>
         <p class="text-sm text-muted-foreground">
-          注意：<code class="font-mono text-sm">CardAction</code> 脱离了 header 的 grid 就没有定位（会落回普通文档流），
-          别把它放在 <code class="font-mono text-sm">CardContent</code> 里。
+          注意：<code>CardAction</code> 脱离了 header 的 grid 就没有定位（会落回普通文档流），
+          别把它放在 <code>CardContent</code> 里。
         </p>
       </CardContent>
     </Card>
@@ -148,8 +148,8 @@ const parts = [
       <CardHeader>
         <CardTitle class="text-xl font-semibold">媒体卡片</CardTitle>
         <CardDescription>
-          把 <code class="font-mono text-sm">&lt;img&gt;</code> 放成 Card 的<strong>第一个子元素</strong>：预设会自动
-          <code class="font-mono text-sm">pt-0</code>（去掉顶部内边距让图贴边）并给图加与卡片一致的顶部圆角。
+          把 <code>&lt;img&gt;</code> 放成 Card 的<strong>第一个子元素</strong>：预设会自动
+          <code>pt-0</code>（去掉顶部内边距让图贴边）并给图加与卡片一致的顶部圆角。
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -227,13 +227,13 @@ const parts = [
       <CardHeader>
         <CardTitle class="text-xl font-semibold">尺寸、间距与分隔线</CardTitle>
         <CardDescription>
-          间距不在子组件里写：竖间距来自 Card 的 <code class="font-mono text-sm">gap</code>、纵向内边距来自
-          Card 的 <code class="font-mono text-sm">py</code>，横向内边距在 header / content / footer（px-6）。
-          要更紧凑请用 <code class="font-mono text-sm">size="sm"</code>（比手写 class 更保险，因为预设的
-          <code class="font-mono text-sm">data-[size=sm]</code> 会同时收紧子组件内边距）。
-          另外，给 header / footer 自己加 <code class="font-mono text-sm">border-b</code> /
-          <code class="font-mono text-sm">border-t</code> 时会自动补上 <code class="font-mono text-sm">pb-6</code> /
-          <code class="font-mono text-sm">pt-6</code>。
+          间距不在子组件里写：竖间距来自 Card 的 <code>gap</code>、纵向内边距来自
+          Card 的 <code>py</code>，横向内边距在 header / content / footer（px-6）。
+          要更紧凑请用 <code>size="sm"</code>（比手写 class 更保险，因为预设的
+          <code>data-[size=sm]</code> 会同时收紧子组件内边距）。
+          另外，给 header / footer 自己加 <code>border-b</code> /
+          <code>border-t</code> 时会自动补上 <code>pb-6</code> /
+          <code>pt-6</code>。
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -273,8 +273,8 @@ const parts = [
       <CardHeader>
         <CardTitle class="text-xl font-semibold">可点击与网格排列</CardTitle>
         <CardDescription>
-          Card 渲染的是普通 <code class="font-mono text-sm">div</code>，事件会透传到根元素，
-          所以直接写 <code class="font-mono text-sm">@click</code> + <code class="font-mono text-sm">cursor-pointer</code> 就能整卡可点。
+          Card 渲染的是普通 <code>div</code>，事件会透传到根元素，
+          所以直接写 <code>@click</code> + <code>cursor-pointer</code> 就能整卡可点。
         </CardDescription>
       </CardHeader>
       <CardContent class="space-y-3">
@@ -296,7 +296,7 @@ const parts = [
           </Card>
         </div>
         <p class="text-sm text-muted-foreground">
-          当前选中：<code class="font-mono">{{ picked || '(未选择)' }}</code>
+          当前选中：<code>{{ picked || '(未选择)' }}</code>
         </p>
       </CardContent>
     </Card>
@@ -306,8 +306,8 @@ const parts = [
       <CardHeader>
         <CardTitle class="text-xl font-semibold">API</CardTitle>
         <CardDescription>
-          Card 只有 <code class="font-mono text-sm">size</code> / <code class="font-mono text-sm">class</code> 两个 prop；
-          其余子组件只有 <code class="font-mono text-sm">class</code>，内容全走默认插槽。
+          Card 只有 <code>size</code> / <code>class</code> 两个 prop；
+          其余子组件只有 <code>class</code>，内容全走默认插槽。
         </CardDescription>
       </CardHeader>
       <CardContent class="space-y-5">
@@ -358,8 +358,8 @@ const parts = [
         </div>
 
         <p class="text-sm text-muted-foreground">
-          每个子组件都带 <code class="font-mono">data-slot="card-*"</code> 标记：
-          8 套风格预设（<code class="font-mono">src/styles/style-*.css</code>）就是按这些标记做圆角、间距、底色差异的，
+          每个子组件都带 <code>data-slot="card-*"</code> 标记：
+          8 套风格预设（<code>src/styles/style-*.css</code>）就是按这些标记做圆角、间距、底色差异的，
           所以换风格时卡片会自动跟着变，不用改业务代码。
         </p>
       </CardContent>

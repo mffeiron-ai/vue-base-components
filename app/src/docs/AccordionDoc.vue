@@ -27,7 +27,7 @@ const propsRows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">基础用法</CardTitle>
-        <CardDescription>单选 + 可折叠，`default-value` 指定默认展开项。</CardDescription>
+        <CardDescription>单选 + 可折叠，<code>default-value</code> 指定默认展开项。</CardDescription>
       </CardHeader>
       <CardContent>
         <div class="rounded-xl p-4">
@@ -49,7 +49,7 @@ const propsRows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">多选</CardTitle>
-        <CardDescription>`type="multiple"` 可同时展开多个面板，`default-value` 传数组。</CardDescription>
+        <CardDescription><code>type="multiple"</code> 可同时展开多个面板，<code>default-value</code> 传数组。</CardDescription>
       </CardHeader>
       <CardContent>
         <div class="rounded-xl p-4">
@@ -75,7 +75,7 @@ const propsRows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">自定义图标</CardTitle>
-        <CardDescription>通过 Trigger 的 `#icon` 插槽替换默认箭头。</CardDescription>
+        <CardDescription>通过 Trigger 的 <code>#icon</code> 插槽替换默认箭头。</CardDescription>
       </CardHeader>
       <CardContent>
         <div class="rounded-xl p-4">
@@ -102,7 +102,7 @@ const propsRows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">禁用状态</CardTitle>
-        <CardDescription>在 `AccordionItem` 上设置 `disabled`，单个面板不可交互。</CardDescription>
+        <CardDescription>在 <code>AccordionItem</code> 上设置 <code>disabled</code>，单个面板不可交互。</CardDescription>
       </CardHeader>
       <CardContent>
         <div class="rounded-xl p-4">
@@ -124,7 +124,7 @@ const propsRows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">受控模式</CardTitle>
-        <CardDescription>用 `v-model` 双向绑定当前展开值，可从外部控制。</CardDescription>
+        <CardDescription>用 <code>v-model</code> 双向绑定当前展开值，可从外部控制。</CardDescription>
       </CardHeader>
       <CardContent>
         <div class="rounded-xl p-4">

@@ -60,7 +60,7 @@ const slots = [
   <div class="mx-auto max-w-3xl px-6 py-10">
     <h1 class="text-3xl font-bold tracking-tight">Calendar 日历</h1>
     <p class="mt-3 text-muted-foreground">
-      用于选择单个日期。日期类型来自 <code class="font-mono text-sm">@internationalized/date</code>，自带键盘导航与无障碍语义。
+      用于选择单个日期。日期类型来自 <code>@internationalized/date</code>，自带键盘导航与无障碍语义。
     </p>
 
     <!-- 基础用法 -->
@@ -78,12 +78,12 @@ const slots = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">选中值（受控）</CardTitle>
-        <CardDescription>用 <code class="font-mono text-sm">v-model</code> 拿到选中的日期；下面是当前值（DateValue 对象，带 year / month / day）。</CardDescription>
+        <CardDescription>用 <code>v-model</code> 拿到选中的日期；下面是当前值（DateValue 对象，带 year / month / day）。</CardDescription>
       </CardHeader>
       <CardContent class="space-y-4">
         <div class="flex flex-wrap items-center gap-2 text-sm">
           <span class="text-muted-foreground">当前选中：</span>
-          <code class="rounded bg-muted px-2 py-0.5 font-mono">{{ fmt(picked) }}</code>
+          <code>{{ fmt(picked) }}</code>
           <Button variant="outline" size="sm" @click="picked = today(getLocalTimeZone())">回到今天</Button>
           <Button variant="ghost" size="sm" @click="picked = null">清空</Button>
         </div>
@@ -96,10 +96,10 @@ const slots = [
       <CardHeader>
         <CardTitle class="text-xl font-semibold">标题下拉（layout）</CardTitle>
         <CardDescription>
-          用 <code class="font-mono text-sm">layout</code> 把标题变成下拉：
-          <code class="font-mono text-sm">month-and-year</code> 月份+年份都可选、
-          <code class="font-mono text-sm">month-only</code> 只选月份、
-          <code class="font-mono text-sm">year-only</code> 只选年份。
+          用 <code>layout</code> 把标题变成下拉：
+          <code>month-and-year</code> 月份+年份都可选、
+          <code>month-only</code> 只选月份、
+          <code>year-only</code> 只选年份。
           标题本身就是项目自己的 Select（触发器去掉了边框与底色，所以看上去就是标题文字），点开才是下拉列表，键盘和移动端都能正常用。
         </CardDescription>
       </CardHeader>
@@ -125,7 +125,7 @@ const slots = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">多个月份</CardTitle>
-        <CardDescription><code class="font-mono text-sm">number-of-months</code> 同时显示多个月；加 <code class="font-mono text-sm">paged-navigation</code> 后翻页按“屏”走（一次翻 2 个月而非 1 个）。</CardDescription>
+        <CardDescription><code>number-of-months</code> 同时显示多个月；加 <code>paged-navigation</code> 后翻页按“屏”走（一次翻 2 个月而非 1 个）。</CardDescription>
       </CardHeader>
       <CardContent class="space-y-6">
         <div>
@@ -144,10 +144,10 @@ const slots = [
       <CardHeader>
         <CardTitle class="text-xl font-semibold">换页动画（page-animation）</CardTitle>
         <CardDescription>
-          用 <code class="font-mono text-sm">page-animation</code> 选换月/翻页时月份网格的动画：
-          <strong>不传就是默认的 <code class="font-mono text-sm">slide</code> 滑入</strong>（会按翻页方向自动换向）、
-          <code class="font-mono text-sm">fade</code> 淡入淡出、<code class="font-mono text-sm">zoom</code> 缩放、
-          <code class="font-mono text-sm">flip</code> 3D 翻转；传 <code class="font-mono text-sm">none</code> 关掉动画、直接切换。
+          用 <code>page-animation</code> 选换月/翻页时月份网格的动画：
+          <strong>不传就是默认的 <code>slide</code> 滑入</strong>（会按翻页方向自动换向）、
+          <code>fade</code> 淡入淡出、<code>zoom</code> 缩放、
+          <code>flip</code> 3D 翻转；传 <code>none</code> 关掉动画、直接切换。
           切下面的动画后，点日历右上的上一月 / 下一月按钮就能看到效果。
         </CardDescription>
       </CardHeader>
@@ -176,8 +176,8 @@ const slots = [
       <CardHeader>
         <CardTitle class="text-xl font-semibold">限制范围与禁用日期</CardTitle>
         <CardDescription>
-          <code class="font-mono text-sm">min-value</code> / <code class="font-mono text-sm">max-value</code> 限制可选区间（超出置灰）；
-          <code class="font-mono text-sm">is-date-unavailable</code> 可自定义规则 ——
+          <code>min-value</code> / <code>max-value</code> 限制可选区间（超出置灰）；
+          <code>is-date-unavailable</code> 可自定义规则 ——
           这里禁掉了所有偶数日，它们会带删除线。
         </CardDescription>
       </CardHeader>
@@ -200,8 +200,8 @@ const slots = [
       <CardHeader>
         <CardTitle class="text-xl font-semibold">语言与历法</CardTitle>
         <CardDescription>
-          <code class="font-mono text-sm">locale</code> 决定界面语言与历法；
-          <code class="font-mono text-sm">weekday-format</code> 控制星期名的详细程度（narrow / short / long）。
+          <code>locale</code> 决定界面语言与历法；
+          <code>weekday-format</code> 控制星期名的详细程度（narrow / short / long）。
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -223,9 +223,9 @@ const slots = [
       <CardHeader>
         <CardTitle class="text-xl font-semibold">自定义标题、格子尺寸与图标</CardTitle>
         <CardDescription>
-          标题区用 <code class="font-mono text-sm">#calendar-heading</code> 插槽替换（插槽给的
-          <code class="font-mono text-sm">month</code> / <code class="font-mono text-sm">year</code> 就是现成的下拉组件）；
-          格子尺寸用 <code class="font-mono text-sm">**:data-[slot=calendar-cell-trigger]:size-11!</code> 覆盖；
+          标题区用 <code>#calendar-heading</code> 插槽替换（插槽给的
+          <code>month</code> / <code>year</code> 就是现成的下拉组件）；
+          格子尺寸用 <code>**:data-[slot=calendar-cell-trigger]:size-11!</code> 覆盖；
           切换按钮的图标用具名插槽换。
         </CardDescription>
       </CardHeader>
@@ -279,14 +279,14 @@ const slots = [
           <p class="mb-2 text-sm font-medium">插槽</p>
           <ul class="space-y-1 text-sm text-muted-foreground">
             <li v-for="s in slots" :key="s.name">
-              · <code class="font-mono text-foreground">{{ s.name }}</code>：{{ s.desc }}
+              · <code>{{ s.name }}</code>：{{ s.desc }}
             </li>
           </ul>
         </div>
 
         <p class="text-sm text-muted-foreground">
-          子组件 <code class="font-mono">CalendarCell</code> / <code class="font-mono">CalendarGrid</code> /
-          <code class="font-mono">CalendarHeader</code> 等都可单独引入，替换表格结构里的任意一块。
+          子组件 <code>CalendarCell</code> / <code>CalendarGrid</code> /
+          <code>CalendarHeader</code> 等都可单独引入，替换表格结构里的任意一块。
         </p>
       </CardContent>
     </Card>

@@ -41,7 +41,7 @@ const rows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">基础用法</CardTitle>
-        <CardDescription>把若干 `Button` 放进组的默认插槽，接缝处会自动去掉内侧圆角与边框。</CardDescription>
+        <CardDescription>把若干 <code>Button</code> 放进组的默认插槽，接缝处会自动去掉内侧圆角与边框。</CardDescription>
       </CardHeader>
       <CardContent>
         <ButtonGroup>
@@ -56,7 +56,7 @@ const rows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">方向</CardTitle>
-        <CardDescription>`orientation="vertical"` 改为纵向拼接（合并的是上下两端的圆角与上边框）。</CardDescription>
+        <CardDescription><code>orientation="vertical"</code> 改为纵向拼接（合并的是上下两端的圆角与上边框）。</CardDescription>
       </CardHeader>
       <CardContent>
         <div class="flex flex-wrap items-start gap-8">
@@ -80,7 +80,7 @@ const rows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">尺寸</CardTitle>
-        <CardDescription>尺寸写在各个 `Button` 上；建议同一组内保持相同尺寸。</CardDescription>
+        <CardDescription>尺寸写在各个 <code>Button</code> 上；建议同一组内保持相同尺寸。</CardDescription>
       </CardHeader>
       <CardContent class="space-y-4">
         <div class="flex flex-wrap items-center gap-4">
@@ -111,7 +111,7 @@ const rows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">分隔符</CardTitle>
-        <CardDescription>`outline` 本身有边框、不需要分隔符；其他变体用 `ButtonGroupSeparator` 划分层次。</CardDescription>
+        <CardDescription><code>outline</code> 本身有边框、不需要分隔符；其他变体用 <code>ButtonGroupSeparator</code> 划分层次。</CardDescription>
       </CardHeader>
       <CardContent class="space-y-4">
         <div class="flex flex-wrap items-center gap-4">
@@ -173,7 +173,7 @@ const rows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">组合 Input</CardTitle>
-        <CardDescription>组内的 `Input` 会自动占满剩余宽度；配 `ButtonGroupText` 可做前置标签（`as-child` 时甚至能直接套 `Label`）。</CardDescription>
+        <CardDescription>组内的 <code>Input</code> 会自动占满剩余宽度；配 <code>ButtonGroupText</code> 可做前置标签（<code>as-child</code> 时甚至能直接套 <code>Label</code>）。</CardDescription>
       </CardHeader>
       <CardContent class="space-y-4">
         <ButtonGroup>
@@ -194,7 +194,7 @@ const rows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">组合 Select</CardTitle>
-        <CardDescription>组内的 `Select` 触发器宽度自动收缩为内容宽，和相邻按钮拼在一起。</CardDescription>
+        <CardDescription>组内的 <code>Select</code> 触发器宽度自动收缩为内容宽，和相邻按钮拼在一起。</CardDescription>
       </CardHeader>
       <CardContent>
         <ButtonGroup>
@@ -217,7 +217,7 @@ const rows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">无障碍</CardTitle>
-        <CardDescription>组容器带 `role="group"`；当组内按钮是纯图标、或整组需要上下文时，补一个 `aria-label`。</CardDescription>
+        <CardDescription>组容器带 <code>role="group"</code>；当组内按钮是纯图标、或整组需要上下文时，补一个 <code>aria-label</code>。</CardDescription>
       </CardHeader>
       <CardContent>
         <ButtonGroup aria-label="文本格式化">
@@ -235,7 +235,7 @@ const rows = [
       </CardHeader>
       <CardContent class="space-y-2 text-sm text-muted-foreground">
         <p>· 一组按钮各自触发一个「动作」→ 用 <span class="font-medium text-foreground">Button Group</span>（本组件）。</p>
-        <p>· 按钮代表「有选中/未选中状态」的选项（类似单选 / 多选）→ 用 <span class="font-medium text-foreground">Toggle Group</span>，它自带 `type`、`model-value` 等状态能力。</p>
+        <p>· 按钮代表「有选中/未选中状态」的选项（类似单选 / 多选）→ 用 <span class="font-medium text-foreground">Toggle Group</span>，它自带 <code>type</code>、<code>model-value</code> 等状态能力。</p>
       </CardContent>
     </Card>
 
@@ -266,7 +266,7 @@ const rows = [
           </table>
         </div>
         <p class="text-sm text-muted-foreground">
-          组的拼接依赖子元素的 `data-slot`：`Button` / `Input` / `SelectTrigger` 等已内置，自定义元素请补上 `data-slot`。
+          组的拼接依赖子元素的 <code>data-slot</code>：<code>Button</code> / <code>Input</code> / <code>SelectTrigger</code> 等已内置，自定义元素请补上 <code>data-slot</code>。
         </p>
       </CardContent>
     </Card>

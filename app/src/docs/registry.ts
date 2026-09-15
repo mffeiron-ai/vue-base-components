@@ -95,6 +95,18 @@ export const componentDocs: ComponentDoc[] = [
     description: '卡片容器，组合标题、描述、正文、右上角操作与页脚，间距由外层统一控制。',
     importCode: `import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'`,
   },
+  {
+    name: 'carousel',
+    title: 'Carousel 轮播',
+    description: '基于 embla 的无头轮播，支持拖拽、循环、自动播放、纵向滚动与自定义对齐。',
+    importCode: `import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'`,
+  },
+  {
+    name: 'chart',
+    title: 'Chart 图表',
+    description: '基于 Unovis 的图表包装：把 ChartConfig 的颜色/名称写成主题变量，并提供统一的提示框与图例。',
+    importCode: `import { ChartContainer, ChartTooltip, ChartCrosshair, ChartTooltipContent, ChartLegendContent, componentToString } from '@/components/ui/chart'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */

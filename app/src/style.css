@@ -210,3 +210,20 @@
   opacity: 0;
   transform: translateY(-16px);
 }
+
+/**
+ * 文档正文里的行内代码
+ * ─────────────────────────────────────────────
+ * 文档作者只需写 <code>xxx</code>，样式在这里统一给（等宽 + 浅底 + 小圆角），
+ * 不用在每处重复 class。（DocsLayout 的 <main> 上挂了 .docs-content 作为钩子）
+ * 代码块 <pre><code> 不受影响。
+ */
+.docs-content :not(pre) > code {
+  padding: 0.1em 0.35em;
+  border-radius: calc(var(--radius-md) * 0.75);
+  background-color: var(--color-muted);
+  color: var(--color-foreground);
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 0.85em;
+  white-space: nowrap;
+}

@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button'
     <!-- 基础用法 -->
     <section class="mt-8">
       <h2 class="text-xl font-semibold">基础用法</h2>
-      <p class="mt-2 text-sm text-muted-foreground">由 `AlertDialogTrigger` 触发，包含标题、描述、取消 / 确认按钮。</p>
+      <p class="mt-2 text-sm text-muted-foreground">由 <code>AlertDialogTrigger</code> 触发，包含标题、描述、取消 / 确认按钮。</p>
       <div class="mt-4 rounded-xl border border-border p-4">
         <AlertDialog>
           <AlertDialogTrigger as-child>
@@ -34,7 +34,7 @@ import { Button } from '@/components/ui/button'
     <!-- 危险操作 -->
     <section class="mt-8">
       <h2 class="text-xl font-semibold">危险操作</h2>
-      <p class="mt-2 text-sm text-muted-foreground">给 `AlertDialogAction` 叠加危险样式，表达删除等不可逆操作。</p>
+      <p class="mt-2 text-sm text-muted-foreground">给 <code>AlertDialogAction</code> 叠加危险样式，表达删除等不可逆操作。</p>
       <div class="mt-4 rounded-xl border border-border p-4">
         <AlertDialog>
           <AlertDialogTrigger as-child>

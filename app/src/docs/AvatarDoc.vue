@@ -40,7 +40,7 @@ const fallbackRows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">基础用法</CardTitle>
-        <CardDescription>`AvatarImage` 放图片，`AvatarFallback` 放兜底文字（加载失败时自动接管）。</CardDescription>
+        <CardDescription><code>AvatarImage</code> 放图片，<code>AvatarFallback</code> 放兜底文字（加载失败时自动接管）。</CardDescription>
       </CardHeader>
       <CardContent>
         <Avatar>
@@ -54,7 +54,7 @@ const fallbackRows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">兜底内容</CardTitle>
-        <CardDescription>不传 `src`（或图片加载失败）时只显示兜底；也可用 `delay-ms` 延迟出现。</CardDescription>
+        <CardDescription>不传 <code>src</code>（或图片加载失败）时只显示兜底；也可用 <code>delay-ms</code> 延迟出现。</CardDescription>
       </CardHeader>
       <CardContent>
         <div class="flex items-center gap-4">
@@ -80,7 +80,7 @@ const fallbackRows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">尺寸</CardTitle>
-        <CardDescription>用 `size` 在 `sm`(24px) / `default`(32px) / `lg`(40px) 间切换；要任意尺寸可加 `!` 强制覆盖类名。</CardDescription>
+        <CardDescription>用 <code>size</code> 在 <code>sm</code>(24px) / <code>default</code>(32px) / <code>lg</code>(40px) 间切换；要任意尺寸可加 <code>!</code> 强制覆盖类名。</CardDescription>
       </CardHeader>
       <CardContent>
         <div class="flex items-center gap-4">

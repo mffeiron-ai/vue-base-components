@@ -11,7 +11,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
     <!-- 基础用法 -->
     <section class="mt-8">
       <h2 class="text-xl font-semibold">基础用法</h2>
-      <p class="mt-2 text-sm text-muted-foreground">默认 `default` 变体，用于普通信息提示。</p>
+      <p class="mt-2 text-sm text-muted-foreground">默认 <code>default</code> 变体，用于普通信息提示。</p>
       <div class="mt-4 rounded-xl border border-border p-4">
         <Alert>
           <AlertTitle>提示</AlertTitle>
@@ -36,7 +36,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
     <!-- 危险状态 -->
     <section class="mt-8">
       <h2 class="text-xl font-semibold">危险状态</h2>
-      <p class="mt-2 text-sm text-muted-foreground">用 `variant="destructive"` 表达错误 / 危险操作。</p>
+      <p class="mt-2 text-sm text-muted-foreground">用 <code>variant="destructive"</code> 表达错误 / 危险操作。</p>
       <div class="mt-4 rounded-xl border border-border p-4">
         <Alert variant="destructive">
           <CircleX class="size-4" />

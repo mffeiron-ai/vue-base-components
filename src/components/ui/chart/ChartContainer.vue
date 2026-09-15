@@ -2,6 +2,7 @@
 import type { HTMLAttributes } from "vue"
 import type { ChartConfig } from "."
 import { useId } from "reka-ui"
+// useId：生成唯一 id（注意它带冒号，下面会替换掉才能当 CSS 选择器用）
 import { computed, toRefs } from "vue"
 import { cn } from "../../../lib/utils"
 import { provideChartContext } from "."
@@ -15,6 +16,8 @@ const props = defineProps<{
   config: ChartConfig
   cursor?: boolean
 }>()
+// config 必填：里面的 label / color 就是提示框与图例的数据源
+// cursor：是否显示十字准线（false 时线宽置 0，Tooltip 仍保留）
 
 defineSlots<{
   default: {
@@ -22,9 +25,11 @@ defineSlots<{
     config: ChartConfig
   }
 }>()
+// 默认插槽透出 { id, config }，需要时可写 <ChartContainer v-slot="{ config }">
 
 const { config } = toRefs(props)
 const uniqueId = useId()
+// 作为 data-chart 属性，同时也是 ChartStyle 里选择器的锚点（CSS 里不能带冒号，故去掉）
 const chartId = computed(() => `chart-${props.id || uniqueId.replace(/:/g, "")}`)
 
 provideChartContext({
@@ -34,6 +39,14 @@ provideChartContext({
 </script>
 
 <template>
+  <!--
+    一个 ChartContainer 只负责“壳”与主题变量：
+    - data-chart 给 ChartStyle 挂作用域化的颜色变量；同页多个图表用 id 区分
+    - 一堆 [&_.tick_text] / [&_.recharts-*] 是在覆盖 Unovis 内部类名的颜色（轴线、网格、光标等），
+      让它们跟随主题而不是写死的灰色
+    - style 里把 Unovis 的 CSS 变量对齐到本项目：提示框透明（我们用 .recharts-* 组件渲染自己的提示框）、
+      crosshair 颜色透背景、字体用 --font-sans
+  -->
   <div
     data-slot="chart"
     :data-chart="chartId"
@@ -53,7 +66,9 @@ provideChartContext({
       '--vis-font-family': 'var(--font-sans)',
     }"
   >
+    <!-- 默认插槽：放 Unovis 容器（VisXYContainer / VisSingleContainer）及其图形、坐标轴、提示框 -->
     <slot :id="uniqueId" :config="config" />
+    <!-- 把 config 里的颜色写成 CSS 变量，供图形与提示框使用 -->
     <ChartStyle :id="chartId" />
   </div>
 </template>

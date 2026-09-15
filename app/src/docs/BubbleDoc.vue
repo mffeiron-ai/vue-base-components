@@ -29,7 +29,7 @@ const rows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">基础用法</CardTitle>
-        <CardDescription>由 `Bubble` + `BubbleContent` 组成，需要反应时再加 `BubbleReactions`。</CardDescription>
+        <CardDescription>由 <code>Bubble</code> + <code>BubbleContent</code> 组成，需要反应时再加 <code>BubbleReactions</code>。</CardDescription>
       </CardHeader>
       <CardContent>
         <Bubble>
@@ -47,7 +47,7 @@ const rows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">变体</CardTitle>
-        <CardDescription>用 `variant` 切换 7 种视觉风格；气泡宽度随内容自适应，最大为容器宽度的 80%（`ghost` 不受限）。</CardDescription>
+        <CardDescription>用 <code>variant</code> 切换 7 种视觉风格；气泡宽度随内容自适应，最大为容器宽度的 80%（<code>ghost</code> 不受限）。</CardDescription>
       </CardHeader>
       <CardContent>
         <div class="flex flex-col items-start gap-3">
@@ -62,7 +62,7 @@ const rows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">对齐</CardTitle>
-        <CardDescription>用 `align="start"`（对方）/ `align="end"`（自己）控制左右。需放在弹性纵向容器里。</CardDescription>
+        <CardDescription>用 <code>align="start"</code>（对方）/ <code>align="end"</code>（自己）控制左右。需放在弹性纵向容器里。</CardDescription>
       </CardHeader>
       <CardContent>
         <div class="flex flex-col gap-3">
@@ -83,7 +83,7 @@ const rows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">分组</CardTitle>
-        <CardDescription>同一发送者的多条气泡用 `BubbleGroup` 包起来；`align` 要设在各 `Bubble` 上。</CardDescription>
+        <CardDescription>同一发送者的多条气泡用 <code>BubbleGroup</code> 包起来；<code>align</code> 要设在各 <code>Bubble</code> 上。</CardDescription>
       </CardHeader>
       <CardContent>
         <BubbleGroup>
@@ -129,7 +129,7 @@ const rows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">链接 / 按钮</CardTitle>
-        <CardDescription>用 `as-child` 把气泡样式合并到真实的可交互元素上（自带焦点环）。</CardDescription>
+        <CardDescription>用 <code>as-child</code> 把气泡样式合并到真实的可交互元素上（自带焦点环）。</CardDescription>
       </CardHeader>
       <CardContent>
         <Bubble variant="muted">
@@ -165,7 +165,7 @@ const rows = [
           </table>
         </div>
         <p class="text-sm text-muted-foreground">
-          `variant` 可选值：`default` / `secondary` / `muted` / `tinted` / `outline` / `ghost` / `destructive`。
+          <code>variant</code> 可选值：<code>default</code> / <code>secondary</code> / <code>muted</code> / <code>tinted</code> / <code>outline</code> / <code>ghost</code> / <code>destructive</code>。
         </p>
       </CardContent>
     </Card>

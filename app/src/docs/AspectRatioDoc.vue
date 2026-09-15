@@ -18,7 +18,7 @@ const propsRows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">基础用法</CardTitle>
-        <CardDescription>用 `ratio` 指定宽高比，`16 / 9` 表示宽是高的 16/9 倍。</CardDescription>
+        <CardDescription>用 <code>ratio</code> 指定宽高比，<code>16 / 9</code> 表示宽是高的 16/9 倍。</CardDescription>
       </CardHeader>
       <CardContent>
         <div class="w-full max-w-md">
@@ -37,7 +37,7 @@ const propsRows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">不同比例</CardTitle>
-        <CardDescription>通过改动 `ratio` 可得到正方形、宽幅、竖版等不同比例的容器。</CardDescription>
+        <CardDescription>通过改动 <code>ratio</code> 可得到正方形、宽幅、竖版等不同比例的容器。</CardDescription>
       </CardHeader>
       <CardContent>
         <div class="grid gap-4 sm:grid-cols-3">

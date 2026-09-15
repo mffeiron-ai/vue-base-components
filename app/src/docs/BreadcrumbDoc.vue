@@ -39,7 +39,7 @@ const rows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">基础用法</CardTitle>
-        <CardDescription>由 `BreadcrumbList` / `BreadcrumbItem` / `BreadcrumbLink` / `BreadcrumbSeparator` 组合；末尾用 `BreadcrumbPage` 表示当前页。</CardDescription>
+        <CardDescription>由 <code>BreadcrumbList</code> / <code>BreadcrumbItem</code> / <code>BreadcrumbLink</code> / <code>BreadcrumbSeparator</code> 组合；末尾用 <code>BreadcrumbPage</code> 表示当前页。</CardDescription>
       </CardHeader>
       <CardContent>
         <Breadcrumb>
@@ -64,7 +64,7 @@ const rows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">自定义分隔符</CardTitle>
-        <CardDescription>给 `BreadcrumbSeparator` 传入插槽内容即可替换默认的右箭头。</CardDescription>
+        <CardDescription>给 <code>BreadcrumbSeparator</code> 传入插槽内容即可替换默认的右箭头。</CardDescription>
       </CardHeader>
       <CardContent class="space-y-4">
         <Breadcrumb>
@@ -106,7 +106,7 @@ const rows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">折叠</CardTitle>
-        <CardDescription>层级太长时，用 `BreadcrumbEllipsis` 折叠中间部分。</CardDescription>
+        <CardDescription>层级太长时，用 <code>BreadcrumbEllipsis</code> 折叠中间部分。</CardDescription>
       </CardHeader>
       <CardContent>
         <Breadcrumb>
@@ -135,7 +135,7 @@ const rows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">下拉菜单</CardTitle>
-        <CardDescription>把 `BreadcrumbItem` 与 `DropdownMenu` 组合，把中间层级折叠进下拉菜单里。</CardDescription>
+        <CardDescription>把 <code>BreadcrumbItem</code> 与 <code>DropdownMenu</code> 组合，把中间层级折叠进下拉菜单里。</CardDescription>
       </CardHeader>
       <CardContent class="space-y-4">
         <!-- 省略号触发（官方写法） -->
@@ -206,7 +206,7 @@ const rows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">配合路由链接</CardTitle>
-        <CardDescription>用 `as-child` 把样式套到 `RouterLink` 上，保持客户端路由跳转。</CardDescription>
+        <CardDescription>用 <code>as-child</code> 把样式套到 <code>RouterLink</code> 上，保持客户端路由跳转。</CardDescription>
       </CardHeader>
       <CardContent>
         <Breadcrumb>

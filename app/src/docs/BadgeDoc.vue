@@ -28,7 +28,7 @@ const propsRows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">变体</CardTitle>
-        <CardDescription>用 `variant` 在 6 种样式间切换。</CardDescription>
+        <CardDescription>用 <code>variant</code> 在 6 种样式间切换。</CardDescription>
       </CardHeader>
       <CardContent>
         <div class="flex flex-wrap items-center gap-3">
@@ -43,7 +43,7 @@ const propsRows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">基础用法</CardTitle>
-        <CardDescription>不传 `variant` 时使用 `default`。</CardDescription>
+        <CardDescription>不传 <code>variant</code> 时使用 <code>default</code>。</CardDescription>
       </CardHeader>
       <CardContent>
         <div class="flex flex-wrap items-center gap-3">
@@ -58,7 +58,7 @@ const propsRows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">带图标</CardTitle>
-        <CardDescription>图标会自动缩到 `size-3`，并与文字保持间距。</CardDescription>
+        <CardDescription>图标会自动缩到 <code>size-3</code>，并与文字保持间距。</CardDescription>
       </CardHeader>
       <CardContent>
         <div class="flex flex-wrap items-center gap-3">
@@ -82,7 +82,7 @@ const propsRows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">作为链接</CardTitle>
-        <CardDescription>用 `as-child` 把徽标样式套到 `&lt;a&gt;` 上。</CardDescription>
+        <CardDescription>用 <code>as-child</code> 把徽标样式套到 <code>&lt;a&gt;</code> 上。</CardDescription>
       </CardHeader>
       <CardContent>
         <div class="flex flex-wrap items-center gap-3">

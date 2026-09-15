@@ -59,7 +59,7 @@ const rows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">变体</CardTitle>
-        <CardDescription>`variant` 共 6 种：主操作、次级操作、危险操作、描边、幽灵、链接。</CardDescription>
+        <CardDescription><code>variant</code> 共 6 种：主操作、次级操作、危险操作、描边、幽灵、链接。</CardDescription>
       </CardHeader>
       <CardContent>
         <div class="flex flex-wrap items-center gap-3">
@@ -72,7 +72,7 @@ const rows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">尺寸</CardTitle>
-        <CardDescription>常规 3 档 `sm` / `default` / `lg`，以及 3 档正方形纯图标尺寸。</CardDescription>
+        <CardDescription>常规 3 档 <code>sm</code> / <code>default</code> / <code>lg</code>，以及 3 档正方形纯图标尺寸。</CardDescription>
       </CardHeader>
       <CardContent class="space-y-4">
         <div class="flex flex-wrap items-center gap-3">
@@ -91,7 +91,7 @@ const rows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">带图标</CardTitle>
-        <CardDescription>图标与文字的间距由 `gap` 统一控制，不需要给图标加 margin；图标未写 `size-*` 时自动收敛为 `size-4`。</CardDescription>
+        <CardDescription>图标与文字的间距由 <code>gap</code> 统一控制，不需要给图标加 margin；图标未写 <code>size-*</code> 时自动收敛为 <code>size-4</code>。</CardDescription>
       </CardHeader>
       <CardContent>
         <div class="flex flex-wrap items-center gap-3">
@@ -115,7 +115,7 @@ const rows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">加载态</CardTitle>
-        <CardDescription>用 `Spinner` + `disabled` 表示操作进行中，避免重复提交。</CardDescription>
+        <CardDescription>用 <code>Spinner</code> + <code>disabled</code> 表示操作进行中，避免重复提交。</CardDescription>
       </CardHeader>
       <CardContent>
         <div class="flex flex-wrap items-center gap-3">
@@ -134,8 +134,8 @@ const rows = [
       <CardHeader>
         <CardTitle class="text-xl font-semibold">圆角、禁用与校验错误</CardTitle>
         <CardDescription>
-          风格预设会给按钮锁定 `rounded-md`（其特异性高于普通工具类），所以改成胶囊要写 `rounded-full!` 显式覆盖；
-          `disabled` 半透明且不可点击；表单校验失败时给按钮加 `aria-invalid`。
+          风格预设会给按钮锁定 <code>rounded-md</code>（其特异性高于普通工具类），所以改成胶囊要写 <code>rounded-full!</code> 显式覆盖；
+          <code>disabled</code> 半透明且不可点击；表单校验失败时给按钮加 <code>aria-invalid</code>。
         </CardDescription>
       </CardHeader>
       <CardContent class="space-y-4">
@@ -160,7 +160,7 @@ const rows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">as-child（让链接看起来像按钮）</CardTitle>
-        <CardDescription>加 `as-child` 后不再渲染 `&lt;button&gt;`，而是把按钮样式合并到唯一子元素上 —— 保留链接的语义与中键/右键行为。</CardDescription>
+        <CardDescription>加 <code>as-child</code> 后不再渲染 <code>&lt;button&gt;</code>，而是把按钮样式合并到唯一子元素上 —— 保留链接的语义与中键/右键行为。</CardDescription>
       </CardHeader>
       <CardContent>
         <div class="flex flex-wrap items-center gap-3">
@@ -184,7 +184,7 @@ const rows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">按钮组</CardTitle>
-        <CardDescription>相邻操作可用 `ButtonGroup` 拼接，自动去掉接缝处的圆角与边框。</CardDescription>
+        <CardDescription>相邻操作可用 <code>ButtonGroup</code> 拼接，自动去掉接缝处的圆角与边框。</CardDescription>
       </CardHeader>
       <CardContent>
         <ButtonGroup>
@@ -222,8 +222,8 @@ const rows = [
           </table>
         </div>
         <p class="text-sm text-muted-foreground">
-          其余原生属性（如 `type` / `disabled` / `aria-label`）会直接透传到渲染出的元素；
-          纯图标按钮务必补 `aria-label`。
+          其余原生属性（如 <code>type</code> / <code>disabled</code> / <code>aria-label</code>）会直接透传到渲染出的元素；
+          纯图标按钮务必补 <code>aria-label</code>。
         </p>
       </CardContent>
     </Card>

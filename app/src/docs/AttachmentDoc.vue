@@ -43,7 +43,7 @@ const mediaRows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">基础用法</CardTitle>
-        <CardDescription>由 `AttachmentMedia` + `AttachmentContent` + `AttachmentActions` 组合而成。</CardDescription>
+        <CardDescription>由 <code>AttachmentMedia</code> + <code>AttachmentContent</code> + <code>AttachmentActions</code> 组合而成。</CardDescription>
       </CardHeader>
       <CardContent>
         <Attachment>
@@ -67,7 +67,7 @@ const mediaRows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">图片</CardTitle>
-        <CardDescription>在 `AttachmentMedia` 上设 `variant="image"`，用 `orientation="vertical"` 让媒体位于内容上方。</CardDescription>
+        <CardDescription>在 <code>AttachmentMedia</code> 上设 <code>variant="image"</code>，用 <code>orientation="vertical"</code> 让媒体位于内容上方。</CardDescription>
       </CardHeader>
       <CardContent>
         <div class="flex flex-wrap items-start gap-4">
@@ -96,7 +96,7 @@ const mediaRows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">上传状态</CardTitle>
-        <CardDescription>用 `state` 表达上传生命周期，`error` 会切到危险色。</CardDescription>
+        <CardDescription>用 <code>state</code> 表达上传生命周期，<code>error</code> 会切到危险色。</CardDescription>
       </CardHeader>
       <CardContent>
         <div class="flex flex-wrap gap-3">
@@ -117,7 +117,7 @@ const mediaRows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">尺寸</CardTitle>
-        <CardDescription>通过 `size` 在 `default` / `sm` / `xs` 之间切换。</CardDescription>
+        <CardDescription>通过 <code>size</code> 在 <code>default</code> / <code>sm</code> / <code>xs</code> 之间切换。</CardDescription>
       </CardHeader>
       <CardContent>
         <div class="flex flex-wrap items-center gap-3">
@@ -150,7 +150,7 @@ const mediaRows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">分组</CardTitle>
-        <CardDescription>用 `AttachmentGroup` 把多个附件排成横向可滚动的一行。</CardDescription>
+        <CardDescription>用 <code>AttachmentGroup</code> 把多个附件排成横向可滚动的一行。</CardDescription>
       </CardHeader>
       <CardContent>
         <AttachmentGroup>
@@ -206,7 +206,7 @@ const mediaRows = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">触发器</CardTitle>
-        <CardDescription>`AttachmentTrigger` 会铺满整张卡片，点击卡片即触发；操作按钮仍可独立点击。</CardDescription>
+        <CardDescription><code>AttachmentTrigger</code> 会铺满整张卡片，点击卡片即触发；操作按钮仍可独立点击。</CardDescription>
       </CardHeader>
       <CardContent>
         <Attachment>

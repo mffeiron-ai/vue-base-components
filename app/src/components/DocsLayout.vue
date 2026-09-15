@@ -53,7 +53,7 @@ const isFullPage = computed(() => route.meta.fullPage === true)
       </aside>
 
       <!-- 内容区（所有路由切换用 page 过渡） -->
-      <main class="min-w-0 flex-1">
+      <main class="docs-content min-w-0 flex-1">
         <Transition name="page" mode="out-in">
           <component :is="page" :key="route.path" />
         </Transition>
