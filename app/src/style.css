@@ -25,7 +25,14 @@
 /* 组件库共享工具类（no-scrollbar / scrollbar-none / scroll-fade-x / shimmer） */
 @import "../../src/styles/utilities.css";
 
-/* RionStudio design-system style presets */
+/* RionStudio design-system style presets
+ *
+ * 8 套预设被 Tailwind 一起编译（@apply / 自定义 variant 需要这里的上下文，无法拆成
+ * 独立文件按需 import），但它们全部常驻会让样式表膨胀到 3519 条规则 / 1.97MB，
+ * 而任意时刻只有 <html> 上 .style-xxx 那一套生效。
+ * 「打开下拉/弹层、切换 class、focus 变化」都会触发 Chromium 的**整文档**样式重算，
+ * 重算耗时与规则数（尤其 :has() 规则）近似线性 —— 全量常驻时一次「打开下拉」实测 1923ms。
+ * 所以 app/src/lib/style.ts 会在运行时把非当前风格的规则从这张表里摘出去（见 presetIsolation.ts）。 */
 @import "../../src/styles/style-luma.css";
 @import "../../src/styles/style-lyra.css";
 @import "../../src/styles/style-maia.css";
@@ -34,6 +41,11 @@
 @import "../../src/styles/style-rhea.css";
 @import "../../src/styles/style-sera.css";
 @import "../../src/styles/style-vega.css";
+
+/* 标记规则：给 presetIsolation 定位「主样式表」用（无视觉影响） */
+:root {
+  --rion-preset-host: 1;
+}
 
 /* 告诉 Tailwind 扫描组件库源码中的类名 */
 @source "../../src/";

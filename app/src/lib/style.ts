@@ -12,6 +12,7 @@ import type {
   ShadowPreset,
 } from '@/random-ui/config/config'
 import { THEMES, useGlobalTheme } from './theme'
+import { initPresetIsolation, isolatePreset } from './presetIsolation'
 
 // 复用 random-ui 现成选项（风格 / 圆角排版 / 阴影 / 图标库）
 // 注意：从 `@/random-ui/config/config` 运行时 import 会连带整个 random-ui 预览组件树，
@@ -209,6 +210,8 @@ function applyLayout() {
 function apply() {
   applyStyle()
   applyLayout()
+  // 8 套预设虽然都在样式表里，但只把当前这套留在表内（详见 presetIsolation.ts）
+  isolatePreset(styleKey.value.replace('reka-', ''))
 }
 
 function persistFonts() {
@@ -304,6 +307,8 @@ export function useGlobalStyle() {
 
 // 模块加载时应用一次
 apply()
+// 样式表晚于 JS 就位 / dev HMR 换表时，自动重跑一次 apply
+initPresetIsolation(apply)
 
 // 联动 1：主题索引变化时，重算「跟随主题」的圆角 / 阴影，并让三档字体跟随主题
 watch(themeIndex, () => {

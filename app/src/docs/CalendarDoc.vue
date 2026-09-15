@@ -78,7 +78,7 @@ const slots = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">选中值（受控）</CardTitle>
-        <CardDescription>用 `v-model` 拿到选中的日期；下面是当前值（DateValue 对象，带 year / month / day）。</CardDescription>
+        <CardDescription>用 <code class="font-mono text-sm">v-model</code> 拿到选中的日期；下面是当前值（DateValue 对象，带 year / month / day）。</CardDescription>
       </CardHeader>
       <CardContent class="space-y-4">
         <div class="flex flex-wrap items-center gap-2 text-sm">
@@ -96,7 +96,10 @@ const slots = [
       <CardHeader>
         <CardTitle class="text-xl font-semibold">标题下拉（layout）</CardTitle>
         <CardDescription>
-          用 `layout` 把标题变成下拉：`month-and-year` 月份+年份都可选、`month-only` 只选月份、`year-only` 只选年份。
+          用 <code class="font-mono text-sm">layout</code> 把标题变成下拉：
+          <code class="font-mono text-sm">month-and-year</code> 月份+年份都可选、
+          <code class="font-mono text-sm">month-only</code> 只选月份、
+          <code class="font-mono text-sm">year-only</code> 只选年份。
           标题本身就是项目自己的 Select（触发器去掉了边框与底色，所以看上去就是标题文字），点开才是下拉列表，键盘和移动端都能正常用。
         </CardDescription>
       </CardHeader>
@@ -122,7 +125,7 @@ const slots = [
     <Card class="mt-8">
       <CardHeader>
         <CardTitle class="text-xl font-semibold">多个月份</CardTitle>
-        <CardDescription>`number-of-months` 同时显示多个月；加 `paged-navigation` 后翻页按“屏”走（一次翻 2 个月而非 1 个）。</CardDescription>
+        <CardDescription><code class="font-mono text-sm">number-of-months</code> 同时显示多个月；加 <code class="font-mono text-sm">paged-navigation</code> 后翻页按“屏”走（一次翻 2 个月而非 1 个）。</CardDescription>
       </CardHeader>
       <CardContent class="space-y-6">
         <div>
@@ -141,8 +144,10 @@ const slots = [
       <CardHeader>
         <CardTitle class="text-xl font-semibold">换页动画（page-animation）</CardTitle>
         <CardDescription>
-          用 `page-animation` 选换月/翻页时月份网格的动画：**不传就是默认的 `slide` 滑入**（会按翻页方向自动换向）、
-          `fade` 淡入淡出、`zoom` 缩放、`flip` 3D 翻转；传 `none` 关掉动画、直接切换。
+          用 <code class="font-mono text-sm">page-animation</code> 选换月/翻页时月份网格的动画：
+          <strong>不传就是默认的 <code class="font-mono text-sm">slide</code> 滑入</strong>（会按翻页方向自动换向）、
+          <code class="font-mono text-sm">fade</code> 淡入淡出、<code class="font-mono text-sm">zoom</code> 缩放、
+          <code class="font-mono text-sm">flip</code> 3D 翻转；传 <code class="font-mono text-sm">none</code> 关掉动画、直接切换。
           切下面的动画后，点日历右上的上一月 / 下一月按钮就能看到效果。
         </CardDescription>
       </CardHeader>
@@ -171,7 +176,8 @@ const slots = [
       <CardHeader>
         <CardTitle class="text-xl font-semibold">限制范围与禁用日期</CardTitle>
         <CardDescription>
-          `min-value` / `max-value` 限制可选区间（超出置灰）；`is-date-unavailable` 可自定义规则 ——
+          <code class="font-mono text-sm">min-value</code> / <code class="font-mono text-sm">max-value</code> 限制可选区间（超出置灰）；
+          <code class="font-mono text-sm">is-date-unavailable</code> 可自定义规则 ——
           这里禁掉了所有偶数日，它们会带删除线。
         </CardDescription>
       </CardHeader>
@@ -194,7 +200,8 @@ const slots = [
       <CardHeader>
         <CardTitle class="text-xl font-semibold">语言与历法</CardTitle>
         <CardDescription>
-          `locale` 决定界面语言与历法；`weekday-format` 控制星期名的详细程度（narrow / short / long）。
+          <code class="font-mono text-sm">locale</code> 决定界面语言与历法；
+          <code class="font-mono text-sm">weekday-format</code> 控制星期名的详细程度（narrow / short / long）。
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -216,8 +223,10 @@ const slots = [
       <CardHeader>
         <CardTitle class="text-xl font-semibold">自定义标题、格子尺寸与图标</CardTitle>
         <CardDescription>
-          标题区用 `#calendar-heading` 插槽替换（插槽给的 `month` / `year` 就是现成的下拉组件）；
-          格子尺寸用 `**:data-[slot=calendar-cell-trigger]:size-11!` 覆盖；切换按钮的图标用具名插槽换。
+          标题区用 <code class="font-mono text-sm">#calendar-heading</code> 插槽替换（插槽给的
+          <code class="font-mono text-sm">month</code> / <code class="font-mono text-sm">year</code> 就是现成的下拉组件）；
+          格子尺寸用 <code class="font-mono text-sm">**:data-[slot=calendar-cell-trigger]:size-11!</code> 覆盖；
+          切换按钮的图标用具名插槽换。
         </CardDescription>
       </CardHeader>
       <CardContent>

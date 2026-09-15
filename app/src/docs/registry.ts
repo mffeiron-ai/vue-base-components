@@ -89,6 +89,12 @@ export const componentDocs: ComponentDoc[] = [
     description: '选择单个日期，支持月份/年份下拉、多月份、范围限制、禁用规则与多语言历法。',
     importCode: `import { Calendar } from '@/components/ui/calendar'`,
   },
+  {
+    name: 'card',
+    title: 'Card 卡片',
+    description: '卡片容器，组合标题、描述、正文、右上角操作与页脚，间距由外层统一控制。',
+    importCode: `import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */
