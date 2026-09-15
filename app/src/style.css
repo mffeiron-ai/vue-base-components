@@ -52,6 +52,11 @@
 /* 以及文档应用自身源码中的类名 */
 @source ".";
 
+/*
+ * 弹层开合不抖动的两条全局规则（html 滚动条槽常驻 + 清零 reka 给 body 的补偿 padding）
+ * 已收进组件库的 src/styles/utilities.css，随上面那行 @import 一起生效，这里不再重复定义。
+ */
+
 /**
  * Design Token（和组件库的 Tailwind 主题保持一致）
  * 以 shadcn-vue 默认主题为基础

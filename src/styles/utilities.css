@@ -10,6 +10,27 @@
  * ─────────────────────────────────────────────
  */
 
+/* ─────────────── 全局基线：弹层开合不抖 ───────────────
+   reka-ui 的弹层（Dialog / Drawer / DropdownMenu / Select / Popover …）默认 modal，
+   打开时会给 body 设 overflow: hidden 锁背景滚动 → 滚动条消失，页面可用宽度瞬间多出
+   十几 px → 固定顶栏与中间文档区都会横向抖一下；它给 body 补的 padding-right 救不了
+   position: fixed 的元素。这里是配套的两条：
+
+   1) 滚动条槽常驻 —— `overflow-y: auto` 是必需的：scrollbar-gutter 只在元素自身是
+      auto / scroll / hidden 时才保留槽位，html 默认的 visible 会让它失效；
+   2) 把上面的补偿清零 —— 滚动条既然没被隐藏，那 15px 就变成多余位移，
+      需要 !important 才能压过 reka 写的内联样式。
+
+   应用如有自己的 body 左右内边距需求，请用更具体的规则覆盖本条的 body 规则。 */
+html {
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+body {
+  padding-right: 0 !important;
+}
+
 /* ─────────────── 滚动条 ─────────────── */
 
 @utility no-scrollbar {
