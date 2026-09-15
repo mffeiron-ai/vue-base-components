@@ -143,6 +143,12 @@ export const componentDocs: ComponentDoc[] = [
     description: '表格标签族的样式包装（Table / TableHead / TableCell …），以及纯 Vue 实现的排序、筛选、分页、行选择与固定表头滚动。',
     importCode: `import { Table, TableBody, TableCaption, TableCell, TableEmpty, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table'`,
   },
+  {
+    name: 'date-picker',
+    title: 'Date Picker 日期选择器',
+    description: '单日 / 输入框 + 日历 / 日期区间三种形态，底层 reka-ui 日历，值类型为 @internationalized/date 的 CalendarDate；支持可选范围、禁用日期、快捷预设与自定义格式。',
+    importCode: `import { DatePicker, DatePickerInput, DatePickerRange, formatDateISO, toCalendarDate } from '@/components/ui/date-picker'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */

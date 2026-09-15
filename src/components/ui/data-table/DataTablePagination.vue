@@ -15,7 +15,9 @@ import { Button } from "../button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../select"
 
 interface PaginationTable {
-  getState: () => { pagination?: { pageIndex: number, pageSize: number } }
+  /** TanStack 实例：兼容 v8 / v9 以及自己实现的薄壳（字段都按需读） */
+  getState?: () => { pagination?: { pageIndex: number, pageSize: number } }
+  pagination?: { pageIndex: number, pageSize: number }
   getPageCount: () => number
   getCanPreviousPage?: () => boolean
   getCanNextPage?: () => boolean
@@ -36,7 +38,7 @@ const props = withDefaults(defineProps<{
   pageSizeOptions: () => [5, 10, 20, 50],
 })
 
-const state = () => props.table.getState().pagination ?? { pageIndex: 0, pageSize: 10 }
+const state = () => props.table.getState?.().pagination ?? props.table.pagination ?? { pageIndex: 0, pageSize: 10 }
 const pageCount = () => Math.max(1, props.table.getPageCount())
 const total = () => props.table.getRowCount?.() ?? props.table.getFilteredRowModel?.().rows.length ?? 0
 const selectedCount = () => props.table.getFilteredSelectedRowModel?.().rows.length ?? 0

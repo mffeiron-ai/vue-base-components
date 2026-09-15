@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import { computed, h, ref } from 'vue'
+import { computed, h, reactive, ref } from 'vue'
 import {
-  createCoreRowModel,
   createFacetedRowModel,
   createFacetedUniqueValues,
   createFilteredRowModel,
   createPaginatedRowModel,
   createSortedRowModel,
   stockFeatures,
+  tableFeatures,
   useTable,
 } from '@tanstack/vue-table'
+import { sortFn_alphanumeric, sortFn_text } from '@tanstack/vue-table'
 import { ArrowDown, ArrowUp, ChevronsUpDown } from 'lucide-vue-next'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -123,11 +124,21 @@ const logs = Array.from({ length: 14 }, (_, i) => ({
 }))
 
 // ---------- 4. TanStack 驱动（排序 / 分面筛选 / 分页 / 列显隐 / 行选择） ----------
-const tsSorting = ref<{ id: string, desc: boolean }[]>([])
-const tsFilters = ref<{ id: string, value: unknown }[]>([])
-const tsVisibility = ref<Record<string, boolean>>({})
-const tsSelection = ref<Record<string, boolean>>({})
-const tsPagination = ref({ pageIndex: 0, pageSize: 5 })
+// TanStack 状态用 reactive 容器直接持有：v9 的 Vue 适配器不会解包传进 state 的 ref（
+// 传 ref 会让内部拿到 Ref 对象，getIsSorted() 之类直接报 "x.find is not a function"）
+const tsState: any = reactive({
+  sorting: [] as { id: string, desc: boolean }[],
+  columnFilters: [] as { id: string, value: unknown }[],
+  columnVisibility: {} as Record<string, boolean>,
+  rowSelection: {} as Record<string, boolean>,
+  pagination: { pageIndex: 0, pageSize: 5 },
+})
+
+// TanStack 的 onXxxChange 回调收到的是 Updater（值或函数），统一在这里落地
+function applyTs<K extends keyof typeof tsState>(key: K, updater: any) {
+  const cur = tsState[key]
+  tsState[key] = typeof updater === 'function' ? updater(cur) : updater
+}
 
 // 列定义就是 TanStack 那套：header / cell 支持字符串、模板函数或组件
 const tsColumns: any[] = [
@@ -137,7 +148,7 @@ const tsColumns: any[] = [
     enableHiding: false,
     header: ({ table }: any) => h(Checkbox, {
       modelValue: table.getIsAllPageRowsSelected(),
-      indeterminate: table.getIsSomePageRowsSelected(),
+      indeterminate: table.getIsSomePageRowsSelected() && !table.getIsAllPageRowsSelected(),
       'onUpdate:modelValue': (v: any) => table.toggleAllPageRowsSelected(!!v),
       'aria-label': '全选',
     }),
@@ -149,13 +160,13 @@ const tsColumns: any[] = [
   },
   {
     accessorKey: 'name',
-    header: ({ column }: any) => h(DataTableColumnHeader, { column, title: '姓名' }),
+    header: '姓名',
     cell: ({ row }: any) => h('span', { class: 'font-medium' }, row.getValue('name')),
   },
   { accessorKey: 'email', header: '邮箱', cell: ({ row }: any) => h('span', { class: 'text-muted-foreground' }, row.getValue('email')) },
   {
     accessorKey: 'status',
-    header: ({ column }: any) => h(DataTableColumnHeader, { column, title: '状态' }),
+    header: '状态',
     // 自定义筛选：相等匹配（分面选项就是拿它算出来的）
     filterFn: (row: any, id: string, value: string) => !value || row.getValue(id) === value,
     cell: ({ row }: any) => h(Badge, {
@@ -164,33 +175,35 @@ const tsColumns: any[] = [
   },
   {
     accessorKey: 'amount',
+    // 自定义表头组件：DataTableColumnHeader 里是排序菜单（升序 / 降序 / 清除）
     header: ({ column }: any) => h(DataTableColumnHeader, { column, title: '金额' }),
     cell: ({ row }: any) => h('span', { class: 'tabular-nums' }, row.getValue('amount')),
   },
 ]
 
+// TanStack v9：功能区（排序 / 筛选 / 分面 / 分页 / 列显隐 / 行选择）与各 row model 都在
+// tableFeatures({...}) 里一次性注册，就地放在组件外，避免每次渲染重建
+const tsFeatures = tableFeatures({
+  ...stockFeatures,
+  sortedRowModel: createSortedRowModel(),
+  filteredRowModel: createFilteredRowModel(),
+  paginatedRowModel: createPaginatedRowModel(),
+  facetedRowModel: createFacetedRowModel(),
+  facetedUniqueValues: createFacetedUniqueValues(),
+  // 排序函数登记表：列定义里 sortingFn 用这些名字（不登记会有 "sortFn 'text' is not registered" 警告）
+  sortFns: { text: sortFn_text, alphanumeric: sortFn_alphanumeric },
+})
+
 const tanstackTable = useTable({
-  features: stockFeatures,
+  features: tsFeatures,
   data: people,
   columns: tsColumns,
-  state: {
-    sorting: tsSorting,
-    columnFilters: tsFilters,
-    columnVisibility: tsVisibility,
-    rowSelection: tsSelection,
-    pagination: tsPagination,
-  },
-  onSortingChange: (u: any) => valueUpdater(u, tsSorting),
-  onColumnFiltersChange: (u: any) => valueUpdater(u, tsFilters),
-  onColumnVisibilityChange: (u: any) => valueUpdater(u, tsVisibility),
-  onRowSelectionChange: (u: any) => valueUpdater(u, tsSelection),
-  onPaginationChange: (u: any) => valueUpdater(u, tsPagination),
-  getCoreRowModel: createCoreRowModel(),
-  getSortedRowModel: createSortedRowModel(),
-  getFilteredRowModel: createFilteredRowModel(),
-  getFacetedRowModel: createFacetedRowModel(),
-  getFacetedUniqueValues: createFacetedUniqueValues(),
-  getPaginationRowModel: createPaginatedRowModel(),
+  state: tsState,
+  onSortingChange: (u: any) => applyTs('sorting', u),
+  onColumnFiltersChange: (u: any) => applyTs('columnFilters', u),
+  onColumnVisibilityChange: (u: any) => applyTs('columnVisibility', u),
+  onRowSelectionChange: (u: any) => applyTs('rowSelection', u),
+  onPaginationChange: (u: any) => applyTs('pagination', u),
 })
 
 // 分面筛选：候选值 + 计数直接来自 faceted unique values
@@ -198,11 +211,11 @@ const statusColumn = () => tanstackTable.getAllColumns?.().find((c: any) => c.id
 const statusOptions = computed(() =>
   [...(statusColumn()?.getFacetedUniqueValues?.() ?? new Map()).entries()].map(([value, count]) => ({ value: String(value), count: Number(count) })),
 )
-const activeStatus = computed(() => (tsFilters.value.find((f) => f.id === 'status')?.value as string) ?? '')
+const activeStatus = computed(() => (tsState.columnFilters.find((f: any) => f.id === 'status')?.value as string) ?? '')
 function setStatus(value: string) {
   const next = value === activeStatus.value ? '' : value
-  tsFilters.value = next ? [{ id: 'status', value: next }] : []
-  tsPagination.value = { ...tsPagination.value, pageIndex: 0 }
+  tsState.columnFilters = next ? [{ id: 'status', value: next }] : []
+  tsState.pagination.pageIndex = 0
 }
 
 // ---------- API ----------
@@ -223,11 +236,13 @@ const rows = [
   <div class="mx-auto max-w-3xl px-6 py-10">
     <h1 class="text-3xl font-bold tracking-tight">Data Table 数据表格</h1>
     <p class="mt-3 text-muted-foreground">
-      表格由一组纯 HTML 语义标签的包装组件组成（<code>Table</code> / <code>TableHead</code> …），
-      没有 headless 依赖。「数据表格」本身不是一个组件：
-      上游 shadcn 的那份指南基于 <code>@tanstack/vue-table</code>，
-      而本仓库没有内置该依赖，所以下面第 2 节的排序 / 筛选 / 分页 / 行选择是<strong>纯 Vue</strong> 实现，
-      直接照搬到项目里就能用。
+      表格由一组纯 HTML 语义标签的包装组件组成（<code>Table</code> / <code>TableHead</code> …），<br />
+      本身不依赖任何 headless 库。数据表格有两种用法：<br />
+      第 2 节是<strong>不引依赖</strong>的最小实现（纯 Vue 的排序 / 筛选 / 分页 / 行选择，几十到几百行数据够用）；<br />
+      第 4 节是 <strong>TanStack 驱动</strong>——本仓库已把 <code>@tanstack/vue-table</code><br />
+      作为<strong>可选 peer 依赖</strong>（不用数据表格的项目不必安装），<br />
+      <code>src/components/ui/data-table/</code> 提供渲染层与配套组件，<br />
+      列显隐、拖拽宽度、分面筛选、服务端分页、虚拟滚动都能直接接。
     </p>
 
     <!-- 1. 基础用法 -->
@@ -402,8 +417,8 @@ const rows = [
       </CardContent>
     </Card>
 
-    <!-- 4. TanStack 驱动（暂时关闭：渲染期报 parentNode of null，待定位后再打开） -->
-    <Card v-if="false" class="mt-8">
+    <!-- 4. TanStack 驱动 -->
+    <Card class="mt-8">
       <CardHeader>
         <h2 class="text-xl font-semibold">TanStack 驱动：排序 / 分面筛选 / 分页 / 列显隐 / 行选择</h2>
         <CardDescription>
@@ -420,7 +435,7 @@ const rows = [
             <div class="flex flex-wrap items-center justify-between gap-3">
               <div class="flex flex-wrap items-center gap-2">
                 <Button
-                  v-for="opt in statusOptions()"
+                  v-for="opt in statusOptions"
                   :key="opt.value"
                   size="sm"
                   :variant="activeStatus === opt.value ? 'default' : 'outline'"
@@ -444,9 +459,9 @@ const rows = [
         </DataTable>
 
         <p class="mt-3 text-sm text-muted-foreground">
-          当前排序：<code>{{ tsSorting.map((s) => `${s.id} ${s.desc ? 'desc' : 'asc'}`).join(' → ') || '（无）' }}</code>
-          · 筛选：<code>{{ tsFilters.length ? JSON.stringify(tsFilters) : '（无）' }}</code>
-          · 每页 <code>{{ tsPagination.pageSize }}</code> / 第 <code>{{ tsPagination.pageIndex + 1 }}</code> 页
+          当前排序：<code>{{ tsState.sorting.map((s: any) => `${s.id} ${s.desc ? 'desc' : 'asc'}`).join(' → ') || '（无）' }}</code>
+          · 筛选：<code>{{ tsState.columnFilters.length ? JSON.stringify(tsState.columnFilters) : '（无）' }}</code>
+          · 每页 <code>{{ tsState.pagination.pageSize }}</code> / 第 <code>{{ tsState.pagination.pageIndex + 1 }}</code> 页
         </p>
       </CardContent>
     </Card>
@@ -487,8 +502,9 @@ const rows = [
           <code>table-header</code>、<code>table-body</code>、<code>table-footer</code>、
           <code>table-row</code>、<code>table-head</code>、<code>table-cell</code>、
           <code>table-caption</code>。
-          另外 <code>src/components/ui/table/utils.ts</code> 是早期数据表格留下的文件，
-          依赖未安装的 <code>@tanstack/vue-table</code>，目前无人引用（可删或补依赖）。
+          另外 <code>src/components/ui/table/utils.ts</code> 里的 <code>valueUpdater</code>
+          是受控状态的桥接工具（把 TanStack 的 updater 写回 ref），第 4 节的 TanStack 表格就用它；
+          它依赖的可选包 <code>@tanstack/vue-table</code> 已随 data-table 组件一起装好。
         </p>
       </CardContent>
     </Card>

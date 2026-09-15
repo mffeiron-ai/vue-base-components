@@ -9,11 +9,20 @@
  * `getCanHide` / `toggleVisibility`）；为了不被 TanStack 版本的类型签名绑住，
  * 这里用结构化最小类型，注册 sorting / columnVisibility feature 后即可直接用。
  */
-import { ArrowDown, ArrowUp, ChevronsUpDown, EyeOff } from "lucide-vue-next"
+/**
+ * DataTableColumnHeader —— 表头里的「排序菜单」（点标题弹 DropdownMenu：升序 / 降序 / 清除排序）。
+ *
+ * 列定义里这样用：
+ *   { accessorKey: 'amount', header: ({ column }) => h(DataTableColumnHeader, { column, title: '金额' }) }
+ *
+ * 不想写列定义的话，DataTable 渲染层会给「字符串表头 + 可排序」的列自动配一个循环排序按钮
+ * （升序 → 降序 → 取消，Shift = 多列排序），两者可以混用。
+ * 列显隐交给 DataTableViewOptions。
+ */
+import { ArrowDown, ArrowUp, Check, ChevronsUpDown } from "lucide-vue-next"
 import { Button } from "../button"
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
@@ -39,42 +48,47 @@ const props = defineProps<{
 }>()
 
 const sorted = () => props.column.getIsSorted?.() ?? false
+
+/** 升序 / 降序（multi = true 时为多列排序，菜单里固定单列） */
+function setSort(desc: boolean, multi = false) {
+  props.column.toggleSorting?.(desc, multi)
+}
+
+/** 清掉这一列的排序 */
+function clearSort() {
+  props.column.clearSorting?.()
+}
 </script>
 
 <template>
-  <div v-if="column.getCanSort?.()" :class="cn('flex items-center', props.class)">
-    <DropdownMenu>
-      <DropdownMenuTrigger as-child>
-        <Button variant="ghost" size="sm" class="-ml-2.5 h-8 data-[state=open]:bg-accent">
-          <span>{{ title }}</span>
-          <ArrowDown v-if="sorted() === 'desc'" />
-          <ArrowUp v-else-if="sorted() === 'asc'" />
-          <ChevronsUpDown v-else />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="start">
-        <DropdownMenuItem @select="column.toggleSorting?.(false)">
-          <ArrowUp />
-          <span>升序</span>
+  <DropdownMenu v-if="column.getCanSort?.()">
+    <DropdownMenuTrigger as-child>
+      <Button
+        variant="ghost"
+        size="sm"
+        :class="cn('-ml-2.5 h-8 gap-1 data-[state=open]:bg-accent', props.class)"
+      >
+        <span>{{ title }}</span>
+        <ArrowDown v-if="sorted() === 'desc'" class="size-4" />
+        <ArrowUp v-else-if="sorted() === 'asc'" class="size-4" />
+        <ChevronsUpDown v-else class="size-4 opacity-50" />
+      </Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent align="start" class="w-36">
+      <DropdownMenuItem @select="setSort(false)">
+        <ArrowUp class="mr-2 size-4" />升序
+      </DropdownMenuItem>
+      <DropdownMenuItem @select="setSort(true)">
+        <ArrowDown class="mr-2 size-4" />降序
+      </DropdownMenuItem>
+      <template v-if="sorted()">
+        <DropdownMenuSeparator />
+        <DropdownMenuItem @select="clearSort()">
+          <Check class="mr-2 size-4" />清除排序
         </DropdownMenuItem>
-        <DropdownMenuItem @select="column.toggleSorting?.(true)">
-          <ArrowDown />
-          <span>降序</span>
-        </DropdownMenuItem>
-        <template v-if="column.getCanHide?.()">
-          <DropdownMenuSeparator />
-          <DropdownMenuCheckboxItem
-            :model-value="false"
-            @select="column.toggleVisibility?.(false)"
-          >
-            <EyeOff />
-            <span>隐藏该列</span>
-          </DropdownMenuCheckboxItem>
-        </template>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  </div>
+      </template>
+    </DropdownMenuContent>
+  </DropdownMenu>
 
-  <!-- 不可排序时退化成纯文本表头 -->
-  <span v-else>{{ title }}</span>
+  <span v-else :class="props.class">{{ title }}</span>
 </template>

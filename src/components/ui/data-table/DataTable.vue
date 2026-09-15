@@ -17,6 +17,7 @@
  */
 import { computed } from "vue"
 import { FlexRender } from "@tanstack/vue-table"
+import { ArrowDown, ArrowUp, ChevronsUpDown } from "lucide-vue-next"
 import { cn } from "../../../lib/utils"
 
 /** TanStack 实例的结构化最小约定（不绑定具体版本的类型名） */
@@ -27,7 +28,7 @@ interface TableLike {
       id: string
       colSpan: number
       isPlaceholder: boolean
-      column: { columnDef: { header?: unknown }, getCanSort?: () => boolean, getIsSorted?: () => false | 'asc' | 'desc', getSize?: () => number }
+      column: { columnDef: { header?: unknown }, getCanSort?: () => boolean, getIsSorted?: () => false | 'asc' | 'desc', getToggleSortingHandler?: () => any, getSize?: () => number }
       getContext: () => unknown
     }>
   }>
@@ -96,7 +97,24 @@ const cellKey = (rowId: string, cellId: string) => `${rowId}:${cellId}`
               class="text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
             >
               <template v-if="!header.isPlaceholder">
-                <FlexRender :header="header" />
+                <!--
+                  可排序的列默认切全自带按钮：点一下 升序 → 降序 → 取消，按住 Shift = 多列排序。
+                  如果列定义自己给了 header（组件/函数），说明你想自己控表头，这里就不插手，
+                  直接交给 FlexRender —— 那种场景用 DataTableColumnHeader（排序菜单）。
+                -->
+                <button
+                  v-if="header.column.getCanSort && header.column.getCanSort() && typeof header.column.columnDef.header === 'string'"
+                  type="button"
+                  class="hover:bg-accent hover:text-accent-foreground -ml-2 flex h-8 items-center gap-1 rounded-md px-2 text-sm font-medium transition-colors"
+                  title="点击排序，按住 Shift 多列排序"
+                  @click="(e) => header.column.getToggleSortingHandler?.()?.(e)"
+                >
+                  <FlexRender :header="header" />
+                  <ArrowDown v-if="header.column.getIsSorted?.() === 'desc'" class="size-4" />
+                  <ArrowUp v-else-if="header.column.getIsSorted?.() === 'asc'" class="size-4" />
+                  <ChevronsUpDown v-else class="size-4 opacity-50" />
+                </button>
+                <FlexRender v-else :header="header" />
               </template>
             </th>
           </tr>
@@ -133,8 +151,6 @@ const cellKey = (rowId: string, cellId: string) => `${rowId}:${cellId}`
             </td>
           </tr>
         </tbody>
-
-        <slot name="tbody-extra" />
       </table>
     </div>
 
