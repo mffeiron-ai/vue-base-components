@@ -1,4 +1,16 @@
 <script setup lang="ts">
+/**
+ * Command 根组件 —— reka-ui ListboxRoot + 本目录自建的过滤逻辑。
+ *
+ * 过滤是「命令面板」的核心，流程：
+ *   1. 每个 CommandItem 挂载时把自己的文本注册到 allItems；
+ *   2. 搜索词变化 → filterItems()：用 reka 的 contains 逐个打分（分值只区分命中/不命中）；
+ *   3. Item 按分数决定自己去渲染（v-if），Group 按「组内还有没有命中」整组隐藏；
+ *   4. CommandEmpty 在「有搜索词且命中数为 0」时出现。
+ *
+ * v-model(modelValue) 是 ListboxRoot 的高亮项（键盘上下选中的那一项），
+ * 不是搜索词 —— 搜索词在 filterState.search 里。data-slot="command" 供预设挂钩。
+ */
 import type { ListboxRootEmits, ListboxRootProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"
@@ -17,9 +29,11 @@ const delegatedProps = reactiveOmit(props, "class")
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits)
 
+// 注册表：所有 Item / Group 在这里登记，过滤时只跑这两张表
 const allItems = ref<Map<string, string>>(new Map())
 const allGroups = ref<Map<string, Set<string>>>(new Map())
 
+// reka 的文本匹配器，sensitivity: "base" = 忽略大小写与重音
 const { contains } = useFilter({ sensitivity: "base" })
 const filterState = reactive({
   search: "",
@@ -33,6 +47,10 @@ const filterState = reactive({
   },
 })
 
+/**
+ * 搜索词变化时重算命中（复杂度 O(选项数)，所以不做防抖也能跟手）。
+ * 搜索词为空时直接认为全命中，交给 Item 自己显示（省一次遍历）。
+ */
 function filterItems() {
   if (!filterState.search) {
     filterState.filtered.count = allItems.value.size
@@ -69,6 +87,7 @@ watch(() => filterState.search, () => {
   filterItems()
 })
 
+// 交给后代组件用：Item 注册文本 / Group 判断要不要隐藏 / Empty 判断要不要出现
 provideCommandContext({
   allItems,
   allGroups,

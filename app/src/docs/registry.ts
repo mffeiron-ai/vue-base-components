@@ -125,6 +125,12 @@ export const componentDocs: ComponentDoc[] = [
     description: '可搜索的下拉选择框，支持单选 / 多选、分组与分隔线、空状态、禁用项、长列表滚动与受控展开。',
     importCode: `import { Combobox, ComboboxAnchor, ComboboxCancel, ComboboxEmpty, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxList, ComboboxSeparator, ComboboxTrigger, ComboboxViewport } from '@/components/ui/combobox'`,
   },
+  {
+    name: 'command',
+    title: 'Command 命令面板',
+    description: 'cmdk 风格的命令面板：搜索过滤、分组与快捷键提示、空状态、长列表滚动，以及 CommandDialog 弹窗形态。',
+    importCode: `import { Command, CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut } from '@/components/ui/command'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */

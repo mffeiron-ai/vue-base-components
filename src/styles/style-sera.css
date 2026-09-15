@@ -370,7 +370,11 @@
   }
 
   :is(.cn-command-group, [data-slot="command-group"]) {
-    @apply text-foreground **:[[cmdk-group-heading]]:text-muted-foreground overflow-hidden p-1.5 **:[[cmdk-group-heading]]:px-3 **:[[cmdk-group-heading]]:py-2 **:[[cmdk-group-heading]]:text-xs **:[[cmdk-group-heading]]:font-semibold **:[[cmdk-group-heading]]:uppercase **:[[cmdk-group-heading]]:tracking-wider;
+    @apply text-foreground overflow-hidden p-1.5;
+  }
+
+  :is(.cn-command-group-heading, [data-slot="command-group-heading"]) {
+    @apply text-muted-foreground px-3 py-2 text-xs font-semibold uppercase tracking-wider;
   }
 
   :is(.cn-command-separator, [data-slot="command-separator"]) {
