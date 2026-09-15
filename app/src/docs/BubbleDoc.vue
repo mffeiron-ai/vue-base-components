@@ -28,7 +28,7 @@ const rows = [
     <!-- 基础用法 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">基础用法</CardTitle>
+        <h2 class="text-xl font-semibold">基础用法</h2>
         <CardDescription>由 <code>Bubble</code> + <code>BubbleContent</code> 组成，需要反应时再加 <code>BubbleReactions</code>。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -46,7 +46,7 @@ const rows = [
     <!-- 变体 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">变体</CardTitle>
+        <h2 class="text-xl font-semibold">变体</h2>
         <CardDescription>用 <code>variant</code> 切换 7 种视觉风格；气泡宽度随内容自适应，最大为容器宽度的 80%（<code>ghost</code> 不受限）。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -61,7 +61,7 @@ const rows = [
     <!-- 对齐 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">对齐</CardTitle>
+        <h2 class="text-xl font-semibold">对齐</h2>
         <CardDescription>用 <code>align="start"</code>（对方）/ <code>align="end"</code>（自己）控制左右。需放在弹性纵向容器里。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -82,7 +82,7 @@ const rows = [
     <!-- 分组 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">分组</CardTitle>
+        <h2 class="text-xl font-semibold">分组</h2>
         <CardDescription>同一发送者的多条气泡用 <code>BubbleGroup</code> 包起来；<code>align</code> 要设在各 <code>Bubble</code> 上。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -100,7 +100,7 @@ const rows = [
     <!-- 反应 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">反应</CardTitle>
+        <h2 class="text-xl font-semibold">反应</h2>
         <CardDescription>反应条会与气泡边缘重叠，所以行与行之间要留出更大间距。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -128,7 +128,7 @@ const rows = [
     <!-- 链接 / 按钮 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">链接 / 按钮</CardTitle>
+        <h2 class="text-xl font-semibold">链接 / 按钮</h2>
         <CardDescription>用 <code>as-child</code> 把气泡样式合并到真实的可交互元素上（自带焦点环）。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -143,7 +143,7 @@ const rows = [
     <!-- API -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">API / Props</CardTitle>
+        <h2 class="text-xl font-semibold">API / Props</h2>
       </CardHeader>
       <CardContent class="space-y-4">
         <div class="overflow-x-auto rounded-lg">

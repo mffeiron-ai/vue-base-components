@@ -44,7 +44,7 @@ const rows = [
     <!-- 基础用法 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">基础用法</CardTitle>
+        <h2 class="text-xl font-semibold">基础用法</h2>
         <CardDescription>不传任何 props 时是主题主色实底按钮。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -58,7 +58,7 @@ const rows = [
     <!-- 变体 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">变体</CardTitle>
+        <h2 class="text-xl font-semibold">变体</h2>
         <CardDescription><code>variant</code> 共 6 种：主操作、次级操作、危险操作、描边、幽灵、链接。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -71,7 +71,7 @@ const rows = [
     <!-- 尺寸 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">尺寸</CardTitle>
+        <h2 class="text-xl font-semibold">尺寸</h2>
         <CardDescription>常规 3 档 <code>sm</code> / <code>default</code> / <code>lg</code>，以及 3 档正方形纯图标尺寸。</CardDescription>
       </CardHeader>
       <CardContent class="space-y-4">
@@ -90,7 +90,7 @@ const rows = [
     <!-- 带图标 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">带图标</CardTitle>
+        <h2 class="text-xl font-semibold">带图标</h2>
         <CardDescription>图标与文字的间距由 <code>gap</code> 统一控制，不需要给图标加 margin；图标未写 <code>size-*</code> 时自动收敛为 <code>size-4</code>。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -114,7 +114,7 @@ const rows = [
     <!-- 加载态 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">加载态</CardTitle>
+        <h2 class="text-xl font-semibold">加载态</h2>
         <CardDescription>用 <code>Spinner</code> + <code>disabled</code> 表示操作进行中，避免重复提交。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -132,7 +132,7 @@ const rows = [
     <!-- 圆角 / 禁用 / 校验 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">圆角、禁用与校验错误</CardTitle>
+        <h2 class="text-xl font-semibold">圆角、禁用与校验错误</h2>
         <CardDescription>
           风格预设会给按钮锁定 <code>rounded-md</code>（其特异性高于普通工具类），所以改成胶囊要写 <code>rounded-full!</code> 显式覆盖；
           <code>disabled</code> 半透明且不可点击；表单校验失败时给按钮加 <code>aria-invalid</code>。
@@ -159,7 +159,7 @@ const rows = [
     <!-- as-child -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">as-child（让链接看起来像按钮）</CardTitle>
+        <h2 class="text-xl font-semibold">as-child（让链接看起来像按钮）</h2>
         <CardDescription>加 <code>as-child</code> 后不再渲染 <code>&lt;button&gt;</code>，而是把按钮样式合并到唯一子元素上 —— 保留链接的语义与中键/右键行为。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -183,7 +183,7 @@ const rows = [
     <!-- 按钮组 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">按钮组</CardTitle>
+        <h2 class="text-xl font-semibold">按钮组</h2>
         <CardDescription>相邻操作可用 <code>ButtonGroup</code> 拼接，自动去掉接缝处的圆角与边框。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -198,7 +198,7 @@ const rows = [
     <!-- API -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">API / Props</CardTitle>
+        <h2 class="text-xl font-semibold">API / Props</h2>
       </CardHeader>
       <CardContent class="space-y-4">
         <div class="overflow-x-auto rounded-lg">

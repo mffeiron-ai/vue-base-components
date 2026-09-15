@@ -67,7 +67,7 @@ const parts = [
     <!-- 基础用法 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">基础用法</CardTitle>
+        <h2 class="text-xl font-semibold">基础用法</h2>
         <CardDescription>
           四个组件即可：<code>Carousel</code> +
           <code>CarouselContent</code> +
@@ -98,7 +98,7 @@ const parts = [
     <!-- 一屏多个 + 循环 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">一屏多个与循环</CardTitle>
+        <h2 class="text-xl font-semibold">一屏多个与循环</h2>
         <CardDescription>
           覆盖 <code>CarouselItem</code> 的
           <code>basis</code> 就能一屏放多个（如
@@ -153,7 +153,7 @@ const parts = [
     <!-- 对齐 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">对齐方式（opts.align）</CardTitle>
+        <h2 class="text-xl font-semibold">对齐方式（opts.align）</h2>
         <CardDescription>
           <code>align</code> 控制每屏贴哪一边：
           <code>start</code>（默认）/ <code>center</code> /
@@ -183,7 +183,7 @@ const parts = [
     <!-- 垂直 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">纵向滚动</CardTitle>
+        <h2 class="text-xl font-semibold">纵向滚动</h2>
         <CardDescription>
           传 <code>orientation="vertical"</code>：轨道变
           <code>flex-col</code>，翻页按钮自动挪到上方 / 下方并旋转 90°。
@@ -210,7 +210,7 @@ const parts = [
     <!-- 自动播放 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">自动播放（plugins）</CardTitle>
+        <h2 class="text-xl font-semibold">自动播放（plugins）</h2>
         <CardDescription>
           自动播放是 embla 的官方插件：<code>import Autoplay from 'embla-carousel-autoplay'</code>，
           再通过 <code>:plugins="[Autoplay({ delay: 2500 })]"</code> 传入。
@@ -238,7 +238,7 @@ const parts = [
     <!-- 指示器 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">圆点指示器（init-api）</CardTitle>
+        <h2 class="text-xl font-semibold">圆点指示器（init-api）</h2>
         <CardDescription>
           需要“当前第几屏”这类信息时，用 <code>@init-api</code> 拿到实例：
           <code>scrollSnapList().length</code> 是总屏数，
@@ -274,7 +274,7 @@ const parts = [
     <!-- API -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">API</CardTitle>
+        <h2 class="text-xl font-semibold">API</h2>
         <CardDescription>
           <code>Carousel</code> 的 props 基本是 embla 的能力透传，
           其余子组件只有 <code>class</code>（翻页按钮额外支持

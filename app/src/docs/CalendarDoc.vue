@@ -66,7 +66,7 @@ const slots = [
     <!-- 基础用法 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">基础用法</CardTitle>
+        <h2 class="text-xl font-semibold">基础用法</h2>
         <CardDescription>不传任何 props 就是「今天所在月」，点击日期即可选择。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -77,7 +77,7 @@ const slots = [
     <!-- 受控 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">选中值（受控）</CardTitle>
+        <h2 class="text-xl font-semibold">选中值（受控）</h2>
         <CardDescription>用 <code>v-model</code> 拿到选中的日期；下面是当前值（DateValue 对象，带 year / month / day）。</CardDescription>
       </CardHeader>
       <CardContent class="space-y-4">
@@ -94,7 +94,7 @@ const slots = [
     <!-- 标题下拉 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">标题下拉（layout）</CardTitle>
+        <h2 class="text-xl font-semibold">标题下拉（layout）</h2>
         <CardDescription>
           用 <code>layout</code> 把标题变成下拉：
           <code>month-and-year</code> 月份+年份都可选、
@@ -124,7 +124,7 @@ const slots = [
     <!-- 多月份 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">多个月份</CardTitle>
+        <h2 class="text-xl font-semibold">多个月份</h2>
         <CardDescription><code>number-of-months</code> 同时显示多个月；加 <code>paged-navigation</code> 后翻页按“屏”走（一次翻 2 个月而非 1 个）。</CardDescription>
       </CardHeader>
       <CardContent class="space-y-6">
@@ -142,7 +142,7 @@ const slots = [
     <!-- 换页动画 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">换页动画（page-animation）</CardTitle>
+        <h2 class="text-xl font-semibold">换页动画（page-animation）</h2>
         <CardDescription>
           用 <code>page-animation</code> 选换月/翻页时月份网格的动画：
           <strong>不传就是默认的 <code>slide</code> 滑入</strong>（会按翻页方向自动换向）、
@@ -174,7 +174,7 @@ const slots = [
     <!-- 限制范围 / 禁用日期 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">限制范围与禁用日期</CardTitle>
+        <h2 class="text-xl font-semibold">限制范围与禁用日期</h2>
         <CardDescription>
           <code>min-value</code> / <code>max-value</code> 限制可选区间（超出置灰）；
           <code>is-date-unavailable</code> 可自定义规则 ——
@@ -198,7 +198,7 @@ const slots = [
     <!-- 中文界面 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">语言与历法</CardTitle>
+        <h2 class="text-xl font-semibold">语言与历法</h2>
         <CardDescription>
           <code>locale</code> 决定界面语言与历法；
           <code>weekday-format</code> 控制星期名的详细程度（narrow / short / long）。
@@ -221,7 +221,7 @@ const slots = [
     <!-- 自定义标题与尺寸 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">自定义标题、格子尺寸与图标</CardTitle>
+        <h2 class="text-xl font-semibold">自定义标题、格子尺寸与图标</h2>
         <CardDescription>
           标题区用 <code>#calendar-heading</code> 插槽替换（插槽给的
           <code>month</code> / <code>year</code> 就是现成的下拉组件）；
@@ -251,7 +251,7 @@ const slots = [
     <!-- API -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">API / Props</CardTitle>
+        <h2 class="text-xl font-semibold">API / Props</h2>
       </CardHeader>
       <CardContent class="space-y-5">
         <div class="overflow-x-auto rounded-lg">

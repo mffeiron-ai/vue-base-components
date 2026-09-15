@@ -38,7 +38,7 @@ const rows = [
     <!-- 基础用法 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">基础用法</CardTitle>
+        <h2 class="text-xl font-semibold">基础用法</h2>
         <CardDescription>由 <code>BreadcrumbList</code> / <code>BreadcrumbItem</code> / <code>BreadcrumbLink</code> / <code>BreadcrumbSeparator</code> 组合；末尾用 <code>BreadcrumbPage</code> 表示当前页。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -63,7 +63,7 @@ const rows = [
     <!-- 自定义分隔符 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">自定义分隔符</CardTitle>
+        <h2 class="text-xl font-semibold">自定义分隔符</h2>
         <CardDescription>给 <code>BreadcrumbSeparator</code> 传入插槽内容即可替换默认的右箭头。</CardDescription>
       </CardHeader>
       <CardContent class="space-y-4">
@@ -105,7 +105,7 @@ const rows = [
     <!-- 折叠 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">折叠</CardTitle>
+        <h2 class="text-xl font-semibold">折叠</h2>
         <CardDescription>层级太长时，用 <code>BreadcrumbEllipsis</code> 折叠中间部分。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -134,7 +134,7 @@ const rows = [
     <!-- 下拉菜单 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">下拉菜单</CardTitle>
+        <h2 class="text-xl font-semibold">下拉菜单</h2>
         <CardDescription>把 <code>BreadcrumbItem</code> 与 <code>DropdownMenu</code> 组合，把中间层级折叠进下拉菜单里。</CardDescription>
       </CardHeader>
       <CardContent class="space-y-4">
@@ -205,7 +205,7 @@ const rows = [
     <!-- 路由链接 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">配合路由链接</CardTitle>
+        <h2 class="text-xl font-semibold">配合路由链接</h2>
         <CardDescription>用 <code>as-child</code> 把样式套到 <code>RouterLink</code> 上，保持客户端路由跳转。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -234,7 +234,7 @@ const rows = [
     <!-- API -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">API / Props</CardTitle>
+        <h2 class="text-xl font-semibold">API / Props</h2>
       </CardHeader>
       <CardContent>
         <div class="overflow-x-auto rounded-lg">

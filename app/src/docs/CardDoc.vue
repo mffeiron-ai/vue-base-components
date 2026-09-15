@@ -46,7 +46,7 @@ const parts = [
     <!-- 基础用法 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">基础用法</CardTitle>
+        <h2 class="text-xl font-semibold">基础用法</h2>
         <CardDescription>Header（标题 + 描述）+ Content + Footer 是标准三段式。</CardDescription>
       </CardHeader>
       <CardContent class="space-y-4">
@@ -73,7 +73,7 @@ const parts = [
     <!-- CardAction -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">右上角操作（CardAction）</CardTitle>
+        <h2 class="text-xl font-semibold">右上角操作（CardAction）</h2>
         <CardDescription>
           把 <code>CardAction</code> 放进 <code>CardHeader</code>：
           header 检测到它就会从单列切成 <code>[1fr_auto]</code> 两列，
@@ -127,7 +127,7 @@ const parts = [
     <!-- 统计卡 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">简洁统计卡</CardTitle>
+        <h2 class="text-xl font-semibold">简洁统计卡</h2>
         <CardDescription>只用 CardContent 也行；大数字 + 小标签是常见组合。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -146,7 +146,7 @@ const parts = [
     <!-- 媒体卡片 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">媒体卡片</CardTitle>
+        <h2 class="text-xl font-semibold">媒体卡片</h2>
         <CardDescription>
           把 <code>&lt;img&gt;</code> 放成 Card 的<strong>第一个子元素</strong>：预设会自动
           <code>pt-0</code>（去掉顶部内边距让图贴边）并给图加与卡片一致的顶部圆角。
@@ -193,7 +193,7 @@ const parts = [
     <!-- 表单卡片 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">表单卡片</CardTitle>
+        <h2 class="text-xl font-semibold">表单卡片</h2>
         <CardDescription>登录 / 订阅这类场景：Content 放字段，Footer 放占满宽度的主按钮。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -225,7 +225,7 @@ const parts = [
     <!-- 间距与分隔线 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">尺寸、间距与分隔线</CardTitle>
+        <h2 class="text-xl font-semibold">尺寸、间距与分隔线</h2>
         <CardDescription>
           间距不在子组件里写：竖间距来自 Card 的 <code>gap</code>、纵向内边距来自
           Card 的 <code>py</code>，横向内边距在 header / content / footer（px-6）。
@@ -271,7 +271,7 @@ const parts = [
     <!-- 可点击卡片 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">可点击与网格排列</CardTitle>
+        <h2 class="text-xl font-semibold">可点击与网格排列</h2>
         <CardDescription>
           Card 渲染的是普通 <code>div</code>，事件会透传到根元素，
           所以直接写 <code>@click</code> + <code>cursor-pointer</code> 就能整卡可点。
@@ -304,7 +304,7 @@ const parts = [
     <!-- API -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">API</CardTitle>
+        <h2 class="text-xl font-semibold">API</h2>
         <CardDescription>
           Card 只有 <code>size</code> / <code>class</code> 两个 prop；
           其余子组件只有 <code>class</code>，内容全走默认插槽。

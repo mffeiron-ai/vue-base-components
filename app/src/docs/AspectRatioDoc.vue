@@ -17,7 +17,7 @@ const propsRows = [
     <!-- 基础用法 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">基础用法</CardTitle>
+        <h2 class="text-xl font-semibold">基础用法</h2>
         <CardDescription>用 <code>ratio</code> 指定宽高比，<code>16 / 9</code> 表示宽是高的 16/9 倍。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -36,7 +36,7 @@ const propsRows = [
     <!-- 不同比例 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">不同比例</CardTitle>
+        <h2 class="text-xl font-semibold">不同比例</h2>
         <CardDescription>通过改动 <code>ratio</code> 可得到正方形、宽幅、竖版等不同比例的容器。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -72,7 +72,7 @@ const propsRows = [
     <!-- 媒体容器 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">媒体容器</CardTitle>
+        <h2 class="text-xl font-semibold">媒体容器</h2>
         <CardDescription>把图片 / 视频放进 AspectRatio，可避免加载前的高度跳动。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -90,7 +90,7 @@ const propsRows = [
     <!-- API -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">API / Props</CardTitle>
+        <h2 class="text-xl font-semibold">API / Props</h2>
       </CardHeader>
       <CardContent>
         <div class="overflow-x-auto rounded-lg">

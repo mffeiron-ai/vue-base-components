@@ -674,12 +674,33 @@
         {
           "path": "ui/checkbox/Checkbox.vue",
           "type": "registry:ui",
-          "content": "<script setup lang=\"ts\">\nimport type { CheckboxRootEmits, CheckboxRootProps } from \"reka-ui\"\nimport type { HTMLAttributes } from \"vue\"\nimport { reactiveOmit } from \"@vueuse/core\"\nimport { Check } from \"lucide-vue-next\"\nimport { CheckboxIndicator, CheckboxRoot, useForwardPropsEmits } from \"reka-ui\"\nimport { cn } from \"../../../lib/utils\"\n\nconst props = defineProps<CheckboxRootProps & { class?: HTMLAttributes[\"class\"] }>()\nconst emits = defineEmits<CheckboxRootEmits>()\n\nconst delegatedProps = reactiveOmit(props, \"class\")\n\nconst forwarded = useForwardPropsEmits(delegatedProps, emits)\n</script>\n\n<template>\n  <CheckboxRoot\n    v-slot=\"slotProps\"\n    data-slot=\"checkbox\"\n    v-bind=\"forwarded\"\n    :class=\"\n      cn('peer border-input data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50',\n         props.class)\"\n  >\n    <CheckboxIndicator\n      data-slot=\"checkbox-indicator\"\n      class=\"grid place-content-center text-current transition-none\"\n    >\n      <slot v-bind=\"slotProps\">\n        <Check class=\"size-3.5\" />\n      </slot>\n    </CheckboxIndicator>\n  </CheckboxRoot>\n</template>\n"
+          "content": "<script setup lang=\"ts\">\nimport type { CheckboxRootEmits, CheckboxRootProps } from \"reka-ui\"\n// CheckboxRootProps：modelValue / defaultValue（boolean 或 'indeterminate'）、disabled、value、trueValue/falseValue、name、required 等\n// CheckboxRootEmits：update:modelValue\nimport type { HTMLAttributes } from \"vue\"\nimport { reactiveOmit } from \"@vueuse/core\"\n// reactiveOmit：把不需要往底层透传的 prop 挑出来（这里只排除 class）\nimport { Check } from \"lucide-vue-next\"\n// 默认勾选图标（用默认插槽可以换成横杠 / 自己的图标）\nimport { CheckboxIndicator, CheckboxRoot, useForwardPropsEmits } from \"reka-ui\"\n// CheckboxRoot：无头基元：三态（checked / unchecked / indeterminate）、空格键切换、aria-checked、\n//   表单里会自动渲染一个隐藏 input（name / required / value 都靠它提交）\n// CheckboxIndicator：只在「选中或半选」时才渲染，用来放勾 / 横杠\nimport { cn } from \"../../../lib/utils\"\n\nconst props = defineProps<CheckboxRootProps & { class?: HTMLAttributes[\"class\"] }>()\nconst emits = defineEmits<CheckboxRootEmits>()\n\nconst delegatedProps = reactiveOmit(props, \"class\")\n\nconst forwarded = useForwardPropsEmits(delegatedProps, emits)\n</script>\n\n<template>\n  <!--\n    Checkbox = reka 的 CheckboxRoot + 一层样式：\n    - data-slot=\"checkbox\" 是样式钩子（8 套风格预设按它定位）\n    - 自身带 peer：可以在兄弟元素上用 peer-data-[state=checked]:… 跟着变（比如标签加删除线）\n    - data-[state=checked] 系列就是选中态（主色底 + 主色文字 + 主色边框）；\n      半选态（indeterminate）在下面单独处理，不然会看起来像未选中的空格子\n    - aria-invalid:* 在表单校验失败时变红环 / 红边，配合 FieldError 使用\n  -->\n  <CheckboxRoot\n    v-slot=\"slotProps\"\n    data-slot=\"checkbox\"\n    v-bind=\"forwarded\"\n    :class=\"\n      cn('peer border-input data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=checked]:border-primary data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground data-[state=indeterminate]:border-primary! focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50',\n         props.class)\"\n  >\n    <!-- 默认插槽透出 reka 的 slotProps（state / checked 等），方便按状态换图标；默认是勾 -->\n    <CheckboxIndicator\n      data-slot=\"checkbox-indicator\"\n      class=\"grid place-content-center text-current transition-none\"\n    >\n      <slot v-bind=\"slotProps\">\n        <Check class=\"size-3.5\" />\n      </slot>\n    </CheckboxIndicator>\n  </CheckboxRoot>\n</template>\n"
         },
         {
           "path": "ui/checkbox/index.ts",
           "type": "registry:ui",
-          "content": "export { default as Checkbox } from \"./Checkbox.vue\"\n"
+          "content": "// 复选框。基于 reka-ui 的 CheckboxRoot：支持选中 / 未选 / 半选三态。\n// 多选列表用数组模型自己维护（每个 Checkbox 给 model-value + update:model-value）。\nexport { default as Checkbox } from \"./Checkbox.vue\"\n"
+        }
+      ]
+    },
+    {
+      "name": "checkbox-group",
+      "type": "registry:ui",
+      "dependencies": [
+        "@vueuse/core",
+        "reka-ui"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "ui/checkbox-group/CheckboxGroup.vue",
+          "type": "registry:ui",
+          "content": "<script setup lang=\"ts\">\nimport type { CheckboxGroupRootEmits, CheckboxGroupRootProps } from \"reka-ui\"\n// CheckboxGroupRootProps：modelValue（数组）/ defaultValue / disabled / rovingFocus / orientation / loop / name / required\n// CheckboxGroupRootEmits：update:modelValue\nimport type { HTMLAttributes } from \"vue\"\nimport { reactiveOmit } from \"@vueuse/core\"\n// reactiveOmit：把不需要往底层透传的 prop 挑出来（这里只排除 class）\nimport { CheckboxGroupRoot, useForwardPropsEmits } from \"reka-ui\"\n// CheckboxGroupRoot：把「一组复选框」的选中项收在一个数组里，并通过 provide 交给子 Checkbox：\n//   - 子项只需要写 :value，选中与否由组的数组决定，不用自己维护\n//   - 默认开启 rovingFocus：方向键在组内移动焦点（不传 orientation 时四个方向都能移动）\n//   - 传了 name 会额外渲染一个隐藏 input，把整个数组作为表单值提交\nimport { cn } from \"../../../lib/utils\"\n\nconst props = defineProps<CheckboxGroupRootProps & { class?: HTMLAttributes[\"class\"] }>()\nconst emits = defineEmits<CheckboxGroupRootEmits>()\n\nconst delegatedProps = reactiveOmit(props, \"class\")\n\nconst forwarded = useForwardPropsEmits(delegatedProps, emits)\n</script>\n\n<template>\n  <!--\n    CheckboxGroup = reka 的 CheckboxGroupRoot + 一层样式与语义：\n    - data-slot=\"checkbox-group\" 是样式钩子（8 套预设里有 [data-slot=checkbox-group] 相关规则）\n    - role=\"group\"：reka 的 RovingFocusGroup 自身不带语义，这里补上，配合 aria-label / aria-labelledby\n      让屏幕阅读器把这一组读成一个整体\n    - 默认纵向排列 grid gap-3；横向可以传 class=\"flex flex-wrap gap-3\"\n  -->\n  <CheckboxGroupRoot\n    data-slot=\"checkbox-group\"\n    role=\"group\"\n    v-bind=\"forwarded\"\n    :class=\"cn('grid gap-3', props.class)\"\n  >\n    <slot />\n  </CheckboxGroupRoot>\n</template>\n"
+        },
+        {
+          "path": "ui/checkbox-group/index.ts",
+          "type": "registry:ui",
+          "content": "// 复选框组：把一组 Checkbox 的选中项收在一个数组里统一管理（子项只需要写 :value），\n// 并自带方向键在组内移动焦点、可选的表单提交（name）。\nexport { default as CheckboxGroup } from \"./CheckboxGroup.vue\"\n"
         }
       ]
     },

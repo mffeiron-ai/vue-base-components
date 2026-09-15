@@ -26,7 +26,7 @@ const propsRows = [
     <!-- 基础用法 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">基础用法</CardTitle>
+        <h2 class="text-xl font-semibold">基础用法</h2>
         <CardDescription>单选 + 可折叠，<code>default-value</code> 指定默认展开项。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -48,7 +48,7 @@ const propsRows = [
     <!-- 多选 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">多选</CardTitle>
+        <h2 class="text-xl font-semibold">多选</h2>
         <CardDescription><code>type="multiple"</code> 可同时展开多个面板，<code>default-value</code> 传数组。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -74,7 +74,7 @@ const propsRows = [
     <!-- 自定义图标 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">自定义图标</CardTitle>
+        <h2 class="text-xl font-semibold">自定义图标</h2>
         <CardDescription>通过 Trigger 的 <code>#icon</code> 插槽替换默认箭头。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -101,7 +101,7 @@ const propsRows = [
     <!-- 禁用状态 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">禁用状态</CardTitle>
+        <h2 class="text-xl font-semibold">禁用状态</h2>
         <CardDescription>在 <code>AccordionItem</code> 上设置 <code>disabled</code>，单个面板不可交互。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -123,7 +123,7 @@ const propsRows = [
     <!-- 受控模式 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">受控模式</CardTitle>
+        <h2 class="text-xl font-semibold">受控模式</h2>
         <CardDescription>用 <code>v-model</code> 双向绑定当前展开值，可从外部控制。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -150,7 +150,7 @@ const propsRows = [
     <!-- API -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">API / Props</CardTitle>
+        <h2 class="text-xl font-semibold">API / Props</h2>
       </CardHeader>
       <CardContent>
         <div class="overflow-x-auto rounded-lg">

@@ -3,11 +3,15 @@
  *  1) `xxx`   → <code>xxx</code>      （反引号在 Vue 模板里不会被解析，会原样显示）
  *  2) **xxx** → <strong>xxx</strong>
  *  3) <code class="..."> → <code>    （样式已由 app/src/style.css 的 .docs-content 统一接管）
+ *  4) <CardTitle class="text-xl font-semibold">xxx</CardTitle> → <h2 class="text-xl font-semibold">xxx</h2>
+ *     段落标题不要用 CardTitle：8 套风格预设是非分层 CSS，优先级高于工具类，
+ *     text-xl 会被预设里的 text-base 盖掉（实测 16px）。用普通 h2 就没这个问题，
+ *     也和最早写的 Alert / Alert Dialog 文档保持一致。
  *
  * 只处理 <template> 区段里的「文本节点」：标签内部（属性）不动，<pre>/<code>/<script>/<style>
  * 的内容原样保留（那里面的反引号可能是模板字符串）。
  *
- * 用法：node tmp/normalize-docs.mjs [--apply]
+ * 用法：node scripts/normalize-doc-markup.mjs [--apply]
  */
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
@@ -39,6 +43,12 @@ function transformText(text, stats) {
 }
 
 function transformTemplate(tpl, stats) {
+  // 4) 段落标题：CardTitle → h2（在 tokenizer 之前做，它跨 标签+文本+标签）
+  tpl = tpl.replace(/<CardTitle class="text-xl font-semibold">([\s\S]*?)<\/CardTitle>/g, (_m, inner) => {
+    stats.title++
+    return `<h2 class="text-xl font-semibold">${inner}</h2>`
+  })
+
   let out = ''
   let i = 0
   while (i < tpl.length) {
@@ -100,11 +110,11 @@ for (const file of readdirSync(DIR).filter((f) => f.endsWith('.vue')).sort()) {
   const head = src.slice(0, start)
   const tpl = src.slice(start + '<template>'.length, end)
   const tail = src.slice(end)
-  const stats = { backtick: 0, bold: 0, codeClass: 0 }
+  const stats = { backtick: 0, bold: 0, codeClass: 0, title: 0 }
   const nextTpl = transformTemplate(tpl, stats)
   const changed = nextTpl !== tpl
   if (changed && apply) writeFileSync(path, head + '<template>' + nextTpl + tail)
-  report.push({ file, '反引号→code': stats.backtick, '**→strong': stats.bold, '简化 code class': stats.codeClass })
+  report.push({ file, '反引号→code': stats.backtick, '**→strong': stats.bold, '简化 code class': stats.codeClass, '标题→h2': stats.title })
 }
 
 console.table(report)

@@ -42,7 +42,7 @@ const mediaRows = [
     <!-- 基础用法 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">基础用法</CardTitle>
+        <h2 class="text-xl font-semibold">基础用法</h2>
         <CardDescription>由 <code>AttachmentMedia</code> + <code>AttachmentContent</code> + <code>AttachmentActions</code> 组合而成。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -66,7 +66,7 @@ const mediaRows = [
     <!-- 图片 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">图片</CardTitle>
+        <h2 class="text-xl font-semibold">图片</h2>
         <CardDescription>在 <code>AttachmentMedia</code> 上设 <code>variant="image"</code>，用 <code>orientation="vertical"</code> 让媒体位于内容上方。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -95,7 +95,7 @@ const mediaRows = [
     <!-- 上传状态 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">上传状态</CardTitle>
+        <h2 class="text-xl font-semibold">上传状态</h2>
         <CardDescription>用 <code>state</code> 表达上传生命周期，<code>error</code> 会切到危险色。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -116,7 +116,7 @@ const mediaRows = [
     <!-- 尺寸 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">尺寸</CardTitle>
+        <h2 class="text-xl font-semibold">尺寸</h2>
         <CardDescription>通过 <code>size</code> 在 <code>default</code> / <code>sm</code> / <code>xs</code> 之间切换。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -149,7 +149,7 @@ const mediaRows = [
     <!-- 分组 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">分组</CardTitle>
+        <h2 class="text-xl font-semibold">分组</h2>
         <CardDescription>用 <code>AttachmentGroup</code> 把多个附件排成横向可滚动的一行。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -205,7 +205,7 @@ const mediaRows = [
     <!-- 触发器 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">触发器</CardTitle>
+        <h2 class="text-xl font-semibold">触发器</h2>
         <CardDescription><code>AttachmentTrigger</code> 会铺满整张卡片，点击卡片即触发；操作按钮仍可独立点击。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -235,7 +235,7 @@ const mediaRows = [
     <!-- API -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">API / Props</CardTitle>
+        <h2 class="text-xl font-semibold">API / Props</h2>
       </CardHeader>
       <CardContent class="space-y-6">
         <div class="space-y-2">

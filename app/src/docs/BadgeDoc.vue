@@ -27,7 +27,7 @@ const propsRows = [
     <!-- 变体 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">变体</CardTitle>
+        <h2 class="text-xl font-semibold">变体</h2>
         <CardDescription>用 <code>variant</code> 在 6 种样式间切换。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -42,7 +42,7 @@ const propsRows = [
     <!-- 基础用法 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">基础用法</CardTitle>
+        <h2 class="text-xl font-semibold">基础用法</h2>
         <CardDescription>不传 <code>variant</code> 时使用 <code>default</code>。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -57,7 +57,7 @@ const propsRows = [
     <!-- 带图标 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">带图标</CardTitle>
+        <h2 class="text-xl font-semibold">带图标</h2>
         <CardDescription>图标会自动缩到 <code>size-3</code>，并与文字保持间距。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -81,7 +81,7 @@ const propsRows = [
     <!-- 作为链接 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">作为链接</CardTitle>
+        <h2 class="text-xl font-semibold">作为链接</h2>
         <CardDescription>用 <code>as-child</code> 把徽标样式套到 <code>&lt;a&gt;</code> 上。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -102,7 +102,7 @@ const propsRows = [
     <!-- API -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">API / Props</CardTitle>
+        <h2 class="text-xl font-semibold">API / Props</h2>
       </CardHeader>
       <CardContent>
         <div class="overflow-x-auto rounded-lg">

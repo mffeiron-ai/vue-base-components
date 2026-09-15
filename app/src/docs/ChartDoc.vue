@@ -133,7 +133,7 @@ const legendProps = [
     <!-- 基础柱状图 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">基础用法（分组柱状图）</CardTitle>
+        <h2 class="text-xl font-semibold">基础用法（分组柱状图）</h2>
         <CardDescription>
           三段：<code>ChartContainer</code>（配置 + 主题）→ Unovis 容器与图形 → <code>ChartTooltip</code> /
           <code>ChartCrosshair</code>（鼠标提示）。图例用 <code>ChartLegendContent</code>，它直接读 config 的
@@ -171,7 +171,7 @@ const legendProps = [
     <!-- 面积 + 折线 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">面积图与折线图</CardTitle>
+        <h2 class="text-xl font-semibold">面积图与折线图</h2>
         <CardDescription>
           面积就是 <code>VisArea</code> + 低透明度，叠一条 <code>VisLine</code> 做描边；
           提示框里想显示“一月”这类文字标签，就给 <code>ChartTooltipContent</code> 传
@@ -215,7 +215,7 @@ const legendProps = [
     <!-- 多系列折线 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">多系列折线</CardTitle>
+        <h2 class="text-xl font-semibold">多系列折线</h2>
         <CardDescription>
           每个系列放一个 <code>VisLine</code>（各自 <code>:color</code>），
           <code>ChartCrosshair</code> 的 <code>:color</code> 传数组就能显示多条准线。
@@ -258,7 +258,7 @@ const legendProps = [
     <!-- 堆叠柱 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">堆叠柱状图</CardTitle>
+        <h2 class="text-xl font-semibold">堆叠柱状图</h2>
         <CardDescription>
           换成 <code>VisStackedBar</code>，<code>:y</code> 与 <code>:color</code> 都传数组即可把多项叠成一根；
           <code>bar-width</code> 控制柱宽。
@@ -296,7 +296,7 @@ const legendProps = [
     <!-- 环形图 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">环形图（Donut）</CardTitle>
+        <h2 class="text-xl font-semibold">环形图（Donut）</h2>
         <CardDescription>
           环形 / 饼图用 <code>VisSingleContainer</code> + <code>VisDonut</code>。
           弧形段没有“横轴”，所以提示框要显式给 <code>ChartTooltip</code> 传
@@ -347,7 +347,7 @@ const legendProps = [
     <!-- 配置详解 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">ChartConfig 怎么写</CardTitle>
+        <h2 class="text-xl font-semibold">ChartConfig 怎么写</h2>
         <CardDescription>
           <code>config</code> 的键要和数据列名对上：图表从它生成
           <code>--color-&lt;key&gt;</code> 变量，提示框和图例也读同一份。
@@ -378,7 +378,7 @@ const legendProps = [
     <!-- API -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">API</CardTitle>
+        <h2 class="text-xl font-semibold">API</h2>
         <CardDescription>
           除 <code>ChartContainer</code> 外，其余都是给 Unovis 当“渲染器”用的：通过
           <code>componentToString()</code> 把 Vue 组件变成 Unovis 需要的 HTML 模板串。

@@ -107,6 +107,12 @@ export const componentDocs: ComponentDoc[] = [
     description: '基于 Unovis 的图表包装：把 ChartConfig 的颜色/名称写成主题变量，并提供统一的提示框与图例。',
     importCode: `import { ChartContainer, ChartTooltip, ChartCrosshair, ChartTooltipContent, ChartLegendContent, componentToString } from '@/components/ui/chart'`,
   },
+  {
+    name: 'checkbox',
+    title: 'Checkbox 复选框',
+    description: '三态复选框（选中 / 未选 / 半选），支持键盘切换、表单提交与校验失败态；CheckboxGroup 可成组管理数组。',
+    importCode: `import { Checkbox } from '@/components/ui/checkbox'\nimport { CheckboxGroup } from '@/components/ui/checkbox-group'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */

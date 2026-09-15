@@ -39,7 +39,7 @@ const fallbackRows = [
     <!-- 基础用法 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">基础用法</CardTitle>
+        <h2 class="text-xl font-semibold">基础用法</h2>
         <CardDescription><code>AvatarImage</code> 放图片，<code>AvatarFallback</code> 放兜底文字（加载失败时自动接管）。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -53,7 +53,7 @@ const fallbackRows = [
     <!-- 兜底 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">兜底内容</CardTitle>
+        <h2 class="text-xl font-semibold">兜底内容</h2>
         <CardDescription>不传 <code>src</code>（或图片加载失败）时只显示兜底；也可用 <code>delay-ms</code> 延迟出现。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -79,7 +79,7 @@ const fallbackRows = [
     <!-- 尺寸 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">尺寸</CardTitle>
+        <h2 class="text-xl font-semibold">尺寸</h2>
         <CardDescription>用 <code>size</code> 在 <code>sm</code>(24px) / <code>default</code>(32px) / <code>lg</code>(40px) 间切换；要任意尺寸可加 <code>!</code> 强制覆盖类名。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -108,7 +108,7 @@ const fallbackRows = [
     <!-- 组合堆叠 -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">堆叠分组</CardTitle>
+        <h2 class="text-xl font-semibold">堆叠分组</h2>
         <CardDescription>用负外边距 + 描边组合多个头像，常用于"参与人"列表。</CardDescription>
       </CardHeader>
       <CardContent>
@@ -124,7 +124,7 @@ const fallbackRows = [
     <!-- API -->
     <Card class="mt-8">
       <CardHeader>
-        <CardTitle class="text-xl font-semibold">API / Props</CardTitle>
+        <h2 class="text-xl font-semibold">API / Props</h2>
       </CardHeader>
       <CardContent class="space-y-6">
         <div class="space-y-2">
