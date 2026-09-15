@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * ContextMenuSeparator —— 菜单内分隔线（1px，两边各出界 1px 让线更满）。
+ */
 import type { ContextMenuSeparatorProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"

@@ -1,4 +1,8 @@
 <script setup lang="ts">
+/**
+ * TableCell —— 普通单元格 <td>（与 TableHead 同样的复选框对齐规则，属预设写法）。
+ * `whitespace-normal break-words`：内容默认换行不断词，长文本不会把表格撑爆。
+ */
 import type { HTMLAttributes } from "vue"
 import { cn } from "../../../lib/utils"
 

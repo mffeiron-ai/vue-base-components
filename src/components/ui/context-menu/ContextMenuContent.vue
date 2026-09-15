@@ -1,4 +1,15 @@
 <script setup lang="ts">
+/**
+ * ContextMenuContent —— 菜单本体（Portal + 定位到鼠标位置）。
+ *
+ * - 定位：不用 anchor，菜单直接开在右键时的光标坐标；超出视口时 reka 会自动翻转/碰撞。
+ * - 高度：`max-h-(--reka-context-menu-content-available-height)`，即“到视口边缘还剩多少”
+ *   （reka 写入的变量），所以菜单不会溢到屏幕外，超出部分自己滚。
+ * - 宽度：组件给 min-w-[8rem] 兜底，预设会收紧到 min-w-36（両者取谁看层叠，见预设注释）。
+ * - 动画：data-[state=open/closed] 的 fade + zoom + 按 side 的 slide，预设里也复述了一套
+ *   （外加 duration-100），改动画时两边都要看。
+ * - inheritAttrs:false + `{ ...$attrs, ...forwarded }`：外层 Portal 不吃属性，属性要落到内容元素上。
+ */
 import type { ContextMenuContentEmits, ContextMenuContentProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"

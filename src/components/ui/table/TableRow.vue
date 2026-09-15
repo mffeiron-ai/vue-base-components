@@ -1,4 +1,9 @@
 <script setup lang="ts">
+/**
+ * TableRow —— 表格行。
+ * 自带 hover 底色；选中态靠 `data-[state=selected]:bg-muted`，
+ * 所以行选择场景要手动接上：`:data-state="selected ? 'selected' : undefined'"`。
+ */
 import type { HTMLAttributes } from "vue"
 import { cn } from "../../../lib/utils"
 

@@ -1,4 +1,8 @@
 <script setup lang="ts">
+/**
+ * ContextMenuSub —— 子菜单根：里面放 SubTrigger（父项）+ SubContent（向右展开的菜单）。
+ * 开合默认由 hover / 键盘右键（ArrowRight）驱动。
+ */
 import type { ContextMenuSubEmits, ContextMenuSubProps } from "reka-ui"
 import {
   ContextMenuSub,

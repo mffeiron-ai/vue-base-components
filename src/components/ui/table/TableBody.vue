@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * TableBody —— 表体 <tbody>（最后一行的下边框由 TableRow 的 border-b 负责，这里去掉，避免双线）。
+ */
 import type { HTMLAttributes } from "vue"
 import { cn } from "../../../lib/utils"
 

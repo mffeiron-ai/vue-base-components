@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * TableCaption —— 表格 <caption>，放在表格底部当说明/数据来源（语义上仍属表格标题）。
+ */
 import type { HTMLAttributes } from "vue"
 import { cn } from "../../../lib/utils"
 

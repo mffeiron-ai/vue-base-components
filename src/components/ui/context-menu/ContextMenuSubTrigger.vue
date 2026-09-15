@@ -1,4 +1,9 @@
 <script setup lang="ts">
+/**
+ * ContextMenuSubTrigger —— 子菜单的父项（带右侧箭头）。
+ * 鼠标划过或键盘 ArrowRight 展开子菜单；inset 与带指示器的项对齐。
+ * 箭头图标固定在最后，不要再自己加一个（会两条箭头）。
+ */
 import type { ContextMenuSubTriggerProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"
@@ -11,7 +16,8 @@ import { cn } from "../../../lib/utils"
 
 const props = defineProps<ContextMenuSubTriggerProps & { class?: HTMLAttributes["class"], inset?: boolean }>()
 
-const delegatedProps = reactiveOmit(props, "class")
+// inset 同 ContextMenuLabel：本地便捷 prop，别透传给 reka，否则会落到 DOM 上
+const delegatedProps = reactiveOmit(props, "class", "inset")
 
 const forwardedProps = useForwardProps(delegatedProps)
 </script>

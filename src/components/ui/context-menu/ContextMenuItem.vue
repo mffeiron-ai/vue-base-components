@@ -1,4 +1,13 @@
 <script setup lang="ts">
+/**
+ * ContextMenuItem —— 普通菜单项。
+ *
+ * - inset：与带勾选指示器的项左边对齐（预设用 data-inset:pl-8）。
+ * - variant="destructive"：危险操作（删除等），预设会把文字/图标换成 destructive 色。
+ * - disabled：不可点且不参与键盘高亮。
+ * - 高亮态：键盘上下或鼠标划过（`data-[highlighted]`）—— 与 DropdownMenu 一致。
+ * - 右侧快捷键提示用 ContextMenuShortcut（它靠 group/context-menu-item 记住父项高亮态）。
+ */
 import type { ContextMenuItemEmits, ContextMenuItemProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"

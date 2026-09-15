@@ -131,6 +131,18 @@ export const componentDocs: ComponentDoc[] = [
     description: 'cmdk 风格的命令面板：搜索过滤、分组与快捷键提示、空状态、长列表滚动，以及 CommandDialog 弹窗形态。',
     importCode: `import { Command, CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut } from '@/components/ui/command'`,
   },
+  {
+    name: 'context-menu',
+    title: 'Context Menu 右键菜单',
+    description: '右键 / 长按唤出的菜单（开在光标位置）：分组、勾选项、单选组、子菜单、inset 对齐、快捷键提示与自定义触发区。',
+    importCode: `import { ContextMenu, ContextMenuCheckboxItem, ContextMenuContent, ContextMenuGroup, ContextMenuItem, ContextMenuLabel, ContextMenuRadioGroup, ContextMenuRadioItem, ContextMenuSeparator, ContextMenuShortcut, ContextMenuSub, ContextMenuSubContent, ContextMenuSubTrigger, ContextMenuTrigger } from '@/components/ui/context-menu'`,
+  },
+  {
+    name: 'data-table',
+    title: 'Data Table 数据表格',
+    description: '表格标签族的样式包装（Table / TableHead / TableCell …），以及纯 Vue 实现的排序、筛选、分页、行选择与固定表头滚动。',
+    importCode: `import { Table, TableBody, TableCaption, TableCell, TableEmpty, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */

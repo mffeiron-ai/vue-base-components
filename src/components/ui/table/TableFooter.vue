@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * TableFooter —— 页脚 <tfoot>，常用于合计行：自带浅底 + 上边框 + 加粗。
+ */
 import type { HTMLAttributes } from "vue"
 import { cn } from "../../../lib/utils"
 

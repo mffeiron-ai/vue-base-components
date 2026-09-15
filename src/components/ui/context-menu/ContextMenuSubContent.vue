@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import type { DropdownMenuSubContentEmits, DropdownMenuSubContentProps } from "reka-ui"
+/**
+ * ContextMenuSubContent —— 子菜单弹出层（向右展开）。
+ * 样式与 Content 接近（同样一套 fade/zoom/slide 动画），但没有最大高度限制，
+ * `origin-(--reka-context-menu-content-transform-origin)` 让缩放从父项那一侧开始。
+ */
+import type { ContextMenuSubContentEmits, ContextMenuSubContentProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"
 import {
@@ -8,8 +13,8 @@ import {
 } from "reka-ui"
 import { cn } from "../../../lib/utils"
 
-const props = defineProps<DropdownMenuSubContentProps & { class?: HTMLAttributes["class"] }>()
-const emits = defineEmits<DropdownMenuSubContentEmits>()
+const props = defineProps<ContextMenuSubContentProps & { class?: HTMLAttributes["class"] }>()
+const emits = defineEmits<ContextMenuSubContentEmits>()
 
 const delegatedProps = reactiveOmit(props, "class")
 

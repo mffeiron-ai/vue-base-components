@@ -1,4 +1,9 @@
 <script setup lang="ts">
+/**
+ * TableEmpty —— 空状态：直接渲染成“一行一列”，内容居中、上下留白。
+ * **colspan 要传成表格的列数**（默认 1），否则空白只会占第一列。
+ * 注意：它自己就输出 TableRow + TableCell，所以不要再套外层行。
+ */
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"
 import { cn } from "../../../lib/utils"
