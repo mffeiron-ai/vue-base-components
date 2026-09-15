@@ -26,7 +26,9 @@ import type { DateRange, DateRangePreset } from "./utils"
 import { defaultRangePresets, formatRangeLabel } from "./utils"
 
 const props = withDefaults(defineProps<
-  Omit<RangeCalendarRootProps, "modelValue" | "defaultValue"> & {
+  // 注意：`placeholder` 要一并剔除 —— reka 的 RangeCalendar 自己也有个 placeholder（DateValue，
+  // 表示「当前展示哪个月」），不剔除会跟这里当「未选文案」用的同名字符串打架
+  Omit<RangeCalendarRootProps, "modelValue" | "defaultValue" | "placeholder"> & {
     modelValue?: DateRange | null
     open?: boolean
     class?: HTMLAttributes["class"]
@@ -76,7 +78,6 @@ const calendarProps = reactiveOmit(
   props,
   "class",
   "modelValue",
-  "defaultValue",
   "open",
   "placeholder",
   "align",

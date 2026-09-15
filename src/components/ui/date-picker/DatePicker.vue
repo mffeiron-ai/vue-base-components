@@ -83,7 +83,6 @@ const calendarProps = reactiveOmit(
   props,
   "class",
   "modelValue",
-  "defaultValue",
   "open",
   "placeholder",
   "align",

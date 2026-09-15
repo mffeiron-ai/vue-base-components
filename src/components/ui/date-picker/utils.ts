@@ -10,10 +10,14 @@ import type { CalendarDate as CalendarDateType, DateValue } from "@international
 import { CalendarDate, endOfMonth, getLocalTimeZone, today } from "@internationalized/date"
 import { toDate } from "reka-ui/date"
 
-/** 一个日期区间（闭区间，含首尾两天）；用户只点了开始日时 `end` 为 null */
+/**
+ * 一个日期区间（闭区间，含首尾两天）。
+ * 字段形状刻意跟 reka-ui 的 `DateRange` 保持一致（键必选、值可以是 undefined）：
+ * 用户只点了开始日时拿到的是 `{ start, end: undefined }`，两端都有才算选完。
+ */
 export interface DateRange {
-  start: DateValue | null
-  end: DateValue | null
+  start: DateValue | undefined
+  end: DateValue | undefined
 }
 
 /** 快捷预设：点一下就套用一段区间（label 上屏，value 现场算，避免跨天时数据过期） */
