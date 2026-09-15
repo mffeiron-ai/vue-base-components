@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+/**
+ * DrawerHeader —— 抽屉头部：标题 + 描述，自带 p-4 内边距。
+ */
 import type { HTMLAttributes } from "vue"
 import { cn } from "../../../lib/utils"
 

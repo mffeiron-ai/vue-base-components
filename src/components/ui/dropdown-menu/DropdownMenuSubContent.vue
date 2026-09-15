@@ -1,4 +1,8 @@
 <script setup lang="ts">
+/**
+ * DropdownMenuSubContent —— 子菜单面板（自身也带 Portal 与阴影）。
+ */
+
 import type { DropdownMenuSubContentEmits, DropdownMenuSubContentProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"

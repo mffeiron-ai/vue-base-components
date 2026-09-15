@@ -1,4 +1,8 @@
 <script setup lang="ts">
+/**
+ * DropdownMenuTrigger —— 打开菜单的触发器（默认渲染 <button>；`as-child` 可包自己的按钮）。
+ */
+
 import type { DropdownMenuTriggerProps } from "reka-ui"
 import { DropdownMenuTrigger, useForwardProps } from "reka-ui"
 

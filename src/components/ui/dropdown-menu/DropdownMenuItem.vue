@@ -1,4 +1,11 @@
 <script setup lang="ts">
+/**
+ * DropdownMenuItem —— 普通菜单项。
+ *
+ * - `inset`：左侧多留 8px（与上面带勾选/圆点的项对齐）
+ * - `variant="destructive"`：危险操作（删除等），文字与焦点态转红
+ */
+
 import type { DropdownMenuItemProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"

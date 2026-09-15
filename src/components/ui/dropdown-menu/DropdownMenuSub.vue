@@ -1,4 +1,11 @@
 <script setup lang="ts">
+/**
+ * DropdownMenuSub —— 子菜单根（状态层）。
+ *
+ * 写法：`DropdownMenuSub` 包住 `DropdownMenuSubTrigger`（带右侧箭头的项）+ `DropdownMenuSubContent`（二级面板）。
+ * 二级面板的弹出方向由 reka 根据可用空间自动算，不用手调。
+ */
+
 import type { DropdownMenuSubEmits, DropdownMenuSubProps } from "reka-ui"
 import {
   DropdownMenuSub,

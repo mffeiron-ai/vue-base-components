@@ -1,4 +1,10 @@
 <script lang="ts" setup>
+/**
+ * DrawerOverlay —— 抽屉背后的遮罩（`DrawerContent` 已自带一层，一般不用手写）。
+ *
+ * 额外加了「关闭态不拦截点击」的兜底：动画被禁用 / 中断时遮罩节点会残留，
+ * 不挡一下的话会把页面上（比如导航栏）的按钮点不动。
+ */
 import type { DialogOverlayProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"

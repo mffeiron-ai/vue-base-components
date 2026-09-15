@@ -1,4 +1,9 @@
 <script setup lang="ts">
+/**
+ * DropdownMenuSubTrigger —— 打开子菜单的项（右侧自带箭头，悬停/右方向键展开）。
+ * `inset` 同样用于与带勾选的项对齐。
+ */
+
 import type { DropdownMenuSubTriggerProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"

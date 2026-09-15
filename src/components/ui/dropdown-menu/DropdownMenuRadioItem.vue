@@ -1,4 +1,8 @@
 <script setup lang="ts">
+/**
+ * DropdownMenuRadioItem —— 单选项；选中时左侧显示实心圆点（想换图标用 `#indicator-icon`）。
+ */
+
 import type { DropdownMenuRadioItemEmits, DropdownMenuRadioItemProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"

@@ -1,4 +1,10 @@
 <script setup lang="ts">
+/**
+ * DropdownMenuCheckboxItem —— 可勾选的菜单项（多选），配 `v-model` 用。
+ *
+ * 勾号固定在左侧（所以文字区从 pl-8 开始），想换图标用 `#indicator-icon` 插槽。
+ */
+
 import type { DropdownMenuCheckboxItemEmits, DropdownMenuCheckboxItemProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"

@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+/**
+ * DrawerTitle —— 抽屉标题（必填）。vaul 用它生成 `aria-labelledby`，缺了会提示无障碍标记不完整。
+ */
 import type { DrawerTitleProps } from "vaul-vue"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"

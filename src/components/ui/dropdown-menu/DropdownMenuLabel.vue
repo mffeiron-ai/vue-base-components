@@ -1,4 +1,8 @@
 <script setup lang="ts">
+/**
+ * DropdownMenuLabel —— 分组标题（不可点，字号更小、颜色更淡）；`inset` 与菜单项左侧对齐。
+ */
+
 import type { DropdownMenuLabelProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"

@@ -1,4 +1,12 @@
 <script setup lang="ts">
+/**
+ * DropdownMenuContent —— 菜单面板（自动挂 Portal，跟随触发器定位）。
+ *
+ * 几个省心的默认：`sideOffset: 4`（与触发器留 4px）、`max-h-(--reka-…-available-height)`
+ * （空间不够时自动变矮并内部滚动）、最小宽度 8rem。
+ * 宽度用 `class` 覆盖（如 `w-56`），对齐用 `align` / `side`。
+ */
+
 import type { DropdownMenuContentEmits, DropdownMenuContentProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"

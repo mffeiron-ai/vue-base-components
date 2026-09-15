@@ -155,6 +155,18 @@ export const componentDocs: ComponentDoc[] = [
     description: '模态对话框：锁背景滚动与焦点，Esc / 点遮罩 / 右上角 × / 内部按钮都能关；支持受控开关、自定义宽度、隐藏关闭按钮，长内容用 DialogScrollContent 整页滚动。',
     importCode: `import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogScrollContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'`,
   },
+  {
+    name: 'drawer',
+    title: 'Drawer 抽屉',
+    description: '带手势的抽屉面板（vaul-vue）：拖拽关闭、顶部把手、背景缩放，支持四个方向、多档吸附、只拖把手与禁止手势关闭，组合方式与 Dialog 一致。',
+    importCode: `import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerTitle, DrawerTrigger } from '@/components/ui/drawer'`,
+  },
+  {
+    name: 'dropdown-menu',
+    title: 'Dropdown Menu 下拉菜单',
+    description: '点击触发的菜单：普通项、可勾选项、单选组、二级子菜单、分隔线、快捷键提示与危险操作样式，支持受控开合和自动碰撞翻转。',
+    importCode: `import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */

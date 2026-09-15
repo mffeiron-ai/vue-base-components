@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+/**
+ * DrawerDescription —— 标题下的说明文字，会挂到 `aria-describedby`。
+ */
 import type { DrawerDescriptionProps } from "vaul-vue"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"
