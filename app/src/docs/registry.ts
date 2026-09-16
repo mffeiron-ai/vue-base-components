@@ -185,6 +185,24 @@ export const componentDocs: ComponentDoc[] = [
     description: '鼠标悬停（或键盘聚焦）时弹出的信息卡片：适合用户资料、链接预览；鼠标可移进卡片继续交互，支持延迟调节、受控开合与四向定位。',
     importCode: `import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'`,
   },
+  {
+    name: 'input',
+    title: 'Input 输入框',
+    description: '单行文本输入框，原生 input 的样式封装：v-model / defaultValue 两种用法，type 与其它原生属性全部透传，错误态用 aria-invalid，尺寸需带 ! 覆盖预设。',
+    importCode: `import { Input } from '@/components/ui/input'`,
+  },
+  {
+    name: 'input-group',
+    title: 'Input Group 输入框组',
+    description: '把输入框与图标 / 文本 / 按钮拼成一体：外框、圆角、聚焦与错误态由容器统一负责，Addon 支持左右与上下整行四种位置，多行用 Textarea 变体。',
+    importCode: `import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput, InputGroupText, InputGroupTextarea } from '@/components/ui/input-group'`,
+  },
+  {
+    name: 'input-otp',
+    title: 'Input OTP 验证码输入',
+    description: '一次性验证码 / PIN 输入框：一排格子背后是一个隐藏 input，整块可聚焦、支持粘贴整串；位数由 maxlength 决定，可分组加分隔符，支持 pattern 限制字符、错误态与 complete 事件。',
+    importCode: `import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '@/components/ui/input-otp'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */

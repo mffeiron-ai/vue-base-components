@@ -68,8 +68,12 @@ const emits = defineEmits<{
 // 展开状态：受控（外部传 open）与非受控（内部自管）走同一套写法
 const open = useVModel(props, "open", emits, { passive: true, defaultValue: false })
 
+// 值也一样走 useVModel：不传 v-model 时内部能自己维护，
+// 否则 emit 出去没人接，选完日期按钮上的文案不会更新
+const modelValue = useVModel(props, "modelValue", emits, { passive: true })
+
 /** 当前选中值（统一成 null 方便模板判断） */
-const selected = computed<DateValue | null>(() => props.modelValue ?? null)
+const selected = computed<DateValue | null>(() => modelValue.value ?? null)
 
 /** 按钮上显示的文案 */
 const display = computed(() =>
@@ -95,7 +99,7 @@ const calendarProps = reactiveOmit(
 
 function onSelect(value: any) {
   const next = (value ?? null) as DateValue | null
-  emits("update:modelValue", next)
+  modelValue.value = next
   emits("change", next)
   // 选完就收起来：日期选择绝大多数场景就是要「点完即走」
   open.value = false
@@ -104,7 +108,7 @@ function onSelect(value: any) {
 function clear(event: MouseEvent) {
   // 阻止冒泡，否则会顺手把弹层打开
   event.stopPropagation()
-  emits("update:modelValue", null)
+  modelValue.value = null
   emits("change", null)
 }
 </script>

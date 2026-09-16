@@ -1,4 +1,19 @@
 <script setup lang="ts">
+/**
+ * InputGroup —— 把「输入框 + 图标 / 文本 / 按钮」拼成一体的容器。
+ *
+ * 结构：`InputGroup` 里放若干 `InputGroupAddon` + 一个
+ * `InputGroupInput`（或 `InputGroupTextarea`）；
+ * 容器负责外框、圆角与聚焦 / 错误态，内部控件是「无边框、无 ring」的。
+ *
+ * - **必须用 `InputGroupInput` / `InputGroupTextarea`，不要直接放 `Input`**：
+ *   容器靠 `data-slot="input-group-control"` 找到内部控件来接管 hover/聚焦与错误态
+ * - 聚焦：内部控件 focus-visible 时容器整体出现 ring（不用自己写 `focus-within`）
+ * - 错误态：给**内部控件**加 `aria-invalid="true"` 就行，容器用 `has-[...]` 自动变红，
+ *   不需要（也不应该）给容器加
+ * - 尺寸：默认 `h-9`；放 `align="block-*"` 的 addon 或 textarea 时自动变成 `h-auto`
+ * - 高度 / 圆角在预设里是写死的，想改要带 `!`
+ */
 import type { HTMLAttributes } from "vue"
 import { cn } from "../../../lib/utils"
 

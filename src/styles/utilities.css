@@ -10,6 +10,27 @@
  * ─────────────────────────────────────────────
  */
 
+/* ─────────────── Input OTP 的光标闪烁 ───────────────
+   `InputOTPSlot` 的假光标用了 `animate-caret-blink`，但它**不是 Tailwind 内置动画**
+   （内置只有 spin / ping / pulse / bounce），预设里也只是 `@apply animate-caret-blink`。
+   不给定义的话那次 `animation` 直接失效，光标变成一根静止的竖线。
+   定义在共享的 utilities.css，消费方只要引了风格预设就能用。 */
+@theme {
+  --animate-caret-blink: caret-blink 1s ease-out infinite;
+
+  @keyframes caret-blink {
+    0%,
+    70%,
+    100% {
+      opacity: 1;
+    }
+    20%,
+    50% {
+      opacity: 0;
+    }
+  }
+}
+
 /* ─────────────── 全局基线：弹层开合不抖 ───────────────
    reka-ui 的弹层（Dialog / Drawer / DropdownMenu / Select / Popover …）默认 modal，
    打开时会给 body 设 overflow: hidden 锁背景滚动 → 滚动条消失，页面可用宽度瞬间多出

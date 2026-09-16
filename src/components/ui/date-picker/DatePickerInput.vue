@@ -57,13 +57,16 @@ const emits = defineEmits<{
 
 const open = useVModel(props, "open", emits, { passive: true, defaultValue: false })
 
+// 值也走 useVModel（同 DatePicker）：不传 v-model 时内部自己维护
+const modelValue = useVModel(props, "modelValue", emits, { passive: true })
+
 /** 输入框里的文本（独立于 modelValue：允许「正在输入的中间态」与已选值不一致） */
-const text = ref(formatDateISO(props.modelValue))
+const text = ref(formatDateISO(modelValue.value))
 /** 当前输入是否解析失败（解析失败才标红，一改就恢复） */
 const invalid = ref(false)
 
 // 外部改值（含初始化）就同步到输入框；解析失败期间不回写，免得把用户正在敲的内容冲掉
-watch(() => props.modelValue, (value) => {
+watch(modelValue, (value) => {
   if (invalid.value) return
   const next = formatDateISO(value)
   if (next !== text.value) text.value = next
@@ -80,7 +83,7 @@ const calendarProps = reactiveOmit(
 )
 
 function emitValue(value: DateValue | null) {
-  emits("update:modelValue", value)
+  modelValue.value = value
   emits("change", value)
 }
 
@@ -89,7 +92,7 @@ function commit() {
   const raw = text.value.trim()
   if (!raw) {
     invalid.value = false
-    if (props.modelValue) emitValue(null)
+    if (modelValue.value) emitValue(null)
     return
   }
   const parsed = parseDateInput(raw)
@@ -100,7 +103,7 @@ function commit() {
   }
   invalid.value = false
   text.value = formatDateISO(parsed)
-  if (formatDateISO(props.modelValue) !== text.value) emitValue(parsed)
+  if (formatDateISO(modelValue.value) !== text.value) emitValue(parsed)
 }
 
 function onSelect(value: any) {

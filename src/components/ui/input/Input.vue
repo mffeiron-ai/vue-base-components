@@ -1,4 +1,18 @@
 <script setup lang="ts">
+/**
+ * Input —— 单行文本输入框（原生 `<input>` 的样式封装，没有额外抽象层）。
+ *
+ * - 值：`v-model` 双向绑定（`string | number`）；只想给个初始值、不想在外面维护状态时用 `defaultValue`
+ * - 除 `defaultValue` / `modelValue` / `class` 之外的属性（`type`、`placeholder`、`disabled`、
+ *   `readonly`、`required`、`name`、`id`、`autocomplete`…）都会原样透传到 `<input>` 上
+ * - 错误态：加 `aria-invalid="true"` 即变红边 + 红 ring（含暗色适配），配合 Field / FieldError 使用
+ * - 尺寸、内边距、圆角由样式预设写死（`h-9` / `px-2.5` / `rounded-md`），
+ *   想改这些要带 `!`（如 `h-12!`、`rounded-full!`、`pl-9!`）——包括 `padding-left`，
+ *   预设的 `px-2.5` 会把它一起锁住，否则会被预设压掉
+ * - **`ref` 拿到的是组件实例，不是 `<input>` DOM**（没有 `defineExpose`）：
+ *   要操作 DOM 用 `refEl.$el`，或直接按 `id` 取
+ * - 需要「输入框 + 前后缀图标 / 按钮 / 单位」请用 InputGroup，不要在这里堆绝对定位
+ */
 import type { HTMLAttributes } from "vue"
 import { useVModel } from "@vueuse/core"
 import { cn } from "../../../lib/utils"

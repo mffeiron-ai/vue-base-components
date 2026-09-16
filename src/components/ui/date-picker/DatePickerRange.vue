@@ -65,7 +65,10 @@ const emits = defineEmits<{
 
 const open = useVModel(props, "open", emits, { passive: true, defaultValue: false })
 
-const selected = computed<DateRange | null>(() => props.modelValue ?? null)
+// 值也走 useVModel（同 DatePicker）：不传 v-model 时内部自己维护
+const modelValue = useVModel(props, "modelValue", emits, { passive: true })
+
+const selected = computed<DateRange | null>(() => modelValue.value ?? null)
 
 /** 两端都选齐了才算「有值」，只点了一头仍然是空态文案 */
 const display = computed(() => {
@@ -91,7 +94,7 @@ const calendarProps = reactiveOmit(
 )
 
 function emitValue(value: DateRange | null) {
-  emits("update:modelValue", value)
+  modelValue.value = value
   emits("change", value)
 }
 
