@@ -8,8 +8,9 @@
  * - 宽度：组件给 min-w-[8rem] 兜底，预设会收紧到 min-w-36（両者取谁看层叠，见预设注释）。
  * - 动画：data-[state=open/closed] 的 fade + zoom + 按 side 的 slide，预设里也复述了一套
  *   （外加 duration-100），改动画时两边都要看。
- * - inheritAttrs:false + `{ ...$attrs, ...forwarded }`：外层 Portal 不吃属性，属性要落到内容元素上。
- */
+ * - inheritAttrs:false + `{ ...$attrs, ...forwarded }`：外层 Portal 不吃属性，属性要落到内容元素上。 * - 关闭时拦掉 `close-auto-focus` 的默认焦点搬迁（reka 会把焦点交给面板自身，
+ *   面板一卸载焦点就落到 body，浏览器会因此把页面滚回顶部）；右键菜单本来也没有
+ *   「触发器」可还焦点，所以直接 preventDefault 最干净。 */
 import type { ContextMenuContentEmits, ContextMenuContentProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"
@@ -37,6 +38,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
     <ContextMenuContent
       data-slot="context-menu-content"
       v-bind="{ ...$attrs, ...forwarded }"
+      @close-auto-focus.prevent
       :class="cn(
         'bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 max-h-(--reka-context-menu-content-available-height) min-w-[8rem] overflow-x-hidden overflow-y-auto rounded-md border border-input p-1 shadow-md',
         props.class,

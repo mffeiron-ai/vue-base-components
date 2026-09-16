@@ -167,6 +167,12 @@ export const componentDocs: ComponentDoc[] = [
     description: '点击触发的菜单：普通项、可勾选项、单选组、二级子菜单、分隔线、快捷键提示与危险操作样式，支持受控开合和自动碰撞翻转。',
     importCode: `import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'`,
   },
+  {
+    name: 'empty',
+    title: 'Empty 空状态',
+    description: '列表为空 / 搜索无结果时的占位块：图标 + 标题 + 说明 + 操作按钮，自带居中与撑满能力，支持 icon 变体与自定义插画。',
+    importCode: `import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */

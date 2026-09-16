@@ -1,4 +1,8 @@
 <script setup lang="ts">
+/**
+ * EmptyTitle —— 空状态主标题（18px / medium，紧凑字距）。
+ */
+
 import type { HTMLAttributes } from "vue"
 import { cn } from "../../../lib/utils"
 

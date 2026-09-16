@@ -232,10 +232,17 @@ const partRows = [
     <Card class="mt-8">
       <CardHeader>
         <h2 class="text-xl font-semibold">受控开合（v-model:open）</h2>
-        <CardDescription>状态拿到外面后，可以用代码打开菜单（例如引导流程、快捷键唤起）。</CardDescription>
+        <CardDescription>
+          状态拿到外面后，除了点触发器，外部按钮也能开合同一份状态。
+          <strong>注意 <code>DropdownMenuTrigger</code> 不能省</strong> —— 它同时是菜单的定位锚点，
+          只写 Content 的话菜单会定位到不可见的地方。
+        </CardDescription>
       </CardHeader>
       <CardContent class="flex flex-wrap items-center gap-3">
         <DropdownMenu v-model:open="ctrlOpen">
+          <DropdownMenuTrigger as-child>
+            <Button variant="outline">账号设置</Button>
+          </DropdownMenuTrigger>
           <DropdownMenuContent class="w-44" align="start">
             <DropdownMenuItem @select="lastAction = '受控项'">受控菜单里的项</DropdownMenuItem>
           </DropdownMenuContent>
