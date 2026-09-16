@@ -1,4 +1,15 @@
 <script setup lang="ts">
+/**
+ * HoverCardContent —— 悬停卡片本体（自动挂 Portal）。
+ *
+ * - 默认宽度 16rem（`w-64`）；preset 里宽度写在「带主题作用域」的规则里
+ *   （`.style-vega :is(...)`，特异性 0,2,0），普通工具类压不过它，
+ *   所以想改宽度要写成 `class="w-80!"`（带 `!`）
+ * - 与触发器留 4px（`sideOffset`）
+ * - 位置：`side`（默认 bottom）/ `align`（默认 center）/ `side-offset` / `align-offset`；
+ *   空间不够时 reka 会自动翻转方向
+ * - 内容以「预览」为主：长内容或需要交互的表单请用 Popover / Dialog
+ */
 import type { HoverCardContentProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"

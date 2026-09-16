@@ -1,4 +1,11 @@
 <script setup lang="ts">
+/**
+ * FieldLabel —— 带 `<label>` 语义的字段标签（点它能聚焦/切换对应控件）。
+ *
+ * 表单里优先用它（而不是 FieldTitle）—— 只有它能把 for/id 关联起来。
+ * 另：当子元素是 Checkbox / Radio（选中态 data-state）时，整块会变成主色高亮，
+ * 所以「标题 + 说明 + 开关」这种整行可点的形式直接用 FieldLabel 包即可。
+ */
 import type { HTMLAttributes } from "vue"
 import { cn } from "../../../lib/utils"
 import { Label } from "../label"

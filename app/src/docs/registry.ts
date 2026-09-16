@@ -173,6 +173,18 @@ export const componentDocs: ComponentDoc[] = [
     description: '列表为空 / 搜索无结果时的占位块：图标 + 标题 + 说明 + 操作按钮，自带居中与撑满能力，支持 icon 变体与自定义插画。',
     importCode: `import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty'`,
   },
+  {
+    name: 'field',
+    title: 'Field 表单字段',
+    description: '表单字段布局组件族：垂直 / 水平 / 响应式三种排布，FieldGroup 与 FieldSet 分组，FieldLabel / FieldTitle / FieldDescription / FieldError 负责各部位，错误可直喂 vee-validate。',
+    importCode: `import { Field, FieldContent, FieldDescription, FieldError, FieldGroup, FieldLabel, FieldLegend, FieldSeparator, FieldSet, FieldTitle } from '@/components/ui/field'`,
+  },
+  {
+    name: 'hover-card',
+    title: 'Hover Card 悬停卡片',
+    description: '鼠标悬停（或键盘聚焦）时弹出的信息卡片：适合用户资料、链接预览；鼠标可移进卡片继续交互，支持延迟调节、受控开合与四向定位。',
+    importCode: `import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */

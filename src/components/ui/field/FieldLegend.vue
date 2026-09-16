@@ -1,4 +1,8 @@
 <script setup lang="ts">
+/**
+ * FieldLegend —— `<legend>` 语义的分组标题，配 FieldSet 使用。
+ * `variant="legend"`（默认，16px）用于整组字段的标题；`"label"`（14px）用于紧凑场景。
+ */
 import type { HTMLAttributes } from "vue"
 import { cn } from "../../../lib/utils"
 

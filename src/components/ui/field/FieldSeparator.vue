@@ -1,4 +1,8 @@
 <script setup lang="ts">
+/**
+ * FieldSeparator —— 字段组之间的分隔线；给默认插槽传文字就变成「中间带字」的分隔线
+ * （例如「或者用邮箱登录」），不传插槽就是一条普通线。
+ */
 import type { HTMLAttributes } from "vue"
 import { cn } from "../../../lib/utils"
 import { Separator } from "../separator"

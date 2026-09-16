@@ -1,4 +1,9 @@
 <script setup lang="ts">
+/**
+ * FieldDescription —— 字段的辅助说明（弱化小字号）。
+ * 自带与 legend / 相邻元素相邻时的间距修正，放在 Field 里不用额外调 margin；
+ * 内部写 `<a>` 会自动带下划线与 hover 主题色。
+ */
 import type { HTMLAttributes } from "vue"
 import { cn } from "../../../lib/utils"
 

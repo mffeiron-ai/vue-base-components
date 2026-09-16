@@ -1,4 +1,12 @@
 <script setup lang="ts">
+/**
+ * FieldError —— 字段的错误提示（红色小字，`role="alert"`）。
+ *
+ * - `errors` 既接受字符串数组，也接受 vee-validate 那种 `{ message }` 数组；
+ *   会自动去重：只有一条时输出字符串，多条则逐个列出
+ * - 两条都不传 / 没有内容时整个不渲染（不占位）
+ * - 想手写文案直接用默认插槽，插槽优先于 `errors`
+ */
 import type { HTMLAttributes } from "vue"
 import { computed } from "vue"
 import { cn } from "../../../lib/utils"
