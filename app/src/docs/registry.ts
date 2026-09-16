@@ -203,9 +203,98 @@ export const componentDocs: ComponentDoc[] = [
     description: '一次性验证码 / PIN 输入框：一排格子背后是一个隐藏 input，整块可聚焦、支持粘贴整串；位数由 maxlength 决定，可分组加分隔符，支持 pattern 限制字符、错误态与 complete 事件。',
     importCode: `import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '@/components/ui/input-otp'`,
   },
+  {
+    name: 'item',
+    title: 'Item 条目',
+    description: '通用条目容器：左侧媒体 + 中间内容 + 右侧操作，也可换成 Header / Content / Footer 的上下结构；三种 variant 与三档尺寸，配 as-child 能整块可点，配 ItemGroup + ItemSeparator 就是列表。',
+    importCode: `import { Item, ItemActions, ItemContent, ItemDescription, ItemFooter, ItemGroup, ItemHeader, ItemMedia, ItemSeparator, ItemTitle } from '@/components/ui/item'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */
 export function getComponentDoc(name: string): ComponentDoc | undefined {
   return componentDocs.find((d) => d.name === name)
+}
+
+/* ─────────────── 侧边栏分类 ───────────────
+   分类只在这一处维护：调整归类时改下面的 names 即可，不用动上面每一条文档记录。
+   没被任何分类收进去的组件不会出现在侧边栏（renderCategories 会跳过），
+   所以新增组件时记得来这里登记。 */
+
+export interface ComponentCategory {
+  /** 稳定标识，用作 key */
+  key: string
+  /** 卡片标题 */
+  title: string
+  /** 卡片副标题（一句话说明这类的边界） */
+  hint: string
+  /** 放在中央文档的哪一侧（不填＝left） */
+  side?: 'left' | 'right'
+  /** 归入本类的组件名（kebab，对应 ComponentDoc.name） */
+  names: string[]
+}
+
+export const componentCategories: ComponentCategory[] = [
+  {
+    key: 'interactive',
+    title: '交互',
+    hint: '点击 / 悬停 / 键盘驱出，本身会改变界面状态',
+    // 组件最多的一类，单放右侧，跟左侧两张卡的合计高度接近
+    side: 'right',
+    names: [
+      'accordion',
+      'alert-dialog',
+      'button',
+      'button-group',
+      'carousel',
+      'collapsible',
+      'combobox',
+      'command',
+      'context-menu',
+      'dialog',
+      'drawer',
+      'dropdown-menu',
+      'hover-card',
+    ],
+  },
+  {
+    key: 'display',
+    title: '展示',
+    hint: '负责「把内容呈现出来」，不承担输入',
+    names: [
+      'alert',
+      'aspect-ratio',
+      'attachment',
+      'avatar',
+      'badge',
+      'breadcrumb',
+      'bubble',
+      'card',
+      'chart',
+      'data-table',
+      'empty',
+      'item',
+    ],
+  },
+  {
+    key: 'input',
+    title: '输入',
+    hint: '收集用户填写的内容，通常配 Field / Label 使用',
+    names: [
+      'calendar',
+      'checkbox',
+      'date-picker',
+      'field',
+      'input',
+      'input-group',
+      'input-otp',
+    ],
+  },
+]
+
+/** 分类 + 该类实际存在的文档（按 names 顺序，找不到的自动跳过） */
+export function getCategoriesWithDocs() {
+  return componentCategories
+    .map((cat) => ({ ...cat, docs: cat.names.map((n) => getComponentDoc(n)).filter((d): d is ComponentDoc => !!d) }))
+    .filter((cat) => cat.docs.length > 0)
 }

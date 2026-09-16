@@ -1,4 +1,9 @@
 <script setup lang="ts">
+/**
+ * ItemTitle —— 条目标题（14px 中等字重，宽度跟随内容）。
+ *
+ * `w-fit` 是为了让它在 header 的 `justify-between` 里不被拉满。
+ */
 import type { HTMLAttributes } from "vue"
 import { cn } from "../../../lib/utils"
 

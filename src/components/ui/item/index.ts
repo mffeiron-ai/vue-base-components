@@ -24,6 +24,8 @@ export const itemVariants = cva(
       size: {
         default: "p-4 gap-4 ",
         sm: "py-3 px-4 gap-2.5",
+        // 预设里给下拉菜单这类紧凑场景备了一档 xs，这里保持一致
+        xs: "gap-2 px-2.5 py-2",
       },
     },
     defaultVariants: {
