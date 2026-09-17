@@ -466,7 +466,7 @@ provideQuestionnaireItemContext({
     :hidden="!active"
     :inert="!active"
     tabindex="-1"
-    :class="cn('flex flex-col gap-5 min-w-0 border-0 p-0 outline-none', activeAnimationClass, props.class)"
+    :class="cn('cn-questionnaire-item flex flex-col gap-5 min-w-0 border-0 p-0 outline-none', activeAnimationClass, props.class)"
   >
     <slot :active="active" :invalid="invalid" :status="status" />
   </fieldset>

@@ -1572,6 +1572,10 @@
     @apply size-3.5;
   }
 
+  .cn-questionnaire-choice-indicator-minus {
+    @apply size-3.5;
+  }
+
   .cn-questionnaire-choice-content {
     @apply gap-1;
   }

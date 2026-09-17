@@ -10,7 +10,7 @@ const props = defineProps<{
 <template>
   <span
     data-slot="questionnaire-choice-description"
-    :class="cn('text-muted-foreground', props.class)"
+    :class="cn('cn-questionnaire-choice-description text-muted-foreground', props.class)"
   >
     <slot />
   </span>

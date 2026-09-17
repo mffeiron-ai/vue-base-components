@@ -131,7 +131,7 @@ onBeforeUnmount(() => {
 <template>
   <div
     data-slot="questionnaire-input-wrapper"
-    class="w-full group/questionnaire-input relative min-w-0"
+    class="cn-questionnaire-input-wrapper w-full group/questionnaire-input relative min-w-0"
   >
     <input
       v-bind="$attrs"
@@ -150,7 +150,7 @@ onBeforeUnmount(() => {
       :type="props.type"
       :value="value"
       :class="cn(
-        'dark:bg-input/30 border-input focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 h-9 rounded-md border bg-transparent px-2.5 py-1 text-base shadow-xs focus-visible:ring-3 aria-invalid:ring-3 md:text-sm min-h-11 w-full min-w-0 transition-[color,box-shadow,background-color] outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 sm:min-h-0',
+        'cn-questionnaire-input dark:bg-input/30 border-input focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 h-9 rounded-md border bg-transparent px-2.5 py-1 text-base shadow-xs focus-visible:ring-3 aria-invalid:ring-3 md:text-sm min-h-11 w-full min-w-0 transition-[color,box-shadow,background-color] outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 sm:min-h-0',
         'selection:bg-primary selection:text-primary-foreground placeholder:text-muted-foreground',
         props.class,
       )"

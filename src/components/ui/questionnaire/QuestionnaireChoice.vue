@@ -159,7 +159,7 @@ onBeforeUnmount(() => {
     :data-type="type"
     :data-unchecked="checked ? undefined : ''"
     :class="cn(
-      'border-input dark:bg-input/20 hover:bg-muted/50 data-checked:border-primary/40 data-checked:bg-muted dark:data-checked:bg-muted data-invalid:border-destructive has-[>input:focus-visible]:border-ring has-[>input:focus-visible]:ring-ring/50 gap-3 rounded-md border bg-transparent px-4 py-3.5 text-sm shadow-xs has-[>input:focus-visible]:ring-3 group/questionnaire-choice relative flex min-h-11 cursor-pointer items-start text-start transition-colors outline-none select-none',
+      'cn-questionnaire-choice border-input dark:bg-input/20 hover:bg-muted/50 data-checked:border-primary/40 data-checked:bg-muted dark:data-checked:bg-muted data-invalid:border-destructive has-[>input:focus-visible]:border-ring has-[>input:focus-visible]:ring-ring/50 gap-3 rounded-md border bg-transparent px-4 py-3.5 text-sm shadow-xs has-[>input:focus-visible]:ring-3 group/questionnaire-choice relative flex min-h-11 cursor-pointer items-start text-start transition-colors outline-none select-none',
       'data-disabled:pointer-events-none data-disabled:cursor-not-allowed data-disabled:opacity-50',
       props.class,
     )"
@@ -186,27 +186,27 @@ onBeforeUnmount(() => {
       aria-hidden="true"
       data-slot="questionnaire-choice-indicator"
       :data-indicator="indicatorStyle"
-      class="border-input dark:bg-input/30 group-data-checked/questionnaire-choice:bg-primary dark:group-data-checked/questionnaire-choice:bg-primary group-data-checked/questionnaire-choice:text-primary-foreground group-data-checked/questionnaire-choice:border-primary size-4 translate-y-[--spacing(0.45)] group-has-data-[slot=questionnaire-choice-description]/questionnaire-choice:translate-y-0.5 rounded-[4px] pointer-events-none relative flex shrink-0 items-center justify-center border group-data-[type=radio]/questionnaire-choice:rounded-full"
+      class="cn-questionnaire-choice-indicator border-input dark:bg-input/30 group-data-checked/questionnaire-choice:bg-primary dark:group-data-checked/questionnaire-choice:bg-primary group-data-checked/questionnaire-choice:text-primary-foreground group-data-checked/questionnaire-choice:border-primary size-4 translate-y-[--spacing(0.45)] group-has-data-[slot=questionnaire-choice-description]/questionnaire-choice:translate-y-0.5 rounded-[4px] pointer-events-none relative flex shrink-0 items-center justify-center border group-data-[type=radio]/questionnaire-choice:rounded-full"
     >
       <span
         v-if="indicatorStyle === 'dot'"
         data-slot="questionnaire-choice-indicator-dot"
-        class="bg-primary-foreground size-2 hidden rounded-full group-has-[>input:checked]/questionnaire-choice:block"
+        class="cn-questionnaire-choice-indicator-dot bg-primary-foreground size-2 hidden rounded-full group-has-[>input:checked]/questionnaire-choice:block"
       />
       <CheckIcon
         v-else-if="indicatorStyle === 'check'"
         data-slot="questionnaire-choice-indicator-check"
-        class="size-3.5 hidden group-has-[>input:checked]/questionnaire-choice:block"
+        class="cn-questionnaire-choice-indicator-check size-3.5 hidden group-has-[>input:checked]/questionnaire-choice:block"
       />
       <MinusIcon
         v-else-if="indicatorStyle === 'minus'"
         data-slot="questionnaire-choice-indicator-minus"
-        class="size-3.5 hidden group-has-[>input:checked]/questionnaire-choice:block"
+        class="cn-questionnaire-choice-indicator-minus size-3.5 hidden group-has-[>input:checked]/questionnaire-choice:block"
       />
     </span>
     <span
       data-slot="questionnaire-choice-label"
-      class="gap-1 flex min-w-0 flex-1 flex-col leading-snug"
+      class="cn-questionnaire-choice-content gap-1 flex min-w-0 flex-1 flex-col leading-snug"
     >
       <slot :checked="checked" :disabled="disabled" :shortcut="shortcut" :type="type" />
     </span>
@@ -214,7 +214,7 @@ onBeforeUnmount(() => {
       v-if="shortcut"
       aria-hidden="true"
       data-slot="questionnaire-choice-shortcut"
-      class="border-input bg-background text-muted-foreground size-5 translate-y-[--spacing(0.45)] group-has-data-[slot=questionnaire-choice-description]/questionnaire-choice:translate-y-0.5 items-center justify-center rounded-md border font-mono text-[0.625rem] font-medium leading-none shadow-xs pointer-events-none ms-auto hidden shrink-0 group-data-[shortcut]/questionnaire-choice:inline-flex"
+      class="cn-questionnaire-shortcut border-input bg-background text-muted-foreground size-5 translate-y-[--spacing(0.45)] group-has-data-[slot=questionnaire-choice-description]/questionnaire-choice:translate-y-0.5 items-center justify-center rounded-md border font-mono text-[0.625rem] font-medium leading-none shadow-xs pointer-events-none ms-auto hidden shrink-0 group-data-[shortcut]/questionnaire-choice:inline-flex"
     >
       {{ shortcut }}
     </span>

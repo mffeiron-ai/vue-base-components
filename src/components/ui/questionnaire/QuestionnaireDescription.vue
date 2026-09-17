@@ -52,7 +52,7 @@ onBeforeUnmount(() => unregisterDescription())
     data-slot="questionnaire-description"
     :as="props.as"
     :as-child="props.asChild"
-    :class="cn('text-sm text-pretty text-muted-foreground', props.class)"
+    :class="cn('cn-questionnaire-description text-sm text-pretty text-muted-foreground', props.class)"
   >
     <slot />
   </Primitive>

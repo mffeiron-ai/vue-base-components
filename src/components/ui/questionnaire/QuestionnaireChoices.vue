@@ -20,7 +20,7 @@ const item = injectQuestionnaireItemContext()
     :as="props.as"
     :as-child="props.asChild"
     :data-shortcuts="item.shortcuts.value ?? undefined"
-    :class="cn('gap-3 group/questionnaire-choices grid min-w-0', props.class)"
+    :class="cn('cn-questionnaire-choices gap-3 group/questionnaire-choices grid min-w-0', props.class)"
   >
     <slot :shortcuts="item.shortcuts.value" />
   </Primitive>

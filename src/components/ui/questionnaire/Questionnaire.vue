@@ -449,7 +449,7 @@ provideQuestionnaireRootContext({
     :data-animation="props.animation"
     :data-shortcuts="shortcuts ?? undefined"
     :novalidate="props.noValidate"
-    :class="cn('gap-6 flex w-full min-w-0 flex-col', props.class)"
+    :class="cn('cn-questionnaire gap-6 flex w-full min-w-0 flex-col', props.class)"
     @keydown="handleKeydown"
     @reset="handleReset"
     @submit="handleSubmit"

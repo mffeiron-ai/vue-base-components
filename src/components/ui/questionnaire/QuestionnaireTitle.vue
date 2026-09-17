@@ -46,7 +46,7 @@ onBeforeUnmount(() => unregisterTitle?.())
     data-slot="questionnaire-title"
     :as="props.as"
     :as-child="props.asChild"
-    :class="cn('text-base font-semibold [&:not(:has(~[data-slot=questionnaire-description]))]:mb-5 cn-font-heading text-pretty', props.class)"
+    :class="cn('cn-questionnaire-title text-base font-semibold [&:not(:has(~[data-slot=questionnaire-description]))]:mb-5 cn-font-heading text-pretty', props.class)"
   >
     <slot />
   </Primitive>
