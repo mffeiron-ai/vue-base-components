@@ -239,6 +239,18 @@ export const componentDocs: ComponentDoc[] = [
     description: '对话里一行消息的布局骨架：Message 横排头像 + 内容列，内容列再放 MessageHeader（发送者）、Bubble（正文）、MessageFooter（时间）；align 控制是对方还是自己，可配 MessageGroup 成组。',
     importCode: `import { Message, MessageAvatar, MessageContent, MessageFooter, MessageGroup, MessageHeader } from '@/components/ui/message'`,
   },
+  {
+    name: 'message-scroller',
+    title: 'Message Scroller 消息滚动区',
+    description: '聊天 / 流式输出的滚动引擎：贴底跟随、用户上滑自动暂停、往上加载不跳位、跳到指定消息、回到底部按钮，并提供 scrollable / 可见性与锚点读数。',
+    importCode: `import { MessageScroller, MessageScrollerButton, MessageScrollerContent, MessageScrollerItem, MessageScrollerProvider, MessageScrollerViewport, useMessageScroller, useMessageScrollerScrollable, useMessageScrollerVisibility } from '@/components/ui/message-scroller'`,
+  },
+  {
+    name: 'navigation-menu',
+    title: 'Navigation Menu 导航菜单',
+    description: '站点级导航菜单：悬停 / 聚焦 / 方向键展开内容面板，横移自动换项；默认共享一块视口（切换时面板伸缩），可关成逐项卡片，支持指示箭头、受控开合与展开延迟。',
+    importCode: `import { NavigationMenu, NavigationMenuContent, NavigationMenuIndicator, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, NavigationMenuViewport, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */
@@ -286,6 +298,7 @@ export const componentCategories: ComponentCategory[] = [
       'dropdown-menu',
       'hover-card',
       'menubar',
+      'navigation-menu',
     ],
   },
   {
@@ -308,6 +321,7 @@ export const componentCategories: ComponentCategory[] = [
       'kbd',
       'marker',
       'message',
+      'message-scroller',
     ],
   },
   {

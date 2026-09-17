@@ -2,7 +2,7 @@
 import type { HTMLAttributes } from "vue"
 import type { MessageScrollerButtonDirection } from "./useMessageScroller"
 import type { ButtonVariants } from "../button"
-import { ArrowDownIcon } from "@lucide/vue"
+import { ArrowDownIcon } from "lucide-vue-next"
 import { computed } from "vue"
 import { cn } from "../../../lib/utils"
 import { Button } from "../button"
