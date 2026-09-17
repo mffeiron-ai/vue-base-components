@@ -38,7 +38,7 @@ const partRows = [
 </script>
 
 <template>
-  <div class="mx-auto max-w-3xl px-6 py-10">
+  <div class="mx-auto max-w-5xl px-6 py-10">
     <h1 class="text-3xl font-bold tracking-tight">Hover Card 悬停卡片</h1>
     <p class="mt-3 text-muted-foreground">
       鼠标悬停（或键盘聚焦）时弹出的信息卡片，常用来做<b>用户资料卡</b>与<b>链接预览</b>。<br />

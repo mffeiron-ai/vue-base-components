@@ -1,4 +1,11 @@
 <script setup lang="ts">
+/**
+ * MenubarSubTrigger —— 二级菜单的入口项（右侧自带一个 ChevronRight）。
+ *
+ * - 展开时 `data-[state=open]:bg-accent`；`inset` 与其它项一致
+ * - 悬停或按右方向键展开子菜单；子菜单内容写在 `MenubarSubContent` 里
+ * - 右端的箭头是默认插槽内容，可自己换
+ */
 import type { MenubarSubTriggerProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"

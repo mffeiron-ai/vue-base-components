@@ -209,6 +209,36 @@ export const componentDocs: ComponentDoc[] = [
     description: '通用条目容器：左侧媒体 + 中间内容 + 右侧操作，也可换成 Header / Content / Footer 的上下结构；三种 variant 与三档尺寸，配 as-child 能整块可点，配 ItemGroup + ItemSeparator 就是列表。',
     importCode: `import { Item, ItemActions, ItemContent, ItemDescription, ItemFooter, ItemGroup, ItemHeader, ItemMedia, ItemSeparator, ItemTitle } from '@/components/ui/item'`,
   },
+  {
+    name: 'kbd',
+    title: 'Kbd 键盘按键',
+    description: '快捷键的按键标记（原生 kbd 标签）：单个用 Kbd、组合键用 KbdGroup 排一行；放进 Tooltip 会自动切成半透明反色，字号与圆角由各风格预设统一。',
+    importCode: `import { Kbd, KbdGroup } from '@/components/ui/kbd'`,
+  },
+  {
+    name: 'label',
+    title: 'Label 标签',
+    description: '表单控件标签（原生 label）：支持 for+id 或直接包裹控件两种绑定，点标签即聚焦/切换；内置 peer-disabled 与 group-data-[disabled] 两条钩子，控件禁用时标签自动变灰。',
+    importCode: `import { Label } from '@/components/ui/label'`,
+  },
+  {
+    name: 'marker',
+    title: 'Marker 标记',
+    description: '内容流里的提示行 / 分隔行（今天、已编辑、AI 已停止生成）：由 Marker + MarkerIcon + MarkerContent 组成，variant 支持普通灰字、两侧横线分隔与底部带边三档。',
+    importCode: `import { Marker, MarkerContent, MarkerIcon } from '@/components/ui/marker'`,
+  },
+  {
+    name: 'menubar',
+    title: 'Menubar 菜单栏',
+    description: '桌面应用风格的横向菜单栏：一排 MenubarMenu（Trigger + Content），面板部件与 DropdownMenu 一一对应；自带键盘导航与「移到相邻标题自动切换」的菜单栏手感。',
+    importCode: `import { Menubar, MenubarCheckboxItem, MenubarContent, MenubarGroup, MenubarItem, MenubarLabel, MenubarMenu, MenubarRadioGroup, MenubarRadioItem, MenubarSeparator, MenubarShortcut, MenubarSub, MenubarSubContent, MenubarSubTrigger, MenubarTrigger } from '@/components/ui/menubar'`,
+  },
+  {
+    name: 'message',
+    title: 'Message 消息',
+    description: '对话里一行消息的布局骨架：Message 横排头像 + 内容列，内容列再放 MessageHeader（发送者）、Bubble（正文）、MessageFooter（时间）；align 控制是对方还是自己，可配 MessageGroup 成组。',
+    importCode: `import { Message, MessageAvatar, MessageContent, MessageFooter, MessageGroup, MessageHeader } from '@/components/ui/message'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */
@@ -255,6 +285,7 @@ export const componentCategories: ComponentCategory[] = [
       'drawer',
       'dropdown-menu',
       'hover-card',
+      'menubar',
     ],
   },
   {
@@ -274,6 +305,9 @@ export const componentCategories: ComponentCategory[] = [
       'data-table',
       'empty',
       'item',
+      'kbd',
+      'marker',
+      'message',
     ],
   },
   {
@@ -288,6 +322,7 @@ export const componentCategories: ComponentCategory[] = [
       'input',
       'input-group',
       'input-otp',
+      'label',
     ],
   },
 ]

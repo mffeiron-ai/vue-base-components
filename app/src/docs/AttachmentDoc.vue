@@ -35,7 +35,7 @@ const mediaRows = [
 </script>
 
 <template>
-  <div class="mx-auto max-w-3xl px-6 py-10">
+  <div class="mx-auto max-w-5xl px-6 py-10">
     <h1 class="text-3xl font-bold tracking-tight">Attachment 附件</h1>
     <p class="mt-3 text-muted-foreground">展示文件或图片附件，含媒体、名称、元信息、上传状态与操作按钮。</p>
 

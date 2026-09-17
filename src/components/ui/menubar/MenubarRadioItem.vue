@@ -1,4 +1,11 @@
 <script setup lang="ts">
+/**
+ * MenubarRadioItem —— 单选项，必须包在 `MenubarRadioGroup` 里。
+ *
+ * 与 CheckboxItem 同样是「左侧固定标记 + `pl-8`」的结构，
+ * 默认标记是一个实心小圆点（`Circle class="size-2 fill-current"`），
+ * 可用 `#indicator-icon` 插槽替换。
+ */
 import type { MenubarRadioItemEmits, MenubarRadioItemProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"

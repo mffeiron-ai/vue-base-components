@@ -1,4 +1,11 @@
 <script setup lang="ts">
+/**
+ * MenubarTrigger —— 菜单栏上那个可点的标题（文件 / 编辑 / 视图…）。
+ *
+ * - 聚焦或展开时都是 `bg-accent` 底色（`focus:` / `data-[state=open]:`）
+ * - 面板打开后，指针移到别的标题上会自动切到那个菜单
+ * - 别在里面放输入框 / 按钮这类交互控件：它本身就是一个菜单按钮
+ */
 import type { MenubarTriggerProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"

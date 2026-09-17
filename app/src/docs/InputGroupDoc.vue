@@ -61,7 +61,7 @@ const stateRows = [
 </script>
 
 <template>
-  <div class="mx-auto max-w-3xl px-6 py-10">
+  <div class="mx-auto max-w-5xl px-6 py-10">
     <h1 class="text-3xl font-bold tracking-tight">Input Group 输入框组</h1>
     <p class="mt-3 text-muted-foreground">
       把<b>输入框 + 图标 / 文本 / 按钮</b>拼成一个整体：外框、圆角、聚焦与错误态由容器统一负责，<br />

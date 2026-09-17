@@ -46,7 +46,7 @@ const partRows = [
 </script>
 
 <template>
-  <div class="mx-auto max-w-3xl px-6 py-10">
+  <div class="mx-auto max-w-5xl px-6 py-10">
     <h1 class="text-3xl font-bold tracking-tight">Drawer 抽屉</h1>
     <p class="mt-3 text-muted-foreground">
       带手势的抽屉面板，底层是 <code>vaul-vue</code>：向下拖拽关闭、拖顶部把手、打开时背景缩放，移动端体验比 Dialog 自然。<br />

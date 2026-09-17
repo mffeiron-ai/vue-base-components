@@ -69,7 +69,7 @@ const slotStateRows = [
 </script>
 
 <template>
-  <div class="mx-auto max-w-3xl px-6 py-10">
+  <div class="mx-auto max-w-5xl px-6 py-10">
     <h1 class="text-3xl font-bold tracking-tight">Input OTP 验证码输入</h1>
     <p class="mt-3 text-muted-foreground">
       一次性验证码 / PIN 码输入框：外观是一排格子，实际是<b>一个隐藏 input</b>——<br />

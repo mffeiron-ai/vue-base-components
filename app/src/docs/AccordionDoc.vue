@@ -19,7 +19,7 @@ const propsRows = [
 </script>
 
 <template>
-  <div class="mx-auto max-w-3xl px-6 py-10">
+  <div class="mx-auto max-w-5xl px-6 py-10">
     <h1 class="text-3xl font-bold tracking-tight">Accordion 手风琴</h1>
     <p class="mt-3 text-muted-foreground">垂直堆叠的可折叠区块，点击标题展开 / 收起对应内容。</p>
 

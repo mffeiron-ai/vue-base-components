@@ -72,7 +72,7 @@ const states = [
 </script>
 
 <template>
-  <div class="mx-auto max-w-3xl px-6 py-10">
+  <div class="mx-auto max-w-5xl px-6 py-10">
     <h1 class="text-3xl font-bold tracking-tight">Checkbox 复选框</h1>
     <p class="mt-3 text-muted-foreground">
       基于 <code>reka-ui</code> 的 <code>CheckboxRoot</code>：除了选中 / 未选，还支持<strong>半选</strong>（indeterminate）三态，

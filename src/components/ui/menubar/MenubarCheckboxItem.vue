@@ -1,4 +1,11 @@
 <script setup lang="ts">
+/**
+ * MenubarCheckboxItem —— 可勾选的菜单项（多选），用 `v-model` 或 `v-model:checked` 控制。
+ *
+ * 勾选标记固定在**左侧**（`absolute left-2` 的一层 span + `MenubarItemIndicator`），
+ * 所以项本身带 `pl-8` 给标记留位 —— 这与预设里的 `left-2` 一致，别改成右侧。
+ * 想换标记图标用 `#indicator-icon` 插槽（默认 Check）。
+ */
 import type { MenubarCheckboxItemEmits, MenubarCheckboxItemProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"

@@ -175,4 +175,9 @@ import '@fontsource/ubuntu-mono/latin-700.css'
 import './style.css'
 // 全局风格切面（style-* class 与圆角档位）由 lib/style.ts 统一管理
 
-createApp(App).use(router).mount('#app')
+const app = createApp(App).use(router)
+
+// 等路由就绪再挂载：否则 RouterView 首次渲染的是「空」、随后才换成真实页面，
+// 会被 DocsLayout 的 <Transition> 当成一次替换而播 enter 动画 —— 首屏白多一次淡入，
+// 且若这一刻动画被冻结（后台标签页 / 文档不可见）会卡在 enter-from 的 opacity:0。
+router.isReady().then(() => app.mount('#app'))

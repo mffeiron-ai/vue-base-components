@@ -35,7 +35,7 @@ const parts = [
 </script>
 
 <template>
-  <div class="mx-auto max-w-3xl px-6 py-10">
+  <div class="mx-auto max-w-5xl px-6 py-10">
     <h1 class="text-3xl font-bold tracking-tight">Card 卡片</h1>
     <p class="mt-3 text-muted-foreground">
       卡片容器，把标题、描述、正文、操作和页脚组合成一块带边框与阴影的区域。

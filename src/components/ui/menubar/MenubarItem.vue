@@ -1,4 +1,13 @@
 <script setup lang="ts">
+/**
+ * MenubarItem —— 普通菜单项。
+ *
+ * - `inset`：左侧缩进（`data-inset` → `pl-8`），用来和带勾选标记的项左对齐
+ * - `variant="destructive"`：危险操作配色（文字与 hover 底色都变红）
+ * - 用 `@select` 拿点击；想阻止「选完自动关面板」用 `@select.prevent`（与 DropdownMenu 同）
+ * - `variant` 给了默认值 `'default'`，保证 `data-variant` 一定渲染出来
+ *   （预设按 data 属性选变体，属性不渲染时会静默失效 —— 同类坑踩过多次）
+ */
 import type { MenubarItemEmits, MenubarItemProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"
@@ -8,11 +17,13 @@ import {
 } from "reka-ui"
 import { cn } from "../../../lib/utils"
 
-const props = defineProps<MenubarItemProps & {
+const props = withDefaults(defineProps<MenubarItemProps & {
   class?: HTMLAttributes["class"]
   inset?: boolean
   variant?: "default" | "destructive"
-}>()
+}>(), {
+  variant: "default",
+})
 
 const emits = defineEmits<MenubarItemEmits>()
 

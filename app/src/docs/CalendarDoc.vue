@@ -57,7 +57,7 @@ const slots = [
 </script>
 
 <template>
-  <div class="mx-auto max-w-3xl px-6 py-10">
+  <div class="mx-auto max-w-5xl px-6 py-10">
     <h1 class="text-3xl font-bold tracking-tight">Calendar 日历</h1>
     <p class="mt-3 text-muted-foreground">
       用于选择单个日期。日期类型来自 <code>@internationalized/date</code>，自带键盘导航与无障碍语义。

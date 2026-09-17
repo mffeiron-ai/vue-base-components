@@ -233,7 +233,7 @@ const rows = [
 </script>
 
 <template>
-  <div class="mx-auto max-w-3xl px-6 py-10">
+  <div class="mx-auto max-w-5xl px-6 py-10">
     <h1 class="text-3xl font-bold tracking-tight">Data Table 数据表格</h1>
     <p class="mt-3 text-muted-foreground">
       表格由一组纯 HTML 语义标签的包装组件组成（<code>Table</code> / <code>TableHead</code> …），<br />

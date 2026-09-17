@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 </script>
 
 <template>
-  <div class="mx-auto max-w-3xl px-6 py-10">
+  <div class="mx-auto max-w-5xl px-6 py-10">
     <h1 class="text-3xl font-bold tracking-tight">Alert Dialog 警告对话框</h1>
     <p class="mt-3 text-muted-foreground">模态对话框，用于需要用户确认的重要操作，打断当前流程。</p>
 
