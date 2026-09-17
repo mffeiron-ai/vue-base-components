@@ -293,6 +293,24 @@ export const componentDocs: ComponentDoc[] = [
     description: '选一段日期：点第一下是开始、第二下是结束，中间连成高亮带（底色画在单元格上，首尾自动补圆角）；支持多月份并排、限定范围、禁用特定日期。',
     importCode: `import { RangeCalendar } from '@/components/ui/range-calendar'`,
   },
+  {
+    name: 'resizable',
+    title: 'Resizable 可调整面板',
+    description: '拖拽分割线布局：Group 给方向、Panel 按百分比分配尺寸、Handle 是那条可拖的线；支持 min/max、折叠、键盘微调与布局持久化。',
+    importCode: `import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable'`,
+  },
+  {
+    name: 'scroll-area',
+    title: 'Scroll Area 滚动区域',
+    description: '自定义样式的滚动区：底色/宽度/圆角跟设计系统走，可控制悬停或滚动时才浮出；默认只有垂直条，要横条得自己加一个 ScrollBar。',
+    importCode: `import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'`,
+  },
+  {
+    name: 'select',
+    title: 'Select 选择器',
+    description: '从一组选项里挑一个：Trigger + Value 拼出触发器，Content 是 Portal 浮层；支持分组标签与分隔线、自定义选项内容与勾选图标、长列表自动出现滚动按钮，带 name 时直接进 FormData。',
+    importCode: `import { Select, SelectContent, SelectGroup, SelectItem, SelectItemText, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue } from '@/components/ui/select'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */
@@ -343,6 +361,7 @@ export const componentCategories: ComponentCategory[] = [
       'navigation-menu',
       'pagination',
       'popover',
+      'resizable',
     ],
   },
   {
@@ -367,6 +386,7 @@ export const componentCategories: ComponentCategory[] = [
       'message',
       'message-scroller',
       'progress',
+      'scroll-area',
     ],
   },
   {
@@ -386,6 +406,7 @@ export const componentCategories: ComponentCategory[] = [
       'questionnaire',
       'radio-group',
       'range-calendar',
+      'select',
     ],
   },
 ]

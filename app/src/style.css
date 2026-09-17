@@ -232,3 +232,24 @@
   font-size: 0.85em;
   white-space: nowrap;
 }
+
+/**
+ * 浮层滚动锁的「参照物修正」
+ * ─────────────────────────────────────────────
+ * reka 的 useBodyScrollLock（Select / Dialog / Drawer / DropdownMenu 等浮层打开时）会给 <body>
+ * 内联一段 `overflow: hidden; padding-right: <滚动条宽>`。问题出在：
+ * 平时 `html { overflow: auto }`，滚动容器是 html；body 一旦变成 `overflow: hidden`，
+ * 它自己就成了新的滚动容器 —— `position: sticky` 的元素会改为相对 body 定位，
+ * 于是页面明明没滚动，侧栏却"跳"到了别处（实测 aside top 80 → -341，差值正好一个 scrollY）。
+ *
+ * 这里把锁「上移」到 html：
+ *   - html 本来就是滚动容器，锁在它身上不改变任何 sticky 的参照物，scrollTop 也原样保留；
+ *   - body 恢复 visible 后，reka 加的 padding-right 继续负责抵消消失的滚动条宽度，视觉不变。
+ * 参考：https://github.com/unovue/reka-ui —— bodyLock / useBodyScrollLock
+ */
+html:has(> body[style*="overflow: hidden"]) {
+  overflow: hidden !important;
+}
+body[style*="overflow: hidden"] {
+  overflow: visible !important;
+}
