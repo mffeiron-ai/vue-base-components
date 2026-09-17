@@ -23,17 +23,20 @@ const forwardedProps = useForwardProps(delegatedProps)
     v-bind="forwardedProps"
     :class="
       cn(
-        'border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50',
+        // `flex items-center justify-center` 是必需的：button 内容盒比 indicator 小 2px
+        //（size-4 含 1px 边框），不居中时 indicator 会被 flex 压成「宽 14 × 高 16」的非正方形，
+        // 圆点跟着 `top-1/2 left-1/2` 向下偏 1px。
+        'border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-center',
         props.class,
       )
     "
   >
     <RadioGroupIndicator
       data-slot="radio-group-indicator"
-      class="relative flex items-center justify-center"
+      class="relative flex items-center justify-center shrink-0"
     >
       <slot>
-        <CircleIcon class="fill-primary absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2" />
+        <CircleIcon class="cn-radio-group-indicator-icon fill-current absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2" />
       </slot>
     </RadioGroupIndicator>
   </RadioGroupItem>

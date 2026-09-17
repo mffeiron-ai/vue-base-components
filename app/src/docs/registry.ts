@@ -281,6 +281,18 @@ export const componentDocs: ComponentDoc[] = [
     description: '一次一题的问卷 / 引导流程：进度、必答校验、跳过、上下题与提交按钮、键盘快捷键都由组件管；根就是 form，答案按题目 name 提交（多选提交多个值）。',
     importCode: `import { Questionnaire, QuestionnaireActions, QuestionnaireChoice, QuestionnaireChoiceDescription, QuestionnaireChoices, QuestionnaireDescription, QuestionnaireError, QuestionnaireInput, QuestionnaireItem, QuestionnaireNext, QuestionnairePrevious, QuestionnaireProgress, QuestionnaireSkip, QuestionnaireSubmit, QuestionnaireTitle } from '@/components/ui/questionnaire'`,
   },
+  {
+    name: 'radio-group',
+    title: 'Radio Group 单选组',
+    description: '一组互斥选项（role=radiogroup）：v-model 绑值，每个 RadioGroupItem 给一个 value；方向键切换、Tab 进出整组，选中标记可自定义。',
+    importCode: `import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'`,
+  },
+  {
+    name: 'range-calendar',
+    title: 'Range Calendar 范围日历',
+    description: '选一段日期：点第一下是开始、第二下是结束，中间连成高亮带（底色画在单元格上，首尾自动补圆角）；支持多月份并排、限定范围、禁用特定日期。',
+    importCode: `import { RangeCalendar } from '@/components/ui/range-calendar'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */
@@ -372,6 +384,8 @@ export const componentCategories: ComponentCategory[] = [
       'label',
       'number-field',
       'questionnaire',
+      'radio-group',
+      'range-calendar',
     ],
   },
 ]

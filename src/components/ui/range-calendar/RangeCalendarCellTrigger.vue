@@ -30,8 +30,9 @@ const forwardedProps = useForwardProps(delegatedProps)
       'data-[outside-view]:text-muted-foreground',
       // Disabled
       'data-[disabled]:text-muted-foreground data-[disabled]:opacity-50',
-      // Unavailable
-      'data-[unavailable]:text-destructive-foreground data-[unavailable]:line-through',
+      // Unavailable：用灰字 + 删除线。上游写的是 `text-destructive-foreground`，
+      // 而那个 token 在浅色主题下就是白色 —— 白底白字，加了删除线也看不见。
+      'data-[unavailable]:text-muted-foreground data-[unavailable]:line-through',
       props.class,
     )"
     v-bind="forwardedProps"

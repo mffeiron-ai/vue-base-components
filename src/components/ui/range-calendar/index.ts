@@ -10,3 +10,6 @@ export { default as RangeCalendarHeader } from "./RangeCalendarHeader.vue"
 export { default as RangeCalendarHeading } from "./RangeCalendarHeading.vue"
 export { default as RangeCalendarNextButton } from "./RangeCalendarNextButton.vue"
 export { default as RangeCalendarPrevButton } from "./RangeCalendarPrevButton.vue"
+
+/** 换页动画类型与 Calendar 共用（slide / fade / zoom / flip / none） */
+export type { PageAnimationTypes } from "../calendar/usePageAnimation"
