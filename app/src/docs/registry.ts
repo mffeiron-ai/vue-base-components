@@ -251,6 +251,36 @@ export const componentDocs: ComponentDoc[] = [
     description: '站点级导航菜单：悬停 / 聚焦 / 方向键展开内容面板，横移自动换项；默认共享一块视口（切换时面板伸缩），可关成逐项卡片，支持指示箭头、受控开合与展开延迟。',
     importCode: `import { NavigationMenu, NavigationMenuContent, NavigationMenuIndicator, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, NavigationMenuViewport, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu'`,
   },
+  {
+    name: 'number-field',
+    title: 'Number Field 数字输入框',
+    description: '带增减按钮的数字输入：值是真正的 number，支持范围限制、小数步长、step 吸附、键盘上下键，以及 Intl.NumberFormat 的货币 / 百分比格式化。',
+    importCode: `import { NumberField, NumberFieldContent, NumberFieldDecrement, NumberFieldIncrement, NumberFieldInput } from '@/components/ui/number-field'`,
+  },
+  {
+    name: 'pagination',
+    title: 'Pagination 分页',
+    description: '列表 / 表格的分页导航：页码数组由 reka 按当前页、总页数、sibling-count、show-edges 算好；支持省略号、首末页跳转、前后翻页自动禁用与链接式页码。',
+    importCode: `import { Pagination, PaginationContent, PaginationEllipsis, PaginationFirst, PaginationItem, PaginationLast, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination'`,
+  },
+  {
+    name: 'popover',
+    title: 'Popover 气泡卡片',
+    description: '点触发器弹出的可交互面板：面板里能放表单与按钮，点内部不关、点外部 / Esc 关闭；支持 side/align 定位自动翻转、自定义锚点（PopoverAnchor）与模态开关。',
+    importCode: `import { Popover, PopoverAnchor, PopoverContent, PopoverDescription, PopoverHeader, PopoverTitle, PopoverTrigger } from '@/components/ui/popover'`,
+  },
+  {
+    name: 'progress',
+    title: 'Progress 进度条',
+    description: '横向进度条：model-value / max 决定填充比例，带 transition 平滑推进与完整的 progressbar 无障碍语义；高度、颜色、圆角用 class 覆盖。',
+    importCode: `import { Progress } from '@/components/ui/progress'`,
+  },
+  {
+    name: 'questionnaire',
+    title: 'Questionnaire 问卷',
+    description: '一次一题的问卷 / 引导流程：进度、必答校验、跳过、上下题与提交按钮、键盘快捷键都由组件管；根就是 form，答案按题目 name 提交（多选提交多个值）。',
+    importCode: `import { Questionnaire, QuestionnaireActions, QuestionnaireChoice, QuestionnaireChoiceDescription, QuestionnaireChoices, QuestionnaireDescription, QuestionnaireError, QuestionnaireInput, QuestionnaireItem, QuestionnaireNext, QuestionnairePrevious, QuestionnaireProgress, QuestionnaireSkip, QuestionnaireSubmit, QuestionnaireTitle } from '@/components/ui/questionnaire'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */
@@ -299,6 +329,8 @@ export const componentCategories: ComponentCategory[] = [
       'hover-card',
       'menubar',
       'navigation-menu',
+      'pagination',
+      'popover',
     ],
   },
   {
@@ -322,6 +354,7 @@ export const componentCategories: ComponentCategory[] = [
       'marker',
       'message',
       'message-scroller',
+      'progress',
     ],
   },
   {
@@ -337,6 +370,8 @@ export const componentCategories: ComponentCategory[] = [
       'input-group',
       'input-otp',
       'label',
+      'number-field',
+      'questionnaire',
     ],
   },
 ]

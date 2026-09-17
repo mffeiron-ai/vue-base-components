@@ -140,6 +140,7 @@ onBeforeUnmount(() => {
 <template>
   <label
     data-slot="questionnaire-choice"
+    :data-state="checked ? 'checked' : 'unchecked'"
     :data-checked="checked ? '' : undefined"
     :data-disabled="disabled ? '' : undefined"
     :data-invalid="item.invalid.value ? '' : undefined"
@@ -160,6 +161,7 @@ onBeforeUnmount(() => {
       :aria-invalid="item.invalid.value || undefined"
       :aria-keyshortcuts="getAnswerKeyShortcuts(shortcut, !disabled && checked)"
       :checked="checked"
+      :data-state="checked ? 'checked' : 'unchecked'"
       :data-checked="checked ? '' : undefined"
       :data-unchecked="checked ? undefined : ''"
       :disabled="disabled"
@@ -176,9 +178,9 @@ onBeforeUnmount(() => {
     >
       <span
         data-slot="questionnaire-choice-indicator-dot"
-        class="bg-primary-foreground size-2 hidden rounded-full group-data-[type=checkbox]/questionnaire-choice:hidden group-data-checked/questionnaire-choice:block"
+        class="bg-primary-foreground size-2 hidden rounded-full group-has-[>input[type=radio]:checked]/questionnaire-choice:block"
       />
-      <CheckIcon data-slot="questionnaire-choice-indicator-check" class="size-3.5 hidden group-data-[type=radio]/questionnaire-choice:hidden group-data-checked/questionnaire-choice:block" />
+      <CheckIcon data-slot="questionnaire-choice-indicator-check" class="size-3.5 hidden group-has-[>input[type=checkbox]:checked]/questionnaire-choice:block" />
     </span>
     <span
       data-slot="questionnaire-choice-label"
