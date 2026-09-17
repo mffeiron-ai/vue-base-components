@@ -15,7 +15,9 @@ export { default as QuestionnaireSubmit } from "./QuestionnaireSubmit.vue"
 export { default as QuestionnaireTitle } from "./QuestionnaireTitle.vue"
 
 export type {
+  QuestionnaireAnimation,
   QuestionnaireChoiceDefinition,
+  QuestionnaireChoiceIndicator,
   QuestionnaireInputType,
   QuestionnaireItemDefinition,
   QuestionnaireItemStatus,

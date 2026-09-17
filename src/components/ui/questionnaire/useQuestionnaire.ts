@@ -4,6 +4,9 @@ import { createContext } from "reka-ui"
 export type QuestionnaireItemStatus = 'unanswered' | 'answered' | 'skipped'
 export type QuestionnaireShortcutMode = 'letters' | 'numbers'
 
+/** 题目切换动画：`none` 关掉动画，其余四种都是入场动画。 */
+export type QuestionnaireAnimation = 'fade' | 'none' | 'rise' | 'scale' | 'slide'
+
 export type QuestionnaireInputType
   = | 'date'
     | 'datetime-local'
@@ -34,6 +37,9 @@ export interface ChoiceRegistration {
   disabled: boolean
   value: string
 }
+
+/** 选中标记的样式：圆点 / 对勾 / 横杠 / 纯实心（不加内部符号）。 */
+export type QuestionnaireChoiceIndicator = 'check' | 'dot' | 'fill' | 'minus'
 
 export interface AnswerControlRegistration {
   disabled: boolean
@@ -66,6 +72,7 @@ export interface QuestionnaireRootContext {
   activeItemName: ComputedRef<string | null>
   activeItemRequired: ComputedRef<boolean | null>
   activeItemStatus: ComputedRef<QuestionnaireItemStatus | null>
+  animation: ComputedRef<QuestionnaireAnimation>
   current: ComputedRef<number>
   domVersion: Ref<number>
   first: ComputedRef<boolean>
@@ -142,6 +149,32 @@ export function getShortcutFromKey(key: string, shortcuts: QuestionnaireShortcut
 
 export function getAnswerKeyShortcuts(shortcut: string | null, filled: boolean) {
   return [shortcut, filled ? 'Enter' : null].filter(Boolean).join(' ') || undefined
+}
+
+/**
+ * 题目切换动画的类名（依赖 tw-animate-css，组件库已普遍使用）。
+ *
+ * 只做入场：非激活题靠 `hidden` 退出布局，切回来时 `display` 从 `none` 变回可见，
+ * 浏览器会从头播放 `animation`，所以不需要（也没机会）做离场动画。
+ */
+export function getQuestionnaireAnimationClass(animation: QuestionnaireAnimation) {
+  if (animation === 'fade') {
+    return 'animate-in fade-in-0 duration-300'
+  }
+
+  if (animation === 'rise') {
+    return 'animate-in fade-in-0 slide-in-from-bottom-4 duration-300'
+  }
+
+  if (animation === 'scale') {
+    return 'animate-in fade-in-0 zoom-in-95 duration-300'
+  }
+
+  if (animation === 'slide') {
+    return 'animate-in fade-in-0 slide-in-from-right-4 duration-300'
+  }
+
+  return ''
 }
 
 export function isAnswerFilled(answer: AnswerControlRegistration) {

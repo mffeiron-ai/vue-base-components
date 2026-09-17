@@ -2,6 +2,7 @@
 import type { HTMLAttributes } from "vue"
 import type {
   ItemRegistration,
+  QuestionnaireAnimation,
   QuestionnaireItemDefinition,
   QuestionnaireShortcutMode,
 } from './useQuestionnaire'
@@ -19,6 +20,8 @@ import {
 } from './useQuestionnaire'
 
 const props = withDefaults(defineProps<{
+  /** Entry animation played whenever the active item changes. */
+  animation?: QuestionnaireAnimation
   class?: HTMLAttributes['class']
   /** Item shown first. Ignored when `item` is provided. */
   defaultItem?: string
@@ -31,6 +34,7 @@ const props = withDefaults(defineProps<{
   /** Assigns a keyboard shortcut to every choice. */
   shortcuts?: QuestionnaireShortcutMode
 }>(), {
+  animation: 'none',
   noValidate: true,
 })
 
@@ -422,6 +426,7 @@ provideQuestionnaireRootContext({
   activeItemName,
   activeItemRequired,
   activeItemStatus,
+  animation: computed(() => props.animation),
   current,
   domVersion,
   first,
@@ -441,6 +446,7 @@ provideQuestionnaireRootContext({
   <form
     ref="rootElement"
     data-slot="questionnaire"
+    :data-animation="props.animation"
     :data-shortcuts="shortcuts ?? undefined"
     :novalidate="props.noValidate"
     :class="cn('gap-6 flex w-full min-w-0 flex-col', props.class)"

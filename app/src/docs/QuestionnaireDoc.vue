@@ -19,6 +19,8 @@ import {
   QuestionnaireSkip,
   QuestionnaireSubmit,
   QuestionnaireTitle,
+  type QuestionnaireAnimation,
+  type QuestionnaireChoiceIndicator,
   type QuestionnaireItemDefinition,
   type QuestionnaireItemStatus,
 } from '@/components/ui/questionnaire'
@@ -54,7 +56,7 @@ function onSubmit(event: Event) {
   submitted.value = answers
 }
 
-// ---------- 演示 2：快捷键与状态 ----------
+// ---------- 快捷键与状态 ----------
 const shortcutItems: QuestionnaireItemDefinition[] = [
   { name: 'size', choices: [{ value: 's' }, { value: 'm' }, { value: 'l' }] },
   { name: 'channel', required: true, choices: [{ value: 'email' }, { value: 'im' }] },
@@ -70,7 +72,30 @@ const statusLabel: Record<QuestionnaireItemStatus, string> = {
   unanswered: '未作答',
 }
 
-// ---------- 演示 3：受控切题 ----------
+// ---------- 勾选样式 ----------
+const indicatorOptions: Array<{ label: string, value: QuestionnaireChoiceIndicator }> = [
+  { label: '圆点 dot（单选默认）', value: 'dot' },
+  { label: '对勾 check（多选默认）', value: 'check' },
+  { label: '横杠 minus', value: 'minus' },
+  { label: '纯实心 fill', value: 'fill' },
+]
+
+// ---------- 切换动画 ----------
+const animation = ref<QuestionnaireAnimation>('slide')
+const animationOptions: Array<{ label: string, value: QuestionnaireAnimation }> = [
+  { label: '淡入 fade', value: 'fade' },
+  { label: '上浮 rise', value: 'rise' },
+  { label: '缩放 scale', value: 'scale' },
+  { label: '右滑 slide', value: 'slide' },
+  { label: '关闭 none', value: 'none' },
+]
+const animationItems: QuestionnaireItemDefinition[] = [
+  { name: 'step-one', required: true, choices: [{ value: 'a' }, { value: 'b' }] },
+  { name: 'step-two', choices: [{ value: 'a' }, { value: 'b' }] },
+  { name: 'step-three' },
+]
+
+// ---------- 受控切题 ----------
 const controlledItems: QuestionnaireItemDefinition[] = [
   { name: 'team', required: true, choices: [{ value: 'design' }, { value: 'dev' }] },
   { name: 'scale', choices: [{ value: 'small' }, { value: 'large' }] },
@@ -85,6 +110,7 @@ const rootRows = [
   { name: 'v-model:item', type: 'string', def: '—', desc: '受控的「当前题」（题目的 <code>name</code>）；不传就按 <code>default-item</code> / 第一题自己走' },
   { name: 'defaultItem', type: 'string', def: '第一题', desc: '非受控时的起始题（<code>item</code> 存在时忽略）' },
   { name: 'shortcuts', type: "'letters' | 'numbers'", def: '—', desc: '给每题选项分配键盘快捷键：<code>letters</code> → A/B/C…，<code>numbers</code> → 1/2/3…（最多 9 个）；按键在<b>表单内</b>聚焦时生效' },
+  { name: 'animation', type: "'fade' | 'rise' | 'scale' | 'slide' | 'none'", def: "'none'", desc: '切到新题时的<b>入场</b>动画；非激活题靠 <code>hidden</code> 退出布局，所以没有离场动画（不需要时传 <code>none</code>）' },
   { name: 'noValidate', type: 'boolean', def: 'true', desc: '默认 <b>true</b>：不用浏览器原生校验，由组件自己拦「必答题未答」；设 <code>false</code> 交给原生 constraint validation' },
 ]
 
@@ -92,7 +118,7 @@ const partRows = [
   { name: 'QuestionnaireItem', slot: 'questionnaire-item', desc: '一题（<code>&lt;fieldset&gt;</code>）：<code>name</code>（必填，也是提交字段名）、<code>required</code>、<code>disabled</code>、<code>multiple</code>（选项变多选）、<code>invalid</code>（外部标记无效）；<code>@update:status</code> 抛出 answered / skipped / unanswered' },
   { name: 'QuestionnaireTitle / Description', slot: 'questionnaire-title / -description', desc: '题干与说明：Title 默认渲染 <code>&lt;legend&gt;</code>；两者都会自动登记进 fieldset 的 <code>aria-labelledby / aria-describedby</code>' },
   { name: 'QuestionnaireChoices', slot: 'questionnaire-choices', desc: '选项容器（<code>grid gap-3</code>）；插槽参数 <code>{ shortcuts }</code>，可以自己按快捷键模式渲染提示' },
-  { name: 'QuestionnaireChoice', slot: 'questionnaire-choice', desc: '一个选项：<code>value</code> 必填；<code>multiple</code> 时渲染 checkbox、否则 radio；<code>defaultChecked</code> / <code>v-model:checked</code> 控制选中；内部把值提交到父题的 <code>name</code>' },
+  { name: 'QuestionnaireChoice', slot: 'questionnaire-choice', desc: '一个选项：<code>value</code> 必填；<code>multiple</code> 时渲染 checkbox、否则 radio；<code>defaultChecked</code> / <code>v-model:checked</code> 控制选中；<code>indicator</code> 选选中标记样式（默认单选圆点、多选对勾）；内部把值提交到父题的 <code>name</code>' },
   { name: 'QuestionnaireChoiceDescription', slot: 'questionnaire-choice-description', desc: '选项里第二行的补充说明（muted 小字）' },
   { name: 'QuestionnaireInput', slot: 'questionnaire-input', desc: '填空型答案：<code>type</code>（text / email / number / date…）、<code>v-model</code> 或 <code>defaultValue</code>；同样提交到父题的 <code>name</code>' },
   { name: 'QuestionnaireError', slot: 'questionnaire-error', desc: '错误提示：只在当前题校验失败时显示（<code>role="alert"</code>），默认文案按 required 区分；可给插槽参数 <code>{ invalid }</code> 自定义' },
@@ -105,6 +131,8 @@ const typeRows = [
   { name: 'QuestionnaireItemDefinition', type: '{ name, required?, disabled?, choices? }', desc: '题目定义：<code>name</code> 必填；<code>choices</code> 里是 <code>{ value, disabled? }</code>' },
   { name: 'QuestionnaireItemStatus', type: "'unanswered' | 'answered' | 'skipped'", desc: '题目状态，配合 <code>@update:status</code> 做「哪题没答」的汇总' },
   { name: 'QuestionnaireShortcutMode', type: "'letters' | 'numbers'", desc: '两种快捷键方案（A–Z / 1–9）' },
+  { name: 'QuestionnaireAnimation', type: "'fade' | 'rise' | 'scale' | 'slide' | 'none'", desc: '题目切换动画；<code>none</code> 表示瞬时切换' },
+  { name: 'QuestionnaireChoiceIndicator', type: "'dot' | 'check' | 'minus' | 'fill'", desc: '选中标记样式：圆点 / 对勾 / 横杠 / 纯实心（不加内部符号）' },
   { name: 'QuestionnaireInputType', type: "'text' | 'email' | 'number' | 'date' | …", desc: '填空型答案支持的 input 类型（含 tel / url / password / time 等）' },
 ]
 </script>
@@ -198,7 +226,162 @@ const typeRows = [
       </CardContent>
     </Card>
 
-    <!-- 2. 快捷键与状态 -->
+    <!-- 勾选状态 -->
+    <Card class="mt-8">
+      <CardHeader>
+        <h2 class="text-xl font-semibold">勾选状态</h2>
+        <CardDescription>
+          选项有三种外观：<b>未选</b>（空心）、<b>已选</b>（主色填充 + 对勾/圆点）、<b>无效</b>（红边框 + 错误提示），
+          另有 <b>禁用</b>（半透明、不可点）。<br />
+          初值用 <code>default-checked</code>（或被 <code>v-model:checked</code> 受控）；无效态由
+          <code>QuestionnaireItem</code> 的 <code>invalid</code> 标出来（比如后端校验失败后回填）。
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div class="grid gap-6 md:grid-cols-3">
+          <div>
+            <p class="mb-2 text-sm font-medium text-muted-foreground">未选 / 禁用</p>
+            <Questionnaire>
+              <QuestionnaireItem name="plain">
+                <QuestionnaireTitle>新功能要不要？</QuestionnaireTitle>
+                <QuestionnaireChoices>
+                  <QuestionnaireChoice value="yes">要</QuestionnaireChoice>
+                  <QuestionnaireChoice value="no">不要</QuestionnaireChoice>
+                  <QuestionnaireChoice value="later" disabled>以后再说</QuestionnaireChoice>
+                </QuestionnaireChoices>
+                <QuestionnaireError />
+              </QuestionnaireItem>
+            </Questionnaire>
+          </div>
+          <div>
+            <p class="mb-2 text-sm font-medium text-muted-foreground">已选（default-checked）</p>
+            <Questionnaire>
+              <QuestionnaireItem name="preselected">
+                <QuestionnaireTitle>默认选中前面那个</QuestionnaireTitle>
+                <QuestionnaireChoices>
+                  <QuestionnaireChoice value="yes" default-checked>要</QuestionnaireChoice>
+                  <QuestionnaireChoice value="no">不要</QuestionnaireChoice>
+                  <QuestionnaireChoice value="later">以后再说</QuestionnaireChoice>
+                </QuestionnaireChoices>
+                <QuestionnaireError />
+              </QuestionnaireItem>
+            </Questionnaire>
+          </div>
+          <div>
+            <p class="mb-2 text-sm font-medium text-muted-foreground">无效（invalid）</p>
+            <Questionnaire>
+              <QuestionnaireItem name="blocked" required invalid>
+                <QuestionnaireTitle>必答，但校验没过</QuestionnaireTitle>
+                <QuestionnaireChoices>
+                  <QuestionnaireChoice value="yes">要</QuestionnaireChoice>
+                  <QuestionnaireChoice value="no">不要</QuestionnaireChoice>
+                </QuestionnaireChoices>
+                <QuestionnaireError />
+              </QuestionnaireItem>
+            </Questionnaire>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+
+    <!-- 勾选样式 -->
+    <Card class="mt-8">
+      <CardHeader>
+        <h2 class="text-xl font-semibold">四种勾选样式</h2>
+        <CardDescription>
+          <code>QuestionnaireChoice</code> 的 <code>indicator</code> 决定选中标记长什么样：
+          <code>dot</code> 圆点（单选默认）、<code>check</code> 对勾（多选默认）、<code>minus</code> 横杠、
+          <code>fill</code> 纯实心（不加内部符号）。<br />
+          不传就按选项类型自动推断，所以「单选圆点 / 多选对勾」的老行为不变；四种样式在单、多选上都能用。
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div v-for="variant in indicatorOptions" :key="variant.value">
+            <p class="mb-2 text-sm font-medium text-muted-foreground">
+              {{ variant.label }}
+            </p>
+            <Questionnaire>
+              <QuestionnaireItem :name="`indicator-${variant.value}`" aria-label="勾选样式示例">
+                <QuestionnaireChoices>
+                  <QuestionnaireChoice value="yes" :indicator="variant.value" default-checked>
+                    已选
+                  </QuestionnaireChoice>
+                  <QuestionnaireChoice value="no" :indicator="variant.value">
+                    未选
+                  </QuestionnaireChoice>
+                </QuestionnaireChoices>
+              </QuestionnaireItem>
+            </Questionnaire>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+
+    <!-- 切换动画 -->
+    <Card class="mt-8">
+      <CardHeader>
+        <h2 class="text-xl font-semibold">四种切换动画</h2>
+        <CardDescription>
+          根组件的 <code>animation</code> 控制「切到新题时」的入场动画：
+          <code>fade</code> 淡入、<code>rise</code> 上浮、<code>scale</code> 缩放、<code>slide</code> 右滑，
+          <code>none</code> 关闭（默认，瞬时切换）。<br />
+          选一套方案后点「下一题」看效果；选项本身也会马上重播一次，方便直接对比。
+        </CardDescription>
+      </CardHeader>
+      <CardContent class="space-y-4">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-sm text-muted-foreground">动画：</span>
+          <Button
+            v-for="option in animationOptions"
+            :key="option.value"
+            size="sm"
+            :variant="animation === option.value ? 'default' : 'outline'"
+            @click="animation = option.value"
+          >
+            {{ option.label }}
+          </Button>
+          <code class="text-xs text-muted-foreground">:animation="{{ animation }}"</code>
+        </div>
+
+        <Questionnaire :animation="animation" :items="animationItems" shortcuts="letters">
+          <QuestionnaireProgress />
+
+          <QuestionnaireItem name="step-one" required>
+            <QuestionnaireTitle>第一题（必答）</QuestionnaireTitle>
+            <QuestionnaireChoices>
+              <QuestionnaireChoice value="a">选项 A</QuestionnaireChoice>
+              <QuestionnaireChoice value="b">选项 B</QuestionnaireChoice>
+            </QuestionnaireChoices>
+            <QuestionnaireError />
+          </QuestionnaireItem>
+
+          <QuestionnaireItem name="step-two">
+            <QuestionnaireTitle>第二题（可跳过）</QuestionnaireTitle>
+            <QuestionnaireChoices>
+              <QuestionnaireChoice value="a">选项 A</QuestionnaireChoice>
+              <QuestionnaireChoice value="b">选项 B</QuestionnaireChoice>
+            </QuestionnaireChoices>
+            <QuestionnaireError />
+          </QuestionnaireItem>
+
+          <QuestionnaireItem name="step-three">
+            <QuestionnaireTitle>第三题（填空）</QuestionnaireTitle>
+            <QuestionnaireInput placeholder="随便写点什么" />
+            <QuestionnaireError />
+          </QuestionnaireItem>
+
+          <QuestionnaireActions>
+            <QuestionnairePrevious />
+            <QuestionnaireSkip />
+            <QuestionnaireNext />
+            <QuestionnaireSubmit />
+          </QuestionnaireActions>
+        </Questionnaire>
+      </CardContent>
+    </Card>
+
+    <!-- 快捷键与状态 -->
     <Card class="mt-8">
       <CardHeader>
         <h2 class="text-xl font-semibold">快捷键与题目状态</h2>
@@ -248,7 +431,7 @@ const typeRows = [
       </CardContent>
     </Card>
 
-    <!-- 3. 受控切题 -->
+    <!-- 受控切题 -->
     <Card class="mt-8">
       <CardHeader>
         <h2 class="text-xl font-semibold">受控切题</h2>

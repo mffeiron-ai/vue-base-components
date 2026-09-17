@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from "vue"
+import type { QuestionnaireChoiceIndicator } from './useQuestionnaire'
 
-import { CheckIcon } from "lucide-vue-next"
+import { CheckIcon, MinusIcon } from "lucide-vue-next"
 import { computed, onBeforeUnmount, ref, useId, watch } from "vue"
 import { cn } from "../../../lib/utils"
 import { getAnswerKeyShortcuts, injectQuestionnaireItemContext } from "./useQuestionnaire"
@@ -13,6 +14,11 @@ const props = withDefaults(defineProps<{
   /** Checks the choice on mount and after a native form reset. */
   defaultChecked?: boolean
   disabled?: boolean
+  /**
+   * 选中标记的样式；不传时按选项类型推断：单选用圆点、多选用对勾。
+   * `fill` 只有主色底色、不加内部符号。
+   */
+  indicator?: QuestionnaireChoiceIndicator
   /** Submitted as the answer of the parent item. */
   value: string
 }>(), {
@@ -21,6 +27,7 @@ const props = withDefaults(defineProps<{
   checked: undefined,
   defaultChecked: false,
   disabled: false,
+  indicator: undefined,
 })
 
 const emits = defineEmits<{
@@ -46,6 +53,10 @@ const checked = computed(() => {
   return item.status.value === 'skipped' ? false : props.checked!
 })
 const type = computed(() => (item.multiple.value ? 'checkbox' : 'radio'))
+// 不传 `indicator` 时保持历史行为：单选圆点、多选对勾。
+const indicatorStyle = computed<QuestionnaireChoiceIndicator>(
+  () => props.indicator ?? (item.multiple.value ? 'check' : 'dot'),
+)
 const shortcut = computed(() =>
   item.shortcutByChoiceValue.value?.get(props.value)
   ?? item.shortcutByAnswerId.value.get(answerId)
@@ -174,13 +185,24 @@ onBeforeUnmount(() => {
     <span
       aria-hidden="true"
       data-slot="questionnaire-choice-indicator"
+      :data-indicator="indicatorStyle"
       class="border-input dark:bg-input/30 group-data-checked/questionnaire-choice:bg-primary dark:group-data-checked/questionnaire-choice:bg-primary group-data-checked/questionnaire-choice:text-primary-foreground group-data-checked/questionnaire-choice:border-primary size-4 translate-y-[--spacing(0.45)] group-has-data-[slot=questionnaire-choice-description]/questionnaire-choice:translate-y-0.5 rounded-[4px] pointer-events-none relative flex shrink-0 items-center justify-center border group-data-[type=radio]/questionnaire-choice:rounded-full"
     >
       <span
+        v-if="indicatorStyle === 'dot'"
         data-slot="questionnaire-choice-indicator-dot"
-        class="bg-primary-foreground size-2 hidden rounded-full group-has-[>input[type=radio]:checked]/questionnaire-choice:block"
+        class="bg-primary-foreground size-2 hidden rounded-full group-has-[>input:checked]/questionnaire-choice:block"
       />
-      <CheckIcon data-slot="questionnaire-choice-indicator-check" class="size-3.5 hidden group-has-[>input[type=checkbox]:checked]/questionnaire-choice:block" />
+      <CheckIcon
+        v-else-if="indicatorStyle === 'check'"
+        data-slot="questionnaire-choice-indicator-check"
+        class="size-3.5 hidden group-has-[>input:checked]/questionnaire-choice:block"
+      />
+      <MinusIcon
+        v-else-if="indicatorStyle === 'minus'"
+        data-slot="questionnaire-choice-indicator-minus"
+        class="size-3.5 hidden group-has-[>input:checked]/questionnaire-choice:block"
+      />
     </span>
     <span
       data-slot="questionnaire-choice-label"

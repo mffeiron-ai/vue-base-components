@@ -5,6 +5,7 @@ import { computed, onBeforeUnmount, ref, shallowRef, useAttrs, watch } from "vue
 import { cn } from "../../../lib/utils"
 import {
   compareDocumentOrder,
+  getQuestionnaireAnimationClass,
   getShortcutByChoiceValue,
   getShortcutKeys,
   injectQuestionnaireRootContext,
@@ -59,6 +60,10 @@ const titleIds = ref<string[]>([])
 let defaultSelectedAnswerIds: string[] = []
 
 const active = computed(() => !props.disabled && root.activeItemName.value === props.name)
+// 只在激活的那题上挂动画类：非激活题带 `hidden` 退出布局，切回来时 `display` 从
+// `none` 变回可见，浏览器会把这个 CSS 动画从头播一次。
+const activeAnimationClass = computed(() =>
+  active.value ? getQuestionnaireAnimationClass(root.animation.value) : '')
 const orderedAnswerControls = computed(() => {
   // Re-sort whenever answers are added to or removed from the DOM.
   void root.domVersion.value
@@ -451,6 +456,7 @@ provideQuestionnaireItemContext({
     :aria-keyshortcuts="keyShortcuts"
     :aria-labelledby="labelledBy"
     :data-active="active ? '' : undefined"
+    :data-animation="active ? root.animation.value : undefined"
     :data-disabled="props.disabled ? '' : undefined"
     :data-invalid="invalid ? '' : undefined"
     :data-multiple="props.multiple ? '' : undefined"
@@ -460,7 +466,7 @@ provideQuestionnaireItemContext({
     :hidden="!active"
     :inert="!active"
     tabindex="-1"
-    :class="cn('flex flex-col gap-5 min-w-0 border-0 p-0 outline-none', props.class)"
+    :class="cn('flex flex-col gap-5 min-w-0 border-0 p-0 outline-none', activeAnimationClass, props.class)"
   >
     <slot :active="active" :invalid="invalid" :status="status" />
   </fieldset>
