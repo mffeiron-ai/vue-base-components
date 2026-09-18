@@ -347,6 +347,18 @@ export const componentDocs: ComponentDoc[] = [
     description: '全局轻提示：<Toaster />（本库包装，管位置/主题/语义配色）+ vue-sonner 的 toast() 函数。六种类型、描述与操作按钮、promise 全程跟随、六向定位、richColors/closeButton/expand 等开关，一个页面放一个 Toaster 即可。',
     importCode: `import { Toaster } from '@/components/ui/sonner'\nimport { toast } from 'vue-sonner'`,
   },
+  {
+    name: 'spinner',
+    title: 'Spinner 加载指示器',
+    description: '一个旋转的圈：内部就是 lucide 的 Loader2 + animate-spin，并带 role="status" + aria-label 无障碍标记；尺寸、颜色、间距全用 class 调，常用于按钮加载态与整块遮罩。',
+    importCode: `import { Spinner } from '@/components/ui/spinner'`,
+  },
+  {
+    name: 'stepper',
+    title: 'Stepper 步骤条',
+    description: '多步流程的进度指示：根节点管当前第几步（从 1 开始），每个 StepperItem 声明自己第几步，状态（active / completed / inactive）由当前步自动派生。默认线性模式只能一步步往前走，可关掉自由跳步，也支持禁用某步、手动标记已完成与纵向布局。',
+    importCode: `import { Stepper, StepperDescription, StepperIndicator, StepperItem, StepperSeparator, StepperTitle, StepperTrigger } from '@/components/ui/stepper'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */
@@ -428,6 +440,8 @@ export const componentCategories: ComponentCategory[] = [
       'separator',
       'skeleton',
       'sonner',
+      'spinner',
+      'stepper',
     ],
   },
   {

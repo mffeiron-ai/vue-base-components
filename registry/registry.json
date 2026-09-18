@@ -2855,7 +2855,7 @@
         {
           "path": "ui/spinner/Spinner.vue",
           "type": "registry:ui",
-          "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from \"vue\"\nimport { Loader2Icon } from \"lucide-vue-next\"\nimport { cn } from \"../../../lib/utils\"\n\nconst props = defineProps<{\n  class?: HTMLAttributes[\"class\"]\n}>()\n</script>\n\n<template>\n  <Loader2Icon\n    role=\"status\"\n    aria-label=\"Loading\"\n    :class=\"cn('size-4 animate-spin', props.class)\"\n  />\n</template>\n"
+          "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from \"vue\"\nimport { Loader2Icon } from \"lucide-vue-next\"\nimport { cn } from \"../../../lib/utils\"\n\nconst props = defineProps<{\n  class?: HTMLAttributes[\"class\"]\n}>()\n</script>\n\n<template>\n  <!--\n    data-slot=\"spinner\" 不能省：8 套预设的 Attachment 规则里有\n    `*:data-[slot=spinner]:size-6!`（纵向附件里把 spinner 放大到 size-6），\n    少了它这条就永远命不中。\n  -->\n  <Loader2Icon\n    data-slot=\"spinner\"\n    role=\"status\"\n    aria-label=\"Loading\"\n    :class=\"cn('size-4 animate-spin', props.class)\"\n  />\n</template>\n"
         }
       ]
     },
