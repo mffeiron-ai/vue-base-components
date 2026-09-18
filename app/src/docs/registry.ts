@@ -395,6 +395,18 @@ export const componentDocs: ComponentDoc[] = [
     description: '一个「按下 / 弹起」的双态按钮，基于 reka-ui 的 Toggle：本质是带 aria-pressed 的 button，按下时输出 data-state="on"。支持 variant（default / outline）、size（default / sm / lg）、禁用与插槽参数换图标，默认插槽会给 { modelValue, pressed, state, disabled }。',
     importCode: `import { Toggle } from '@/components/ui/toggle'`,
   },
+  {
+    name: 'toggle-group',
+    title: 'Toggle Group 按钮组',
+    description: '一组可切换按钮，基于 reka-ui 的 ToggleGroupRoot：支持单选（type="single"）与多选（type="multiple"），组级 variant / size / spacing 会通过 data 属性下发到每个子项（spacing=0 时自动连体并处理首尾圆角与共享描边），另有方向键导航（rovingFocus / loop）、纵向布局与禁用。',
+    importCode: `import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'`,
+  },
+  {
+    name: 'tooltip',
+    title: 'Tooltip 文字提示',
+    description: '悬停 / 键盘聚焦时弹出的短提示，基于 reka-ui 的 TooltipRoot。气泡是深底浅字的反色样式并自带箭头，支持四个方向与三档对齐、延迟（本库 Provider 默认改成 0，即立刻显示）、受控开合、禁用与「只键盘聚焦才显示」，内容里放 Kbd 会自动切成半透明反色。',
+    importCode: `import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */
@@ -450,6 +462,8 @@ export const componentCategories: ComponentCategory[] = [
       'sidebar',
       'tabs',
       'toggle',
+      'toggle-group',
+      'tooltip',
     ],
   },
   {
