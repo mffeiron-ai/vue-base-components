@@ -172,6 +172,11 @@ import '@fontsource/space-mono/latin-700.css'
 import '@fontsource/ubuntu-mono/latin-400.css'
 import '@fontsource/ubuntu-mono/latin-700.css'
 
+// vue-sonner 自带样式（toast 的宽度、配色、进出动画、堆叠全靠它）：
+// 必须放在 './style.css' **之前** —— sonner 的规则是普通 CSS（无层），
+// 而 8 套预设里的 .cn-toast（同样无层）要靠源序在后才能覆盖掉它的圆角。
+import 'vue-sonner/style.css'
+
 import './style.css'
 // 全局风格切面（style-* class 与圆角档位）由 lib/style.ts 统一管理
 

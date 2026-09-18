@@ -323,6 +323,30 @@ export const componentDocs: ComponentDoc[] = [
     description: '从屏幕某一边滑出的面板：side 选 top/right/bottom/left，内置右上角关闭按钮；底层就是 Dialog，所以模态、焦点与 Esc/点遮罩关闭都一致，配合 Header/Footer 就是标准的「右滑编辑面板」。',
     importCode: `import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'`,
   },
+  {
+    name: 'sidebar',
+    title: 'Sidebar 侧边栏',
+    description: '后台布局的侧边栏：SidebarProvider 管状态（展开 / 折叠 / 移动端抽屉 + cookie 记忆 + Ctrl/Cmd+B），Sidebar 三档折叠（offcanvas / icon / none）× 三种外观（sidebar / floating / inset）× 左右两侧，配 SidebarInset 就是完整骨架。',
+    importCode: `import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuAction, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarRail, SidebarSeparator, SidebarTrigger, useSidebar } from '@/components/ui/sidebar'`,
+  },
+  {
+    name: 'skeleton',
+    title: 'Skeleton 骨架屏',
+    description: '加载前的占位块：一个空 div + 呼吸式动画，尺寸与形状全由 class 描述；底色与圆角由设计系统接管（各风格圆角不同），换色/改圆角要带 !，关动画用 animate-none。',
+    importCode: `import { Skeleton } from '@/components/ui/skeleton'`,
+  },
+  {
+    name: 'slider',
+    title: 'Slider 滑块',
+    description: '拖动把手选数值：单个组件同时搞定单值与区间 —— 值是数组，数组里有几个数就有几个把手；支持 min/max/step 吸附、纵向、反转、最小间距与原生表单提交，键盘与触摸都由 reka 处理。',
+    importCode: `import { Slider } from '@/components/ui/slider'`,
+  },
+  {
+    name: 'sonner',
+    title: 'Sonner Toast 通知',
+    description: '全局轻提示：<Toaster />（本库包装，管位置/主题/语义配色）+ vue-sonner 的 toast() 函数。六种类型、描述与操作按钮、promise 全程跟随、六向定位、richColors/closeButton/expand 等开关，一个页面放一个 Toaster 即可。',
+    importCode: `import { Toaster } from '@/components/ui/sonner'\nimport { toast } from 'vue-sonner'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */
@@ -375,6 +399,7 @@ export const componentCategories: ComponentCategory[] = [
       'popover',
       'resizable',
       'sheet',
+      'sidebar',
     ],
   },
   {
@@ -401,6 +426,8 @@ export const componentCategories: ComponentCategory[] = [
       'progress',
       'scroll-area',
       'separator',
+      'skeleton',
+      'sonner',
     ],
   },
   {
@@ -421,6 +448,7 @@ export const componentCategories: ComponentCategory[] = [
       'radio-group',
       'range-calendar',
       'select',
+      'slider',
     ],
   },
 ]
