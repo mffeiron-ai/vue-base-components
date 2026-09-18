@@ -359,6 +359,18 @@ export const componentDocs: ComponentDoc[] = [
     description: '多步流程的进度指示：根节点管当前第几步（从 1 开始），每个 StepperItem 声明自己第几步，状态（active / completed / inactive）由当前步自动派生。默认线性模式只能一步步往前走，可关掉自由跳步，也支持禁用某步、手动标记已完成与纵向布局。',
     importCode: `import { Stepper, StepperDescription, StepperIndicator, StepperItem, StepperSeparator, StepperTitle, StepperTrigger } from '@/components/ui/stepper'`,
   },
+  {
+    name: 'switch',
+    title: 'Switch 开关',
+    description: '二态即时生效开关，基于 reka-ui 的 SwitchRoot。根节点是带 data-state 的 button，内部一颗滑块靠 translate-x 滑动；两档尺寸（default / sm），传 name 时会额外渲染隐藏 checkbox 参与原生表单提交。',
+    importCode: `import { Switch } from '@/components/ui/switch'`,
+  },
+  {
+    name: 'table',
+    title: 'Table 表格',
+    description: '表格标签族的样式包装（9 个部件，不依赖任何 headless 库）：每个部件就是对应的原生标签加一组 Tailwind 类与 data-slot 钩子。支持表头 / 表体 / 页脚合计、行 hover 与选中态、复选框列对齐、空状态整行、固定高度滚动 + 粘性表头。',
+    importCode: `import { Table, TableBody, TableCaption, TableCell, TableEmpty, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */
@@ -442,6 +454,7 @@ export const componentCategories: ComponentCategory[] = [
       'sonner',
       'spinner',
       'stepper',
+      'table',
     ],
   },
   {
@@ -463,6 +476,7 @@ export const componentCategories: ComponentCategory[] = [
       'range-calendar',
       'select',
       'slider',
+      'switch',
     ],
   },
 ]
