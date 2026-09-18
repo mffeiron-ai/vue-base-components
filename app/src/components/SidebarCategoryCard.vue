@@ -15,6 +15,8 @@ defineProps<{
   title: string
   hint: string
   docs: ComponentDoc[]
+  /** 链接前缀：原子组件 /components，业务组件 /business */
+  hrefBase?: string
 }>()
 
 const route = useRoute()
@@ -30,9 +32,9 @@ const route = useRoute()
     <ul class="space-y-0.5">
       <li v-for="doc in docs" :key="doc.name">
         <RouterLink
-          :to="`/components/${doc.name}`"
+          :to="`${hrefBase ?? '/components'}/${doc.name}`"
           class="flex items-center truncate rounded-md px-3 py-1.5 text-sm transition-colors"
-          :class="route.path === `/components/${doc.name}` ? 'bg-accent text-accent-foreground font-medium' : 'text-muted-foreground hover:bg-accent/50'"
+          :class="route.path === `${hrefBase ?? '/components'}/${doc.name}` ? 'bg-accent text-accent-foreground font-medium' : 'text-muted-foreground hover:bg-accent/50'"
         >
           {{ doc.title }}
         </RouterLink>

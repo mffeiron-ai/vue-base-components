@@ -136,6 +136,10 @@ const props = withDefaults(defineProps<{
   cellMaxLines?: number
   /** 列宽拖拽下限 px */
   minColumnWidth?: number
+  /** 是否显示列宽拖拽手柄（表头右缘） */
+  resizable?: boolean
+  /** 是否显示「显示/隐藏列」菜单（含列序拖拽） */
+  columnSettings?: boolean
   /** 行是否可点击（首列高亮 + 发 row-click） */
   clickable?: boolean
   // ── 行选择 ──
@@ -159,6 +163,8 @@ const props = withDefaults(defineProps<{
   pageSize: 10,
   pageSizeOptions: () => [10, 20, 50, 100],
   minColumnWidth: 60,
+  resizable: true,
+  columnSettings: true,
   cellMaxLines: 3,
   maxHeight: '72vh',
   minLoadingMs: 120,
@@ -951,7 +957,7 @@ defineExpose({
       <slot name="search"></slot>
       <slot name="toolbar"></slot>
 
-      <div class="relative flex-shrink-0">
+      <div v-if="columnSettings" class="relative flex-shrink-0">
         <DropdownMenu>
           <DropdownMenuTrigger as-child>
             <Button variant="outline" size="sm" class="gap-2">
@@ -1215,6 +1221,7 @@ defineExpose({
 
             <!-- 列宽拖拽手柄 -->
             <div
+              v-if="resizable"
               class="absolute right-0 top-0 h-full w-1.5 cursor-col-resize select-none hover:bg-primary/40 active:bg-primary/60"
               @mousedown.stop="startResize($event, col)"
               @click.stop

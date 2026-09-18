@@ -414,6 +414,24 @@ export function getComponentDoc(name: string): ComponentDoc | undefined {
   return componentDocs.find((d) => d.name === name)
 }
 
+/* ─────────────── 业务组件（分子组件）───────────────
+   与原子组件分开维护：它们是「把原子组合 / 强化成生产成品」的组件，
+   文档页在 app/src/business/<Name>Doc.vue，路由 /business/<name>。 */
+
+export const businessDocs: ComponentDoc[] = [
+  {
+    name: 'basetable',
+    title: 'BaseTable 数据表格',
+    description: '把 Table / Checkbox / Popover / DropdownMenu / Pagination / Sheet 等原子按「后台列表页」这个场景组合 + 强化出来的成品：状态机交给 TanStack（排序 / 分页 / 列宽 / 列序 / 列显隐），业务侧补齐服务端分页与筛选协议、Excel 式分面懒加载、跨页「全选所有匹配」、列状态持久化与行详情侧滑。',
+    importCode: `import { BaseTable } from '@/components/business'`,
+  },
+]
+
+/** 按 kebab 名取业务组件文档 */
+export function getBusinessDoc(name: string): ComponentDoc | undefined {
+  return businessDocs.find((d) => d.name === name)
+}
+
 /* ─────────────── 侧边栏分类 ───────────────
    分类只在这一处维护：调整归类时改下面的 names 即可，不用动上面每一条文档记录。
    没被任何分类收进去的组件不会出现在侧边栏（renderCategories 会跳过），
@@ -428,9 +446,29 @@ export interface ComponentCategory {
   hint: string
   /** 放在中央文档的哪一侧（不填＝left） */
   side?: 'left' | 'right'
+  /** 链接前缀（不填按所属分组推断：业务组 /business，原子组 /components） */
+  hrefBase?: string
   /** 归入本类的组件名（kebab，对应 ComponentDoc.name） */
   names: string[]
 }
+
+/** 侧栏渲染用的分类：带上了实际存在的文档、链接前缀与分组标记 */
+export type ResolvedCategory = ComponentCategory & {
+  /** business = 业务组件（分子），component = 原子组件 */
+  kind: 'business' | 'component'
+  hrefBase: string
+  docs: ComponentDoc[]
+}
+
+/** 业务组件分组（分子组件：一个组件 / 一个分类，等以后多了再拆） */
+export const businessCategories: ComponentCategory[] = [
+  {
+    key: 'business',
+    title: '业务组件',
+    hint: '把原子组件组合 / 强化成生产可用的成品',
+    names: ['basetable'],
+  },
+]
 
 export const componentCategories: ComponentCategory[] = [
   {
@@ -534,9 +572,27 @@ export const componentCategories: ComponentCategory[] = [
   },
 ]
 
-/** 分类 + 该类实际存在的文档（按 names 顺序，找不到的自动跳过） */
-export function getCategoriesWithDocs() {
-  return componentCategories
-    .map((cat) => ({ ...cat, docs: cat.names.map((n) => getComponentDoc(n)).filter((d): d is ComponentDoc => !!d) }))
-    .filter((cat) => cat.docs.length > 0)
+/**
+ * 侧栏分组：业务组件（分子）在前，原子分类在后。
+ * 链接前缀按分组推断（可被 category.hrefBase 覆盖），文档按 names 顺序取，找不到的自动跳过。
+ */
+export function getCategoriesWithDocs(): ResolvedCategory[] {
+  const resolve = (
+    cats: ComponentCategory[],
+    docs: ComponentDoc[],
+    kind: 'business' | 'component',
+    hrefBase: string,
+  ): ResolvedCategory[] => cats
+    .map(cat => ({
+      ...cat,
+      kind,
+      hrefBase: cat.hrefBase ?? hrefBase,
+      docs: cat.names.map(n => docs.find(d => d.name === n)).filter((d): d is ComponentDoc => !!d),
+    }))
+    .filter(cat => cat.docs.length > 0)
+
+  return [
+    ...resolve(businessCategories, businessDocs, 'business', '/business'),
+    ...resolve(componentCategories, componentDocs, 'component', '/components'),
+  ]
 }

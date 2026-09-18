@@ -34,10 +34,19 @@ watch(isFullPage, () => {
 })
 onBeforeUnmount(() => clearTimeout(layoutFallback))
 
-// 分类卡片分列中央文档两侧（哪一类放哪边由 registry 的 ComponentCategory.side 决定）
+/**
+ * 侧栏按「章节」分开，两个章节不混在一起（靠顶栏「UI 组件 / 业务组件」切换）：
+ *   /components/* → 只列原子分类（展示 / 输入 / 交互 / 浮层）
+ *   /business/*   → 只列业务组件（分子组件）
+ * 哪一类放哪一列仍由 registry 的 ComponentCategory.side 决定（不填＝左列）。
+ */
 const categories = getCategoriesWithDocs()
-const leftCategories = computed(() => categories.filter((c) => (c.side ?? 'left') === 'left'))
-const rightCategories = computed(() => categories.filter((c) => c.side === 'right'))
+const section = computed<'business' | 'component'>(() => (route.path.startsWith('/business') ? 'business' : 'component'))
+const sectionCategories = computed(() => categories.filter((c) => c.kind === section.value))
+const leftCategories = computed(() => sectionCategories.value.filter((c) => (c.side ?? 'left') === 'left'))
+const rightCategories = computed(() => sectionCategories.value.filter((c) => c.side === 'right'))
+// 左列只有 1 张卡时不占两列宽度（原子章节是「输入｜展示」两张并排，才需要 29rem）
+const leftWide = computed(() => leftCategories.value.length > 1)
 </script>
 
 <template>
@@ -61,21 +70,25 @@ const rightCategories = computed(() => categories.filter((c) => c.side === 'righ
         ? 'block'
         : 'mx-auto flex max-w-[1680px] gap-10 px-6 pt-14 xl:gap-14 2xl:max-w-[1900px]'"
     >
-      <!-- 左列：输入 + 展示（仅文档页）。
-           2xl 起这一列自己变横向两列：输入在最外（最左），展示贴着正文；
-           2xl:items-start 让两张卡各按自己内容的高度（不然会被 stretch 拉成等高，
-           件数少的那张底下会空一大块） -->
+      <!-- 左列（仅文档页）：内容随章节变（原子章节＝展示｜输入，业务章节＝业务组件）。
+           卡片包一层 div 做 2xl 横排，aside 自身保持竖排；2xl:items-start 只加在内层，
+           避免多张卡被 stretch 拉成等高（件数少的那张底下会空一大块）；
+           宽度只在多卡时撑到 29rem（224×2 + 16），单卡就保持 224 不占位 -->
       <aside
         v-if="!layoutFullPage"
-        class="sticky top-20 hidden h-fit max-h-[calc(100vh-6rem)] w-56 shrink-0 flex-col gap-4 overflow-y-auto lg:flex 2xl:w-[29rem] 2xl:flex-row 2xl:items-start"
+        class="sticky top-20 hidden h-fit max-h-[calc(100vh-6rem)] w-56 shrink-0 flex-col gap-4 overflow-y-auto lg:flex"
+        :class="leftWide && '2xl:w-[29rem]'"
       >
-        <SidebarCategoryCard
-          v-for="cat in leftCategories"
-          :key="cat.key"
-          :title="cat.title"
-          :hint="cat.hint"
-          :docs="cat.docs"
-        />
+        <div class="flex flex-col gap-4 2xl:flex-row 2xl:items-start">
+          <SidebarCategoryCard
+            v-for="cat in leftCategories"
+            :key="cat.key"
+            :title="cat.title"
+            :hint="cat.hint"
+            :docs="cat.docs"
+            :href-base="cat.hrefBase"
+          />
+        </div>
       </aside>
 
       <!-- 中央内容：全屏页与文档页共用同一个 <main>（也是整站唯一的路由出口），
@@ -86,7 +99,10 @@ const rightCategories = computed(() => categories.filter((c) => c.side === 'righ
         </Transition>
       </main>
 
-      <!-- 右列：交互 + 浮层（左列偏「内容型」：展示 + 输入；右列偏「会动 / 浮起」；仅文档页） -->
+      <!-- 右列：原子章节放「交互 + 浮层」（左列偏「内容型」，右列偏「会动 / 浮起」）。
+           业务章节这里没有分类，但页面可能自己往这栏塞卡片（如 demo 的能力开关），
+           所以恒渲染；`#docs-aside-extra` 是页面的 Teleport 挂载点，
+           用 display:contents 让塞进来的卡片直接成为这一列的 flex 子项（享受同一个 gap） -->
       <aside
         v-if="!layoutFullPage"
         class="sticky top-20 hidden h-fit max-h-[calc(100vh-6rem)] w-56 shrink-0 flex-col gap-4 overflow-y-auto xl:flex"
@@ -97,8 +113,12 @@ const rightCategories = computed(() => categories.filter((c) => c.side === 'righ
           :title="cat.title"
           :hint="cat.hint"
           :docs="cat.docs"
+          :href-base="cat.hrefBase"
         />
-        <p class="shrink-0 px-2 text-xs text-muted-foreground">
+
+        <div id="docs-aside-extra" class="contents"></div>
+
+        <p v-if="rightCategories.length" class="shrink-0 px-2 text-xs text-muted-foreground">
           {{ componentDocs.length }} 个组件 · 基于
           <a
             href="https://github.com/unovue/shadcn-vue"
