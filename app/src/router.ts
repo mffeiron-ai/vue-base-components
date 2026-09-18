@@ -3,6 +3,7 @@ import type { Component } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 import LandingPage from './pages/LandingPage.vue'
 import PlaceholderPage from './pages/PlaceholderPage.vue'
+import BasetableDoc from './business/BasetableDoc.vue'
 import { componentDocs } from './docs/registry'
 
 // 自动加载 `app/src/docs/*.vue` 独立文档组件，文件名 `<Name>Doc.vue` → 路由段 `name`
@@ -36,7 +37,8 @@ const routes: RouteRecordRaw[] = [
   },
   // 尚未迁移的模块 → 占位页（避免落地页链接 404）
   { path: '/playground', name: 'playground', component: PlaceholderPage },
-  { path: '/business/basetable', name: 'business-basetable', component: PlaceholderPage },
+  // 业务组件（分子组件）：文档页自带假数据 + 模拟服务端 demo
+  { path: '/business/basetable', name: 'business-basetable', component: BasetableDoc },
   ...componentRoutes,
   { path: '/:pathMatch(.*)*', redirect: '/' },
 ]
