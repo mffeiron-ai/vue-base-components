@@ -58,42 +58,51 @@ export function usePageAnimation(
     lastMonthIndex = index
   }, { immediate: true })
 
-  /** 把 pageAnimation + 方向翻译成 <Transition> 的 4 个 class */
+  /**
+   * 把 pageAnimation + 方向翻译成 <Transition> 的 4 个 class。
+   *
+   * 时长**跟随全局动效设置**：`duration-[var(--anim-dur,200ms)]` 读的是
+   * `src/styles/animations.css` 里定义的 `--anim-dur`（进入）/ `--anim-dur-out`（离开）。
+   * 逗号后是回退值 —— 没引入那个样式文件的消费方仍是原来的 200ms / 150ms，行为不变。
+   * 注意「形式」不跟随全局：slide / fade / zoom / flip 由组件的 `pageAnimation` prop 决定。
+   */
   const animationClasses = computed<PageAnimationClasses>(() => {
     const direction = pageDirection.value
+    const enterDuration = "duration-[var(--anim-dur,200ms)]"
+    const leaveDuration = "duration-[var(--anim-dur-out,150ms)]"
 
     switch (animation()) {
       case "slide":
         return {
           base: "",
-          enterActive: "transition-all duration-200 ease-out",
+          enterActive: `transition-all ${enterDuration} ease-out`,
           enterFrom: direction === 1 ? "translate-x-8 opacity-0" : "-translate-x-8 opacity-0",
-          leaveActive: "transition-all duration-150 ease-in",
+          leaveActive: `transition-all ${leaveDuration} ease-in`,
           leaveTo: direction === 1 ? "-translate-x-8 opacity-0" : "translate-x-8 opacity-0",
         }
       case "fade":
         return {
           base: "",
-          enterActive: "transition-opacity duration-200 ease-out",
+          enterActive: `transition-opacity ${enterDuration} ease-out`,
           enterFrom: "opacity-0",
-          leaveActive: "transition-opacity duration-150 ease-in",
+          leaveActive: `transition-opacity ${leaveDuration} ease-in`,
           leaveTo: "opacity-0",
         }
       case "zoom":
         return {
           base: "",
-          enterActive: "transition-all duration-200 ease-out",
+          enterActive: `transition-all ${enterDuration} ease-out`,
           enterFrom: "scale-95 opacity-0",
-          leaveActive: "transition-all duration-150 ease-in",
+          leaveActive: `transition-all ${leaveDuration} ease-in`,
           leaveTo: "scale-95 opacity-0",
         }
       case "flip":
         // 3D 翻转：基础态显式写成 rotateY(0)，这样进出场能从具体矩阵插值，不会有跳变
         return {
           base: "origin-center [transform:perspective(1000px)_rotateY(0deg)]",
-          enterActive: "transition-all duration-300 ease-out",
+          enterActive: "transition-all duration-[var(--anim-dur,300ms)] ease-out",
           enterFrom: "[transform:perspective(1000px)_rotateY(-90deg)] opacity-0",
-          leaveActive: "transition-all duration-200 ease-in",
+          leaveActive: "transition-all duration-[var(--anim-dur-out,200ms)] ease-in",
           leaveTo: "[transform:perspective(1000px)_rotateY(90deg)] opacity-0",
         }
       default:

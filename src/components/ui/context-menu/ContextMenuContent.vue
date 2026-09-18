@@ -6,9 +6,10 @@
  * - 高度：`max-h-(--reka-context-menu-content-available-height)`，即“到视口边缘还剩多少”
  *   （reka 写入的变量），所以菜单不会溢到屏幕外，超出部分自己滚。
  * - 宽度：组件给 min-w-[8rem] 兜底，预设会收紧到 min-w-36（両者取谁看层叠，见预设注释）。
- * - 动画：data-[state=open/closed] 的 fade + zoom + 按 side 的 slide，预设里也复述了一套
- *   （外加 duration-100），改动画时两边都要看。
- * - inheritAttrs:false + `{ ...$attrs, ...forwarded }`：外层 Portal 不吃属性，属性要落到内容元素上。 * - 关闭时拦掉 `close-auto-focus` 的默认焦点搬迁（reka 会把焦点交给面板自身，
+ * - 动画：只写语义类 `cn-anim-overlay`（进出场由 `<html data-anim>` 与 `--anim-dur` 决定），
+ *   所以这里**不要**再写 animate-in / duration-*，否则会与全局动效设定打架。
+ * - inheritAttrs:false + `{ ...$attrs, ...forwarded }`：外层 Portal 不吃属性，属性要落到内容元素上。
+ * - 关闭时拦掉 `close-auto-focus` 的默认焦点搬迁（reka 会把焦点交给面板自身，
  *   面板一卸载焦点就落到 body，浏览器会因此把页面滚回顶部）；右键菜单本来也没有
  *   「触发器」可还焦点，所以直接 preventDefault 最干净。 */
 import type { ContextMenuContentEmits, ContextMenuContentProps } from "reka-ui"

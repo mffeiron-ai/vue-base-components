@@ -156,22 +156,31 @@ export function getAnswerKeyShortcuts(shortcut: string | null, filled: boolean) 
  *
  * 只做入场：非激活题靠 `hidden` 退出布局，切回来时 `display` 从 `none` 变回可见，
  * 浏览器会从头播放 `animation`，所以不需要（也没机会）做离场动画。
+ *
+ * 时长**跟随全局动效设置**：tw-animate-css 的 `animate-in` 读的是 `--tw-duration`
+ * （`animation: enter var(--tw-animation-duration, var(--tw-duration, .15s)) …`），
+ * 而 `duration-*` 会同时写 `--tw-duration` 与 `transition-duration`
+ * —— 所以 `duration-[var(--anim-dur,300ms)]` 能把 `src/styles/animations.css` 的
+ * 全局时长接进来；逗号后是回退值，没引入那个样式文件的消费方仍是 300ms。
+ * 「形式」仍由组件自己的 `animation` prop 决定（fade / rise / scale / slide / none）。
  */
 export function getQuestionnaireAnimationClass(animation: QuestionnaireAnimation) {
+  const duration = 'duration-[var(--anim-dur,300ms)]'
+
   if (animation === 'fade') {
-    return 'animate-in fade-in-0 duration-300'
+    return `animate-in fade-in-0 ${duration}`
   }
 
   if (animation === 'rise') {
-    return 'animate-in fade-in-0 slide-in-from-bottom-4 duration-300'
+    return `animate-in fade-in-0 slide-in-from-bottom-4 ${duration}`
   }
 
   if (animation === 'scale') {
-    return 'animate-in fade-in-0 zoom-in-95 duration-300'
+    return `animate-in fade-in-0 zoom-in-95 ${duration}`
   }
 
   if (animation === 'slide') {
-    return 'animate-in fade-in-0 slide-in-from-right-4 duration-300'
+    return `animate-in fade-in-0 slide-in-from-right-4 ${duration}`
   }
 
   return ''

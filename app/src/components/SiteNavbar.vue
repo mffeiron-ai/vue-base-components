@@ -2,7 +2,7 @@
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { Github, Menu, Moon, Palette, Sparkles, Sun, SlidersHorizontal, Type, X } from 'lucide-vue-next'
-import { useDark, useToggle } from '@vueuse/core'
+import { useDark, useMediaQuery, useToggle } from '@vueuse/core'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import {
@@ -26,9 +26,17 @@ import {
   SheetHeader,
   SheetTitle,
 } from '@/components/ui/sheet'
+import { Slider } from '@/components/ui/slider'
 import { componentDocs } from '../docs/registry'
 import { useGlobalTheme } from '../lib/theme'
-import { useGlobalAnim, ANIM_OPTIONS } from '../lib/animation'
+import {
+  useGlobalAnim,
+  ANIM_OPTIONS,
+  ANIM_SPEED_OPTIONS,
+  ANIM_MS_MIN,
+  ANIM_MS_MAX,
+  ANIM_MS_STEP,
+} from '../lib/animation'
 import { useGlobalStyle, STYLE_OPTIONS, LAYOUT_PRESETS, SHADOW_PRESETS, ICON_LIBRARY_OPTIONS } from '../lib/style'
 
 const route = useRoute()
@@ -56,8 +64,38 @@ watch(isScrolled, (scrolled) => {
   }
 })
 
+/**
+ * 两条导航栏在 lg 以上的外观（把「外观设置」与「菜单」拆成了同一行里的两条）：
+ *  - 未滚动：透明无边框，观感仍是原来的一整条（只减内边距，给两条留空间）
+ *  - 滚动后：各自变成毛玻璃胶囊、中间隔开 gap，成为「两座岛」
+ * **只产出 lg:* 类**：<lg 时第二条整条折到第二行当移动端面板，用自己那套样式。
+ */
+const barLgClass = computed(() => isScrolled.value
+  ? 'lg:rounded-2xl lg:border lg:border-border lg:bg-background/50 lg:shadow-lg lg:shadow-black/5 lg:backdrop-blur-lg lg:px-5'
+  : 'lg:border-transparent lg:bg-transparent lg:shadow-none lg:px-5 xl:px-8')
+
+/**
+ * 两条栏所在行的宽度上限与间距。拆成两条后各自都带内边距（+ 中间 gap），总宽比原来的一整条大约 100px，
+ * 所以上限要相应放宽，否则「同一行」会折行：滚动 5xl(1024) → 6xl(1152)、未滚动 7xl(1280) → 84rem(1344)。
+ * 实测（2277 视口）：滚动后行宽 1024 时两条相加 1033px —— 正是原来折行的原因。
+ * lg 上用更小的 gap（lg:gap-2）：1024 视口是 lg 段里最紧的（未滚动时刚好差 3px），
+ * 收掉内边距 + 间距后余量约 9px；再宽一档回到 12px，让滚动后的「两座岛」间隔好看些。
+ */
+const navRowClass = computed(() => isScrolled.value
+  ? 'max-w-6xl min-[1800px]:max-w-none lg:gap-3'
+  : 'max-w-7xl min-[1800px]:max-w-none lg:gap-2')
+
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
+
+/**
+ * 窄屏（<1440）：未滚动时也用**短标签**。
+ * 原因：导航栏拆成「菜单 + 外观」两条、操作按钮也并进菜单栏后总宽变大，
+ * lg（1024）/ xl 段用长标签会把外观栏挤到第二行（实测 1024 未滚动需 1032px > 993）。
+ * 只用于**标签**；主题预览/开始使用 那对 CTA 的切换仍看 wideLabels（滚动状态）。
+ */
+const isNarrow = useMediaQuery('(max-width: 1439px)')
+const compactLabels = computed(() => wideLabels.value && !isNarrow.value)
 
 // 全局主题（41 套色板，作用到整站）
 const { themes, index: themeIndex, setIndex } = useGlobalTheme()
@@ -85,12 +123,29 @@ const {
 const styleSheetOpen = ref(false)
 const fontSheetOpen = ref(false)
 
-// 全局动效（动画形式）：与「风格」「主题」「字体」并列的第四个维度
-const { animKey, setAnim } = useGlobalAnim()
+// 全局动效（动画形式 + 时长）：与「风格」「主题」「字体」并列的第四个维度
+const {
+  animKey, animSpeed, animMs,
+  setAnim, setAnimSpeed, setAnimMs,
+  currentMs, currentSpeedLabel,
+} = useGlobalAnim()
 const animSheetOpen = ref(false)
 const currentAnimLabel = computed(
   () => ANIM_OPTIONS.find(o => o.value === animKey.value)?.label ?? '淡入',
 )
+/** 导航栏收窄后用的短名（4 字长名会把整行挤到换行） */
+const currentAnimShort = computed(
+  () => ANIM_OPTIONS.find(o => o.value === animKey.value)?.short ?? '淡入',
+)
+/** 「淡入 · 240ms」：面板预览区显示的当前设置 */
+const animSummary = computed(() => `${currentAnimLabel.value} · ${currentMs.value}ms`)
+/** 预览方块的 key：形式或时长一变就换元素 → 重播一次动画 */
+const animPreviewKey = computed(() => `${animKey.value}-${animSpeed.value}-${animMs.value}`)
+function onAnimMs(value: number[] | undefined) {
+  const ms = value?.[0]
+  if (typeof ms === 'number')
+    setAnimMs(ms)
+}
 const currentStyleLabel = computed(
   () => STYLE_OPTIONS.find(o => o.value === styleKey.value)?.label ?? '风格',
 )
@@ -147,22 +202,46 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <nav
-    :data-state="menuState ? 'active' : ''"
-    class="fixed z-50 w-full px-2"
-  >
+  <div class="fixed z-50 w-full px-2">
+    <!--
+      同一行里的两条独立导航栏，分工（2026-09 定稿）：
+        ① 菜单栏：品牌 + 主导航 + 操作（深色 / GitHub / 主题预览·开始使用）
+        ② 外观栏：风格 / 主题 / 字体 / 动效
+      几何：
+        · ≥1700px：行放开到整宽 + 左侧一块等宽**留白** → 菜单栏精确居中于整页；
+          外观栏在「右侧区域」（菜单栏右边界 → 行右边界）里居中。
+          1700 这个阈值是算出来的：要同时满足「菜单居中 + 外观在右区居中」需 rowW ≥
+          菜单栏 + 2×外观栏 + 2×gap（实测 xl 下 ≈ 766 + 2×462 + 16 = 1706）。
+        · <1700px：行回到 max-w-7xl/6xl，菜单栏靠左、外观栏在剩余空间里居中。
+        · <lg：两条各自折到第二行、由汉堡控制：菜单栏变成卡片（内部是链接 + 操作），
+          外观栏是下面第二张卡片。
+      滚动收窄后两条各自成为毛玻璃胶囊（中间留 gap），未滚动时都是透明的。
+    -->
     <div
       :class="[
-        'mx-auto px-6 duration-300 lg:px-12',
-        'transition-[max-width,background-color,backdrop-filter,box-shadow]',
-        isScrolled
-          ? 'bg-background/50 max-w-5xl rounded-2xl border border-border shadow-lg shadow-black/5 backdrop-blur-lg lg:px-5'
-          : 'max-w-7xl',
+        'mx-auto flex flex-wrap items-stretch gap-2 duration-300 lg:gap-3',
+        'transition-[max-width]',
+        navRowClass,
       ]"
     >
-      <div class="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-3">
-        <!-- Logo -->
-        <div class="flex w-full justify-between lg:w-auto">
+      <!-- 左侧留白：只在「居中模式」出现，把菜单栏顶到整页正中 -->
+      <div class="hidden min-[1800px]:block min-[1800px]:flex-1" aria-hidden="true" />
+
+      <!-- ① 菜单栏 -->
+      <nav
+        :data-state="menuState ? 'active' : ''"
+        aria-label="主导航"
+        :class="[
+          'w-full py-3 duration-300 lg:flex lg:w-auto lg:items-center lg:gap-6',
+          'transition-[background-color,backdrop-filter,box-shadow]',
+          'max-lg:rounded-2xl max-lg:px-6',
+          menuState ? 'max-lg:space-y-6 max-lg:bg-background max-lg:border max-lg:border-border max-lg:shadow-2xl' : '',
+          barLgClass,
+        ]"
+      >
+        <!-- 品牌行：桌面是行内第一项；移动端与汉堡同一行 -->
+        <div class="flex items-center justify-between gap-6">
+          <!-- Logo -->
           <RouterLink to="/" aria-label="home" class="flex items-center gap-2 transition-opacity hover:opacity-75">
             <span class="flex size-8 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground">
               R
@@ -182,8 +261,7 @@ onUnmounted(() => {
         </div>
 
         <!-- 桌面菜单（导航收窄时用短标签，避免文字被挤成竖排） -->
-        <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center">
-          <ul class="flex gap-6 text-sm xl:gap-8">
+        <ul class="hidden gap-6 text-sm lg:flex xl:gap-8">
             <li v-for="item in menuItems" :key="item.name">
               <RouterLink
                 :to="item.href"
@@ -195,51 +273,93 @@ onUnmounted(() => {
                      （300ms 与导航栏收窄一致）—— 不然换文案是硬跳，文字会「啪」地少两个字。
                      上限用 em：窄状态按短文案字数收（中文一个字≈1em），宽状态给 5em 留出
                      hover 加粗与不同字体的余量；两端宽度与改之前完全一致。
+                     justify-items-start 必须有：grid 列宽会被**长标签**撑满（如「UI 组件」45.7px），
+                     而按钮/链接里的文字是居中的 → 短标签会被居中到格子中间，被 max-width 裁掉尾巴。
                      aria-hidden + 链接上的 aria-label：两个标签都在 DOM 里（过渡需要），
                      否则读屏会把名字念成「UI 组件 组件」 -->
                 <span
                   aria-hidden="true"
-                  class="inline-grid overflow-hidden transition-[max-width] duration-300"
-                  :style="{ maxWidth: wideLabels ? '5em' : `${item.short.length}em` }"
+                  class="inline-grid justify-items-start overflow-hidden transition-[max-width] duration-300"
+                  :style="{ maxWidth: compactLabels ? '5em' : `${item.short.length}em` }"
                 >
                   <span
                     class="col-start-1 row-start-1 transition-opacity duration-300"
-                    :class="wideLabels ? 'opacity-100' : 'opacity-0'"
+                    :class="compactLabels ? 'opacity-100' : 'opacity-0'"
                   >{{ item.name }}</span>
                   <span
                     class="col-start-1 row-start-1 transition-opacity duration-300"
-                    :class="wideLabels ? 'opacity-0' : 'opacity-100'"
+                    :class="compactLabels ? 'opacity-0' : 'opacity-100'"
                   >{{ item.short }}</span>
                 </span>
               </RouterLink>
             </li>
-          </ul>
-        </div>
+        </ul>
 
-        <!-- 右侧按钮区 -->
+        <!-- 移动端菜单（汉堡展开时，跟在品牌行后面） -->
+        <ul :class="[menuState ? 'block' : 'hidden', 'space-y-6 text-base lg:hidden']">
+          <li v-for="item in menuItems" :key="`mobile-${item.name}`">
+            <RouterLink :to="item.href" class="text-muted-foreground block duration-150 hover:text-accent-foreground" @click="menuState = false">
+              {{ item.name }}
+            </RouterLink>
+          </li>
+        </ul>
+
+        <!-- 操作：深色 / GitHub / 主题预览（未滚动）· 开始使用（滚动后） -->
         <div
           :class="[
-            'bg-background mb-6 hidden w-full flex-wrap items-center justify-end rounded-3xl border border-border p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-3 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none',
-            menuState && 'block',
+            menuState ? 'flex' : 'hidden',
+            'flex-col gap-3 lg:flex lg:flex-row lg:items-center lg:gap-3',
           ]"
         >
-          <!-- 移动端菜单 -->
-          <div class="w-full lg:hidden">
-            <ul class="space-y-6 text-base">
-              <li v-for="item in menuItems" :key="item.name">
-                <RouterLink :to="item.href" class="text-muted-foreground block duration-150 hover:text-accent-foreground" @click="menuState = false">
-                  {{ item.name }}
-                </RouterLink>
-              </li>
-            </ul>
-          </div>
+          <Button variant="ghost" size="icon" aria-label="切换主题" @click="toggleDark()">
+            <Sun v-if="isDark" class="size-4" />
+            <Moon v-else class="size-4" />
+          </Button>
+          <a href="https://github.com/mffeiron-ai/vue-base-components" target="_blank">
+            <Button variant="outline" size="sm" class="border-border">
+              <Github class="size-4" />
+              <span>GitHub</span>
+            </Button>
+          </a>
+          <!-- 主题预览：菜单里已有同名入口，按钮只在 xl 以上（空间充足时）显示 -->
+          <RouterLink to="/playground" :class="wideLabels ? 'hidden xl:block' : 'hidden'">
+            <Button size="sm">
+              <span>主题预览</span>
+            </Button>
+          </RouterLink>
+          <RouterLink :to="firstComponentLink" :class="wideLabels ? 'hidden' : 'lg:inline-flex'">
+            <Button size="sm">
+              <span>开始使用</span>
+            </Button>
+          </RouterLink>
+        </div>
+      </nav>
 
-          <!-- CTA -->
-          <div class="mt-6 flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 lg:mt-0 md:w-fit">
+      <!-- ② 外观栏：lg+ 在右侧区域里居中；<lg 是汉堡展开的第二张卡片 -->
+      <!--
+        显隐必须用**互斥**的 block / hidden（不能写成 `hidden` + 菜单打开时追加 `block`）：
+        实测 Tailwind 生成的 CSS 里 `.hidden` 排在 `.block` 之后，两者同时存在时永远是 none，
+        于是汉堡菜单点开也看不到面板（这是个一直存在的老 bug）。lg 以上用 `lg:flex` 常显
+        （媒体查询的变体排在无变体之后，所以能压过这里的 hidden）。
+      -->
+      <div class="flex w-full justify-center lg:w-auto lg:flex-1">
+        <nav
+          aria-label="外观与操作"
+          :class="[
+            'w-full py-3 duration-300 lg:flex lg:w-fit lg:items-center lg:gap-3',
+            'transition-[background-color,backdrop-filter,box-shadow]',
+            'max-lg:rounded-2xl max-lg:px-6',
+            menuState ? 'max-lg:bg-background max-lg:border max-lg:border-border max-lg:shadow-2xl' : 'hidden',
+            'lg:flex',
+            barLgClass,
+          ]"
+        >
+          <!-- 外观设置：风格 / 主题 / 字体 / 动效 -->
+          <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-3">
             <!-- 风格选择（打开右侧 Sheet）；滚动后导航栏变窄，标签改成短名 -->
             <Button variant="ghost" size="sm" @click="styleSheetOpen = true">
               <SlidersHorizontal class="size-4" />
-              <span class="hidden lg:inline">{{ wideLabels ? `${currentStyleLabel} · ${currentLayoutLabel}` : currentStyleLabel }}</span>
+              <span class="hidden lg:inline">{{ compactLabels ? `${currentStyleLabel} · ${currentLayoutLabel}` : currentStyleLabel }}</span>
             </Button>
 
             <!-- 主题选择（打开抽屉） -->
@@ -255,38 +375,36 @@ onUnmounted(() => {
               <span class="hidden max-w-[6rem] truncate xl:inline-block" :title="fontSans">{{ currentFontLabel }}</span>
             </Button>
 
-            <!-- 动效选择（与「风格」「字体」「主题」并列；文字标签只在 xl 以上显示） -->
-            <Button variant="ghost" size="sm" @click="animSheetOpen = true">
+            <!-- 动效选择（与「风格」「字体」「主题」并列；文字标签只在 xl 以上显示）
+                 标签同样长/短切换：滚动收窄后只留 2 个字（如「从左滑入」→「左滑」），
+                 否则 4 个字的长名会把右侧按钮组挤到换行 -->
+            <Button
+              variant="ghost"
+              size="sm"
+              :aria-label="`动效：${currentAnimLabel}`"
+              @click="animSheetOpen = true"
+            >
               <Sparkles class="size-4" />
-              <span class="hidden max-w-[5rem] truncate xl:inline-block" :title="currentAnimLabel">{{ currentAnimLabel }}</span>
+              <span
+                aria-hidden="true"
+                class="hidden justify-items-start overflow-hidden transition-[max-width] duration-300 xl:inline-grid"
+                :style="{ maxWidth: compactLabels ? '5em' : `${currentAnimShort.length}em` }"
+              >
+                <span
+                  class="col-start-1 row-start-1 whitespace-nowrap transition-opacity duration-300"
+                  :class="wideLabels ? 'opacity-100' : 'opacity-0'"
+                >{{ currentAnimLabel }}</span>
+                <span
+                  class="col-start-1 row-start-1 whitespace-nowrap transition-opacity duration-300"
+                  :class="wideLabels ? 'opacity-0' : 'opacity-100'"
+                >{{ currentAnimShort }}</span>
+              </span>
             </Button>
-
-            <Button variant="ghost" size="icon" aria-label="切换主题" @click="toggleDark()">
-              <Sun v-if="isDark" class="size-4" />
-              <Moon v-else class="size-4" />
-            </Button>
-            <a href="https://github.com/mffeiron-ai/vue-base-components" target="_blank">
-              <Button variant="outline" size="sm" class="border-border">
-                <Github class="size-4" />
-                <span>GitHub</span>
-              </Button>
-            </a>
-            <!-- 主题预览：菜单里已有同名入口，按钮只在 xl 以上（空间充足时）显示 -->
-            <RouterLink to="/playground" :class="wideLabels ? 'hidden xl:block' : 'hidden'">
-              <Button size="sm">
-                <span>主题预览</span>
-              </Button>
-            </RouterLink>
-            <RouterLink :to="firstComponentLink" :class="wideLabels ? 'hidden' : 'lg:inline-flex'">
-              <Button size="sm">
-                <span>开始使用</span>
-              </Button>
-            </RouterLink>
           </div>
-        </div>
+        </nav>
       </div>
     </div>
-  </nav>
+  </div>
 
   <!-- 主题选择抽屉 -->
   <Drawer v-model:open="themeDrawerOpen">
@@ -489,13 +607,13 @@ onUnmounted(() => {
       </SheetHeader>
 
       <div class="flex-1 space-y-5 overflow-y-auto px-1 pb-6">
-        <!-- 预览：切换后重播一次（:key 换掉元素即重启动画） -->
+        <!-- 预览：切换形式/时长后重播一次（:key 换掉元素即重启动画） -->
         <div class="flex items-center gap-4 rounded-lg border border-border bg-muted/40 p-4">
-          <div :key="animKey" class="cn-anim-enter size-12 shrink-0 rounded-md bg-primary/25 ring-1 ring-primary/40" />
+          <div :key="animPreviewKey" class="cn-anim-enter size-12 shrink-0 rounded-md bg-primary/25 ring-1 ring-primary/40" />
           <div class="text-sm">
-            当前：<span class="font-medium">{{ currentAnimLabel }}</span>
+            当前：<span class="font-medium">{{ animSummary }}</span>
             <p class="mt-1 text-xs leading-snug text-muted-foreground">
-              每换一次形式，左侧方块会重播；不过「无动画」时不会动。
+              每换一次形式或时长，左侧方块会重播；不过「无动画」时不会动。
             </p>
           </div>
         </div>
@@ -518,6 +636,48 @@ onUnmounted(() => {
               </span>
               <p class="text-[11px] leading-snug text-muted-foreground/80">{{ opt.hint }}</p>
             </button>
+          </div>
+        </div>
+
+        <!-- 时长：固定档位 + 自定义滑块 -->
+        <div class="space-y-3">
+          <p class="text-sm font-semibold">动画时长</p>
+          <div class="grid grid-cols-4 gap-2">
+            <button
+              v-for="opt in ANIM_SPEED_OPTIONS"
+              :key="opt.value"
+              type="button"
+              class="rounded-lg border px-2 py-2 text-center transition-colors"
+              :class="animSpeed === opt.value
+                ? 'border-primary bg-primary/10'
+                : 'border-border hover:bg-accent/50'"
+              @click="setAnimSpeed(opt.value)"
+            >
+              <span class="text-sm font-medium" :class="animSpeed === opt.value ? 'text-foreground' : 'text-muted-foreground'">
+                {{ opt.label }}
+              </span>
+              <p class="text-[11px] leading-snug text-muted-foreground/80">
+                {{ opt.ms === null ? '用滑块' : `${opt.ms}ms` }}
+              </p>
+            </button>
+          </div>
+
+          <div class="rounded-lg border px-3 py-3" :class="animSpeed === 'custom' ? 'border-primary bg-primary/5' : 'border-border'">
+            <div class="flex items-baseline justify-between">
+              <span class="text-xs text-muted-foreground">自定义时长</span>
+              <span class="text-xs font-medium tabular-nums">{{ animMs }}ms</span>
+            </div>
+            <Slider
+              class="mt-3"
+              :model-value="[animMs]"
+              :min="ANIM_MS_MIN"
+              :max="ANIM_MS_MAX"
+              :step="ANIM_MS_STEP"
+              @update:model-value="onAnimMs"
+            />
+            <p class="mt-2 text-[11px] leading-snug text-muted-foreground/80">
+              拖动即切到「自定义」；上限 {{ ANIM_MS_MAX }}ms。退出动画固定为进入的 2/3（当前 {{ Math.round(currentMs * 2 / 3) }}ms）。
+            </p>
           </div>
         </div>
       </div>

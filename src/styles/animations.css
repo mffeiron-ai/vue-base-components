@@ -1,12 +1,17 @@
 /**
  * 全局动效（动画形式）—— 与「风格」「主题」「字体」并列的第四个全局维度
  * ─────────────────────────────────────────────────────────────
- * 用法：`<html data-anim="fade | from-left | from-right | from-bottom | zoom | flip | none">`
+ * 用法：`<html data-anim="fade | from-left | from-right | from-bottom | zoom | none"
+ *              data-anim-speed="faster | normal | slow | slower | custom">`
+ *   形式（data-anim）决定「播哪套关键帧」，时长（data-anim-speed）决定「多快」；
+ *   custom 档再读一个内联变量 `--anim-custom-dur`（顶栏滑块拖出来的任意毫秒数）。
  *   组件里**只写语义类**（cn-anim-*），具体播哪套 keyframes 由这个属性决定：
  *     cn-anim-enter     内容进入（表格行 / 列表项 / 卡片）—— 播一次
  *     cn-anim-overlay   浮层进出（dialog / sheet / popover / dropdown / tooltip…）
  *     cn-anim-backdrop  遮罩进出（恒为淡入淡出）
  *   于是「整站切换动画形式」＝ 换 <html> 上的一个属性，组件一行都不用改。
+ *
+ *   进场用 `--anim-in`、出场用 `--anim-out`（**必须两个不同的 keyframes 名**，见 ② 处的说明）。
  *
  * ⚠️ 三个必须遵守的约束：
  *   1. 本文件**不能包在 @layer 里**（Tailwind 工具类都在 layer 里，包了就压不过预设）；
@@ -20,16 +25,24 @@
 
 /* ─────────────── ① 参数：想调节奏只改这里 ─────────────── */
 [data-anim] {
-  --anim-dur: 240ms;                 /* 进入时长 */
-  --anim-dur-out: 160ms;             /* 离开时长（快一点，手感更利落） */
+  --anim-dur: 240ms;                 /* 进入时长（默认档，会被下面的「时长档位」覆盖） */
+  --anim-dur-out: calc(var(--anim-dur) * 2 / 3);  /* 离开时长固定为进入的 2/3，换档位自动跟随 */
   --anim-ease: cubic-bezier(0.22, 1, 0.36, 1);
   --anim-distance: 16px;             /* 内容进入的位移 */
   --anim-distance-panel: 8px;        /* 浮层的位移（小一点，方向不合也不突兀） */
   --anim-scale: 0.96;                /* 缩放的起始比例 */
-  --anim-flip-angle: 12deg;          /* 翻转的起始角度 */
 }
 
-/* 无动画 / 用户偏好减少动效：时长归零（保留最终态，不影响可交互性） */
+/* 时长档位（<html data-anim-speed="…">，由顶栏「选择动效」的第二组设置写入） */
+[data-anim-speed='faster'] { --anim-dur: 120ms; }
+[data-anim-speed='normal'] { --anim-dur: 240ms; }
+[data-anim-speed='slow']   { --anim-dur: 360ms; }
+[data-anim-speed='slower'] { --anim-dur: 520ms; }
+/* 自定义：值由 animation.ts 以**内联**方式写到 <html> 上的 --anim-custom-dur */
+[data-anim-speed='custom'] { --anim-dur: var(--anim-custom-dur, 240ms); }
+
+/* 无动画 / 用户偏好减少动效：时长归零（保留最终态，不影响可交互性）
+   ⚠️ 必须排在「时长档位」之后：两者都是单属性选择器（0,1,0），靠源码顺序取胜。 */
 [data-anim='none'] {
   --anim-dur: 1ms;
   --anim-dur-out: 1ms;
@@ -41,38 +54,58 @@
   }
 }
 
-/* ─────────────── ② 形式：选中的关键帧名写进 --anim-in ─────────────── */
-[data-anim='fade'] { --anim-in: anim-fade; }
-[data-anim='from-left'] { --anim-in: anim-from-left; }
-[data-anim='from-right'] { --anim-in: anim-from-right; }
-[data-anim='from-bottom'] { --anim-in: anim-from-bottom; }
-[data-anim='zoom'] { --anim-in: anim-zoom; }
-[data-anim='flip'] { --anim-in: anim-flip; }
-[data-anim='none'] { --anim-in: anim-fade; }
+/* ─────────────── ② 形式：进／出各一套关键帧 ───────────────
+   ⚠️ 出场的 keyframes 名必须与进场**不同**（所以下面每个形式配了 `--anim-in` + `--anim-out`）：
+   浏览器规范里 animation-name 不变时**不会重新开始动画**，只会就地更新时长/方向 ——
+   实测「进场跑到 350/800 时切出场」时，出场动画的 currentTime 直接接着 360ms 起算
+   （duration 533ms 已经过了 68%），200ms 就播完、看起来像「动画时间被吞掉」。
+   换成不同名字 → 旧动画取消、新动画从 0 计时，出场一定跑满 --anim-dur-out。 */
+[data-anim='fade'] { --anim-in: anim-fade; --anim-out: anim-fade-out; --page-shift: 0 0; --page-scale: 1; }
+[data-anim='from-left'] { --anim-in: anim-from-left; --anim-out: anim-from-left-out; --page-shift: calc(-1 * var(--anim-distance)) 0; --page-scale: 1; }
+[data-anim='from-right'] { --anim-in: anim-from-right; --anim-out: anim-from-right-out; --page-shift: var(--anim-distance) 0; --page-scale: 1; }
+[data-anim='from-bottom'] { --anim-in: anim-from-bottom; --anim-out: anim-from-bottom-out; --page-shift: 0 var(--anim-distance); --page-scale: 1; }
+[data-anim='zoom'] { --anim-in: anim-zoom; --anim-out: anim-zoom-out; --page-shift: 0 0; --page-scale: var(--anim-scale); }
+[data-anim='none'] { --anim-in: anim-fade; --anim-out: anim-fade-out; --page-shift: 0 0; --page-scale: 1; }
 
 @keyframes anim-fade {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+@keyframes anim-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
 @keyframes anim-from-left {
   from { opacity: 0; translate: calc(-1 * var(--anim-distance)) 0; }
   to { opacity: 1; translate: 0 0; }
+}
+@keyframes anim-from-left-out {
+  from { opacity: 1; translate: 0 0; }
+  to { opacity: 0; translate: calc(-1 * var(--anim-distance)) 0; }
 }
 @keyframes anim-from-right {
   from { opacity: 0; translate: var(--anim-distance) 0; }
   to { opacity: 1; translate: 0 0; }
 }
+@keyframes anim-from-right-out {
+  from { opacity: 1; translate: 0 0; }
+  to { opacity: 0; translate: var(--anim-distance) 0; }
+}
 @keyframes anim-from-bottom {
   from { opacity: 0; translate: 0 var(--anim-distance); }
   to { opacity: 1; translate: 0 0; }
+}
+@keyframes anim-from-bottom-out {
+  from { opacity: 1; translate: 0 0; }
+  to { opacity: 0; translate: 0 var(--anim-distance); }
 }
 @keyframes anim-zoom {
   from { opacity: 0; scale: var(--anim-scale); }
   to { opacity: 1; scale: 1; }
 }
-@keyframes anim-flip {
-  from { opacity: 0; rotate: y calc(-1 * var(--anim-flip-angle)); }
-  to { opacity: 1; rotate: y 0deg; }
+@keyframes anim-zoom-out {
+  from { opacity: 1; scale: 1; }
+  to { opacity: 0; scale: var(--anim-scale); }
 }
 
 /* ─────────────── ③ 语义类：组件只写这三个 ───────────────
@@ -85,7 +118,7 @@ html[data-anim] .cn-anim-enter {
   animation: var(--anim-in, anim-fade) var(--anim-dur) var(--anim-ease) both;
 }
 
-/* 浮层：按 data-state 区分进出；退出＝同一组关键帧倒放 */
+/* 浮层：按 data-state 区分进出（出场用 --anim-out，名字不同才会重新从 0 计时） */
 html[data-anim] .cn-anim-overlay {
   --anim-distance: var(--anim-distance-panel);
 }
@@ -93,23 +126,37 @@ html[data-anim] .cn-anim-overlay[data-state='open'] {
   animation: var(--anim-in, anim-fade) var(--anim-dur) var(--anim-ease) both;
 }
 html[data-anim] .cn-anim-overlay[data-state='closed'] {
-  animation: var(--anim-in, anim-fade) var(--anim-dur-out) var(--anim-ease) reverse both;
+  animation: var(--anim-out, anim-fade-out) var(--anim-dur-out) var(--anim-ease) both;
 }
 
-/* 遮罩：恒为淡入淡出（不跟随形式，否则会与内容动效打架） */
+/* 遮罩：恒为淡入淡出（不跟随形式，否则会与内容动效打架）—— 进出也必须是两个名字 */
 html[data-anim] .cn-anim-backdrop[data-state='open'] {
   animation: anim-fade var(--anim-dur) var(--anim-ease) both;
 }
 html[data-anim] .cn-anim-backdrop[data-state='closed'] {
-  animation: anim-fade var(--anim-dur-out) var(--anim-ease) reverse both;
+  animation: anim-fade-out var(--anim-dur-out) var(--anim-ease) both;
 }
 
-/* 页面 / 面板切换（文档站的 <Transition name="page"> 用这套 class 名） */
-html[data-anim] .page-enter-active {
-  animation: var(--anim-in, anim-fade) var(--anim-dur) var(--anim-ease) both;
+/* 页面 / 面板切换（文档站的 <Transition name="page"> 用这套 class 名）
+   ⚠️ 页面这里用 **transition** 而不是 animation，两个原因：
+   ① animation 的出场 keyframes 只能写死 `from`，而进场被打断时的当前值可能是 0.7 ——
+      同名/换名都会先跳到 `from` 再走（看起来像闪一下）；transition 永远从**当前值**开始，
+      所以「连点两次」时旧页面会从它当时的不透明度直接平滑淡出。
+   ② 常驻 transition 也让 Vue 能正确测出过渡时长（读的就是元素上的 transitionDuration）。
+   进场起始值由各形式提供的 --page-shift / --page-scale 决定。 */
+html[data-anim] main > * {
+  transition-property: opacity, translate, scale;
+  transition-duration: var(--anim-dur);
+  transition-timing-function: var(--anim-ease);
+}
+html[data-anim] .page-enter-from,
+html[data-anim] .page-leave-to {
+  opacity: 0;
+  translate: var(--page-shift, 0 0);
+  scale: var(--page-scale, 1);
 }
 html[data-anim] .page-leave-active {
-  animation: var(--anim-in, anim-fade) var(--anim-dur-out) var(--anim-ease) reverse both;
+  transition-duration: var(--anim-dur-out);
 }
 
 /* ─────────────── ④ 物理动效：只跟时长，不换形式 ───────────────
