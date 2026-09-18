@@ -371,6 +371,30 @@ export const componentDocs: ComponentDoc[] = [
     description: '表格标签族的样式包装（9 个部件，不依赖任何 headless 库）：每个部件就是对应的原生标签加一组 Tailwind 类与 data-slot 钩子。支持表头 / 表体 / 页脚合计、行 hover 与选中态、复选框列对齐、空状态整行、固定高度滚动 + 粘性表头。',
     importCode: `import { Table, TableBody, TableCaption, TableCell, TableEmpty, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table'`,
   },
+  {
+    name: 'tabs',
+    title: 'Tabs 标签页',
+    description: '用一排标签切换同级内容，基于 reka-ui 的 TabsRoot：Tabs 管选中值与方向、TabsList 是标签容器（含 default / line 两个档位）、TabsTrigger 是单个标签、TabsContent 是内容面板。支持受控、禁用某标签、纵向布局、图标与计数，以及面板挂载行为（unmountOnHide / forceMount）与键盘激活模式。',
+    importCode: `import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'`,
+  },
+  {
+    name: 'tags-input',
+    title: 'Tags Input 标签输入',
+    description: '把自由文本收成一组标签，基于 reka-ui 的 TagsInputRoot。标签可由分隔符 / Enter / Tab / 失焦 / 粘贴五种方式添加，支持数量上限、重复项拦截（拒了会打 data-invalid）、对象值（convertValue + displayValue）与键盘选中删除，传 name 还能参与原生表单提交。',
+    importCode: `import { TagsInput, TagsInputInput, TagsInputItem, TagsInputItemDelete, TagsInputItemText } from '@/components/ui/tags-input'`,
+  },
+  {
+    name: 'textarea',
+    title: 'Textarea 多行输入',
+    description: '一个 textarea 的样式包装，只有 v-model / default-value / class 三个 prop，其余原生属性全部透传。自带 field-sizing-content 会随内容自动长高（min-h-16 兜底），并内置禁用与 aria-invalid 校验态样式。',
+    importCode: `import { Textarea } from '@/components/ui/textarea'`,
+  },
+  {
+    name: 'toggle',
+    title: 'Toggle 切换按钮',
+    description: '一个「按下 / 弹起」的双态按钮，基于 reka-ui 的 Toggle：本质是带 aria-pressed 的 button，按下时输出 data-state="on"。支持 variant（default / outline）、size（default / sm / lg）、禁用与插槽参数换图标，默认插槽会给 { modelValue, pressed, state, disabled }。',
+    importCode: `import { Toggle } from '@/components/ui/toggle'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */
@@ -424,6 +448,8 @@ export const componentCategories: ComponentCategory[] = [
       'resizable',
       'sheet',
       'sidebar',
+      'tabs',
+      'toggle',
     ],
   },
   {
@@ -477,6 +503,8 @@ export const componentCategories: ComponentCategory[] = [
       'select',
       'slider',
       'switch',
+      'tags-input',
+      'textarea',
     ],
   },
 ]

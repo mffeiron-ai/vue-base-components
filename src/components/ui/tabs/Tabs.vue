@@ -17,7 +17,13 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
     v-slot="slotProps"
     data-slot="tabs"
     v-bind="forwarded"
-    :class="cn('flex flex-col gap-2', props.class)"
+    :class="cn(
+      // group/tabs：8 套预设都用 group-data-horizontal/tabs:… 与 group-data-vertical/tabs:…
+      // 在列表 / 触发器上选方向相关的样式，少了它这些规则全部静默失效（reka 已提供 data-orientation）
+      // data-vertical:flex-row：纵向时让内容排到列表右侧
+      'group/tabs flex flex-col gap-2 data-vertical:flex-row',
+      props.class,
+    )"
   >
     <slot v-bind="slotProps" />
   </TabsRoot>
