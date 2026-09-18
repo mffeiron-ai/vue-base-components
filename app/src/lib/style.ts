@@ -19,15 +19,28 @@ import { initPresetIsolation, isolatePreset } from './presetIsolation'
 // 故此处仅在 app 侧声明常量，内容与 config/config.ts 保持一致。
 export type { StyleKey, LayoutPresetKey, ShadowPresetKey }
 
+/**
+ * 风格（设计系统）选项。
+ *
+ * `label` 是**给用户看的中文名**，按各风格实测的几何 / 排版特征命名（值 `reka-*` 不变）：
+ *   经典 6px 中等圆角 + 标准密度，是基线那一套
+ *   小巧 圆角同「经典」但整体小一档（按钮 28px / 12.8px 字）
+ *   胶囊 按钮与卡片全圆、开关是细长条
+ *   圆润 按钮全圆但卡片克制（16px）
+ *   紧凑 整体最小一档（按钮 24px / 12px 字、开关 28×16.6）
+ *   直角 全 0 圆角 + 1px 细线 + 小字
+ *   饱满 圆角 16~24px、开关偏厚
+ *   排版 直角 + 大写宽字距 + 内边距最大 + 下划线式输入
+ */
 export const STYLE_OPTIONS: Array<{ value: StyleKey, label: string }> = [
-  { value: 'reka-nova', label: 'Nova' },
-  { value: 'reka-luma', label: 'Luma' },
-  { value: 'reka-lyra', label: 'Lyra' },
-  { value: 'reka-maia', label: 'Maia' },
-  { value: 'reka-mira', label: 'Mira' },
-  { value: 'reka-rhea', label: 'Rhea' },
-  { value: 'reka-sera', label: 'Sera' },
-  { value: 'reka-vega', label: 'Vega' },
+  { value: 'reka-nova', label: '小巧' },
+  { value: 'reka-luma', label: '胶囊' },
+  { value: 'reka-lyra', label: '直角' },
+  { value: 'reka-maia', label: '圆润' },
+  { value: 'reka-mira', label: '紧凑' },
+  { value: 'reka-rhea', label: '饱满' },
+  { value: 'reka-sera', label: '排版' },
+  { value: 'reka-vega', label: '经典' },
 ]
 
 /** 默认正文字体（设计系统未定义字体时用） */

@@ -49,21 +49,25 @@ const rightCategories = computed(() => categories.filter((c) => c.side === 'righ
          注意：这里不能用 v-if / v-else 拆成两个分支 —— 跨「全屏页 ↔ 文档页」时
          内层 <Transition> 会被整块换掉，新实例首次挂载不播 appear 动画，过渡动画就没了。
            · 全屏页（落地页）→ block，main 全宽，不渲染两侧栏
-           · 文档页        → flex，左两卡 | 中央文档 | 右一卡
+           · 文档页        → flex，左两列（输入｜展示）| 中央文档 | 右两列（交互 / 浮层）
          模式由 layoutFullPage 控制（比路由晚一步生效，见 script 里的说明）
          items-start 是必须的：不能让 flex 拉高两列，否则 sticky 会失效
          两列高度自适应（h-fit），超过视口才出现自己的滚动条，不硬占满
-         宽度上限 1680：可视区 2448 时中央能拿到 1072，文档 1024 刚好铺满 -->
+         宽度上限：2xl 之前 1680（左列竖排 224px）；2xl 起 1900
+         —— 左列横向变两列后占 464px（224×2 + 16），1900 时中央仍有 1036，文档 1024 刚好铺满 -->
     <div
       class="items-start justify-center"
       :class="layoutFullPage
         ? 'block'
-        : 'mx-auto flex max-w-[1680px] gap-10 px-6 pt-14 xl:gap-14'"
+        : 'mx-auto flex max-w-[1680px] gap-10 px-6 pt-14 xl:gap-14 2xl:max-w-[1900px]'"
     >
-      <!-- 左列：展示 + 输入（仅文档页） -->
+      <!-- 左列：输入 + 展示（仅文档页）。
+           2xl 起这一列自己变横向两列：输入在最外（最左），展示贴着正文；
+           2xl:items-start 让两张卡各按自己内容的高度（不然会被 stretch 拉成等高，
+           件数少的那张底下会空一大块） -->
       <aside
         v-if="!layoutFullPage"
-        class="sticky top-20 hidden h-fit max-h-[calc(100vh-6rem)] w-56 shrink-0 flex-col gap-4 overflow-y-auto lg:flex"
+        class="sticky top-20 hidden h-fit max-h-[calc(100vh-6rem)] w-56 shrink-0 flex-col gap-4 overflow-y-auto lg:flex 2xl:w-[29rem] 2xl:flex-row 2xl:items-start"
       >
         <SidebarCategoryCard
           v-for="cat in leftCategories"
@@ -82,7 +86,7 @@ const rightCategories = computed(() => categories.filter((c) => c.side === 'righ
         </Transition>
       </main>
 
-      <!-- 右列：交互（组件最多的一类，高度跟左侧两张卡接近；仅文档页） -->
+      <!-- 右列：交互 + 浮层（左列偏「内容型」：展示 + 输入；右列偏「会动 / 浮起」；仅文档页） -->
       <aside
         v-if="!layoutFullPage"
         class="sticky top-20 hidden h-fit max-h-[calc(100vh-6rem)] w-56 shrink-0 flex-col gap-4 overflow-y-auto xl:flex"

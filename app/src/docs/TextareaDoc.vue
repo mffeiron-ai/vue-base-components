@@ -36,14 +36,14 @@ const stateRows = [
 ]
 
 const presetRows = [
-  { style: 'Vega', radius: '6px', padding: '10 / 8', bg: '透明', border: '四边描边', font: '14px', resize: '可竖向拖拽' },
-  { style: 'Luma', radius: '16px', padding: '12 / 12', bg: '--input/50 填充', border: '无描边（透明）', font: '14px', resize: '不可拖' },
-  { style: 'Lyra', radius: '0（直角）', padding: '10 / 8', bg: '透明', border: '四边描边', font: '12px', resize: '可竖向拖拽' },
-  { style: 'Maia', radius: '12px', padding: '12 / 12', bg: '--input/30', border: '四边描边', font: '14px', resize: '不可拖' },
-  { style: 'Mira', radius: '6px', padding: '8 / 8', bg: '--input/20', border: '四边描边', font: '12px', resize: '不可拖' },
-  { style: 'Nova', radius: '8px', padding: '10 / 8', bg: '透明', border: '四边描边', font: '14px', resize: '可竖向拖拽' },
-  { style: 'Rhea', radius: '16px', padding: '10 / 8', bg: '--input/50 填充', border: '无描边（透明）', font: '14px', resize: '不可拖' },
-  { style: 'Sera', radius: '0（直角）', padding: '0 / 12', bg: '透明', border: '只有下边框', font: '14px', resize: '不可拖' },
+  { style: '经典', radius: '6px', padding: '10 / 8', bg: '透明', border: '四边描边', font: '14px', resize: '可竖向拖拽' },
+  { style: '胶囊', radius: '16px', padding: '12 / 12', bg: '--input/50 填充', border: '无描边（透明）', font: '14px', resize: '不可拖' },
+  { style: '直角', radius: '0（直角）', padding: '10 / 8', bg: '透明', border: '四边描边', font: '12px', resize: '可竖向拖拽' },
+  { style: '圆润', radius: '12px', padding: '12 / 12', bg: '--input/30', border: '四边描边', font: '14px', resize: '不可拖' },
+  { style: '紧凑', radius: '6px', padding: '8 / 8', bg: '--input/20', border: '四边描边', font: '12px', resize: '不可拖' },
+  { style: '小巧', radius: '8px', padding: '10 / 8', bg: '透明', border: '四边描边', font: '14px', resize: '可竖向拖拽' },
+  { style: '饱满', radius: '16px', padding: '10 / 8', bg: '--input/50 填充', border: '无描边（透明）', font: '14px', resize: '不可拖' },
+  { style: '排版', radius: '0（直角）', padding: '0 / 12', bg: '透明', border: '只有下边框', font: '14px', resize: '不可拖' },
 ]
 
 const remaining = computed(() => maxCount - counted.value.length)
@@ -127,9 +127,9 @@ const remaining = computed(() => maxCount - counted.value.length)
         <h2 class="text-xl font-semibold">高度与缩放</h2>
         <CardDescription>
           <code>rows</code> 是原生属性，会与 <code>min-h-16</code> 一起决定初始高度；
-          能不能拖拽改大小由 <code>resize</code> 决定 —— <b>5 套风格（Luma / Maia / Mira / Rhea / Sera）
+          能不能拖拽改大小由 <code>resize</code> 决定 —— <b>5 套风格（胶囊 / 圆润 / 紧凑 / 饱满 / 排版）
           预设里写了 <code>resize-none</code></b>，那些风格下右下角的拖拽手柄会消失；
-          其余 3 套（Vega / Lyra / Nova）保持可竖向拖拽。
+          其余 3 套（经典 / 直角 / 小巧）保持可竖向拖拽。
         </CardDescription>
       </CardHeader>
       <CardContent class="space-y-6">
@@ -427,7 +427,7 @@ const remaining = computed(() => maxCount - counted.value.length)
         </div>
         <p class="text-xs text-muted-foreground">
           内边距单位为 px（<b>左/右 / 上/下</b>，实际是 <code>px-x py-y</code> 的 <code>x</code> 与 <code>y</code>）。
-          <b>Sera 最特别</b>：它是「下划线」形态 —— 其余三边透明、只有下边框有颜色，
+          <b>「排版」最特别</b>：它是「下划线」形态 —— 其余三边透明、只有下边框有颜色，
           所以它的左右内边距是 0（内容贴着边线）。
         </p>
       </CardContent>

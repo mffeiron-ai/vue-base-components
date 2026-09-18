@@ -63,7 +63,7 @@ const partRows = [
   { name: 'SheetClose', desc: '关闭按钮，<b>可以放在任意位置</b>（Footer 里的「取消」就是它）；已用专属 <code>data-slot="sheet-close"</code>，不会被预设拽到右上角' },
   { name: 'SheetHeader / Footer', desc: '上下两个容器（<code>flex flex-col</code> + <code>p-4</code>）；Footer 自带 <code>mt-auto</code>，会自动被顶到底部' },
   { name: 'SheetTitle / Description', desc: '标题与说明。Description 会挂到内容面板的 <code>aria-describedby</code> 上，不想要就传 <code>aria-describedby=undefined</code>' },
-  { name: 'SheetOverlay', desc: '遮罩，由 <code>SheetContent</code> 自动渲染，一般不用手写。颜色取预设（vega 是 <code>bg-black/10</code> + 背景模糊）' },
+  { name: 'SheetOverlay', desc: '遮罩，由 <code>SheetContent</code> 自动渲染，一般不用手写。颜色取预设（如「经典」风格是 <code>bg-black/10</code> + 背景模糊）' },
 ]
 </script>
 

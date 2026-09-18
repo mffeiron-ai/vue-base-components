@@ -35,19 +35,19 @@ const apiRows = [
 const dataAttrRows = [
   { el: 'Tabs（根）', attrs: 'data-slot="tabs" · data-orientation · group/tabs', desc: '预设的方向相关规则读的就是根上的 <code>group-data-horizontal/tabs</code> / <code>group-data-vertical/tabs</code>' },
   { el: 'TabsList', attrs: 'data-slot="tabs-list" · data-variant', desc: '同时带 <code>group/tabs-list</code>，供触发器读取档位' },
-  { el: 'TabsTrigger', attrs: 'data-slot="tabs-trigger" · role="tab" · data-state="active|inactive" · <b>data-active</b> · data-disabled · data-orientation · aria-selected', desc: 'reka 只给 <code>data-state</code>，<code>data-active</code> 是本库补的 —— 预设（vega / nova）按 <code>data-active</code> 写阴影规则' },
+  { el: 'TabsTrigger', attrs: 'data-slot="tabs-trigger" · role="tab" · data-state="active|inactive" · <b>data-active</b> · data-disabled · data-orientation · aria-selected', desc: 'reka 只给 <code>data-state</code>，<code>data-active</code> 是本库补的 —— 预设（「经典 / 小巧」）按 <code>data-active</code> 写阴影规则' },
   { el: 'TabsContent', attrs: 'data-slot="tabs-content" · role="tabpanel" · data-state · data-orientation · hidden', desc: '<b>面板元素一直在 DOM 里</b>；未选中时带 <code>hidden</code>（<code>display: none</code>），里面渲染的内容则看 <code>unmountOnHide</code>' },
 ]
 
 const presetRows = [
-  { style: 'Vega', listH: '36px', radius: 'rounded-lg', triggerFont: 'text-sm', note: '激活项白底 + 阴影' },
-  { style: 'Luma', listH: '36px', radius: 'rounded-full', triggerFont: 'text-sm', note: '整条胶囊形' },
-  { style: 'Lyra', listH: '32px', radius: 'rounded-none', triggerFont: 'text-xs', note: '直角系' },
-  { style: 'Maia', listH: '36px', radius: 'rounded-4xl', triggerFont: 'text-sm', note: '大圆角' },
-  { style: 'Mira', listH: '32px', radius: 'rounded-lg', triggerFont: 'text-xs', note: '紧凑' },
-  { style: 'Nova', listH: '32px', radius: 'rounded-lg', triggerFont: 'text-sm', note: '激活项阴影随档位变化' },
-  { style: 'Rhea', listH: '32px', radius: 'rounded-2xl', triggerFont: 'text-sm', note: '圆角 16px' },
-  { style: 'Sera', listH: '40px', radius: '（组件默认）', triggerFont: 'text-xs + uppercase', note: '最高、大写字母 + 字距' },
+  { style: '经典', listH: '36px', radius: 'rounded-lg', triggerFont: 'text-sm', note: '激活项白底 + 阴影' },
+  { style: '胶囊', listH: '36px', radius: 'rounded-full', triggerFont: 'text-sm', note: '整条胶囊形' },
+  { style: '直角', listH: '32px', radius: 'rounded-none', triggerFont: 'text-xs', note: '直角系' },
+  { style: '圆润', listH: '36px', radius: 'rounded-4xl', triggerFont: 'text-sm', note: '大圆角' },
+  { style: '紧凑', listH: '32px', radius: 'rounded-lg', triggerFont: 'text-xs', note: '紧凑' },
+  { style: '小巧', listH: '32px', radius: 'rounded-lg', triggerFont: 'text-sm', note: '激活项阴影随档位变化' },
+  { style: '饱满', listH: '32px', radius: 'rounded-2xl', triggerFont: 'text-sm', note: '圆角 16px' },
+  { style: '排版', listH: '40px', radius: '（组件默认）', triggerFont: 'text-xs + uppercase', note: '最高、大写字母 + 字距' },
 ]
 </script>
 
@@ -277,7 +277,7 @@ const presetRows = [
           <code>orientation="vertical"</code> 会让根节点输出
           <code>data-orientation="vertical"</code>，方向键随之变成上下。
           <b>布局由组件兜底</b>：根节点在纵向时改 <code>flex-row</code>、列表改 <code>flex-col</code>；
-          预设里除 Vega 外的 7 套还有额外的纵向内边距 / 圆角（也靠这个属性命中）。
+          预设里除「经典」外的 7 套还有额外的纵向内边距 / 圆角（也靠这个属性命中）。
         </CardDescription>
       </CardHeader>
       <CardContent>

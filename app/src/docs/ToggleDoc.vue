@@ -38,14 +38,14 @@ const slotRows = [
 ]
 
 const presetRows = [
-  { style: 'Vega', radius: '6px', font: '14px', icon: '16px', note: '按下底色 bg-muted' },
-  { style: 'Luma', radius: '24px', font: '14px', icon: '16px', note: '接近全圆角' },
-  { style: 'Lyra', radius: '0（直角）', font: '12px', icon: '16px', note: '直角系；额外写了一条 data-[state=on]' },
-  { style: 'Maia', radius: '32px', font: '14px', icon: '16px', note: '全圆角' },
-  { style: 'Mira', radius: '6px', font: '12px', icon: '16px', note: '紧凑；同样有 data-[state=on] 兜底' },
-  { style: 'Nova', radius: '8px', font: '14px', icon: '16px', note: '同样有 data-[state=on] 兜底' },
-  { style: 'Rhea', radius: '16px', font: '14px', icon: '16px', note: '' },
-  { style: 'Sera', radius: '0（直角）', font: '12px + 大写 + 字距', icon: '14px', note: '唯一改小图标的风格' },
+  { style: '经典', radius: '6px', font: '14px', icon: '16px', note: '按下底色 bg-muted' },
+  { style: '胶囊', radius: '24px', font: '14px', icon: '16px', note: '接近全圆角' },
+  { style: '直角', radius: '0（直角）', font: '12px', icon: '16px', note: '直角系；额外写了一条 data-[state=on]' },
+  { style: '圆润', radius: '32px', font: '14px', icon: '16px', note: '全圆角' },
+  { style: '紧凑', radius: '6px', font: '12px', icon: '16px', note: '紧凑；同样有 data-[state=on] 兜底' },
+  { style: '小巧', radius: '8px', font: '14px', icon: '16px', note: '同样有 data-[state=on] 兜底' },
+  { style: '饱满', radius: '16px', font: '14px', icon: '16px', note: '' },
+  { style: '排版', radius: '0（直角）', font: '12px + 大写 + 字距', icon: '14px', note: '唯一改小图标的风格' },
 ]
 </script>
 
@@ -371,7 +371,7 @@ const presetRows = [
         <div class="rounded-lg border border-input p-3 text-xs text-muted-foreground">
           <ul class="list-disc space-y-1 pl-4">
             <li>根节点：<code>button</code>，带 <code>aria-pressed="true|false"</code>、<code>data-state="on|off"</code>、<code>data-disabled</code></li>
-            <li>按下态预设写的是 <code>aria-pressed:bg-muted</code>（8 套都有），Lyra / Mira / Nova 另外补了一条 <code>data-[state=on]:bg-muted</code></li>
+            <li>按下态预设写的是 <code>aria-pressed:bg-muted</code>（8 套都有），直角 / 紧凑 / 小巧 另外补了一条 <code>data-[state=on]:bg-muted</code></li>
             <li>键盘：Space / Enter（原生 button 行为），不需要额外处理</li>
             <li>无障碍：<code>aria-pressed</code> 已经把「这是个可切换按钮」传达给读屏软件；纯图标时记得补 <code>aria-label</code></li>
           </ul>

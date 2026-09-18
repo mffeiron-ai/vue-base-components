@@ -37,7 +37,7 @@ const isScrolled = ref(false)
 // 导航栏收窄/展开的宽度过渡时长（与模板里的 duration-300 保持一致）
 const PILL_TRANSITION_MS = 300
 /**
- * 是否使用「宽布局」文案：长菜单标签、风格的长标签（Vega · 跟随主题）、主题预览按钮。
+ * 是否使用「宽布局」文案：长菜单标签、风格的长标签（如「经典 · 跟随主题」）、主题预览按钮。
  *
  * 为何需要单独一个标志：滚动回到顶部时，宽度过渡（300ms）还没跑完，容器只有 ~930px，
  * 而宽布局需要 ~1014px——若同一帧就把长文案换回去，会被挤成两行、闪烁一下。
@@ -179,10 +179,30 @@ onUnmounted(() => {
             <li v-for="item in menuItems" :key="item.name">
               <RouterLink
                 :to="item.href"
+                :aria-label="item.name"
                 class="block whitespace-nowrap transition-all duration-150 hover:font-semibold hover:text-accent-foreground"
                 :class="isActive(item.href) ? 'font-semibold text-accent-foreground' : 'text-muted-foreground'"
               >
-                {{ wideLabels ? item.name : item.short }}
+                <!-- 长 / 短两个文案叠在同一格里交叉淡入淡出，外层 max-width 同步过渡
+                     （300ms 与导航栏收窄一致）—— 不然换文案是硬跳，文字会「啪」地少两个字。
+                     上限用 em：窄状态按短文案字数收（中文一个字≈1em），宽状态给 5em 留出
+                     hover 加粗与不同字体的余量；两端宽度与改之前完全一致。
+                     aria-hidden + 链接上的 aria-label：两个标签都在 DOM 里（过渡需要），
+                     否则读屏会把名字念成「UI 组件 组件」 -->
+                <span
+                  aria-hidden="true"
+                  class="inline-grid overflow-hidden transition-[max-width] duration-300"
+                  :style="{ maxWidth: wideLabels ? '5em' : `${item.short.length}em` }"
+                >
+                  <span
+                    class="col-start-1 row-start-1 transition-opacity duration-300"
+                    :class="wideLabels ? 'opacity-100' : 'opacity-0'"
+                  >{{ item.name }}</span>
+                  <span
+                    class="col-start-1 row-start-1 transition-opacity duration-300"
+                    :class="wideLabels ? 'opacity-0' : 'opacity-100'"
+                  >{{ item.short }}</span>
+                </span>
               </RouterLink>
             </li>
           </ul>
@@ -435,7 +455,7 @@ onUnmounted(() => {
             </div>
           </div>
           <p class="text-xs leading-relaxed text-muted-foreground">
-            风格自带的正文：Nova / Vega / Mira / Luma / Rhea / Sera → Inter，Maia → Figtree，Lyra → JetBrains Mono；
+            风格自带的正文：小巧 / 经典 / 紧凑 / 胶囊 / 饱满 / 排版 → Inter，圆润 → Figtree，直角 → JetBrains Mono；
             主题则自带它自己的一套字体（如 Poppins / Montserrat）。
           </p>
         </div>

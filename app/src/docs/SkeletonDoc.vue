@@ -25,7 +25,7 @@ const propRows = [
 
 const presetRows = [
   { name: '背景色', type: 'bg-muted', desc: '组件自带 <code>bg-primary/10</code>，但 8 套预设都会把它覆盖成 <code>bg-muted</code> —— 所以实际生效的是预设值，想换色记得带 <code>!</code>' },
-  { name: '圆角', type: 'rounded-md', desc: '各风格不同：vega / lyra 是 <code>rounded-md</code>（6px），luma / rhea 等是 <code>rounded-2xl</code>。所以同一段 HTML 在不同风格下圆角会变 —— 这就是「跟随设计系统」；要固定住就写 <code>rounded-full!</code> 之类' },
+  { name: '圆角', type: 'rounded-md', desc: '各风格不同：「经典 / 直角」是 <code>rounded-md</code>（6px），「胶囊 / 饱满」等是 <code>rounded-2xl</code>。所以同一段 HTML 在不同风格下圆角会变 —— 这就是「跟随设计系统」；要固定住就写 <code>rounded-full!</code> 之类' },
   { name: '动画', type: 'animate-pulse', desc: '内置 <code>animate-pulse</code>（Tailwind 的呼吸式透明度动画）。不想要动画（比如配合 <code>prefers-reduced-motion</code>）写 <code>animate-none</code> 即可，同组属性后写者胜、不加 <code>!</code> 也能覆盖' },
 ]
 </script>
@@ -46,7 +46,7 @@ const presetRows = [
         <CardDescription>
           用 <code>h-*</code> / <code>w-*</code> / <code>rounded-*</code> 拼出你要的形状 ——
           文字行、头像圆、封面图、按钮位都只是同一个组件换了 class。<br />
-          背景色与圆角<b>由设计系统接管</b>：底色取 <code>--muted</code>，圆角各风格不同（vega 6px，luma / rhea 是 <code>rounded-2xl</code>）。
+          背景色与圆角<b>由设计系统接管</b>：底色取 <code>--muted</code>，圆角各风格不同（「经典」6px，「胶囊 / 饱满」是 <code>rounded-2xl</code>）。
         </CardDescription>
       </CardHeader>
       <CardContent>

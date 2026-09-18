@@ -99,7 +99,7 @@ const hookRows = [
   { slot: 'table', note: '<code>w-full caption-bottom text-sm</code>（各风格一致）' },
   { slot: 'table-header / table-body / table-footer', note: '边框与页脚底色；页脚 <code>bg-muted/50 border-t border-input font-medium</code>（页脚的边框色同样由组件层补）' },
   { slot: 'table-row', note: '<code>hover:bg-muted/50 data-[state=selected]:bg-muted border-b</code>（各风格一致）。<b>预设只给了边框宽度、没给颜色</b> → 颜色由组件层补的 <code>border-input</code> 兜底（实测 <code>rgb(229,231,235)</code>）；不补的话 Tailwind v4 的默认边框色是 <code>currentColor</code>，行线会变成文字色（#333 近黑）' },
-  { slot: 'table-head / table-cell', note: '<b>各风格差别最大</b>：vega 是 <code>h-10 px-2</code>，sera 是 <code>h-12 px-3 text-xs uppercase tracking-wider</code>；两者都给单元格加了 <code>whitespace-nowrap</code>' },
+  { slot: 'table-head / table-cell', note: '<b>各风格差别最大</b>：「经典」是 <code>h-10 px-2</code>，「排版」是 <code>h-12 px-3 text-xs uppercase tracking-wider</code>；两者都给单元格加了 <code>whitespace-nowrap</code>' },
   { slot: 'table-caption', note: '<code>text-muted-foreground mt-4 text-sm</code>（各风格一致）' },
 ]
 </script>

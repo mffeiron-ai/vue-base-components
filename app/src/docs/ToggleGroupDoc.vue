@@ -52,14 +52,14 @@ const itemRows = [
 ]
 
 const presetRows = [
-  { style: 'Vega', groupRadius: '6px', firstLast: 'rounded-l-md / rounded-r-md', onBg: 'bg-muted', note: '' },
-  { style: 'Luma', groupRadius: '3xl（仅 outline 档）', firstLast: 'rounded-l-3xl / rounded-r-3xl', onBg: 'bg-muted', note: '连体时更圆' },
-  { style: 'Lyra', groupRadius: '0（直角）', firstLast: 'rounded-none', onBg: 'bg-accent（预设未写，cva 兜底）', note: '直角系；它是少数「选中底色偏蓝」的风格' },
-  { style: 'Maia', groupRadius: '4xl（仅 outline 档）', firstLast: 'rounded-l-3xl / rounded-r-3xl', onBg: 'bg-muted', note: '' },
-  { style: 'Mira', groupRadius: '6px', firstLast: 'rounded-l-md / rounded-r-md', onBg: 'bg-accent（预设未写，cva 兜底）', note: '选中底色偏蓝' },
-  { style: 'Nova', groupRadius: '8px', firstLast: 'rounded-l-lg / rounded-r-lg', onBg: 'bg-accent（预设未写，cva 兜底）', note: '选中底色偏蓝' },
-  { style: 'Rhea', groupRadius: '2xl（仅 outline 档）', firstLast: 'rounded-l-2xl / rounded-r-2xl', onBg: 'bg-muted', note: '' },
-  { style: 'Sera', groupRadius: '0（直角）', firstLast: 'rounded-none', onBg: 'bg-muted + text-foreground', note: '连体时左右内边距最大（px-6）' },
+  { style: '经典', groupRadius: '6px', firstLast: 'rounded-l-md / rounded-r-md', onBg: 'bg-muted', note: '' },
+  { style: '胶囊', groupRadius: '3xl（仅 outline 档）', firstLast: 'rounded-l-3xl / rounded-r-3xl', onBg: 'bg-muted', note: '连体时更圆' },
+  { style: '直角', groupRadius: '0（直角）', firstLast: 'rounded-none', onBg: 'bg-accent（预设未写，cva 兜底）', note: '直角系；它是少数「选中底色偏蓝」的风格' },
+  { style: '圆润', groupRadius: '4xl（仅 outline 档）', firstLast: 'rounded-l-3xl / rounded-r-3xl', onBg: 'bg-muted', note: '' },
+  { style: '紧凑', groupRadius: '6px', firstLast: 'rounded-l-md / rounded-r-md', onBg: 'bg-accent（预设未写，cva 兜底）', note: '选中底色偏蓝' },
+  { style: '小巧', groupRadius: '8px', firstLast: 'rounded-l-lg / rounded-r-lg', onBg: 'bg-accent（预设未写，cva 兜底）', note: '选中底色偏蓝' },
+  { style: '饱满', groupRadius: '2xl（仅 outline 档）', firstLast: 'rounded-l-2xl / rounded-r-2xl', onBg: 'bg-muted', note: '' },
+  { style: '排版', groupRadius: '0（直角）', firstLast: 'rounded-none', onBg: 'bg-muted + text-foreground', note: '连体时左右内边距最大（px-6）' },
 ]
 </script>
 
@@ -600,7 +600,7 @@ const presetRows = [
         </div>
         <p class="text-xs text-muted-foreground">
           选中底色在各风格里基本都是 <code>bg-muted</code>（<code>#f9fafb</code>）；
-          Lyra / Mira / Nova 的预设里没写这条，于是由组件 cva 的 <code>data-[state=on]:bg-accent</code> 兜底 ——
+          直角 / 紧凑 / 小巧 的预设里没写这条，于是由组件 cva 的 <code>data-[state=on]:bg-accent</code> 兜底 ——
           它们是仅有的「选中底色偏蓝」的几套。
         </p>
       </CardContent>

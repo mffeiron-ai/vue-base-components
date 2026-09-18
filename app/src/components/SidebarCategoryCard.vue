@@ -6,7 +6,10 @@ import type { ComponentDoc } from '../docs/registry'
  * 侧边栏分类卡片 —— 一张卡代表一个分类（交互 / 展示 / 输入）。
  *
  * 被 DocsLayout 复用：左侧列放若干张、右侧列放一张（右侧那张会被撑长）。
- * 卡片本体只负责「标题 + 数量 + 说明 + 链接列表」，位置与宽度交给外层。
+ * 卡片本体只负责「标题 + 数量 + 说明 + 链接列表」，位置交给外层；
+ * `w-full` 让它在竖排时铺满整列、在横排时与同列的卡片等宽平分；
+ * `min-w-0` 是必须的 —— 链接是 `truncate`（nowrap），不压掉 min-content
+ * 横排时两张卡会被最长的那个条目顶成一宽一窄。
  */
 defineProps<{
   title: string
@@ -18,7 +21,7 @@ const route = useRoute()
 </script>
 
 <template>
-  <section class="rounded-lg border border-border bg-card p-2 shadow-xs">
+  <section class="w-full min-w-0 rounded-lg border border-border bg-card p-2 shadow-xs">
     <div class="flex items-baseline justify-between px-2 pt-1 pb-1">
       <h3 class="text-sm font-semibold">{{ title }}</h3>
       <span class="text-xs tabular-nums text-muted-foreground">{{ docs.length }}</span>

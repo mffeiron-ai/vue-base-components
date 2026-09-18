@@ -54,14 +54,14 @@ const sizeRows = [
 
 /** 8 套预设的实测尺寸（浏览器量得，非推测） */
 const presetRows = [
-  { style: 'Vega', defRoot: '18.4 × 32', defThumb: '16', smRoot: '14 × 24', smThumb: '12', note: '胶囊形（本页默认）' },
-  { style: 'Luma', defRoot: '20 × 44', defThumb: '16 × 24', smRoot: '16 × 28', smThumb: '16', note: '2px 描边；滑块是长条形，不是圆点' },
-  { style: 'Lyra', defRoot: '18.4 × 32', defThumb: '16', smRoot: '14 × 24', smThumb: '12', note: '整体直角，但开关仍是胶囊' },
-  { style: 'Maia', defRoot: '18.4 × 32', defThumb: '16', smRoot: '14 × 24', smThumb: '12', note: '同 Vega' },
-  { style: 'Mira', defRoot: '16.6 × 28', defThumb: '14', smRoot: '14 × 24', smThumb: '12', note: '最小的一档' },
-  { style: 'Nova', defRoot: '18.4 × 32', defThumb: '16', smRoot: '14 × 24', smThumb: '12', note: '同 Vega' },
-  { style: 'Rhea', defRoot: '20 × 32', defThumb: '16', smRoot: '16 × 24', smThumb: '12', note: '<code>rounded-2xl</code>（圆角 16px）+ 2px 描边' },
-  { style: 'Sera', defRoot: '18 × 33', defThumb: '14', smRoot: '14 × 25', smThumb: '10', note: '彻底直角（圆角 0）' },
+  { style: '经典', defRoot: '18.4 × 32', defThumb: '16', smRoot: '14 × 24', smThumb: '12', note: '胶囊形（本页默认）' },
+  { style: '胶囊', defRoot: '20 × 44', defThumb: '16 × 24', smRoot: '16 × 28', smThumb: '16', note: '2px 描边；滑块是长条形，不是圆点' },
+  { style: '直角', defRoot: '18.4 × 32', defThumb: '16', smRoot: '14 × 24', smThumb: '12', note: '整体直角，但开关仍是胶囊' },
+  { style: '圆润', defRoot: '18.4 × 32', defThumb: '16', smRoot: '14 × 24', smThumb: '12', note: '同「经典」' },
+  { style: '紧凑', defRoot: '16.6 × 28', defThumb: '14', smRoot: '14 × 24', smThumb: '12', note: '最小的一档' },
+  { style: '小巧', defRoot: '18.4 × 32', defThumb: '16', smRoot: '14 × 24', smThumb: '12', note: '同「经典」' },
+  { style: '饱满', defRoot: '20 × 32', defThumb: '16', smRoot: '16 × 24', smThumb: '12', note: '<code>rounded-2xl</code>（圆角 16px）+ 2px 描边' },
+  { style: '排版', defRoot: '18 × 33', defThumb: '14', smRoot: '14 × 25', smThumb: '10', note: '彻底直角（圆角 0）' },
 ]
 </script>
 
@@ -117,7 +117,7 @@ const presetRows = [
         <CardDescription>
           两档尺寸的<b>具体像素由当前设计系统决定</b>（预设里的
           <code>data-[size=default]</code> / <code>data-[size=sm]</code>），
-          比如 vega 的 default 是 <code>18.4×32</code>、滑块 16px，而 luma 是 <code>20×44</code>、滑块 24px 的细长形。<br />
+          比如「经典」的 default 是 <code>18.4×32</code>、滑块 16px，而「胶囊」是 <code>20×44</code>、滑块 24px 的细长形。<br />
           下面还叠了颗「缩放到 2 倍」的示例，方便看清滑块位置在不同档位下的差异。
         </CardDescription>
       </CardHeader>

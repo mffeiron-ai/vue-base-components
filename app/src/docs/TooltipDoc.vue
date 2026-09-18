@@ -53,14 +53,14 @@ const contentRows = [
 ]
 
 const presetRows = [
-  { style: 'Vega', radius: '6px', font: '12px', note: '' },
-  { style: 'Luma', radius: '12px', font: '12px', note: '左右方向的箭头额外补 1.5px 偏移' },
-  { style: 'Lyra', radius: '0（直角）', font: '12px', note: '' },
-  { style: 'Maia', radius: '16px', font: '12px', note: '箭头有额外偏移' },
-  { style: 'Mira', radius: '6px', font: '12px', note: '' },
-  { style: 'Nova', radius: '6px', font: '12px', note: '' },
-  { style: 'Rhea', radius: '12px', font: '12px', note: '箭头有额外偏移' },
-  { style: 'Sera', radius: '0（直角）', font: '12px', note: '' },
+  { style: '经典', radius: '6px', font: '12px', note: '' },
+  { style: '胶囊', radius: '12px', font: '12px', note: '左右方向的箭头额外补 1.5px 偏移' },
+  { style: '直角', radius: '0（直角）', font: '12px', note: '' },
+  { style: '圆润', radius: '16px', font: '12px', note: '箭头有额外偏移' },
+  { style: '紧凑', radius: '6px', font: '12px', note: '' },
+  { style: '小巧', radius: '6px', font: '12px', note: '' },
+  { style: '饱满', radius: '12px', font: '12px', note: '箭头有额外偏移' },
+  { style: '排版', radius: '0（直角）', font: '12px', note: '' },
 ]
 </script>
 
