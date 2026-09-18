@@ -41,7 +41,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
     <!-- 遮罩层：固定全屏 + 半透明黑 + 打开/关闭淡入淡出 -->
     <AlertDialogOverlay
       data-slot="alert-dialog-overlay"
-      class="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/80"
+      class="cn-anim-backdrop fixed inset-0 z-50 bg-black/80"
     />
     <!-- 内容面板：居中 + 打开/关闭缩放动画，:class 合并用户传入的 props.class -->
     <AlertDialogContent
@@ -49,7 +49,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
       v-bind="{ ...$attrs, ...forwarded }"
       :class="
         cn(
-          'bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border border-input p-6 shadow-lg duration-200 sm:max-w-lg',
+          'cn-anim-overlay bg-background fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border border-input p-6 shadow-lg sm:max-w-lg',
           props.class,
         )
       "

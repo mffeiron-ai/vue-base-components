@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { Github, Menu, Moon, Palette, Sun, SlidersHorizontal, Type, X } from 'lucide-vue-next'
+import { Github, Menu, Moon, Palette, Sparkles, Sun, SlidersHorizontal, Type, X } from 'lucide-vue-next'
 import { useDark, useToggle } from '@vueuse/core'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -28,6 +28,7 @@ import {
 } from '@/components/ui/sheet'
 import { componentDocs } from '../docs/registry'
 import { useGlobalTheme } from '../lib/theme'
+import { useGlobalAnim, ANIM_OPTIONS } from '../lib/animation'
 import { useGlobalStyle, STYLE_OPTIONS, LAYOUT_PRESETS, SHADOW_PRESETS, ICON_LIBRARY_OPTIONS } from '../lib/style'
 
 const route = useRoute()
@@ -83,6 +84,13 @@ const {
 } = useGlobalStyle()
 const styleSheetOpen = ref(false)
 const fontSheetOpen = ref(false)
+
+// 全局动效（动画形式）：与「风格」「主题」「字体」并列的第四个维度
+const { animKey, setAnim } = useGlobalAnim()
+const animSheetOpen = ref(false)
+const currentAnimLabel = computed(
+  () => ANIM_OPTIONS.find(o => o.value === animKey.value)?.label ?? '淡入',
+)
 const currentStyleLabel = computed(
   () => STYLE_OPTIONS.find(o => o.value === styleKey.value)?.label ?? '风格',
 )
@@ -245,6 +253,12 @@ onUnmounted(() => {
             <Button variant="ghost" size="sm" @click="fontSheetOpen = true">
               <Type class="size-4" />
               <span class="hidden max-w-[6rem] truncate xl:inline-block" :title="fontSans">{{ currentFontLabel }}</span>
+            </Button>
+
+            <!-- 动效选择（与「风格」「字体」「主题」并列；文字标签只在 xl 以上显示） -->
+            <Button variant="ghost" size="sm" @click="animSheetOpen = true">
+              <Sparkles class="size-4" />
+              <span class="hidden max-w-[5rem] truncate xl:inline-block" :title="currentAnimLabel">{{ currentAnimLabel }}</span>
             </Button>
 
             <Button variant="ghost" size="icon" aria-label="切换主题" @click="toggleDark()">
@@ -458,6 +472,53 @@ onUnmounted(() => {
             风格自带的正文：小巧 / 经典 / 紧凑 / 胶囊 / 饱满 / 排版 → Inter，圆润 → Figtree，直角 → JetBrains Mono；
             主题则自带它自己的一套字体（如 Poppins / Montserrat）。
           </p>
+        </div>
+      </div>
+    </SheetContent>
+  </Sheet>
+
+  <!-- 动效选择（右侧 Sheet）：整站动画形式统一切换 -->
+  <Sheet v-model:open="animSheetOpen">
+    <SheetContent side="right" class="w-full sm:max-w-md">
+      <SheetHeader>
+        <SheetTitle>选择动效</SheetTitle>
+        <SheetDescription>
+          全局动画形式：浮层进出（弹窗 / 抽屉 / 下拉 / 气泡）、表格行进入、页面切换都按它来。
+          折叠高度、开关滑块这类有物理含义的动效不换形式，只跟随时长。
+        </SheetDescription>
+      </SheetHeader>
+
+      <div class="flex-1 space-y-5 overflow-y-auto px-1 pb-6">
+        <!-- 预览：切换后重播一次（:key 换掉元素即重启动画） -->
+        <div class="flex items-center gap-4 rounded-lg border border-border bg-muted/40 p-4">
+          <div :key="animKey" class="cn-anim-enter size-12 shrink-0 rounded-md bg-primary/25 ring-1 ring-primary/40" />
+          <div class="text-sm">
+            当前：<span class="font-medium">{{ currentAnimLabel }}</span>
+            <p class="mt-1 text-xs leading-snug text-muted-foreground">
+              每换一次形式，左侧方块会重播；不过「无动画」时不会动。
+            </p>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <p class="text-sm font-semibold">动画形式</p>
+          <div class="grid grid-cols-2 gap-2">
+            <button
+              v-for="opt in ANIM_OPTIONS"
+              :key="opt.value"
+              type="button"
+              class="rounded-lg border px-3 py-2 text-left transition-colors"
+              :class="animKey === opt.value
+                ? 'border-primary bg-primary/10'
+                : 'border-border hover:bg-accent/50'"
+              @click="setAnim(opt.value)"
+            >
+              <span class="text-sm font-medium" :class="animKey === opt.value ? 'text-foreground' : 'text-muted-foreground'">
+                {{ opt.label }}
+              </span>
+              <p class="text-[11px] leading-snug text-muted-foreground/80">{{ opt.hint }}</p>
+            </button>
+          </div>
         </div>
       </div>
     </SheetContent>

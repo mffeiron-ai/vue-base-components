@@ -1,0 +1,125 @@
+/**
+ * 全局动效（动画形式）—— 与「风格」「主题」「字体」并列的第四个全局维度
+ * ─────────────────────────────────────────────────────────────
+ * 用法：`<html data-anim="fade | from-left | from-right | from-bottom | zoom | flip | none">`
+ *   组件里**只写语义类**（cn-anim-*），具体播哪套 keyframes 由这个属性决定：
+ *     cn-anim-enter     内容进入（表格行 / 列表项 / 卡片）—— 播一次
+ *     cn-anim-overlay   浮层进出（dialog / sheet / popover / dropdown / tooltip…）
+ *     cn-anim-backdrop  遮罩进出（恒为淡入淡出）
+ *   于是「整站切换动画形式」＝ 换 <html> 上的一个属性，组件一行都不用改。
+ *
+ * ⚠️ 三个必须遵守的约束：
+ *   1. 本文件**不能包在 @layer 里**（Tailwind 工具类都在 layer 里，包了就压不过预设）；
+ *   2. 必须在 8 套风格预设**之后** import（预设里也抄了一份 animate-in/… 声明，
+ *      同特异性下靠源码顺序取胜）；
+ *   3. 关键帧里只用 **独立变换属性**（translate / scale / rotate），
+ *      不要用 transform —— 浮层的定位是 floating-ui 用 transform 写的，用 transform 会把位置顶掉。
+ *
+ * 有「物理含义」的动效（折叠高度、开关滑块位移）**不换形式**，只把时长接过来，见文件末尾。
+ */
+
+/* ─────────────── ① 参数：想调节奏只改这里 ─────────────── */
+[data-anim] {
+  --anim-dur: 240ms;                 /* 进入时长 */
+  --anim-dur-out: 160ms;             /* 离开时长（快一点，手感更利落） */
+  --anim-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --anim-distance: 16px;             /* 内容进入的位移 */
+  --anim-distance-panel: 8px;        /* 浮层的位移（小一点，方向不合也不突兀） */
+  --anim-scale: 0.96;                /* 缩放的起始比例 */
+  --anim-flip-angle: 12deg;          /* 翻转的起始角度 */
+}
+
+/* 无动画 / 用户偏好减少动效：时长归零（保留最终态，不影响可交互性） */
+[data-anim='none'] {
+  --anim-dur: 1ms;
+  --anim-dur-out: 1ms;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-anim] {
+    --anim-dur: 1ms;
+    --anim-dur-out: 1ms;
+  }
+}
+
+/* ─────────────── ② 形式：选中的关键帧名写进 --anim-in ─────────────── */
+[data-anim='fade'] { --anim-in: anim-fade; }
+[data-anim='from-left'] { --anim-in: anim-from-left; }
+[data-anim='from-right'] { --anim-in: anim-from-right; }
+[data-anim='from-bottom'] { --anim-in: anim-from-bottom; }
+[data-anim='zoom'] { --anim-in: anim-zoom; }
+[data-anim='flip'] { --anim-in: anim-flip; }
+[data-anim='none'] { --anim-in: anim-fade; }
+
+@keyframes anim-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes anim-from-left {
+  from { opacity: 0; translate: calc(-1 * var(--anim-distance)) 0; }
+  to { opacity: 1; translate: 0 0; }
+}
+@keyframes anim-from-right {
+  from { opacity: 0; translate: var(--anim-distance) 0; }
+  to { opacity: 1; translate: 0 0; }
+}
+@keyframes anim-from-bottom {
+  from { opacity: 0; translate: 0 var(--anim-distance); }
+  to { opacity: 1; translate: 0 0; }
+}
+@keyframes anim-zoom {
+  from { opacity: 0; scale: var(--anim-scale); }
+  to { opacity: 1; scale: 1; }
+}
+@keyframes anim-flip {
+  from { opacity: 0; rotate: y calc(-1 * var(--anim-flip-angle)); }
+  to { opacity: 1; rotate: y 0deg; }
+}
+
+/* ─────────────── ③ 语义类：组件只写这三个 ───────────────
+   ⚠️ 选择器统一带 `html[data-anim]` 前缀：app 侧的 presetIsolation 会把**当前风格**的规则
+   重新插回主样式表**末尾**（见 app/src/lib/presetIsolation.ts），所以同优先级别下我们必输。
+   多这一层前缀（0,3,1 > 0,2,0）就能稳定接管；同时它也表达了「只在全局动效开启时生效」。 */
+
+/* 内容进入（播一次） */
+html[data-anim] .cn-anim-enter {
+  animation: var(--anim-in, anim-fade) var(--anim-dur) var(--anim-ease) both;
+}
+
+/* 浮层：按 data-state 区分进出；退出＝同一组关键帧倒放 */
+html[data-anim] .cn-anim-overlay {
+  --anim-distance: var(--anim-distance-panel);
+}
+html[data-anim] .cn-anim-overlay[data-state='open'] {
+  animation: var(--anim-in, anim-fade) var(--anim-dur) var(--anim-ease) both;
+}
+html[data-anim] .cn-anim-overlay[data-state='closed'] {
+  animation: var(--anim-in, anim-fade) var(--anim-dur-out) var(--anim-ease) reverse both;
+}
+
+/* 遮罩：恒为淡入淡出（不跟随形式，否则会与内容动效打架） */
+html[data-anim] .cn-anim-backdrop[data-state='open'] {
+  animation: anim-fade var(--anim-dur) var(--anim-ease) both;
+}
+html[data-anim] .cn-anim-backdrop[data-state='closed'] {
+  animation: anim-fade var(--anim-dur-out) var(--anim-ease) reverse both;
+}
+
+/* 页面 / 面板切换（文档站的 <Transition name="page"> 用这套 class 名） */
+html[data-anim] .page-enter-active {
+  animation: var(--anim-in, anim-fade) var(--anim-dur) var(--anim-ease) both;
+}
+html[data-anim] .page-leave-active {
+  animation: var(--anim-in, anim-fade) var(--anim-dur-out) var(--anim-ease) reverse both;
+}
+
+/* ─────────────── ④ 物理动效：只跟时长，不换形式 ───────────────
+   折叠高度、开关滑块这类有"真实含义"的动效换成「从左滑入」会很怪，
+   所以只把时长接过来（切到「无动画」时它们也会立刻到位）。 */
+html[data-anim] :is(.cn-accordion-content, [data-slot="accordion-content"]),
+html[data-anim] :is(.cn-collapsible-content, [data-slot="collapsible-content"]) {
+  animation-duration: var(--anim-dur);
+}
+html[data-anim] :is(.cn-switch, [data-slot="switch"]),
+html[data-anim] :is(.cn-switch-thumb, [data-slot="switch-thumb"]) {
+  transition-duration: var(--anim-dur-out);
+}

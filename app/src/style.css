@@ -42,6 +42,12 @@
 @import "../../src/styles/style-sera.css";
 @import "../../src/styles/style-vega.css";
 
+/* 全局动效（动画形式）
+ * ⚠️ 必须放在 8 套预设**之后**：预设里也抄了一份 animate-in/… 声明，
+ * 而 cn-anim-* 是无 layer 的，同特异性下靠源码顺序取胜。
+ * 它同时接管了原来的 .page-* 页面切换动画（见文件里的 .page-enter-active）。 */
+@import "../../src/styles/animations.css";
+
 /* 标记规则：给 presetIsolation 定位「主样式表」用（无视觉影响） */
 :root {
   --rion-preset-host: 1;
@@ -202,19 +208,10 @@
   --chart-5: var(--color-chart-5);
 }
 
-/* ── 路由页面切换动画（类似 landing hero-enter 的淡入上移） ── */
-.page-enter-active,
-.page-leave-active {
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-.page-enter-from {
-  opacity: 0;
-  transform: translateY(24px);
-}
-.page-leave-to {
-  opacity: 0;
-  transform: translateY(-16px);
-}
+/* ── 路由页面切换动画 ──
+   已交给全局动效（src/styles/animations.css 里的 .page-enter-active / .page-leave-active）：
+   形式与时长跟着 <html data-anim> 走，这里不再自己写 transition/transform
+   —— 否则这份（源码顺序更靠后）会盖掉那份，切动画形式时页面切换不跟着变。 */
 
 /**
  * 文档正文里的行内代码

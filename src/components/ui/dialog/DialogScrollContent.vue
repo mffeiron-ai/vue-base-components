@@ -37,7 +37,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 
 <template>
   <DialogPortal>
-    <DialogOverlay class="fixed inset-0 z-50 grid place-items-center overflow-y-auto bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0">
+    <DialogOverlay class="fixed inset-0 z-50 grid place-items-center overflow-y-auto bg-black/80">
       <DialogContent
         data-slot="dialog-scroll-content"
         :class="

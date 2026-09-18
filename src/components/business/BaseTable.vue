@@ -1253,7 +1253,7 @@ defineExpose({
           <TableRow
             v-for="(row, ri) in sortedData"
             :key="row[idField]"
-            class="bt-row-in"
+            class="cn-anim-enter"
             :data-state="isRowSelected(row) ? 'selected' : undefined"
             :style="{ animationDelay: `${Math.min(ri, 10) * 0.02}s` }"
           >
@@ -1412,26 +1412,3 @@ defineExpose({
     </DialogContent>
   </Dialog>
 </template>
-
-<style scoped>
-/* 行进入动画：延迟封顶（避免 pageSize=100 时最后一行等几秒），并尊重「减少动效」偏好 */
-@keyframes btRowIn {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.bt-row-in {
-  animation: btRowIn 0.28s ease-out both;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .bt-row-in {
-    animation: none;
-  }
-}
-</style>
