@@ -311,6 +311,18 @@ export const componentDocs: ComponentDoc[] = [
     description: '从一组选项里挑一个：Trigger + Value 拼出触发器，Content 是 Portal 浮层；支持分组标签与分隔线、自定义选项内容与勾选图标、长列表自动出现滚动按钮，带 name 时直接进 FormData。',
     importCode: `import { Select, SelectContent, SelectGroup, SelectItem, SelectItemText, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue } from '@/components/ui/select'`,
   },
+  {
+    name: 'separator',
+    title: 'Separator 分隔线',
+    description: '一条 1px 的分割线，横向或纵向：orientation 决定方向，decorative 决定它对屏幕阅读器是「隐形」还是「真的在分隔两块区域」；颜色取设计系统的 --border。',
+    importCode: `import { Separator } from '@/components/ui/separator'`,
+  },
+  {
+    name: 'sheet',
+    title: 'Sheet 侧边抽屉',
+    description: '从屏幕某一边滑出的面板：side 选 top/right/bottom/left，内置右上角关闭按钮；底层就是 Dialog，所以模态、焦点与 Esc/点遮罩关闭都一致，配合 Header/Footer 就是标准的「右滑编辑面板」。',
+    importCode: `import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'`,
+  },
 ]
 
 /** 按 kebab 名取文档 */
@@ -362,6 +374,7 @@ export const componentCategories: ComponentCategory[] = [
       'pagination',
       'popover',
       'resizable',
+      'sheet',
     ],
   },
   {
@@ -387,6 +400,7 @@ export const componentCategories: ComponentCategory[] = [
       'message-scroller',
       'progress',
       'scroll-area',
+      'separator',
     ],
   },
   {
