@@ -15,6 +15,11 @@ import router from './router'
 //
 // 维护方式：新增字体包后跑 `node .tmp/fonts-audit.mjs` 重新生成下面的清单。
 
+// ── 动效组件额外用到的字体（不在主题/风格清单里，重新生成上面清单时请保留）──────
+// TextPressure 依赖**可变字体**：`standard` 已含 wght + wdth + slnt 轴；
+// 本地自托管，不走 Google Fonts（有些网络环境访问不到），也不请求外网。
+import '@fontsource-variable/roboto-flex/standard.css'
+
 // Architects Daughter（只有 400）
 import '@fontsource/architects-daughter/latin-400.css'
 

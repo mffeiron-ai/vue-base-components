@@ -504,6 +504,24 @@ export const motionDocs: ComponentDoc[] = [
     description: '一条高光扫过整行文字：角度、颜色、速度、方向、来回与悬停暂停都可调，颜色跟随主题。',
     importCode: `import { ShinyText } from '@/components/motion'`,
   },
+  {
+    name: 'text-pressure',
+    title: '挤压文字 TextPressure',
+    description: '光标附近的字被可变字体「挤」宽挤粗：宽度/粗细/斜体轴、透明度、描边、纵向拉伸都可开关。',
+    importCode: `import { TextPressure } from '@/components/motion'`,
+  },
+  {
+    name: 'fuzzy-text',
+    title: '毛刺文字 FuzzyText',
+    description: '把文字逐行随机错位做出毛刺/故障感：强度、范围、方向、帧率、悬停、点击与故障模式都可调。',
+    importCode: `import { FuzzyText } from '@/components/motion'`,
+  },
+  {
+    name: 'gradient-text',
+    title: '渐变文字 GradientText',
+    description: '一条会流动的渐变铺在文字上：横向/纵向/对角、色标数量、速度、来回与悬停暂停、渐变描边都可调。',
+    importCode: `import { GradientText } from '@/components/motion'`,
+  },
 ]
 
 /** 按 kebab 名取动效组件文档 */
@@ -657,7 +675,7 @@ export const motionCategories: ComponentCategory[] = [
     key: 'motion',
     title: '动效组件',
     hint: '独立动效组件：各自带参数、各自决定入场时机，不跟随全局过渡设置',
-    names: ['masked-heading', 'particle-text', 'split-flap-text', 'stroke-text', 'fold-text', 'echo-text', 'split-text', 'blur-text', 'text-type', 'shuffle', 'shiny-text'],
+    names: ['masked-heading', 'particle-text', 'split-flap-text', 'stroke-text', 'fold-text', 'echo-text', 'split-text', 'blur-text', 'text-type', 'shuffle', 'shiny-text', 'text-pressure', 'fuzzy-text', 'gradient-text'],
   },
 ]
 
