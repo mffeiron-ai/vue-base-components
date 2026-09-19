@@ -12,19 +12,23 @@
  */
 import { computed, ref, watch } from 'vue'
 
-export type AnimKey = 'fade' | 'from-left' | 'from-right' | 'from-bottom' | 'zoom' | 'none'
+export type AnimKey = 'fade' | 'slide' | 'rise' | 'zoom' | 'none'
 
+/**
+ * 动画形式。**不带方向**：滑动 / 浮入 往哪边动由**元素自己**声明
+ *（`data-anim-from` 或 reka 的 `data-side`，见 src/styles/animations.css 的 ③）。
+ * 因为同一个「横向滑入」放在右侧抽屉上就会很怪。
+ */
 export const ANIM_OPTIONS: Array<{ value: AnimKey, label: string, short: string, hint: string }> = [
   { value: 'fade', label: '淡入', short: '淡入', hint: '只做透明度，最稳' },
-  { value: 'from-left', label: '从左滑入', short: '左滑', hint: '水平位移 16px' },
-  { value: 'from-right', label: '从右滑入', short: '右滑', hint: '与「从左滑入」相反' },
-  { value: 'from-bottom', label: '从下浮入', short: '下浮', hint: '竖向位移 16px' },
+  { value: 'slide', label: '滑动', short: '滑动', hint: '沿组件自己的方向平移' },
+  { value: 'rise', label: '浮入', short: '浮入', hint: '与滑动同向，位移更短、更轻' },
   { value: 'zoom', label: '缩放', short: '缩放', hint: '从 96% 放大到 100%' },
   { value: 'none', label: '无动画', short: '无', hint: '只保留最终态' },
 ]
 
 // 说明：`label` 给面板与窄屏提示用，`short` 给**滚动收窄后的导航栏**用
-//（长名 4 个字会占 56px，把整行挤到换行，见 SiteNavbar 的长短标签交叉淡入）。
+//（长名会占更宽，把整行挤到换行，见 SiteNavbar 的长短标签交叉淡入）。
 
 const ANIM_STORAGE_KEY = 'app-global-anim'
 const SPEED_STORAGE_KEY = 'app-global-anim-speed'
@@ -57,9 +61,18 @@ export function clampAnimMs(ms: number) {
   return Math.min(ANIM_MS_MAX, Math.max(ANIM_MS_MIN, stepped))
 }
 
-/** 读本地存的动效形式；值已下线（如旧版 flip）或非法时回退到 fade */
+/** 旧版本的形式名（带方向）→ 现在都归到「滑动」 */
+const LEGACY_ANIM_MAP: Record<string, AnimKey> = {
+  'from-left': 'slide',
+  'from-right': 'slide',
+  'from-bottom': 'slide',
+}
+
+/** 读本地存的动效形式；旧的方向名先迁移，非法值回退 fade（如已下线的 flip） */
 function readStoredAnim(): AnimKey {
-  const stored = localStorage.getItem(ANIM_STORAGE_KEY)
+  const stored = localStorage.getItem(ANIM_STORAGE_KEY) ?? ''
+  if (LEGACY_ANIM_MAP[stored])
+    return LEGACY_ANIM_MAP[stored]
   return ANIM_OPTIONS.some(o => o.value === stored) ? (stored as AnimKey) : 'fade'
 }
 

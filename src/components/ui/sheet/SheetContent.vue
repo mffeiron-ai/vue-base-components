@@ -37,8 +37,9 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
     <DialogContent
       data-slot="sheet-content"
       :data-side="side"
+      :data-anim-from="side"
       :class="cn(
-        'cn-anim-overlay bg-background fixed z-50 flex flex-col gap-4 shadow-lg',
+        'cn-anim-overlay bg-background fixed z-50 flex flex-col gap-4 shadow-lg [--anim-slide-dist:100%]',
         side === 'right'
           && 'inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm',
         side === 'left'

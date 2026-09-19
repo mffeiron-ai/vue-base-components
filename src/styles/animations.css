@@ -1,9 +1,11 @@
 /**
  * 全局动效（动画形式）—— 与「风格」「主题」「字体」并列的第四个全局维度
  * ─────────────────────────────────────────────────────────────
- * 用法：`<html data-anim="fade | from-left | from-right | from-bottom | zoom | none"
+ * 用法：`<html data-anim="fade | slide | rise | zoom | none"
  *              data-anim-speed="faster | normal | slow | slower | custom">`
- *   形式（data-anim）决定「播哪套关键帧」，时长（data-anim-speed）决定「多快」；
+ *   形式（data-anim）决定「**怎么**动」，时长（data-anim-speed）决定「多快」，
+ *   **方向不写在形式上、由元素自己声明**（见 ④）：同一个「横向滑入」放在右侧抽屉上
+ *   就会很怪，所以「滑动 / 浮入」只表示「沿一条直线平移」，往哪边滑交给组件。
  *   custom 档再读一个内联变量 `--anim-custom-dur`（顶栏滑块拖出来的任意毫秒数）。
  *   组件里**只写语义类**（cn-anim-*），具体播哪套 keyframes 由这个属性决定：
  *     cn-anim-enter     内容进入（表格行 / 列表项 / 卡片）—— 播一次
@@ -60,12 +62,11 @@
    实测「进场跑到 350/800 时切出场」时，出场动画的 currentTime 直接接着 360ms 起算
    （duration 533ms 已经过了 68%），200ms 就播完、看起来像「动画时间被吞掉」。
    换成不同名字 → 旧动画取消、新动画从 0 计时，出场一定跑满 --anim-dur-out。 */
-[data-anim='fade'] { --anim-in: anim-fade; --anim-out: anim-fade-out; --page-shift: 0 0; --page-scale: 1; }
-[data-anim='from-left'] { --anim-in: anim-from-left; --anim-out: anim-from-left-out; --page-shift: calc(-1 * var(--anim-distance)) 0; --page-scale: 1; }
-[data-anim='from-right'] { --anim-in: anim-from-right; --anim-out: anim-from-right-out; --page-shift: var(--anim-distance) 0; --page-scale: 1; }
-[data-anim='from-bottom'] { --anim-in: anim-from-bottom; --anim-out: anim-from-bottom-out; --page-shift: 0 var(--anim-distance); --page-scale: 1; }
-[data-anim='zoom'] { --anim-in: anim-zoom; --anim-out: anim-zoom-out; --page-shift: 0 0; --page-scale: var(--anim-scale); }
-[data-anim='none'] { --anim-in: anim-fade; --anim-out: anim-fade-out; --page-shift: 0 0; --page-scale: 1; }
+[data-anim='fade'] { --anim-in: anim-fade; --anim-out: anim-fade-out; --page-scale: 1; }
+[data-anim='slide'] { --anim-in: anim-slide; --anim-out: anim-slide-out; --page-scale: 1; }
+[data-anim='rise'] { --anim-in: anim-rise; --anim-out: anim-rise-out; --page-scale: 1; }
+[data-anim='zoom'] { --anim-in: anim-zoom; --anim-out: anim-zoom-out; --page-scale: var(--anim-scale); }
+[data-anim='none'] { --anim-in: anim-fade; --anim-out: anim-fade-out; --page-scale: 1; }
 
 @keyframes anim-fade {
   from { opacity: 0; }
@@ -75,29 +76,26 @@
   from { opacity: 1; }
   to { opacity: 0; }
 }
-@keyframes anim-from-left {
-  from { opacity: 0; translate: calc(-1 * var(--anim-distance)) 0; }
+
+/* 滑动 / 浮入：位移**方向**读 --anim-dir-x / --anim-dir-y（单位向量，见 ④），
+   距离默认 --anim-distance；元素可以自己给「滑动距离」= --anim-slide-dist
+   （如右侧 Sheet 设 100%，就是真正从屏幕外滑进来）。 */
+@keyframes anim-slide {
+  from { opacity: 0; translate: calc(var(--anim-dir-x) * var(--anim-slide-dist, var(--anim-distance))) calc(var(--anim-dir-y) * var(--anim-slide-dist, var(--anim-distance))); }
   to { opacity: 1; translate: 0 0; }
 }
-@keyframes anim-from-left-out {
+@keyframes anim-slide-out {
   from { opacity: 1; translate: 0 0; }
-  to { opacity: 0; translate: calc(-1 * var(--anim-distance)) 0; }
+  to { opacity: 0; translate: calc(var(--anim-dir-x) * var(--anim-slide-dist, var(--anim-distance))) calc(var(--anim-dir-y) * var(--anim-slide-dist, var(--anim-distance))); }
 }
-@keyframes anim-from-right {
-  from { opacity: 0; translate: var(--anim-distance) 0; }
-  to { opacity: 1; translate: 0 0; }
+/* 浮入：同一方向，但只有一半位移 + 从 98% 微微放大，像「浮」上来 */
+@keyframes anim-rise {
+  from { opacity: 0; scale: 0.98; translate: calc(var(--anim-dir-x) * var(--anim-distance) / 2) calc(var(--anim-dir-y) * var(--anim-distance) / 2); }
+  to { opacity: 1; scale: 1; translate: 0 0; }
 }
-@keyframes anim-from-right-out {
-  from { opacity: 1; translate: 0 0; }
-  to { opacity: 0; translate: var(--anim-distance) 0; }
-}
-@keyframes anim-from-bottom {
-  from { opacity: 0; translate: 0 var(--anim-distance); }
-  to { opacity: 1; translate: 0 0; }
-}
-@keyframes anim-from-bottom-out {
-  from { opacity: 1; translate: 0 0; }
-  to { opacity: 0; translate: 0 var(--anim-distance); }
+@keyframes anim-rise-out {
+  from { opacity: 1; scale: 1; translate: 0 0; }
+  to { opacity: 0; scale: 0.98; translate: calc(var(--anim-dir-x) * var(--anim-distance) / 2) calc(var(--anim-dir-y) * var(--anim-distance) / 2); }
 }
 @keyframes anim-zoom {
   from { opacity: 0; scale: var(--anim-scale); }
@@ -108,7 +106,31 @@
   to { opacity: 0; scale: var(--anim-scale); }
 }
 
-/* ─────────────── ③ 语义类：组件只写这三个 ───────────────
+/* ─────────────── ③ 方向：由**元素自己**声明 ───────────────
+   形式（滑动 / 浮入）只知道「沿一条直线平移」，往哪边由元素给 `--anim-dir-x/y`
+   （单位向量，默认 0,1 = 从下往上）。两种声明方式：
+
+   · `data-anim-from="top | right | bottom | left"` —— 「**从哪边进来**」。
+     例：右侧 Sheet → right（从屏幕右边滑入）；下方展开的导航菜单面板 → top（从上方落下）。
+   · reka 浮层自带的 `data-side` —— 它表示「内容出现在**锚点的哪一侧**」，
+     所以运动方向要**取反**：下拉在触发器下方（side=bottom）→ 从上方落下（-y），
+     内容在右侧（side=right）→ 从左边过来（-x），与 shadcn 原本的 slide-in-from-* 一致。
+   · 两个都没有（表格行、页面切换…）→ 用默认值 0,1。
+
+   `data-anim-from` 写在后面：两者特异性相同（0,3,1），靠源码顺序覆盖 `data-side` 的映射。 */
+[data-anim] { --anim-dir-x: 0; --anim-dir-y: 1; }
+
+html[data-anim] [data-side='bottom'] { --anim-dir-x: 0; --anim-dir-y: -1; }
+html[data-anim] [data-side='top'] { --anim-dir-x: 0; --anim-dir-y: 1; }
+html[data-anim] [data-side='right'] { --anim-dir-x: -1; --anim-dir-y: 0; }
+html[data-anim] [data-side='left'] { --anim-dir-x: 1; --anim-dir-y: 0; }
+
+html[data-anim] [data-anim-from='top'] { --anim-dir-x: 0; --anim-dir-y: -1; }
+html[data-anim] [data-anim-from='bottom'] { --anim-dir-x: 0; --anim-dir-y: 1; }
+html[data-anim] [data-anim-from='right'] { --anim-dir-x: 1; --anim-dir-y: 0; }
+html[data-anim] [data-anim-from='left'] { --anim-dir-x: -1; --anim-dir-y: 0; }
+
+/* ─────────────── ④ 语义类：组件只写这三个 ───────────────
    ⚠️ 选择器统一带 `html[data-anim]` 前缀：app 侧的 presetIsolation 会把**当前风格**的规则
    重新插回主样式表**末尾**（见 app/src/lib/presetIsolation.ts），所以同优先级别下我们必输。
    多这一层前缀（0,3,1 > 0,2,0）就能稳定接管；同时它也表达了「只在全局动效开启时生效」。 */
@@ -143,7 +165,8 @@ html[data-anim] .cn-anim-backdrop[data-state='closed'] {
       同名/换名都会先跳到 `from` 再走（看起来像闪一下）；transition 永远从**当前值**开始，
       所以「连点两次」时旧页面会从它当时的不透明度直接平滑淡出。
    ② 常驻 transition 也让 Vue 能正确测出过渡时长（读的就是元素上的 transitionDuration）。
-   进场起始值由各形式提供的 --page-shift / --page-scale 决定。 */
+   起始位移方向同样读 --anim-dir-x/y（页面根元素没有 data 属性 → 用默认的 0,1 = 从下往上），
+   缩放起始值由各形式的 --page-scale 给。 */
 html[data-anim] main > * {
   transition-property: opacity, translate, scale;
   transition-duration: var(--anim-dur);
@@ -152,15 +175,15 @@ html[data-anim] main > * {
 html[data-anim] .page-enter-from,
 html[data-anim] .page-leave-to {
   opacity: 0;
-  translate: var(--page-shift, 0 0);
+  translate: calc(var(--anim-dir-x) * var(--anim-distance)) calc(var(--anim-dir-y) * var(--anim-distance));
   scale: var(--page-scale, 1);
 }
 html[data-anim] .page-leave-active {
   transition-duration: var(--anim-dur-out);
 }
 
-/* ─────────────── ④ 物理动效：只跟时长，不换形式 ───────────────
-   折叠高度、开关滑块这类有"真实含义"的动效换成「从左滑入」会很怪，
+/* ─────────────── ⑤ 物理动效：只跟时长，不换形式 ───────────────
+   折叠高度、开关滑块这类有"真实含义"的动效换成「滑动」会很怪，
    所以只把时长接过来（切到「无动画」时它们也会立刻到位）。 */
 html[data-anim] :is(.cn-accordion-content, [data-slot="accordion-content"]),
 html[data-anim] :is(.cn-collapsible-content, [data-slot="collapsible-content"]) {

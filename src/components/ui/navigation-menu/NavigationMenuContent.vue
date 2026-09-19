@@ -19,6 +19,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 <template>
   <NavigationMenuContent
     data-slot="navigation-menu-content"
+    data-anim-from="top"
     v-bind="forwarded"
     :class="cn(
       'cn-anim-overlay top-0 left-0 w-full p-2 pr-2.5 md:absolute md:w-auto',

@@ -602,6 +602,8 @@ onUnmounted(() => {
         <SheetTitle>选择动效</SheetTitle>
         <SheetDescription>
           全局动画形式：浮层进出（弹窗 / 抽屉 / 下拉 / 气泡）、表格行进入、页面切换都按它来。
+          <strong class="font-medium">方向不在这里选</strong>：往哪边滑由组件自己决定
+          —— 右侧抽屉从右边滑入、下方展开的菜单从上方落下、页面与表格行默认从下往上。
           折叠高度、开关滑块这类有物理含义的动效不换形式，只跟随时长。
         </SheetDescription>
       </SheetHeader>
