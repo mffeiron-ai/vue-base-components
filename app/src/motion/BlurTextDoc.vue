@@ -14,6 +14,7 @@ const TEXT_PRESETS = [
   { label: '默认', value: "Isn't this so cool?!" },
   { label: '长句（看折行）', value: 'Blur out, sharpen in — one word at a time, following the theme color.' },
   { label: '中文', value: '从模糊到清晰，一个字一个字来' },
+  { label: '中英混排', value: '中英混排 mixed text 也是逐个单位' },
   { label: '标题', value: 'Design in the details' },
 ]
 
@@ -27,12 +28,18 @@ const DIRECTION_OPTIONS: { label: string; value: BlurTextDirection }[] = [
   { label: '从下浮起', value: 'bottom' },
 ]
 
-/** from / to[] 就是上游那套关键帧写法 */
-const KEYFRAME_PRESETS: { label: string; from: BlurTextVars; to: BlurTextVars[] }[] = [
+/** from / to[] 就是上游那套关键帧写法；不传（undefined）时由 direction 推导默认关键帧 */
+const KEYFRAME_PRESETS: { label: string; from?: BlurTextVars; to?: BlurTextVars[] }[] = [
+  { label: '跟随方向（上游默认）', from: undefined, to: undefined },
   {
-    label: '默认（模糊上浮）',
+    label: '固定：从上',
     from: { filter: 'blur(10px)', opacity: 0, y: -50 },
     to: [{ filter: 'blur(5px)', opacity: 0.5, y: 5 }, { filter: 'blur(0px)', opacity: 1, y: 0 }],
+  },
+  {
+    label: '固定：从下',
+    from: { filter: 'blur(10px)', opacity: 0, y: 50 },
+    to: [{ filter: 'blur(5px)', opacity: 0.5, y: -5 }, { filter: 'blur(0px)', opacity: 1, y: 0 }],
   },
   {
     label: '大模糊',
@@ -88,8 +95,8 @@ const blur = reactive({
   animateBy: 'words' as BlurTextAnimateBy,
   direction: 'top' as BlurTextDirection,
   keyLabel: KEYFRAME_PRESETS[0].label,
-  from: { ...KEYFRAME_PRESETS[0].from } as BlurTextVars,
-  to: KEYFRAME_PRESETS[0].to.map(s => ({ ...s })) as BlurTextVars[],
+  from: undefined as BlurTextVars | undefined,
+  to: undefined as BlurTextVars[] | undefined,
   easing: 'linear' as BlurTextEasing,
   delay: 200,
   stepDuration: 0.35,
@@ -102,8 +109,8 @@ const blur = reactive({
 
 function pickKeyframes(preset: (typeof KEYFRAME_PRESETS)[number]) {
   blur.keyLabel = preset.label
-  blur.from = { ...preset.from }
-  blur.to = preset.to.map(s => ({ ...s }))
+  blur.from = preset.from ? { ...preset.from } : undefined
+  blur.to = preset.to ? preset.to.map(s => ({ ...s })) : undefined
 }
 
 type NumberKey = 'delay' | 'stepDuration' | 'threshold' | 'boxWidth'
@@ -126,20 +133,23 @@ function onComplete() {
   completedAt.value = new Date().toLocaleTimeString()
 }
 
-const totalDuration = computed(() => ((blur.to.length + 1 - 1) * blur.stepDuration).toFixed(2))
+const totalDuration = computed(() => (((blur.to ? blur.to.length : 2)) * blur.stepDuration).toFixed(2))
 
-const usageSnippet = computed(
-  () => `<BlurText
-  text="${blur.text.slice(0, 20)}"
-  animate-by="${blur.animateBy}"
-  direction="${blur.direction}"
-  :delay="${blur.delay}"
-  :step-duration="${blur.stepDuration}"
-  :animation-from="{ ${Object.entries(blur.from).map(([k, v]) => `${k}: ${JSON.stringify(v)}`).join(', ')} }"
-  :animation-to="[${blur.to.map(s => `{ ${Object.entries(s).map(([k, v]) => `${k}: ${JSON.stringify(v)}`).join(', ')} }`).join(', ')}]"
-  @complete="onComplete"
-/>`,
-)
+const usageSnippet = computed(() => {
+  const lines = [
+    `  text="${blur.text.slice(0, 20)}"`,
+    `  animate-by="${blur.animateBy}"`,
+    `  direction="${blur.direction}"`,
+    `  :delay="${blur.delay}"`,
+    `  :step-duration="${blur.stepDuration}"`,
+  ]
+  if (blur.from && blur.to) {
+    lines.push(`  :animation-from="{ ${Object.entries(blur.from).map(([k, v]) => `${k}: ${JSON.stringify(v)}`).join(', ')} }"`)
+    lines.push(`  :animation-to="[${blur.to.map(s => `{ ${Object.entries(s).map(([k, v]) => `${k}: ${JSON.stringify(v)}`).join(', ')} }`).join(', ')}]"`)
+  }
+  lines.push('  @complete="onComplete"')
+  return `<BlurText\n${lines.join('\n')}\n/>`
+})
 
 const PROPS = [
   { name: 'text', type: 'string', def: "''", desc: '要播的文案' },
@@ -252,6 +262,10 @@ const PROPS = [
                 @click="pickKeyframes(opt)"
               >{{ opt.label }}</Button>
             </div>
+            <p class="text-[11px] leading-relaxed text-muted-foreground">
+              <template v-if="blur.to">当前是<strong>自定义关键帧</strong> → <code>direction</code> 不生效（与上游一致：<code>animationFrom ?? defaultFrom</code>）。</template>
+              <template v-else>不传 <code>animationFrom</code> / <code>animationTo</code>，方向由 <code>direction</code> 推导 —— 上方「方向」切换才看得到变化。</template>
+            </p>
           </div>
 
           <div class="space-y-2">

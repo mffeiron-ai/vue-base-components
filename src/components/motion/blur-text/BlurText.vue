@@ -71,9 +71,53 @@ const rootEl = ref<HTMLElement | null>(null)
 
 /* ── 切分 ───────────────────────────────────────────────── */
 
-const elements = computed<string[]>(() =>
-  props.animateBy === 'words' ? String(props.text ?? '').split(' ') : Array.from(String(props.text ?? '')),
-)
+export interface BlurTextUnit {
+  text: string
+  /** 原文这里后面跟了一个空格 → 渲染时补 \u00A0 */
+  spaceAfter: boolean
+}
+
+/**
+ * CJK（含中日文标点 / 全角符号 / 假名）在「词」模式下**按单字切**。
+ * 上游是 `text.split(' ')`，中文没有空格 → 整句会变成一个单位、看起来是「整体动」。
+ * 拉丁文仍按空格切词（与原版行为一致）。
+ */
+const CJK_RE = /[\u2e80-\u303f\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff00-\uffef]/
+
+function splitCjk(chunk: string): string[] {
+  const parts: string[] = []
+  let buffer = ''
+  for (const ch of Array.from(chunk)) {
+    if (CJK_RE.test(ch)) {
+      if (buffer) {
+        parts.push(buffer)
+        buffer = ''
+      }
+      parts.push(ch)
+    } else {
+      buffer += ch
+    }
+  }
+  if (buffer) parts.push(buffer)
+  return parts.length ? parts : ['']
+}
+
+const units = computed<BlurTextUnit[]>(() => {
+  const text = String(props.text ?? '')
+  if (props.animateBy === 'letters') {
+    return Array.from(text).map(ch => ({ text: ch === ' ' ? '\u00A0' : ch, spaceAfter: false }))
+  }
+  const chunks = text.split(' ')
+  const out: BlurTextUnit[] = []
+  chunks.forEach((chunk, chunkIndex) => {
+    const parts = splitCjk(chunk)
+    parts.forEach((part, partIndex) => {
+      // 只有「原文这里真的有个空格」才补 nbsp —— 否则中文每个字之间会被撑开
+      out.push({ text: part, spaceAfter: partIndex === parts.length - 1 && chunkIndex < chunks.length - 1 })
+    })
+  })
+  return out
+})
 
 /* ── 关键帧 ─────────────────────────────────────────────── */
 
@@ -198,7 +242,7 @@ let viewObserver: IntersectionObserver | null = null
 let completeTimer: number | null = null
 let hasPlayed = false
 
-function units(): HTMLElement[] {
+function unitElements(): HTMLElement[] {
   const root = rootEl.value
   return root ? Array.from(root.querySelectorAll<HTMLElement>('.blur-text__unit')) : []
 }
@@ -217,7 +261,7 @@ function settle() {
   stopAnimations()
   hasPlayed = true
   const last = keyframePlan.value.frames[keyframePlan.value.frames.length - 1]
-  units().forEach((el) => {
+  unitElements().forEach((el) => {
     el.style.opacity = String(last.opacity)
     el.style.transform = String(last.transform)
     el.style.filter = String(last.filter)
@@ -225,7 +269,7 @@ function settle() {
 }
 
 function play() {
-  const list = units()
+  const list = unitElements()
   if (!list.length) return
 
   if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
@@ -292,7 +336,7 @@ onBeforeUnmount(() => {
 })
 
 // 文案 / 切分方式变了 → 重建单位、重新触发
-watch([elements, () => props.animateBy, () => props.tag], async () => {
+watch([units, () => props.animateBy, () => props.tag], async () => {
   await nextTick()
   start()
 })
@@ -314,10 +358,10 @@ defineExpose({ play, replay: play })
     :style="{ justifyContent: justify }"
   >
     <span
-      v-for="(segment, index) in elements"
+      v-for="(unit, index) in units"
       :key="index"
       class="blur-text__unit"
-    >{{ segment === ' ' ? '\u00A0' : segment }}{{ animateBy === 'words' && index < elements.length - 1 ? '\u00A0' : '' }}</span>
+    >{{ unit.text }}{{ unit.spaceAfter ? '\u00A0' : '' }}</span>
   </component>
 </template>
 

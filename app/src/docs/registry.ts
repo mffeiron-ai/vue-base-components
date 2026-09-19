@@ -486,6 +486,12 @@ export const motionDocs: ComponentDoc[] = [
     description: '逐词 / 逐字从模糊到清晰：支持方向、每档时长、错峰间隔与自定义关键帧。',
     importCode: `import { BlurText } from '@/components/motion'`,
   },
+  {
+    name: 'text-type',
+    title: '打字机 TextType',
+    description: '逐字打出来、停一下、再逐字删掉；速度、停顿、光标、配色都可调，支持多句循环。',
+    importCode: `import { TextType } from '@/components/motion'`,
+  },
 ]
 
 /** 按 kebab 名取动效组件文档 */
@@ -639,7 +645,7 @@ export const motionCategories: ComponentCategory[] = [
     key: 'motion',
     title: '动效组件',
     hint: '独立动效组件：各自带参数、各自决定入场时机，不跟随全局过渡设置',
-    names: ['masked-heading', 'particle-text', 'split-flap-text', 'stroke-text', 'fold-text', 'echo-text', 'split-text', 'blur-text'],
+    names: ['masked-heading', 'particle-text', 'split-flap-text', 'stroke-text', 'fold-text', 'echo-text', 'split-text', 'blur-text', 'text-type'],
   },
 ]
 

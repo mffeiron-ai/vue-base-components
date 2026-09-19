@@ -26,4 +26,6 @@ export type {
   BlurTextEasing,
   BlurTextVars,
 } from './blur-text/BlurText.vue'
+export { default as TextType } from './text-type/TextType.vue'
+export type { TextTypeTag, TextTypeVariableSpeed } from './text-type/TextType.vue'
 export { resolveEase } from './gsap-ease'
