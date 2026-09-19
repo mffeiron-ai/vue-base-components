@@ -68,10 +68,20 @@ function mulberry32(seed: number) {
   }
 }
 
-/** 内联 SVG 占位图：不依赖网络，离线也能演示图片单元格 / 图片详情 */
-const THUMB = `data:image/svg+xml;utf8,${encodeURIComponent(
-  '<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80"><rect width="80" height="80" fill="#e5e7eb"/><text x="40" y="45" font-size="11" text-anchor="middle" fill="#6b7280">商品图</text></svg>',
-)}`
+/**
+ * 商品缩略图：用 `app/public/sources/` 下的本地测试图（不依赖外网，离线也能演示图片单元格 / 图片详情）。
+ * 按行号循环取，**不消耗 rand()**，所以下面那串假数据的取值流完全不变。
+ */
+const THUMBS = [
+  '/sources/sandisk.jpg',
+  '/sources/kevin-schmid.jpg',
+  '/sources/alexander-kaufmann.jpg',
+  '/sources/kellen-riggin.jpg',
+  '/sources/sammy-swae.jpg',
+  '/sources/tamara-harhai.jpg',
+  '/sources/tolga-ahmetler.jpg',
+  '/sources/vincent-yap.jpg',
+]
 
 const PRODUCTS = [
   '纯棉长袖衬衫（男）',
@@ -122,7 +132,7 @@ export const MOCK_ROWS: AfterSaleRow[] = (() => {
       createdAt: `${day(created)} ${p(created.getHours())}:${p(created.getMinutes())}`,
       paidAt: paid ? `${day(paid)} ${p(paid.getHours())}:${p(paid.getMinutes())}` : null,
       remark: REMARKS[Math.floor(rand() * REMARKS.length)],
-      thumb: THUMB,
+      thumb: THUMBS[i % THUMBS.length],
     })
   }
   return rows

@@ -24,7 +24,7 @@ const propsRows = [
         <div class="w-full max-w-md">
           <AspectRatio :ratio="16 / 9" class="overflow-hidden rounded-lg">
             <img
-              src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
+              src="/sources/kevin-schmid.jpg"
               alt="Photo"
               class="h-full w-full object-cover"
             >

@@ -74,7 +74,7 @@ const mediaRows = [
           <Attachment orientation="vertical">
             <AttachmentMedia variant="image">
               <img
-                src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=400&dpr=2&q=80"
+                src="/sources/sandisk.jpg"
                 alt="Photo"
               >
             </AttachmentMedia>
@@ -163,7 +163,7 @@ const mediaRows = [
           </Attachment>
           <Attachment>
             <AttachmentMedia variant="image">
-              <img src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=200&q=80" alt="Photo">
+              <img src="/sources/kellen-riggin.jpg" alt="Photo">
             </AttachmentMedia>
             <AttachmentContent>
               <AttachmentTitle>cover.png</AttachmentTitle>

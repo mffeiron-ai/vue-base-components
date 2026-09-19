@@ -173,7 +173,7 @@ const partRows = [
           <Item v-for="m in mediaDemo" :key="m.variant" variant="outline">
             <ItemMedia :variant="m.variant">
               <template v-if="m.variant === 'image'">
-                <img src="https://picsum.photos/seed/rion/80/80" alt="" />
+                <img src="/sources/alexander-kaufmann.jpg" alt="" />
               </template>
               <component :is="m.variant === 'image' ? FileText : Star" v-else />
             </ItemMedia>

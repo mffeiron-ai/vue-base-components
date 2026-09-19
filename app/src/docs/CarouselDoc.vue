@@ -5,21 +5,21 @@ import type { CarouselApi } from '@/components/ui/carousel'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
-// 演示用的 5 张“幻灯片”（用渐变块代替图片，文档站不依赖外部资源）
+// 演示用的 5 张幻灯片：图片取自 app/public/sources/（本地测试图，离线可用）
 const slides = [
-  { n: 1, title: '第一屏', desc: '拖动、点按钮、按方向键都能翻', tone: 'from-sky-500/25 to-sky-500/5' },
-  { n: 2, title: '第二屏', desc: '默认不循环，到两头按钮自动禁用', tone: 'from-violet-500/25 to-violet-500/5' },
-  { n: 3, title: '第三屏', desc: '一屏一个，宽度由 basis 决定', tone: 'from-emerald-500/25 to-emerald-500/5' },
-  { n: 4, title: '第四屏', desc: '可以一屏放多个', tone: 'from-amber-500/25 to-amber-500/5' },
-  { n: 5, title: '第五屏', desc: '也可以纵向滚动', tone: 'from-rose-500/25 to-rose-500/5' },
+  { n: 1, title: '第一屏', desc: '拖动、点按钮、按方向键都能翻', img: '/sources/kevin-schmid.jpg' },
+  { n: 2, title: '第二屏', desc: '默认不循环，到两头按钮自动禁用', img: '/sources/sandisk.jpg' },
+  { n: 3, title: '第三屏', desc: '一屏一个，宽度由 basis 决定', img: '/sources/alexander-kaufmann.jpg' },
+  { n: 4, title: '第四屏', desc: '可以一屏放多个', img: '/sources/kellen-riggin.jpg' },
+  { n: 5, title: '第五屏', desc: '也可以纵向滚动', img: '/sources/sammy-swae.jpg' },
 ]
 
 const cards = [
-  { title: '周报自动汇总', desc: '每周一早上把上周的提交整理成摘要' },
-  { title: '异常自动告警', desc: '错误率超过阈值时推送到群里' },
-  { title: '文档同步', desc: '组件变更后自动更新文档站' },
-  { title: '依赖巡检', desc: '每周检查过期依赖并开 issue' },
-  { title: '预览环境', desc: '每个 PR 自动部署一套预览' },
+  { title: '周报自动汇总', desc: '每周一早上把上周的提交整理成摘要', img: '/sources/tamara-harhai.jpg' },
+  { title: '异常自动告警', desc: '错误率超过阈值时推送到群里', img: '/sources/tolga-ahmetler.jpg' },
+  { title: '文档同步', desc: '组件变更后自动更新文档站', img: '/sources/vincent-yap.jpg' },
+  { title: '依赖巡检', desc: '每周检查过期依赖并开 issue', img: '/sources/sandisk.jpg' },
+  { title: '预览环境', desc: '每个 PR 自动部署一套预览', img: '/sources/kevin-schmid.jpg' },
 ]
 
 // 自动播放插件：放在 setup 里只创建一次（每次渲染新建插件会反复重播）
@@ -81,10 +81,13 @@ const parts = [
           <Carousel class="w-full">
             <CarouselContent>
               <CarouselItem v-for="s in slides" :key="s.n">
-                <div class="flex h-40 flex-col justify-end rounded-xl bg-gradient-to-br p-5" :class="s.tone">
-                  <p class="text-2xl font-semibold">{{ s.n }}</p>
-                  <p class="text-sm font-medium">{{ s.title }}</p>
-                  <p class="text-xs text-muted-foreground">{{ s.desc }}</p>
+                <div class="relative overflow-hidden rounded-xl">
+                  <img :src="s.img" alt="" class="h-40 w-full object-cover" />
+                  <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-5">
+                    <p class="text-2xl font-semibold text-white">{{ s.n }}</p>
+                    <p class="text-sm font-medium text-white">{{ s.title }}</p>
+                    <p class="text-xs text-white/80">{{ s.desc }}</p>
+                  </div>
                 </div>
               </CarouselItem>
             </CarouselContent>
@@ -114,7 +117,8 @@ const parts = [
             <Carousel class="w-full">
               <CarouselContent>
                 <CarouselItem v-for="c in cards" :key="c.title" class="basis-1/2 md:basis-1/3">
-                  <Card class="h-full" size="sm">
+                  <Card class="h-full overflow-hidden" size="sm">
+                    <img :src="c.img" alt="" class="h-24 w-full object-cover" />
                     <CardHeader>
                       <CardTitle>{{ c.title }}</CardTitle>
                       <CardDescription>{{ c.desc }}</CardDescription>
@@ -134,7 +138,8 @@ const parts = [
             <Carousel class="w-full" :opts="{ loop: true }">
               <CarouselContent>
                 <CarouselItem v-for="c in cards" :key="c.title" class="basis-1/2 md:basis-1/3">
-                  <Card class="h-full" size="sm">
+                  <Card class="h-full overflow-hidden" size="sm">
+                    <img :src="c.img" alt="" class="h-24 w-full object-cover" />
                     <CardHeader>
                       <CardTitle>{{ c.title }}</CardTitle>
                       <CardDescription>{{ c.desc }}</CardDescription>
@@ -167,8 +172,11 @@ const parts = [
             <Carousel class="w-full" :opts="{ align: 'center' }">
               <CarouselContent>
                 <CarouselItem v-for="s in slides" :key="s.n" class="basis-2/3 md:basis-1/2">
-                  <div class="flex h-32 items-center justify-center rounded-xl bg-gradient-to-br text-2xl font-semibold" :class="s.tone">
-                    {{ s.n }}
+                  <div class="relative h-32 overflow-hidden rounded-xl">
+                    <img :src="s.img" alt="" class="h-32 w-full object-cover" />
+                    <div class="absolute inset-0 flex items-center justify-center bg-black/25">
+                      <span class="text-2xl font-semibold text-white">{{ s.n }}</span>
+                    </div>
                   </div>
                 </CarouselItem>
               </CarouselContent>
@@ -195,8 +203,11 @@ const parts = [
           <Carousel orientation="vertical" class="w-full max-w-xs">
             <CarouselContent class="h-64">
               <CarouselItem v-for="s in slides" :key="s.n" class="basis-1/2">
-                <div class="flex h-full items-center justify-center rounded-xl bg-gradient-to-br text-xl font-semibold" :class="s.tone">
-                  {{ s.n }} · {{ s.title }}
+                <div class="relative h-full overflow-hidden rounded-xl">
+                  <img :src="s.img" alt="" class="h-full w-full object-cover" />
+                  <div class="absolute inset-0 flex items-center justify-center bg-black/25">
+                    <span class="text-xl font-semibold text-white">{{ s.n }} · {{ s.title }}</span>
+                  </div>
                 </div>
               </CarouselItem>
             </CarouselContent>
@@ -222,9 +233,12 @@ const parts = [
           <Carousel class="w-full" :opts="{ loop: true }" :plugins="autoplay">
             <CarouselContent>
               <CarouselItem v-for="s in slides" :key="s.n">
-                <div class="flex h-40 flex-col justify-end rounded-xl bg-gradient-to-br p-5" :class="s.tone">
-                  <p class="text-2xl font-semibold">{{ s.n }}</p>
-                  <p class="text-xs text-muted-foreground">每 2.5 秒自动翻一屏（鼠标移入会暂停）</p>
+                <div class="relative overflow-hidden rounded-xl">
+                  <img :src="s.img" alt="" class="h-40 w-full object-cover" />
+                  <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-5">
+                    <p class="text-2xl font-semibold text-white">{{ s.n }}</p>
+                    <p class="text-xs text-white/80">每 2.5 秒自动翻一屏（鼠标移入会暂停）</p>
+                  </div>
                 </div>
               </CarouselItem>
             </CarouselContent>
@@ -251,8 +265,11 @@ const parts = [
         <Carousel class="w-full" @init-api="onDotsReady">
           <CarouselContent>
             <CarouselItem v-for="s in slides" :key="s.n">
-              <div class="flex h-36 items-center justify-center rounded-xl bg-gradient-to-br text-3xl font-semibold" :class="s.tone">
-                {{ s.n }}
+              <div class="relative h-36 overflow-hidden rounded-xl">
+                <img :src="s.img" alt="" class="h-36 w-full object-cover" />
+                <div class="absolute inset-0 flex items-center justify-center bg-black/25">
+                  <span class="text-3xl font-semibold text-white">{{ s.n }}</span>
+                </div>
               </div>
             </CarouselItem>
           </CarouselContent>

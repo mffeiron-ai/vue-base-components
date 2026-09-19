@@ -3,8 +3,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
 const group = [
-  { src: 'https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=200&dpr=2&q=80', fallback: 'CN' },
-  { src: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&dpr=2&q=80', fallback: 'LR' },
+  { src: '/sources/vincent-yap.jpg', fallback: 'CN' },
+  { src: '/sources/tamara-harhai.jpg', fallback: 'LR' },
   { src: '', fallback: 'JD' },
   { src: '', fallback: 'MK' },
 ]
@@ -44,7 +44,7 @@ const fallbackRows = [
       </CardHeader>
       <CardContent>
         <Avatar>
-          <AvatarImage src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=200&dpr=2&q=80" alt="用户头像" />
+          <AvatarImage src="/sources/vincent-yap.jpg" alt="用户头像" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
       </CardContent>
@@ -85,20 +85,20 @@ const fallbackRows = [
       <CardContent>
         <div class="flex items-center gap-4">
           <Avatar size="sm">
-            <AvatarImage src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=200&dpr=2&q=80" alt="小号" />
+            <AvatarImage src="/sources/vincent-yap.jpg" alt="小号" />
             <AvatarFallback>SM</AvatarFallback>
           </Avatar>
           <Avatar>
-            <AvatarImage src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=200&dpr=2&q=80" alt="默认" />
+            <AvatarImage src="/sources/vincent-yap.jpg" alt="默认" />
             <AvatarFallback>DEF</AvatarFallback>
           </Avatar>
           <Avatar size="lg">
-            <AvatarImage src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=200&dpr=2&q=80" alt="大号" />
+            <AvatarImage src="/sources/vincent-yap.jpg" alt="大号" />
             <AvatarFallback>LG</AvatarFallback>
           </Avatar>
           <!-- 自定义尺寸：用 ! 提升优先级，压过样式预设里的默认尺寸 -->
           <Avatar class="size-16!">
-            <AvatarImage src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=200&dpr=2&q=80" alt="自定义 64" />
+            <AvatarImage src="/sources/vincent-yap.jpg" alt="自定义 64" />
             <AvatarFallback class="text-lg">64</AvatarFallback>
           </Avatar>
         </div>
