@@ -474,6 +474,18 @@ export const motionDocs: ComponentDoc[] = [
     description: '正文后面叠一叠回声副本：入场时从一侧追上来，指针移动时被拉开成拖尾，静止后自动收干净。',
     importCode: `import { EchoText } from '@/components/motion'`,
   },
+  {
+    name: 'split-text',
+    title: '切分文字 SplitText',
+    description: '把文案切成字符 / 单词 / 行，进入视口后逐单位错峰入场：起点终点、错峰间隔、缓动都可调。',
+    importCode: `import { SplitText } from '@/components/motion'`,
+  },
+  {
+    name: 'blur-text',
+    title: '模糊文字 BlurText',
+    description: '逐词 / 逐字从模糊到清晰：支持方向、每档时长、错峰间隔与自定义关键帧。',
+    importCode: `import { BlurText } from '@/components/motion'`,
+  },
 ]
 
 /** 按 kebab 名取动效组件文档 */
@@ -627,7 +639,7 @@ export const motionCategories: ComponentCategory[] = [
     key: 'motion',
     title: '动效组件',
     hint: '独立动效组件：各自带参数、各自决定入场时机，不跟随全局过渡设置',
-    names: ['masked-heading', 'particle-text', 'split-flap-text', 'stroke-text', 'fold-text', 'echo-text'],
+    names: ['masked-heading', 'particle-text', 'split-flap-text', 'stroke-text', 'fold-text', 'echo-text', 'split-text', 'blur-text'],
   },
 ]
 

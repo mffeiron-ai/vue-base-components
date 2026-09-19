@@ -17,4 +17,13 @@ export { default as FoldText } from './fold-text/FoldText.vue'
 export type { FoldTextHinge, FoldTextSplitBy, FoldTextTrigger } from './fold-text/FoldText.vue'
 export { default as EchoText } from './echo-text/EchoText.vue'
 export type { EchoTextDirection, EchoTextEase, EchoTextMode } from './echo-text/EchoText.vue'
+export { default as SplitText } from './split-text/SplitText.vue'
+export type { SplitTextTag, SplitTextType, SplitTextVars } from './split-text/SplitText.vue'
+export { default as BlurText } from './blur-text/BlurText.vue'
+export type {
+  BlurTextAnimateBy,
+  BlurTextDirection,
+  BlurTextEasing,
+  BlurTextVars,
+} from './blur-text/BlurText.vue'
 export { resolveEase } from './gsap-ease'
