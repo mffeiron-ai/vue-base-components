@@ -31,6 +31,25 @@
   }
 }
 
+/* ─────────────── 全局基线：裸边框的默认颜色 ───────────────
+   Tailwind v4 不再给 `border-color` 一个设计 token 默认值，CSS 初始值就是 `currentColor`，
+   于是**只写宽度不写颜色**的 `border-b` / `border-t` / `border-l` / `border-r` 会取到
+   文字色（vega 下 `#333` 深灰），而不是描边色 `--input` / `--color-input`（`#e5e7eb`）。
+   预设里有成片的裸边框（如 Accordion 的 `not-last:border-b`、TableRow 的 `border-b`），
+   逐个在组件里补 `border-input` 容易漏，所以在这里给一个全局默认值：
+
+   - **必须放 `@layer base`**：显式颜色工具类（`border-input` / `border-red-500` …）在
+     `utilities` 层，天然高于 `base`，不会被压掉；而 8 套预设是**无层样式**，仍然照样覆盖本规则；
+   - 本文件必须在使用方的 Tailwind 入口**之后** import（app 里就是这样），否则层顺序会被提前固定；
+   - token 依次回退：`--input`（shadcn 标准名）→ `--color-input`（本库 @theme 名）→ `currentColor`。 */
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--input, var(--color-input, currentColor));
+  }
+}
+
 /* ─────────────── 全局基线：弹层开合不抖 ───────────────
    reka-ui 的弹层（Dialog / Drawer / DropdownMenu / Select / Popover …）默认 modal，
    打开时会给 body 设 overflow: hidden 锁背景滚动 → 滚动条消失，页面可用宽度瞬间多出
