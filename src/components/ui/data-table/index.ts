@@ -24,3 +24,11 @@ export { default as DataTable } from "./DataTable.vue"
 export { default as DataTableColumnHeader } from "./DataTableColumnHeader.vue"
 export { default as DataTablePagination } from "./DataTablePagination.vue"
 export { default as DataTableViewOptions } from "./DataTableViewOptions.vue"
+
+/**
+ * 列状态设施（显隐 / 列序 / 列宽 + 拖拽 + 持久化）。
+ * `DataTable`（原子）与 `business/BaseTable`（分子）共用同一套，避免各写一遍 DOM 交互。
+ * 用法见 `useTableColumns` 顶部注释。
+ */
+export { useTableColumns } from "./useTableColumns"
+export type { UseTableColumnsOptions } from "./useTableColumns"
