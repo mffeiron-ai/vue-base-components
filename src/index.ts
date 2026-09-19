@@ -21,8 +21,20 @@ export { ALL_SELECT_MARK, EXCLUDE_PREFIX, excludedMark, summarizeSelection } fro
 // ── 动效组件 ──────────────────────────────────────────────
 // 目录：src/components/motion/，独立动效组件（各自带参数，不跟随全局过渡设置）
 // 注：目前还没进 Registry（registry/build.mjs 只扫 ui/），先走 npm 导出。
-export { MaskedHeading, ParticleText } from './components/motion'
-export type { MaskedHeadingReveal, MaskedHeadingTrigger, ParticleTextTrigger } from './components/motion'
+export { MaskedHeading, ParticleText, SplitFlapText, StrokeText, FoldText, EchoText } from './components/motion'
+export type {
+  MaskedHeadingReveal,
+  MaskedHeadingTrigger,
+  ParticleTextTrigger,
+  StrokeTextFillMode,
+  StrokeTextTrigger,
+  FoldTextHinge,
+  FoldTextSplitBy,
+  FoldTextTrigger,
+  EchoTextDirection,
+  EchoTextEase,
+  EchoTextMode,
+} from './components/motion'
 
 // ── 工具函数 ──────────────────────────────────────────────
 export { cn } from './lib/utils'

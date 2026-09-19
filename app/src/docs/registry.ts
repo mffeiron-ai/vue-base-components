@@ -450,6 +450,30 @@ export const motionDocs: ComponentDoc[] = [
     description: '文字由上千颗粒子聚成：采样字形 → 从四周聚合 → 静止微漂 + 指针软排斥，纯 Canvas 2D、零依赖。',
     importCode: `import { ParticleText } from '@/components/motion'`,
   },
+  {
+    name: 'split-flap-text',
+    title: '翻页牌 SplitFlapText',
+    description: '机场出发牌那种一格一格翻字：每格上下两半 + 3D 翻翼，逐格错峰翻到目标短语并循环。',
+    importCode: `import { SplitFlapText } from '@/components/motion'`,
+  },
+  {
+    name: 'stroke-text',
+    title: '描边文字 StrokeText',
+    description: '文字先一笔一笔描出来，再把填充色灌进去：SVG 双层文字 + stroke-dashoffset 逐字写 + clip-path 扫过填充。',
+    importCode: `import { StrokeText } from '@/components/motion'`,
+  },
+  {
+    name: 'fold-text',
+    title: '折页文字 FoldText',
+    description: '按字 / 词 / 行切段，每块沿指定的铰链像折纸一样翻开落平，带折痕阴影与错峰。',
+    importCode: `import { FoldText } from '@/components/motion'`,
+  },
+  {
+    name: 'echo-text',
+    title: '回声文字 EchoText',
+    description: '正文后面叠一叠回声副本：入场时从一侧追上来，指针移动时被拉开成拖尾，静止后自动收干净。',
+    importCode: `import { EchoText } from '@/components/motion'`,
+  },
 ]
 
 /** 按 kebab 名取动效组件文档 */
@@ -603,7 +627,7 @@ export const motionCategories: ComponentCategory[] = [
     key: 'motion',
     title: '动效组件',
     hint: '独立动效组件：各自带参数、各自决定入场时机，不跟随全局过渡设置',
-    names: ['masked-heading', 'particle-text'],
+    names: ['masked-heading', 'particle-text', 'split-flap-text', 'stroke-text', 'fold-text', 'echo-text'],
   },
 ]
 
