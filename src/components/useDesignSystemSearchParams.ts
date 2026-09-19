@@ -24,9 +24,15 @@ export function useDesignSystemSearchParams(): DesignSystemSearchParams {
 }
 
 export function setDesignSystemSearchParams(params: Partial<{ style: string | null; iconLibrary: string | null }>) {
-  const sp = new URLSearchParams()
-  if (params.style) sp.set('style', params.style)
-  if (params.iconLibrary) sp.set('iconLibrary', params.iconLibrary)
+  // 在现有 query 上改，只动自己这两个参数：
+  // 之前是新建 URLSearchParams 从零拼，会把别人的参数（如文档站的 ?tab=）整个抹掉。
+  const sp = new URLSearchParams(window.location.search)
+  for (const key of ['style', 'iconLibrary'] as const) {
+    const value = params[key]
+    if (value === undefined) continue
+    if (value) sp.set(key, value)
+    else sp.delete(key)
+  }
   const qs = sp.toString()
   const newURL = qs ? `${window.location.pathname}?${qs}` : window.location.pathname
   window.history.replaceState(null, '', newURL)

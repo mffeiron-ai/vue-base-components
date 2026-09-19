@@ -432,6 +432,31 @@ export function getBusinessDoc(name: string): ComponentDoc | undefined {
   return businessDocs.find((d) => d.name === name)
 }
 
+/* ─────────────── 动效组件 ───────────────
+   与原子 / 业务并列的第三类：独立动效组件（各自带参数、各自决定入场时机，
+   不跟随全局过渡设置）。文档页在 app/src/motion/<Name>Doc.vue，路由 /motion/<name>。
+   **一个动效一个页面**：这类演示本身就要占满一屏，堆在一页里就得一直滚。 */
+
+export const motionDocs: ComponentDoc[] = [
+  {
+    name: 'masked-heading',
+    title: '遮罩标题 MaskedHeading',
+    description: '媒体（图片 / 视频）从字母里透出来：SVG 文字裁剪 + 指针视差 + 缓慢漂移，支持四种入场形式。',
+    importCode: `import { MaskedHeading } from '@/components/motion'`,
+  },
+  {
+    name: 'particle-text',
+    title: '粒子文字 ParticleText',
+    description: '文字由上千颗粒子聚成：采样字形 → 从四周聚合 → 静止微漂 + 指针软排斥，纯 Canvas 2D、零依赖。',
+    importCode: `import { ParticleText } from '@/components/motion'`,
+  },
+]
+
+/** 按 kebab 名取动效组件文档 */
+export function getMotionDoc(name: string): ComponentDoc | undefined {
+  return motionDocs.find((d) => d.name === name)
+}
+
 /* ─────────────── 侧边栏分类 ───────────────
    分类只在这一处维护：调整归类时改下面的 names 即可，不用动上面每一条文档记录。
    没被任何分类收进去的组件不会出现在侧边栏（renderCategories 会跳过），
@@ -446,7 +471,7 @@ export interface ComponentCategory {
   hint: string
   /** 放在中央文档的哪一侧（不填＝left） */
   side?: 'left' | 'right'
-  /** 链接前缀（不填按所属分组推断：业务组 /business，原子组 /components） */
+  /** 链接前缀（不填按所属分组推断：业务组 /business、动效组 /motion、原子组 /components） */
   hrefBase?: string
   /** 归入本类的组件名（kebab，对应 ComponentDoc.name） */
   names: string[]
@@ -454,8 +479,8 @@ export interface ComponentCategory {
 
 /** 侧栏渲染用的分类：带上了实际存在的文档、链接前缀与分组标记 */
 export type ResolvedCategory = ComponentCategory & {
-  /** business = 业务组件（分子），component = 原子组件 */
-  kind: 'business' | 'component'
+  /** business = 业务组件（分子），motion = 动效组件，component = 原子组件 */
+  kind: 'business' | 'motion' | 'component'
   hrefBase: string
   docs: ComponentDoc[]
 }
@@ -572,15 +597,25 @@ export const componentCategories: ComponentCategory[] = [
   },
 ]
 
+/** 动效组件分组（独立动效：一个组件一个页面） */
+export const motionCategories: ComponentCategory[] = [
+  {
+    key: 'motion',
+    title: '动效组件',
+    hint: '独立动效组件：各自带参数、各自决定入场时机，不跟随全局过渡设置',
+    names: ['masked-heading', 'particle-text'],
+  },
+]
+
 /**
- * 侧栏分组：业务组件（分子）在前，原子分类在后。
+ * 侧栏分组：业务组件（分子）→ 动效组件 → 原子分类。
  * 链接前缀按分组推断（可被 category.hrefBase 覆盖），文档按 names 顺序取，找不到的自动跳过。
  */
 export function getCategoriesWithDocs(): ResolvedCategory[] {
   const resolve = (
     cats: ComponentCategory[],
     docs: ComponentDoc[],
-    kind: 'business' | 'component',
+    kind: 'business' | 'motion' | 'component',
     hrefBase: string,
   ): ResolvedCategory[] => cats
     .map(cat => ({
@@ -593,6 +628,7 @@ export function getCategoriesWithDocs(): ResolvedCategory[] {
 
   return [
     ...resolve(businessCategories, businessDocs, 'business', '/business'),
+    ...resolve(motionCategories, motionDocs, 'motion', '/motion'),
     ...resolve(componentCategories, componentDocs, 'component', '/components'),
   ]
 }

@@ -27,7 +27,7 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet'
 import { Slider } from '@/components/ui/slider'
-import { componentDocs } from '../docs/registry'
+import { componentDocs, motionDocs } from '../docs/registry'
 import { useGlobalTheme } from '../lib/theme'
 import {
   useGlobalAnim,
@@ -169,21 +169,26 @@ function toStr(v: unknown) {
 
 // 第一个组件文档（用于「UI 组件 / 开始使用」这类入口链接）
 const firstComponentLink = `/components/${componentDocs[0]?.name ?? 'accordion'}`
+// 第一个动效组件（动效设计入口直接落到第一个组件页，/motion 本身也会重定向过去）
+const firstMotionLink = `/motion/${motionDocs[0]?.name ?? 'masked-heading'}`
 
 // 全站统一导航项（short：导航收窄时显示的短标签）
 const menuItems = [
   { name: '首页', short: '首页', href: '/' },
   { name: 'UI 组件', short: '组件', href: firstComponentLink },
   { name: '业务组件', short: '业务', href: '/business/rich-table' },
-  { name: '主题预览', short: '主题', href: '/playground' },
+  // 主题预览（/playground）：用户要求先隐藏 —— 页面与路由都保留，恢复时把这行放回来即可
+  // { name: '主题预览', short: '主题', href: '/playground' },
+  { name: '动效设计', short: '动效', href: firstMotionLink },
 ]
 
 function isActive(href: string) {
   if (href === '/') return route.path === '/'
   if (href.startsWith('/components')) return route.path.startsWith('/components')
   if (href.startsWith('/business')) return route.path.startsWith('/business')
-  if (href === '/playground') return route.path === '/playground'
-  return false
+  if (href.startsWith('/motion')) return route.path.startsWith('/motion')
+  // /playground 是单页入口，精确匹配
+  return route.path === href
 }
 
 function handleScroll() {
@@ -321,12 +326,13 @@ onUnmounted(() => {
               <span>GitHub</span>
             </Button>
           </a>
-          <!-- 主题预览：菜单里已有同名入口，按钮只在 xl 以上（空间充足时）显示 -->
+          <!-- 主题预览按钮：随菜单里的同名入口一起先隐藏（页面 /playground 仍在，要恢复拷回下面这段即可）
           <RouterLink to="/playground" :class="wideLabels ? 'hidden xl:block' : 'hidden'">
             <Button size="sm">
               <span>主题预览</span>
             </Button>
           </RouterLink>
+          -->
           <RouterLink :to="firstComponentLink" :class="wideLabels ? 'hidden' : 'lg:inline-flex'">
             <Button size="sm">
               <span>开始使用</span>

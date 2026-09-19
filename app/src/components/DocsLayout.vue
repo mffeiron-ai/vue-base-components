@@ -35,13 +35,18 @@ watch(isFullPage, () => {
 onBeforeUnmount(() => clearTimeout(layoutFallback))
 
 /**
- * 侧栏按「章节」分开，两个章节不混在一起（靠顶栏「UI 组件 / 业务组件」切换）：
+ * 侧栏按「章节」分开，两个章节不混在一起（靠顶栏「UI 组件 / 业务组件 / 动效设计」切换）：
  *   /components/* → 只列原子分类（展示 / 输入 / 交互 / 浮层）
  *   /business/*   → 只列业务组件（分子组件）
+ *   /motion/*     → 只列动效组件（一个动效一个页面）
  * 哪一类放哪一列仍由 registry 的 ComponentCategory.side 决定（不填＝左列）。
  */
 const categories = getCategoriesWithDocs()
-const section = computed<'business' | 'component'>(() => (route.path.startsWith('/business') ? 'business' : 'component'))
+const section = computed<'business' | 'motion' | 'component'>(() => {
+  if (route.path.startsWith('/business')) return 'business'
+  if (route.path.startsWith('/motion')) return 'motion'
+  return 'component'
+})
 const sectionCategories = computed(() => categories.filter((c) => c.kind === section.value))
 const leftCategories = computed(() => sectionCategories.value.filter((c) => (c.side ?? 'left') === 'left'))
 const rightCategories = computed(() => sectionCategories.value.filter((c) => c.side === 'right'))

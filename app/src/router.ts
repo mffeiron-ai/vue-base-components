@@ -2,8 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import type { Component } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 import LandingPage from './pages/LandingPage.vue'
-import PlaceholderPage from './pages/PlaceholderPage.vue'
-import { businessDocs, componentDocs } from './docs/registry'
+import PlaygroundPage from './pages/PlaygroundPage.vue'
+import { businessDocs, componentDocs, motionDocs } from './docs/registry'
 
 /**
  * 把 `./<目录>/<Name>Doc.vue` 目录下的文档组件映射成「kebab 名 → 组件」。
@@ -32,6 +32,11 @@ const businessComponents = collectDocComponents(
   import.meta.glob('./business/*Doc.vue', { eager: true }) as Record<string, { default: Component }>,
 )
 
+// 动效组件文档：app/src/motion/*Doc.vue（一个动效一个页面，新增组件只加一个文件 + registry 一条记录）
+const motionComponents = collectDocComponents(
+  import.meta.glob('./motion/*Doc.vue', { eager: true }) as Record<string, { default: Component }>,
+)
+
 // 由文档数据自动生成路由：原子 /components/:name，业务 /business/:name
 // （两边都只维护 registry 里的列表，新增组件不用改这里）
 const componentRoutes: RouteRecordRaw[] = componentDocs.map((doc) => ({
@@ -46,6 +51,12 @@ const businessRoutes: RouteRecordRaw[] = businessDocs.map((doc) => ({
   component: businessComponents[doc.name],
 }))
 
+const motionRoutes: RouteRecordRaw[] = motionDocs.map((doc) => ({
+  path: `/motion/${doc.name}`,
+  name: `motion-${doc.name}`,
+  component: motionComponents[doc.name],
+}))
+
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -54,8 +65,12 @@ const routes: RouteRecordRaw[] = [
     // 全屏落地页：不走 app 的侧边栏/顶栏外壳
     meta: { fullPage: true },
   },
+  // 自建展示页：主题预览（风格 + 色板 + 随机 UI）
   // 尚未迁移的模块 → 占位页（避免落地页链接 404）
-  { path: '/playground', name: 'playground', component: PlaceholderPage },
+  { path: '/playground', name: 'playground', component: PlaygroundPage },
+  // 动效设计：一个动效一个页面；/motion 重定向到第一个（导航也直接指第一个）
+  { path: '/motion', redirect: `/motion/${motionDocs[0]?.name ?? 'masked-heading'}` },
+  ...motionRoutes,
   ...componentRoutes,
   ...businessRoutes,
   { path: '/:pathMatch(.*)*', redirect: '/' },
