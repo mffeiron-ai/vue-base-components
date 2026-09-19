@@ -570,6 +570,18 @@ export const motionDocs: ComponentDoc[] = [
     description: '一串词轮流上场：旧的向上飞出、新的从下方弹上来（弹簧），按字/词/行错开方式可调。',
     importCode: `import { RotatingText } from '@/components/motion'`,
   },
+  {
+    name: 'glitch-text',
+    title: '故障文字 GlitchText',
+    description: '上下两层红/青副本不断切片错位，像信号不稳的显示器；可只在悬停时故障。',
+    importCode: `import { GlitchText } from '@/components/motion'`,
+  },
+  {
+    name: 'variable-proximity',
+    title: '近距变轴 VariableProximity',
+    description: '光标靠近时字符的可变字体轴被「吸」过去（变粗变宽）：半径、衰减曲线、起止轴值都可调。',
+    importCode: `import { VariableProximity } from '@/components/motion'`,
+  },
 ]
 
 /** 按 kebab 名取动效组件文档 */
@@ -723,7 +735,7 @@ export const motionCategories: ComponentCategory[] = [
     key: 'motion',
     title: '动效组件',
     hint: '独立动效组件：各自带参数、各自决定入场时机，不跟随全局过渡设置',
-    names: ['masked-heading', 'particle-text', 'split-flap-text', 'stroke-text', 'fold-text', 'echo-text', 'split-text', 'blur-text', 'text-type', 'shuffle', 'shiny-text', 'text-pressure', 'fuzzy-text', 'gradient-text', 'falling-text', 'decrypted-text', 'true-focus', 'scroll-float', 'scroll-reveal', 'ascii-text', 'scrambled-text', 'rotating-text'],
+    names: ['masked-heading', 'particle-text', 'split-flap-text', 'stroke-text', 'fold-text', 'echo-text', 'split-text', 'blur-text', 'text-type', 'shuffle', 'shiny-text', 'text-pressure', 'fuzzy-text', 'gradient-text', 'falling-text', 'decrypted-text', 'true-focus', 'scroll-float', 'scroll-reveal', 'ascii-text', 'scrambled-text', 'rotating-text', 'glitch-text', 'variable-proximity'],
   },
 ]
 

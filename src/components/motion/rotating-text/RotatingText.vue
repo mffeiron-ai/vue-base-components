@@ -63,6 +63,8 @@ const props = withDefaults(
     mass?: number
     /** 裁掉容器外的字符（默认关，跟上游一样靠外层容器裁；打开后字符会「从边缘钻出来」） */
     clip?: boolean
+    /** 切换时让容器宽度平滑过渡（对应上游 motion 的 `layout`：外层的相邻文字会跟着一起移动） */
+    animateWidth?: boolean
     /** 外层容器类名（Vue 里直接写 class 也会透传到根元素） */
     mainClassName?: string
     /** 每个「词」容器的类名 */
@@ -85,6 +87,7 @@ const props = withDefaults(
     damping: 25,
     mass: 1,
     clip: false,
+    animateWidth: true,
     mainClassName: '',
     splitLevelClassName: '',
     elementLevelClassName: '',
@@ -240,6 +243,73 @@ function timing() {
   return { duration: springDuration(options) * 1000, easing: springEasing(options) }
 }
 
+/* ── 宽度过渡（对应上游 motion 的 `layout`） ──────────────
+ * 这是 FLIP 的简化版：
+ *   ① 切换前把容器宽度**锁成当前像素值**（不然一换 DOM 就瞬间跳变了）
+ *   ② 换完内容后，临时把 width 放开成 auto 量一次**新内容的自然宽度**，再锁回去
+ *   ③ 用与字符动画同一根弹簧，把 width 从旧值动到新值；结束后清掉内联宽度回到 auto
+ * 这样容器右边界是平滑移动的，跟在它后面的兄弟元素（比如示例里的前置文字）也就跟着一起滑。
+ * 动画期间要临时禁止换行（`flex-wrap: nowrap` + 文字层 `white-space: nowrap`），
+ * 否则「变宽」的那半程里，新内容会被比它窄的容器挤成两行。
+ */
+
+/** 用来识别/作废「上一轮宽度动画」的代号 —— 连续切换时旧回调不能再来清样式 */
+let widthGeneration = 0
+
+function cancelWidthTransition(wrapper: HTMLElement) {
+  widthGeneration += 1
+  for (const animation of wrapper.getAnimations()) {
+    if (animation.id === 'resize') animation.cancel()
+  }
+  wrapper.classList.remove('rotating-text--resizing')
+  wrapper.style.width = ''
+}
+
+/** 锁住当前宽度，返回锁住的像素值（0 = 没锁） */
+function lockWidth(wrapper: HTMLElement) {
+  cancelWidthTransition(wrapper)
+  const width = wrapper.getBoundingClientRect().width
+  if (!width) return 0
+  wrapper.style.width = `${width}px`
+  return width
+}
+
+/** 换完内容后：量新宽度并平滑过渡过去 */
+function resizeTo(wrapper: HTMLElement, startWidth: number) {
+  wrapper.style.width = 'auto'
+  const endWidth = wrapper.getBoundingClientRect().width
+  wrapper.style.width = `${startWidth}px`
+
+  const parentWidth = wrapper.parentElement?.clientWidth ?? Number.POSITIVE_INFINITY
+  const fits = endWidth > 0 && endWidth <= parentWidth && startWidth <= parentWidth
+  if (!fits || Math.abs(endWidth - startWidth) < 0.5) {
+    wrapper.style.width = ''
+    return
+  }
+
+  const { duration, easing } = timing()
+  wrapper.classList.add('rotating-text--resizing')
+  const animation = wrapper.animate(
+    [{ width: `${startWidth}px` }, { width: `${endWidth}px` }],
+    { duration, easing, fill: 'none' },
+  )
+  animation.id = 'resize'
+  // 先把基础值设好：动画结束时内联值就是终点，不会跳一下
+  wrapper.style.width = `${endWidth}px`
+
+  widthGeneration += 1
+  const generation = widthGeneration
+  const cleanup = () => {
+    if (generation !== widthGeneration) return
+    wrapper.classList.remove('rotating-text--resizing')
+    wrapper.style.width = ''
+  }
+  // 正常靠 `finished` 收尾；再挂一个超时兜底 —— 动画被取消 / 页面切到后台（rAF 与动画时钟都会停）
+  // 之类的情况下，promise 不一定按时落地，而「宽度被锁死 + nowrap 残留」是会真影响布局的
+  animation.finished.then(cleanup).catch(cleanup)
+  window.setTimeout(cleanup, duration + 120)
+}
+
 /* ── 切换 ───────────────────────────────────────────────── */
 
 let busy = false
@@ -252,11 +322,15 @@ async function goTo(index: number) {
 
   busy = true
   try {
+    const wrapper = rootRef.value
+    const startWidth = props.animateWidth && !reduceMotion() && wrapper ? lockWidth(wrapper) : 0
+
     if (!reduceMotion()) {
       await playExit() // 等退场全部结束，下一段才进来
     }
     currentIndex.value = target
     await nextTick()
+    if (wrapper && startWidth) resizeTo(wrapper, startWidth)
     if (reduceMotion()) settle()
     else playEnter()
   } finally {
@@ -310,6 +384,7 @@ onMounted(async () => {
 onBeforeUnmount(() => {
   if (timer) window.clearInterval(timer)
   timer = 0
+  widthGeneration += 1 // 作废进行中的宽度过渡
 })
 
 watch(
@@ -408,6 +483,15 @@ defineExpose({
 
 .rotating-text__stage--clip {
   overflow: hidden;
+}
+
+/* 宽度过渡进行中：临时禁止换行，否则「变宽」那半程里新内容会被挤成两行 */
+.rotating-text--resizing {
+  flex-wrap: nowrap;
+}
+
+.rotating-text--resizing .rotating-text__stage {
+  white-space: nowrap;
 }
 
 .rotating-text__word {

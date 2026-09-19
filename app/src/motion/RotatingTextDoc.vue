@@ -45,6 +45,7 @@ const rotate = reactive({
   auto: true,
   loop: true,
   clip: false,
+  animateWidth: true,
 })
 
 function pickTexts(item: (typeof TEXTS_PRESETS)[number]) {
@@ -69,6 +70,7 @@ function resetAll() {
   rotate.auto = true
   rotate.loop = true
   rotate.clip = false
+  rotate.animateWidth = true
   rotate.splitBy = 'characters'
   rotate.staggerFrom = 'first'
   rotate.textsLabel = TEXTS_PRESETS[0].label
@@ -150,6 +152,7 @@ const PROPS = [
   { name: 'damping', type: 'number', def: '25', desc: '弹簧阻尼（越小越弹、过冲越明显）' },
   { name: 'mass', type: 'number', def: '1', desc: '弹簧质量' },
   { name: 'clip', type: 'boolean', def: 'false', desc: '给文字层加 `overflow: hidden`（字符会「从边缘钻出来」；默认关，跟上游一样靠外层裁）' },
+  { name: 'animateWidth', type: 'boolean', def: 'true', desc: '切换时容器宽度平滑过渡（对应上游 motion 的 `layout`：后面的兄弟元素会跟着一起移动）' },
   { name: 'mainClassName', type: 'string', def: "''", desc: '外层类名' },
   { name: 'splitLevelClassName', type: 'string', def: "''", desc: '每个「词」容器的类名' },
   { name: 'elementLevelClassName', type: 'string', def: "''", desc: '每个字符的类名' },
@@ -204,8 +207,11 @@ const EXPOSED = [
               :auto="rotate.auto"
               :loop="rotate.loop"
               :clip="rotate.clip"
+              :animate-width="rotate.animateWidth"
               main-class-name="text-primary"
             />
+            <!-- 后面的文字会跟着容器宽度一起平滑移动：这就是 animateWidth 在起作用 -->
+            <span class="text-base font-normal text-muted-foreground">with zero deps</span>
           </p>
         </div>
 
@@ -275,6 +281,11 @@ const EXPOSED = [
                 size="sm"
                 @click="rotate.clip = !rotate.clip"
               >clip</Button>
+              <Button
+                :variant="rotate.animateWidth ? 'default' : 'outline'"
+                size="sm"
+                @click="rotate.animateWidth = !rotate.animateWidth"
+              >animateWidth</Button>
             </div>
           </div>
         </div>
@@ -400,9 +411,15 @@ const EXPOSED = [
               直接落在 <code>animate</code> 状态上；之后每次切换才播。</li>
             <li>切换中的重复请求会被<strong>忽略</strong>（不是一个队列）：把 <code>rotationInterval</code> 调得比
               「整轮耗时」小的时候，不会出现两段动画打架。</li>
-            <li><strong>有意省掉的一处：</strong>上游用 motion 的 <code>layout</code> 让容器宽度在切换时平滑过渡
-              （「Creative thinking」→「Creative components!」那个位移）。纯 CSS 无法对 <code>auto</code> 宽度做过渡，
-              这里就<strong>不做宽度动画</strong> —— 需要的话用 <code>mainClassName</code> 自己加，或把轮换词放进固定宽度的容器。</li>
+            <li><strong>容器宽度是「锁宽 → 换内容 → 量新宽 → 过渡」做出来的</strong>（对应上游 motion 的 <code>layout</code>）：
+              切换前先把容器宽度锁成当前像素值（不然一换 DOM 就瞬间跳变），换完内容后临时把 <code>width</code>
+              放开成 <code>auto</code> 量一次<strong>新内容的自然宽度</strong>、再锁回旧值，然后用
+              <strong>与字符动画同一根弹簧</strong>把宽度从旧值动到新值，结束后清掉内联宽度回到 <code>auto</code>。
+              这样跟在它后面的兄弟元素（示例里的 “with zero deps”）也会跟着一起平滑滑动。
+              动画期间会临时加 <code>flex-wrap: nowrap</code> —— 否则「变宽」那半程里新内容会被比它窄的容器挤成两行。</li>
+            <li>宽度过渡的两个边界处理：<strong>连续切换</strong>时用代号作废上一轮动画的收尾回调（不会互相踩），
+              <code>reduceMotion</code> 或 <code>animateWidth=false</code> 时完全不碰宽度；
+              如果内容宽度超出父容器（长文本要换行）也会跳过动画，避免为了一行动画把布局撑爆。</li>
             <li><code>prefers-reduced-motion: reduce</code> 时<strong>保留轮换但去掉动画</strong>（直接换文本）——
               轮换本身是内容，不该整个停掉。</li>
             <li>无障碍：容器里有一个只在视觉上隐藏的 <code>&lt;span&gt;</code> 承载当前文本，
