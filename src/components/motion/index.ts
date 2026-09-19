@@ -28,4 +28,7 @@ export type {
 } from './blur-text/BlurText.vue'
 export { default as TextType } from './text-type/TextType.vue'
 export type { TextTypeTag, TextTypeVariableSpeed } from './text-type/TextType.vue'
+export { default as Shuffle } from './shuffle/Shuffle.vue'
+export type { ShuffleAnimationMode, ShuffleDirection, ShuffleTag } from './shuffle/Shuffle.vue'
+export { default as ShinyText } from './shiny-text/ShinyText.vue'
 export { resolveEase } from './gsap-ease'

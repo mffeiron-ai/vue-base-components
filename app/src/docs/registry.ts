@@ -492,6 +492,18 @@ export const motionDocs: ComponentDoc[] = [
     description: '逐字打出来、停一下、再逐字删掉；速度、停顿、光标、配色都可调，支持多句循环。',
     importCode: `import { TextType } from '@/components/motion'`,
   },
+  {
+    name: 'shuffle',
+    title: '洗牌机 Shuffle',
+    description: '每个字符是一条滚轮：滚过几格乱码后停在真字上，支持四向、奇偶错峰、循环与悬停重播。',
+    importCode: `import { Shuffle } from '@/components/motion'`,
+  },
+  {
+    name: 'shiny-text',
+    title: '扫光文字 ShinyText',
+    description: '一条高光扫过整行文字：角度、颜色、速度、方向、来回与悬停暂停都可调，颜色跟随主题。',
+    importCode: `import { ShinyText } from '@/components/motion'`,
+  },
 ]
 
 /** 按 kebab 名取动效组件文档 */
@@ -645,7 +657,7 @@ export const motionCategories: ComponentCategory[] = [
     key: 'motion',
     title: '动效组件',
     hint: '独立动效组件：各自带参数、各自决定入场时机，不跟随全局过渡设置',
-    names: ['masked-heading', 'particle-text', 'split-flap-text', 'stroke-text', 'fold-text', 'echo-text', 'split-text', 'blur-text', 'text-type'],
+    names: ['masked-heading', 'particle-text', 'split-flap-text', 'stroke-text', 'fold-text', 'echo-text', 'split-text', 'blur-text', 'text-type', 'shuffle', 'shiny-text'],
   },
 ]
 
