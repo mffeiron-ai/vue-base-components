@@ -522,6 +522,12 @@ export const motionDocs: ComponentDoc[] = [
     description: '一条会流动的渐变铺在文字上：横向/纵向/对角、色标数量、速度、来回与悬停暂停、渐变描边都可调。',
     importCode: `import { GradientText } from '@/components/motion'`,
   },
+  {
+    name: 'falling-text',
+    title: '掉落文字 FallingText',
+    description: '整段文字被拆成一个个词掉下来：重力、弹跳、翻滚、互相堆叠，还能用鼠标拖着玩。',
+    importCode: `import { FallingText } from '@/components/motion'`,
+  },
 ]
 
 /** 按 kebab 名取动效组件文档 */
@@ -675,7 +681,7 @@ export const motionCategories: ComponentCategory[] = [
     key: 'motion',
     title: '动效组件',
     hint: '独立动效组件：各自带参数、各自决定入场时机，不跟随全局过渡设置',
-    names: ['masked-heading', 'particle-text', 'split-flap-text', 'stroke-text', 'fold-text', 'echo-text', 'split-text', 'blur-text', 'text-type', 'shuffle', 'shiny-text', 'text-pressure', 'fuzzy-text', 'gradient-text'],
+    names: ['masked-heading', 'particle-text', 'split-flap-text', 'stroke-text', 'fold-text', 'echo-text', 'split-text', 'blur-text', 'text-type', 'shuffle', 'shiny-text', 'text-pressure', 'fuzzy-text', 'gradient-text', 'falling-text'],
   },
 ]
 
