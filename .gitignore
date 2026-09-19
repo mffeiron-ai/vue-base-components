@@ -7,5 +7,6 @@ docs/.vitepress/cache
 # CLI 测试目录
 e2e-test/
 .tmp/
-sources/
+# 只忽略仓库根目录的 sources/：app/public/sources/ 是文档站的演示图，必须提交
+/sources/
 tmp/
