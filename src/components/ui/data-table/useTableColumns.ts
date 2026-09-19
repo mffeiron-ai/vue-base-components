@@ -1,7 +1,7 @@
 /**
  * 列状态设施（显隐 / 列序 / 列宽 + 拖拽 + 持久化）
  *
- * 原子层 `DataTable` 和分子层 `business/BaseTable` 需要完全一样的三件事：
+ * 原子层 `DataTable` 和分子层 `business/RichTable` 需要完全一样的三件事：
  *  ① 列显隐：菜单里勾选、最后一列不许隐藏；
  *  ② 列序：拖动手柄换位置（pointer 事件 + elementFromPoint，不用 HTML5 DnD）；
  *  ③ 列宽：拖拽改宽 + localStorage 持久化。

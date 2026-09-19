@@ -1,15 +1,15 @@
 <script setup lang="ts">
 /**
- * 业务组件文档页 · BaseTable
+ * 业务组件文档页 · RichTable
  *
  * 中央内容分两个 Tab（业务组件跟原子组件不一样，单开一页）：
- *   1) 组件 —— 纯组件演示（BasetableDemo），真实跑在假数据 + 模拟服务端上；
+ *   1) 组件 —— 纯组件演示（RichTableDemo），真实跑在假数据 + 模拟服务端上；
  *   2) 文档 —— 快速开始 / 服务端协议 / API / 升级对照。
  */
 import { ref } from 'vue'
 import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import BasetableDemo from './BasetableDemo.vue'
+import RichTableDemo from './RichTableDemo.vue'
 
 const tab = ref('component')
 
@@ -77,7 +77,7 @@ const protocolRows = [
 
 <template>
   <div class="mx-auto max-w-5xl px-6 py-10">
-    <h1 class="text-3xl font-bold tracking-tight">BaseTable 数据表格</h1>
+    <h1 class="text-3xl font-bold tracking-tight">RichTable 数据表格</h1>
     <p class="mt-3 text-muted-foreground">
       业务组件（分子组件）：把 <code>Table</code> / <code>Checkbox</code> / <code>Popover</code> /
       <code>DropdownMenu</code> / <code>Pagination</code> / <code>Sheet</code> 这些原子，
@@ -94,7 +94,7 @@ const protocolRows = [
 
       <!-- Tab 1：纯组件 -->
       <TabsContent value="component" class="mt-6">
-        <BasetableDemo />
+        <RichTableDemo />
       </TabsContent>
 
       <!-- Tab 2：相关文档 -->
@@ -108,7 +108,7 @@ const protocolRows = [
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <pre v-pre class="overflow-x-auto rounded-lg bg-muted/50 p-4 text-xs leading-relaxed"><code>&lt;BaseTable
+            <pre v-pre class="overflow-x-auto rounded-lg bg-muted/50 p-4 text-xs leading-relaxed"><code>&lt;RichTable
   id-field="id"
   v-model:page="page"
   v-model:page-size="pageSize"
@@ -258,7 +258,7 @@ const protocolRows = [
             <CardDescription>
               <code>ui/data-table</code>（DataTable）是 headless 渲染层：列定义与能力全由使用方
               <code>useTable</code> 注册，适合虚拟滚动、复杂列定义；<br />
-              BaseTable 是约定式开箱即用（columns 配置 + 服务端协议），适合后台列表页。
+              RichTable 是约定式开箱即用（columns 配置 + 服务端协议），适合后台列表页。
               两者共用同一套 Table 原子与命名（<code>#toolbar</code> / <code>#empty</code> /
               <code>#footer</code>、选中行 <code>data-state="selected"</code>），可以按场景互换。
             </CardDescription>

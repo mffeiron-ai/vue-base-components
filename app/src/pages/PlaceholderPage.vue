@@ -9,7 +9,7 @@ const route = useRoute()
 const title = computed(() => (route.path.startsWith('/business') ? '业务组件' : '主题预览'))
 const desc = computed(() =>
   route.path.startsWith('/business')
-    ? 'BaseTable 等业务组件文档待迁移到纯 Vue 文档。'
+    ? 'RichTable 等业务组件文档待迁移到纯 Vue 文档。'
     : '随机 UI 生成器 / 主题预览待迁移到纯 Vue 文档。',
 )
 </script>

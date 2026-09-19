@@ -7,7 +7,7 @@ import { businessDocs, componentDocs } from './docs/registry'
 
 /**
  * 把 `./<目录>/<Name>Doc.vue` 目录下的文档组件映射成「kebab 名 → 组件」。
- * 命名约定：文件名 `<Name>Doc.vue` → 路由段 `<name>`（如 BasetableDoc.vue → basetable）。
+ * 命名约定：文件名 `<Name>Doc.vue` → 路由段 `<name>`（如 RichTableDoc.vue → rich-table）。
  */
 function collectDocComponents(modules: Record<string, { default: Component }>): Record<string, Component> {
   const map: Record<string, Component> = {}

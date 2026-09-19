@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * BaseTable —— 业务组件（分子组件）· 数据表格
+ * RichTable —— 业务组件（分子组件）· 数据表格
  *
  * 定位：把原子组件按「后台列表页」这一生产场景组合 + 强化出来的成品。
  *   · 状态机交给 TanStack（`@tanstack/vue-table` v9，可选依赖）：排序 / 分页 / 列显隐 /
@@ -14,13 +14,13 @@
  *
  * 与 `ui/data-table`（TanStack 渲染层）的分工：
  *   DataTable = headless，列定义与能力全由使用方注册，适合虚拟滚动、复杂表格；
- *   BaseTable = 约定式开箱即用（columns 配置 + 服务端协议），适合后台列表页。
+ *   RichTable = 约定式开箱即用（columns 配置 + 服务端协议），适合后台列表页。
  *   两者共用同一套 Table 原子与命名（`#toolbar` / `#empty` / `#footer`、`data-state="selected"`）。
  *
  * 本目录（重构后，组件只留编排）：
- *   BaseTable.vue          模板 + 动作函数（排序 / 分页 / 行详情）
- *   BaseTableFilter.vue    表头筛选弹层（5 种输入形态，只驱动 useTableFilters）
- *   BaseTableCell.vue      单元格内置形态（markdown / 图片 / 枚举 / 文本裁切）
+ *   RichTable.vue          模板 + 动作函数（排序 / 分页 / 行详情）
+ *   RichTableFilter.vue    表头筛选弹层（5 种输入形态，只驱动 useTableFilters）
+ *   RichTableCell.vue      单元格内置形态（markdown / 图片 / 枚举 / 文本裁切）
  *   types.ts               列定义与协议（筛选参数组装、跨页选中语义）
  *   useTableState.ts       TanStack 状态 + props → state 单向同步
  *   useTableSelection.ts   跨页选中语义（'__all__' / '__except__:<id>'）
@@ -78,8 +78,8 @@ import {
 } from '../../ui/table'
 import type { Column, FacetLoader, SelectionSummary } from './types'
 import { guessColumnWidth } from './types'
-import BaseTableCell from './BaseTableCell.vue'
-import BaseTableFilter from './BaseTableFilter.vue'
+import RichTableCell from './RichTableCell.vue'
+import RichTableFilter from './RichTableFilter.vue'
 import { useTableState } from './useTableState'
 import { useTableSelection } from './useTableSelection'
 import { useTableFilters } from './useTableFilters'
@@ -180,7 +180,7 @@ const { tableState, table, rowCount, pageCount, currentPage } = useTableState({
   minColumnWidth: () => props.minColumnWidth,
 })
 
-/** 列标识：BaseTable 用 field 当列 id（与 TanStack 的列 id 保持一致） */
+/** 列标识：RichTable 用 field 当列 id（与 TanStack 的列 id 保持一致） */
 const colId = (col: Column) => String(col.field)
 
 /**
@@ -331,7 +331,7 @@ const colspanCount = computed(() => filteredColumns.value.length + (props.select
 // ============================================================
 
 /**
- * 筛选状态机（实现在 `useTableFilters`，UI 在 `BaseTableFilter.vue`）。
+ * 筛选状态机（实现在 `useTableFilters`，UI 在 `RichTableFilter.vue`）。
  * 这里只留一个句柄：模板里只需要判断「这一列有没有筛选」，其余全交给子组件。
  */
 const filterApi = useTableFilters({
@@ -494,7 +494,7 @@ defineExpose({
               </template>
 
               <!-- 筛选：弹层与 5 种输入形态都在子组件里，这里只把「列 + 状态机」递进去 -->
-              <BaseTableFilter v-if="col.filter" :col="col" :f="filterApi" />
+              <RichTableFilter v-if="col.filter" :col="col" :f="filterApi" />
             </div>
 
             <!-- 列宽拖拽手柄 -->
@@ -551,7 +551,7 @@ defineExpose({
               @click="clickable && idx === 0 ? onRowClick(row) : undefined"
             >
               <!-- 内置形态（markdown / 图片 / 枚举 / 文本裁切）走子组件；自定义渲染由消费方插槽接住 -->
-              <BaseTableCell
+              <RichTableCell
                 :col="col"
                 :row="row"
                 :clamp-style="clampStyle"
@@ -561,7 +561,7 @@ defineExpose({
                 <slot :name="col.slot" v-bind="row" :row="row" :_idx="ri">
                   <div class="break-words" :style="clampStyle">{{ row[col.field] }}</div>
                 </slot>
-              </BaseTableCell>
+              </RichTableCell>
             </TableCell>
 
             <TableCell v-if="slots.actions" class="whitespace-nowrap text-right">

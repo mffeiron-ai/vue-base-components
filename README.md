@@ -13,7 +13,7 @@ Vue 3 + Tailwind CSS + shadcn-vue 共享组件库，为多个项目提供统一�
 | [unovue/reka-ui](https://github.com/unovue/reka-ui) | 所有无头（headless）无障碍组件基元 | MIT |
 | [tailwindlabs/tailwindcss](https://github.com/tailwindlabs/tailwindcss) | 样式引擎（Tailwind CSS 4） | MIT |
 
-本项目在此基础上做的部分：接入自有设计令牌与主题系统、业务组件（`BaseTable` 等）、随机 UI 生成器、纯 Vue 文档站应用（`app/`），以及若干 bug 修复（见 `git log`）。
+本项目在此基础上做的部分：接入自有设计令牌与主题系统、业务组件（`RichTable` 等）、随机 UI 生成器、纯 Vue 文档站应用（`app/`），以及若干 bug 修复（见 `git log`）。
 
 **本项目与 shadcn / shadcn-vue 官方无任何隶属、赞助或背书关系**，相关名称与商标归各自所有者。
 
@@ -44,7 +44,7 @@ npm install github:mffeiron-ai/vue-base-components#main
 ```vue
 <script setup lang="ts">
 // 业务组件
-import { BaseTable, ImportDialog, BaseEdit } from 'vue-base-components'
+import { RichTable } from 'vue-base-components'
 // 或 shadcn UI 组件
 import { Button, Dialog, Input } from 'vue-base-components'
 // 工具函数
@@ -58,7 +58,7 @@ import { cn } from 'vue-base-components'
 
 | 组件 | 说明 |
 |------|------|
-| `BaseTable` | 通用表格（排序/分页/列显示/行详情侧滑） |
+| `RichTable` | 完整表格：服务端分页 / 筛选 + 分面 / 列显隐·列序·列宽持久化 / 跨页全选 / 行详情侧滑 |
 | `BaseEdit` | 通用编辑表单（动态字段/图片上传/轮播图） |
 | `BasePagination` | 通用分页 |
 | `EditDialog` | 编辑弹窗 |
@@ -150,7 +150,7 @@ src/stores/editStore.ts   → export const useEditStore
 | 组件 | 需要的包 | 可选标记 |
 |------|----------|----------|
 | `BaseEdit` | `vue-router`, `pinia`, `vue-sonner` | ✅ optional |
-| `BaseTable` | `md-editor-v3` (Markdown 列) | ✅ optional |
+| `RichTable` | `md-editor-v3` (Markdown 列) | ✅ optional |
 | `TrendChart` | `echarts` | ✅ optional |
 | `ui/carousel` | `embla-carousel-vue` | ✅ optional |
 | `ui/drawer` | `vaul-vue` | ✅ optional |
@@ -262,16 +262,9 @@ vue-base-components/
 │   ├── lib/
 │   │   └── utils.ts              ← cn() 工具函数
 │   └── components/
-│       ├── BaseTable.vue         ← 9 个业务组件
-│       ├── BaseEdit.vue
-│       ├── BasePagination.vue
-│       ├── EditDialog.vue
-│       ├── ImportDialog.vue
-│       ├── GlobalSearch.vue
-│       ├── ComboboxField.vue
-│       ├── MarkDown.vue
-│       ├── TrendChart.vue
-│       └── ui/                   ← 65 个 shadcn-vue 组件
+│       ├── business/             ← 业务组件（分子：把原子组合成生产成品）
+│       │   └── rich-table/       ← RichTable（服务端分页 / 筛选·分面 / 列状态 / 行详情）
+│       └── ui/                   ← 69 个 shadcn-vue 原子组件（Registry 源码分发）
 │           ├── button/
 │           ├── dialog/
 │           ├── table/

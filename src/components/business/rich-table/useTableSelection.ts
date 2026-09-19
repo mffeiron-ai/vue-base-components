@@ -1,5 +1,5 @@
 /**
- * BaseTable · 行选择（跨页语义）
+ * RichTable · 行选择（跨页语义）
  *
  * 刻意**不用** TanStack 的 rowSelection：生产语义是「跨页全选所有匹配」，
  * 服务端分页下列不出全集，所以 selected 里用两个标记表达（协议见 types.ts）：
@@ -25,9 +25,16 @@ export function useTableSelection<T>(options: UseTableSelectionOptions<T>) {
   const marks = () => options.selected() || []
   const allowAll = () => !!options.selectAll?.()
 
-  function isRowSelected(row: any): boolean {
+  /**
+   * 按 idField 取行主键。
+   * `T` 故意不约束成 `Record<...>`（调用方行类型任意），所以这里显式转一次 ——
+   * 否则 `row[options.idField()]` 会因为「string 不能用于索引 unknown」报 TS 7053。
+   */
+  const idOf = (row: T): string | number => (row as Record<string, any>)[options.idField()]
+
+  function isRowSelected(row: T): boolean {
     const sel = marks()
-    const id = row[options.idField()]
+    const id = idOf(row)
     if (allowAll() && sel.includes(ALL_SELECT_MARK)) return !sel.includes(excludedMark(id))
     return sel.includes(id)
   }
@@ -36,7 +43,7 @@ export function useTableSelection<T>(options: UseTableSelectionOptions<T>) {
     const sel = marks()
     if (!options.rows().length) return false
     if (allowAll() && sel.includes(ALL_SELECT_MARK)) {
-      return !options.rows().some(row => sel.includes(excludedMark(row[options.idField()])))
+      return !options.rows().some(row => sel.includes(excludedMark(idOf(row))))
     }
     return options.rows().every(row => isRowSelected(row))
   })
@@ -55,7 +62,7 @@ export function useTableSelection<T>(options: UseTableSelectionOptions<T>) {
     } else if (allowAll()) {
       options.onChange([ALL_SELECT_MARK]) // 跨页：标记「全部匹配」
     } else {
-      options.onChange(options.rows().map(row => row[options.idField()]))
+      options.onChange(options.rows().map(idOf))
     }
   }
 

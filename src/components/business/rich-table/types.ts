@@ -1,5 +1,5 @@
 /**
- * BaseTable —— 共享类型与协议
+ * RichTable —— 共享类型与协议
  *
  * 业务组件 = 把若干「原子组件」（src/components/ui/*）按生产场景组合 / 强化出来的成品，
  * 所以这里只放**约定**（列定义、筛选协议、选中协议）与**纯函数**，不放 UI 实现。
@@ -47,8 +47,14 @@ export type ColumnFilter =
 export type Column<T = any> = {
   /** 表头文案（配 headerSlot 时作为兜底 / 列显隐菜单里的名字） */
   label: string
-  /** 取值字段 */
-  field: keyof T | string
+  /**
+   * 取值字段。
+   *
+   * 写法是 `(keyof T & string) | string` 而不是 `keyof T | string` —— 后者在 `T = any`（默认泛型）
+   * 时会带上 `number | symbol`（`keyof any` 全部三样），于是 `row[col.field]` 这类索引会报
+   * 「类型"symbol"不能作为索引类型使用」；`& string` 把它收敛回字符串键。
+   */
+  field: (keyof T & string) | string
   /** 单元格自定义插槽名：`<template #mySlot="{ row }">`（插槽收到整行 + row） */
   slot?: string
   /** 自定义表头插槽名：收到 `{ col, columns }`，替代默认 label */
@@ -158,7 +164,7 @@ export function buildFilterParams(columns: Column[], filters: Record<string, any
 // 「跨页全选所有匹配」没法用 id 数组表达（服务端不知道全集），所以 selected 里可能出现两种标记：
 //   '__all__'                → 所有匹配项都已选中
 //   '__except__:<id>'        → 在全选基础上，排除某行
-// 业务方请不要直接用这个数组，用 summarizeSelection() / BaseTable#resolveSelected() 解码。
+// 业务方请不要直接用这个数组，用 summarizeSelection() / RichTable#resolveSelected() 解码。
 
 /** 全选标记：表示「所有匹配」而非某一页的 ids */
 export const ALL_SELECT_MARK = '__all__'

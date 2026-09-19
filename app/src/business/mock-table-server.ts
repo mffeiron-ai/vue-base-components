@@ -1,7 +1,7 @@
 /**
  * 假数据 + 模拟服务端
  *
- * 目的：把 BaseTable 的**参数协议**（见 src/components/business/types.ts）当成真接口实现一遍，
+ * 目的：把 RichTable 的**参数协议**（见 src/components/business/rich-table/types.ts）当成真接口实现一遍，
  * 这样文档站的 demo 既能跑，也能当「后端要支持哪些参数」的可执行说明。
  *
  * 协议速查：

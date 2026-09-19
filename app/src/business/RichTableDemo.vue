@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * BaseTable 的「纯组件」演示（文档页第一个 Tab）
+ * RichTable 的「纯组件」演示（文档页第一个 Tab）
  *
  * 布局：组件本体留在正文里（就是它该待的位置），「能力开关」是**侧栏卡片** ——
  * 通过 Teleport 塞进 DocsLayout 右栏的 `#docs-aside-extra` 挂载点，
@@ -13,7 +13,7 @@ import { computed, reactive, ref, watch } from 'vue'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { BaseTable, summarizeSelection } from '@/components/business'
+import { RichTable, summarizeSelection } from '@/components/business'
 import type { Column } from '@/components/business'
 import TableCapabilityPanel from './TableCapabilityPanel.vue'
 import {
@@ -83,7 +83,7 @@ const columns = computed<Column<AfterSaleRow>[]>(() => baseColumns.map((col) => 
 // 3. 「服务端」状态：页面自己维护，组件只发语义事件
 // ============================================================
 
-const tableRef = ref<InstanceType<typeof BaseTable> | null>(null)
+const tableRef = ref<InstanceType<typeof RichTable> | null>(null)
 const rows = ref<AfterSaleRow[]>([])
 const total = ref(0)
 const loading = ref(false)
@@ -169,13 +169,13 @@ const pageAmountSum = computed(() => rows.value.reduce((sum, r) => sum + r.amoun
 
 <template>
   <div class="m-0 p-0">
-    <BaseTable
+    <RichTable
       ref="tableRef"
       v-model:page="page"
       v-model:page-size="pageSize"
       v-model:selected="selected"
       id-field="id"
-      persist-key="doc-basetable"
+      persist-key="doc-rich-table"
       :columns="columns"
       :data="rows"
       :total="caps.pagination ? total : undefined"
@@ -216,7 +216,7 @@ const pageAmountSum = computed(() => rows.value.reduce((sum, r) => sum + r.amoun
           当页合计 ¥{{ pageAmountSum.toFixed(2) }}
         </span>
       </template>
-    </BaseTable>
+    </RichTable>
 
     <!-- 调试信息：把「组件往外发了什么」直接摆出来 -->
     <div class="mt-3 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">

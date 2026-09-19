@@ -174,7 +174,7 @@ const firstComponentLink = `/components/${componentDocs[0]?.name ?? 'accordion'}
 const menuItems = [
   { name: '首页', short: '首页', href: '/' },
   { name: 'UI 组件', short: '组件', href: firstComponentLink },
-  { name: '业务组件', short: '业务', href: '/business/basetable' },
+  { name: '业务组件', short: '业务', href: '/business/rich-table' },
   { name: '主题预览', short: '主题', href: '/playground' },
 ]
 

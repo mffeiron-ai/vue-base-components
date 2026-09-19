@@ -1,5 +1,5 @@
 /**
- * BaseTable · TanStack 状态与受控同步
+ * RichTable · TanStack 状态与受控同步
  *
  * 单一来源：排序 / 分页 / 列显隐 / 列宽 / 列序 全部交给 TanStack 的 table 实例，
  * 本文件负责①能力注册（一次，放模块作用域）②状态容器③与 props 的单向同步。

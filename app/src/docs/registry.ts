@@ -420,10 +420,10 @@ export function getComponentDoc(name: string): ComponentDoc | undefined {
 
 export const businessDocs: ComponentDoc[] = [
   {
-    name: 'basetable',
-    title: 'BaseTable 数据表格',
+    name: 'rich-table',
+    title: 'RichTable 数据表格',
     description: '把 Table / Checkbox / Popover / DropdownMenu / Pagination / Sheet 等原子按「后台列表页」这个场景组合 + 强化出来的成品：状态机交给 TanStack（排序 / 分页 / 列宽 / 列序 / 列显隐），业务侧补齐服务端分页与筛选协议、Excel 式分面懒加载、跨页「全选所有匹配」、列状态持久化与行详情侧滑。',
-    importCode: `import { BaseTable } from '@/components/business'`,
+    importCode: `import { RichTable } from '@/components/business'`,
   },
 ]
 
@@ -466,7 +466,7 @@ export const businessCategories: ComponentCategory[] = [
     key: 'business',
     title: '业务组件',
     hint: '把原子组件组合 / 强化成生产可用的成品',
-    names: ['basetable'],
+    names: ['rich-table'],
   },
 ]
 

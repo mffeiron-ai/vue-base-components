@@ -5,8 +5,8 @@
  *   `ui/`   = 原子组件，走 Registry 源码分发（`npx rionstudio add <name>`），只吃预设样式不做业务假设；
  *   `business/` = 分子组件，把原子按生产场景组合 / 强化出来，通过 npm 导出（`@rionstudio/ui`）。
  *
- * 命名约定：业务组件一律 `Base*` 前缀（BaseTable、BaseForm…），
- * 每个业务组件一个目录（组件 + types + 同目录 composable）。
+ * 命名约定：业务组件名字要说清「它是什么成品」，不加 `Base*` 这类前缀
+ *（如 RichTable = 表格能力超集）；每个业务组件一个目录（组件 + types + 同目录 composable）。
  */
-export { default as BaseTable } from './base-table/BaseTable.vue'
-export * from './base-table/types'
+export { default as RichTable } from './rich-table/RichTable.vue'
+export * from './rich-table/types'
