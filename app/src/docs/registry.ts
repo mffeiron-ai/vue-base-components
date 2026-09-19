@@ -552,6 +552,24 @@ export const motionDocs: ComponentDoc[] = [
     description: '文字随滚动逐词显影（透明度 + 模糊），整块文字从微小的倾角转正；同样可倒放。',
     importCode: `import { ScrollReveal } from '@/components/motion'`,
   },
+  {
+    name: 'ascii-text',
+    title: 'ASCII 文字 AsciiText',
+    description: '一段 3D 文字被拆成 ASCII 字符：平面会呼吸、鼠标一动整块文字跟着倾斜、色相绕着鼠标转。',
+    importCode: `import { AsciiText } from '@/components/motion'`,
+  },
+  {
+    name: 'scrambled-text',
+    title: '乱码文字 ScrambledText',
+    description: '鼠标扫过的地方字符炸成随机字符，越近乱得越久：半径、时长、刷新速度、乱码字符都可调。',
+    importCode: `import { ScrambledText } from '@/components/motion'`,
+  },
+  {
+    name: 'rotating-text',
+    title: '轮换文字 RotatingText',
+    description: '一串词轮流上场：旧的向上飞出、新的从下方弹上来（弹簧），按字/词/行错开方式可调。',
+    importCode: `import { RotatingText } from '@/components/motion'`,
+  },
 ]
 
 /** 按 kebab 名取动效组件文档 */
@@ -705,7 +723,7 @@ export const motionCategories: ComponentCategory[] = [
     key: 'motion',
     title: '动效组件',
     hint: '独立动效组件：各自带参数、各自决定入场时机，不跟随全局过渡设置',
-    names: ['masked-heading', 'particle-text', 'split-flap-text', 'stroke-text', 'fold-text', 'echo-text', 'split-text', 'blur-text', 'text-type', 'shuffle', 'shiny-text', 'text-pressure', 'fuzzy-text', 'gradient-text', 'falling-text', 'decrypted-text', 'true-focus', 'scroll-float', 'scroll-reveal'],
+    names: ['masked-heading', 'particle-text', 'split-flap-text', 'stroke-text', 'fold-text', 'echo-text', 'split-text', 'blur-text', 'text-type', 'shuffle', 'shiny-text', 'text-pressure', 'fuzzy-text', 'gradient-text', 'falling-text', 'decrypted-text', 'true-focus', 'scroll-float', 'scroll-reveal', 'ascii-text', 'scrambled-text', 'rotating-text'],
   },
 ]
 
