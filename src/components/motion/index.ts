@@ -39,4 +39,13 @@ export { default as GradientText } from './gradient-text/GradientText.vue'
 export type { GradientTextDirection } from './gradient-text/GradientText.vue'
 export { default as FallingText } from './falling-text/FallingText.vue'
 export type { FallingTextTrigger } from './falling-text/FallingText.vue'
-export { resolveEase } from './gsap-ease'
+export { default as DecryptedText } from './decrypted-text/DecryptedText.vue'
+export type {
+  DecryptedTextAnimateOn,
+  DecryptedTextClickMode,
+  DecryptedTextRevealDirection,
+} from './decrypted-text/DecryptedText.vue'
+export { default as TrueFocus } from './true-focus/TrueFocus.vue'
+export { default as ScrollFloat } from './scroll-float/ScrollFloat.vue'
+export { default as ScrollReveal } from './scroll-reveal/ScrollReveal.vue'
+export { resolveEase, resolveEaseFn } from './gsap-ease'

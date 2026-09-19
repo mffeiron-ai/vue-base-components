@@ -528,6 +528,30 @@ export const motionDocs: ComponentDoc[] = [
     description: '整段文字被拆成一个个词掉下来：重力、弹跳、翻滚、互相堆叠，还能用鼠标拖着玩。',
     importCode: `import { FallingText } from '@/components/motion'`,
   },
+  {
+    name: 'decrypted-text',
+    title: '解密文字 DecryptedText',
+    description: '字符先是随机乱码再逐个解回真字：顺序/非顺序、三个起解方向、悬停/滚入/点击触发。',
+    importCode: `import { DecryptedText } from '@/components/motion'`,
+  },
+  {
+    name: 'true-focus',
+    title: '真聚焦 TrueFocus',
+    description: '一排词里只有一个清晰、其余全糊，四角括号平滑地滑到当前词上；自动轮换或悬停聚焦。',
+    importCode: `import { TrueFocus } from '@/components/motion'`,
+  },
+  {
+    name: 'scroll-float',
+    title: '滚动浮起 ScrollFloat',
+    description: '文字逐字从下方浮上来，进度完全由滚动位置驱动（可倒放）：区间、缓动、逐字错开都可调。',
+    importCode: `import { ScrollFloat } from '@/components/motion'`,
+  },
+  {
+    name: 'scroll-reveal',
+    title: '滚动揭露 ScrollReveal',
+    description: '文字随滚动逐词显影（透明度 + 模糊），整块文字从微小的倾角转正；同样可倒放。',
+    importCode: `import { ScrollReveal } from '@/components/motion'`,
+  },
 ]
 
 /** 按 kebab 名取动效组件文档 */
@@ -681,7 +705,7 @@ export const motionCategories: ComponentCategory[] = [
     key: 'motion',
     title: '动效组件',
     hint: '独立动效组件：各自带参数、各自决定入场时机，不跟随全局过渡设置',
-    names: ['masked-heading', 'particle-text', 'split-flap-text', 'stroke-text', 'fold-text', 'echo-text', 'split-text', 'blur-text', 'text-type', 'shuffle', 'shiny-text', 'text-pressure', 'fuzzy-text', 'gradient-text', 'falling-text'],
+    names: ['masked-heading', 'particle-text', 'split-flap-text', 'stroke-text', 'fold-text', 'echo-text', 'split-text', 'blur-text', 'text-type', 'shuffle', 'shiny-text', 'text-pressure', 'fuzzy-text', 'gradient-text', 'falling-text', 'decrypted-text', 'true-focus', 'scroll-float', 'scroll-reveal'],
   },
 ]
 
